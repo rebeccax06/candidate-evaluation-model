@@ -74,8 +74,11 @@ def get_storage() -> Storage:
 def get_evaluator(api_key: str) -> CandidateEvaluator:
     """Get or create evaluator with user's API key."""
     if st.session_state.evaluator is None or st.session_state.get('current_api_key') != api_key:
-        config = get_default_config()
-        config["anthropic_api_key"] = api_key
+        # Create config directly with the user's API key
+        from candidate_evaluator.utils.config import Config, APIConfig
+        config = Config(
+            api=APIConfig(anthropic_api_key=api_key)
+        )
         st.session_state.evaluator = CandidateEvaluator(config)
         st.session_state.current_api_key = api_key
     return st.session_state.evaluator
