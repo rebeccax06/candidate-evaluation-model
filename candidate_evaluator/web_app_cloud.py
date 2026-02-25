@@ -65,10 +65,20 @@ def init_session_state():
 
 
 def get_storage() -> Storage:
-    """Get or create Storage instance using the authenticated client."""
+    """Get or create Storage instance, ensuring the user JWT is set on the storage client."""
+    client = get_auth_client()
+    
+    # supabase-py auth→storage propagation is unreliable in Streamlit's rerun model,
+    # so explicitly re-apply the access token before every storage operation.
+    access_token = st.session_state.get('access_token')
+    if access_token:
+        try:
+            client.storage.set_auth(access_token)
+        except Exception:
+            pass
+    
     if st.session_state.storage is None:
-        # Use the same authenticated client that was used for sign-in
-        st.session_state.storage = Storage(get_auth_client())
+        st.session_state.storage = Storage(client)
     return st.session_state.storage
 
 

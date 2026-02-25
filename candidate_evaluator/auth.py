@@ -55,7 +55,10 @@ def init_auth_state():
                 try:
                     client = get_supabase_client()
                     client.auth.set_session(cookie_access_token, cookie_refresh_token)
+                    # Explicitly propagate token to storage (Streamlit callbacks unreliable)
+                    client.storage.set_auth(cookie_access_token)
                     ss.supabase_client = client
+                    ss.access_token = cookie_access_token
                 except Exception:
                     # Token may be expired; user will need to re-sign in
                     ss.supabase_client = None
@@ -135,6 +138,14 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
                 "email": response.user.email,
                 "created_at": str(response.user.created_at)
             }
+            
+            # Explicitly propagate token to storage (Streamlit callbacks unreliable)
+            if response.session:
+                try:
+                    client.storage.set_auth(response.session.access_token)
+                    ss.access_token = response.session.access_token
+                except Exception:
+                    pass
             
             # Save to cookies for persistence (include session tokens)
             try:
