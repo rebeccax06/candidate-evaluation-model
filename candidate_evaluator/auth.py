@@ -3,15 +3,21 @@
 import streamlit as st
 from typing import Optional
 from supabase import Client
-import extra_streamlit_components as stx
 from datetime import datetime, timedelta
+import time
 
 from candidate_evaluator.database import get_supabase_client, Database
 
+from streamlit_cookies_controller import CookieController
+    
 
-def get_cookie_manager():
-    """Get cookie manager instance."""
-    return stx.CookieManager(key="auth_cookies")
+
+
+def get_cookie_controller():
+    """Get or create a cookie controller instance."""
+    if "cookie_controller" not in st.session_state:
+        st.session_state.cookie_controller = CookieController(key='auth_cookies')
+    return st.session_state.cookie_controller
 
 
 def init_auth_state():
@@ -24,18 +30,26 @@ def init_auth_state():
         
         # Try to restore session from cookies
         try:
-            cookie_manager = get_cookie_manager()
-            user_id = cookie_manager.get("user_id")
-            user_email = cookie_manager.get("user_email")
-            
-            if user_id and user_email:
-                st.session_state.user = {
-                    "id": user_id,
-                    "email": user_email,
-                    "created_at": ""
-                }
+            controller = get_cookie_controller()
+            if controller:
+                # Give cookies time to load
+                time.sleep(0.5)
+                
+                user_id = controller.get("eval_user_id")
+                user_email = controller.get("eval_user_email")
+                
+                if user_id and user_email:
+                    st.session_state.user = {
+                        "id": user_id,
+                        "email": user_email,
+                        "created_at": ""
+                    }
         except Exception:
             pass
+    
+    return True
+
+
 
 
 def get_auth_client() -> Client:
@@ -109,10 +123,10 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
             
             # Save to cookies for persistence
             try:
-                cookie_manager = get_cookie_manager()
-                expires = datetime.now() + timedelta(days=7)
-                cookie_manager.set("user_id", response.user.id, expires_at=expires)
-                cookie_manager.set("user_email", response.user.email, expires_at=expires)
+                controller = get_cookie_controller()
+                if controller:
+                    controller.set("eval_user_id", response.user.id)
+                    controller.set("eval_user_email", response.user.email)
             except Exception:
                 pass
             
@@ -143,9 +157,10 @@ def sign_out() -> tuple[bool, str]:
         
         # Clear cookies
         try:
-            cookie_manager = get_cookie_manager()
-            cookie_manager.delete("user_id")
-            cookie_manager.delete("user_email")
+            controller = get_cookie_controller()
+            if controller:
+                controller.remove("eval_user_id")
+                controller.remove("eval_user_email")
         except Exception:
             pass
         

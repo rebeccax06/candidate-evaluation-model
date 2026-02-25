@@ -35,4 +35,4 @@ mypy>=1.5.0
 
 #auth
 supabase>=2.0.0
-extra-streamlit-components>=0.1.60
+streamlit_cookies_controller>=0.0.1
