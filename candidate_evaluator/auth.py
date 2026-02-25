@@ -3,8 +3,15 @@
 import streamlit as st
 from typing import Optional
 from supabase import Client
+import extra_streamlit_components as stx
+from datetime import datetime, timedelta
 
 from candidate_evaluator.database import get_supabase_client, Database
+
+
+def get_cookie_manager():
+    """Get cookie manager instance."""
+    return stx.CookieManager(key="auth_cookies")
 
 
 def init_auth_state():
@@ -14,6 +21,21 @@ def init_auth_state():
         st.session_state.user = None
         st.session_state.supabase_client = None
         st.session_state.db = None
+        
+        # Try to restore session from cookies
+        try:
+            cookie_manager = get_cookie_manager()
+            user_id = cookie_manager.get("user_id")
+            user_email = cookie_manager.get("user_email")
+            
+            if user_id and user_email:
+                st.session_state.user = {
+                    "id": user_id,
+                    "email": user_email,
+                    "created_at": ""
+                }
+        except Exception:
+            pass
 
 
 def get_auth_client() -> Client:
@@ -84,6 +106,16 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
                 "email": response.user.email,
                 "created_at": str(response.user.created_at)
             }
+            
+            # Save to cookies for persistence
+            try:
+                cookie_manager = get_cookie_manager()
+                expires = datetime.now() + timedelta(days=7)
+                cookie_manager.set("user_id", response.user.id, expires_at=expires)
+                cookie_manager.set("user_email", response.user.email, expires_at=expires)
+            except Exception:
+                pass
+            
             return True, "Signed in successfully!"
         else:
             return False, "Invalid email or password."
@@ -108,6 +140,14 @@ def sign_out() -> tuple[bool, str]:
         st.session_state.user = None
         st.session_state.supabase_client = None
         st.session_state.db = None
+        
+        # Clear cookies
+        try:
+            cookie_manager = get_cookie_manager()
+            cookie_manager.delete("user_id")
+            cookie_manager.delete("user_email")
+        except Exception:
+            pass
         
         return True, "Signed out successfully."
     
