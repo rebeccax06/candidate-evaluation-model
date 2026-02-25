@@ -24,6 +24,22 @@ def get_cookie_controller():
     return controller
 
 
+def _propagate_token(client: Client, access_token: str) -> None:
+    """Explicitly set the user JWT on both storage and postgrest clients.
+    
+    supabase-py uses an internal event callback to propagate auth changes, but
+    those callbacks are unreliable in Streamlit's stateless rerun model.
+    """
+    try:
+        client.storage.set_auth(access_token)
+    except Exception:
+        pass
+    try:
+        client.postgrest.auth(access_token)
+    except Exception:
+        pass
+
+
 def init_auth_state():
     """Initialize authentication state in Streamlit session."""
     # Check if this is a fresh page load (not already initialized this session)
@@ -32,38 +48,43 @@ def init_auth_state():
         ss.user = None
         ss.supabase_client = None
         ss.db = None
+        ss.access_token = None
         
         # Give cookies time to load from JavaScript
-        cookies = controller.getAll()
+        controller.getAll()
         time.sleep(1)
         
-        # Try to restore session from cookies using .get() for individual values
+        # Only need user_id, email, and refresh_token — access tokens are too
+        # large (~700+ chars) for reliable cookie storage; we exchange the
+        # refresh token for a fresh access token instead.
         cookie_user_id = controller.get(f'{COOKIE_PREFIX}_user_id')
         cookie_user_email = controller.get(f'{COOKIE_PREFIX}_user_email')
-        cookie_access_token = controller.get(f'{COOKIE_PREFIX}_access_token')
         cookie_refresh_token = controller.get(f'{COOKIE_PREFIX}_refresh_token')
         
-        if cookie_user_id and cookie_user_email:
-            ss.user = {
-                "id": cookie_user_id,
-                "email": cookie_user_email,
-                "created_at": ""
-            }
-            
-            # Restore authenticated Supabase session so storage/db use the user JWT
-            if cookie_access_token and cookie_refresh_token:
-                try:
-                    client = get_supabase_client()
-                    client.auth.set_session(cookie_access_token, cookie_refresh_token)
-                    # Explicitly propagate token to storage (Streamlit callbacks unreliable)
-                    client.storage.set_auth(cookie_access_token)
+        if cookie_user_id and cookie_user_email and cookie_refresh_token:
+            try:
+                client = get_supabase_client()
+                # Exchange refresh token for a fresh session
+                result = client.auth.refresh_session(cookie_refresh_token)
+                if result and result.session:
+                    access_token = result.session.access_token
+                    _propagate_token(client, access_token)
                     ss.supabase_client = client
-                    ss.access_token = cookie_access_token
-                except Exception:
-                    # Token may be expired; user will need to re-sign in
-                    ss.supabase_client = None
-            
-            st.toast(f"Welcome back, {cookie_user_email}!")
+                    ss.access_token = access_token
+                    ss.user = {
+                        "id": cookie_user_id,
+                        "email": cookie_user_email,
+                        "created_at": ""
+                    }
+                    st.toast(f"Welcome back, {cookie_user_email}!")
+            except Exception:
+                # Refresh token expired — cookies are stale, user must re-login
+                for key in [f'{COOKIE_PREFIX}_user_id', f'{COOKIE_PREFIX}_user_email',
+                            f'{COOKIE_PREFIX}_refresh_token']:
+                    try:
+                        controller.remove(key)
+                    except Exception:
+                        pass
     
     return True
 
@@ -78,9 +99,17 @@ def get_auth_client() -> Client:
 
 
 def get_database() -> Database:
-    """Get or create Database instance."""
+    """Get or create Database instance, ensuring user JWT is set on the postgrest client."""
+    client = get_auth_client()
+    # Re-apply access token on every call — same reason as get_storage() in web_app_cloud.py
+    access_token = st.session_state.get('access_token')
+    if access_token:
+        try:
+            client.postgrest.auth(access_token)
+        except Exception:
+            pass
     if st.session_state.db is None:
-        st.session_state.db = Database(get_auth_client())
+        st.session_state.db = Database(client)
     return st.session_state.db
 
 
@@ -139,20 +168,18 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
                 "created_at": str(response.user.created_at)
             }
             
-            # Explicitly propagate token to storage (Streamlit callbacks unreliable)
+            # Explicitly propagate token to both storage and postgrest clients
             if response.session:
-                try:
-                    client.storage.set_auth(response.session.access_token)
-                    ss.access_token = response.session.access_token
-                except Exception:
-                    pass
+                _propagate_token(client, response.session.access_token)
+                ss.access_token = response.session.access_token
             
-            # Save to cookies for persistence (include session tokens)
+            # Save to cookies for persistence.
+            # Only store refresh_token (short opaque string) — access tokens are
+            # JWTs (~700+ chars) that often fail to persist in cookies reliably.
             try:
                 controller.set(f"{COOKIE_PREFIX}_user_id", response.user.id)
                 controller.set(f"{COOKIE_PREFIX}_user_email", response.user.email)
                 if response.session:
-                    controller.set(f"{COOKIE_PREFIX}_access_token", response.session.access_token)
                     controller.set(f"{COOKIE_PREFIX}_refresh_token", response.session.refresh_token)
             except Exception as e:
                 st.warning(f"Could not save session cookie: {e}")
@@ -182,11 +209,12 @@ def sign_out() -> tuple[bool, str]:
         ss.supabase_client = None
         ss.db = None
         
+        ss.access_token = None
+        
         # Clear cookies
         try:
             controller.remove(f"{COOKIE_PREFIX}_user_id")
             controller.remove(f"{COOKIE_PREFIX}_user_email")
-            controller.remove(f"{COOKIE_PREFIX}_access_token")
             controller.remove(f"{COOKIE_PREFIX}_refresh_token")
         except Exception:
             pass
