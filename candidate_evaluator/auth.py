@@ -1,60 +1,53 @@
 """Supabase authentication for candidate evaluator."""
 
 import streamlit as st
+from streamlit import session_state as ss
 from typing import Optional
 from supabase import Client
 from datetime import datetime, timedelta
+import time
 
 from candidate_evaluator.database import get_supabase_client, Database
 
 from streamlit_cookies_controller import CookieController
 
 
-# Global controller instance
-_controller = None
+# Cookie controller must be created at module level
+controller = CookieController(key='cookies')
+
+# Cookie prefix for this app
+COOKIE_PREFIX = "eval_app"
 
 
 def get_cookie_controller():
     """Get the cookie controller instance."""
-    global _controller
-    if _controller is None:
-        _controller = CookieController(key='auth_cookies')
-    return _controller
+    return controller
 
 
 def init_auth_state():
     """Initialize authentication state in Streamlit session."""
-    # Initialize session state defaults
-    if "auth_initialized" not in st.session_state:
-        st.session_state.auth_initialized = True
-        st.session_state.user = None
-        st.session_state.supabase_client = None
-        st.session_state.db = None
-    
-    # Get controller (this renders the hidden component needed for cookies)
-    controller = get_cookie_controller()
-    
-    # If not logged in, try to restore from cookies
-    if st.session_state.user is None:
-        try:
-            # getAll() returns None on first render before JS loads
-            # On subsequent renders it returns the cookie dict
-            cookies = controller.getAll()
-            
-            if cookies and isinstance(cookies, dict):
-                user_id = cookies.get("eval_user_id")
-                user_email = cookies.get("eval_user_email")
-                
-                if user_id and user_email:
-                    st.session_state.user = {
-                        "id": user_id,
-                        "email": user_email,
-                        "created_at": ""
-                    }
-                    # Rerun to update UI with logged-in state
-                    st.rerun()
-        except Exception:
-            pass
+    # Check if this is a fresh page load (not already initialized this session)
+    if "auth_initialized" not in ss:
+        ss.auth_initialized = True
+        ss.user = None
+        ss.supabase_client = None
+        ss.db = None
+        
+        # Give cookies time to load from JavaScript
+        cookies = controller.getAll()
+        time.sleep(1)
+        
+        # Try to restore session from cookies using .get() for individual values
+        cookie_user_id = controller.get(f'{COOKIE_PREFIX}_user_id')
+        cookie_user_email = controller.get(f'{COOKIE_PREFIX}_user_email')
+        
+        if cookie_user_id and cookie_user_email:
+            ss.user = {
+                "id": cookie_user_id,
+                "email": cookie_user_email,
+                "created_at": ""
+            }
+            st.toast(f"Welcome back, {cookie_user_email}!")
     
     return True
 
@@ -124,7 +117,7 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
         })
         
         if response.user:
-            st.session_state.user = {
+            ss.user = {
                 "id": response.user.id,
                 "email": response.user.email,
                 "created_at": str(response.user.created_at)
@@ -132,9 +125,8 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
             
             # Save to cookies for persistence
             try:
-                controller = get_cookie_controller()
-                controller.set("eval_user_id", response.user.id)
-                controller.set("eval_user_email", response.user.email)
+                controller.set(f"{COOKIE_PREFIX}_user_id", response.user.id)
+                controller.set(f"{COOKIE_PREFIX}_user_email", response.user.email)
             except Exception as e:
                 st.warning(f"Could not save session cookie: {e}")
             
@@ -159,22 +151,21 @@ def sign_out() -> tuple[bool, str]:
         client = get_auth_client()
         client.auth.sign_out()
         
-        st.session_state.user = None
-        st.session_state.supabase_client = None
-        st.session_state.db = None
+        ss.user = None
+        ss.supabase_client = None
+        ss.db = None
         
         # Clear cookies
         try:
-            controller = get_cookie_controller()
-            controller.remove("eval_user_id")
-            controller.remove("eval_user_email")
+            controller.remove(f"{COOKIE_PREFIX}_user_id")
+            controller.remove(f"{COOKIE_PREFIX}_user_email")
         except Exception:
             pass
         
         return True, "Signed out successfully."
     
     except Exception as e:
-        st.session_state.user = None
+        ss.user = None
         return True, "Signed out."
 
 
@@ -205,7 +196,7 @@ def render_auth_ui() -> bool:
         return True
     
     st.title("Candidate Evaluator")
-    st.markdown("AI-powered candidate evaluation using Claude")
+    st.markdown("AI-powered candidate evaluation")
     
     st.markdown("---")
     
