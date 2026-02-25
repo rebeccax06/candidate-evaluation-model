@@ -107,7 +107,8 @@ def result_dict_to_evaluation_result(data: dict) -> EvaluationResult:
         
         criterion_value = score_data['criterion']
         if isinstance(criterion_value, str):
-            criterion_value = criterion_value.replace('EvaluationCriterion.', '')
+            # Strip prefix if present and normalize to lowercase
+            criterion_value = criterion_value.replace('EvaluationCriterion.', '').lower()
         
         scores.append(CriterionScore(
             criterion=EvaluationCriterion(criterion_value),
@@ -400,7 +401,8 @@ def single_evaluation_form(user: dict, api_key: str):
                     result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
                     for score in result_dict.get("scores", []):
                         if "criterion" in score:
-                            score["criterion"] = str(score["criterion"])
+                            crit = score["criterion"]
+                            score["criterion"] = crit.value if hasattr(crit, 'value') else str(crit)
                     
                     db.save_evaluation(
                         user_id=user["id"],

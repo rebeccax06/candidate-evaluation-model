@@ -23,7 +23,7 @@ from uuid import uuid4
 from candidate_evaluator.database import Database, get_supabase_client
 from candidate_evaluator.storage import Storage, cleanup_temp_files
 from candidate_evaluator.core.evaluator import CandidateEvaluator
-from candidate_evaluator.utils.config import get_default_config
+from candidate_evaluator.utils.config import Config, APIConfig
 
 logging.basicConfig(
     level=logging.INFO,
@@ -64,8 +64,7 @@ class Worker:
     
     def create_evaluator(self, api_key: str) -> CandidateEvaluator:
         """Create an evaluator instance with the user's API key."""
-        config = get_default_config()
-        config["anthropic_api_key"] = api_key
+        config = Config(api=APIConfig(anthropic_api_key=api_key))
         return CandidateEvaluator(config)
     
     def process_job(self, job: dict) -> None:
@@ -129,7 +128,8 @@ class Worker:
                     )
                     for score in result_dict.get("scores", []):
                         if "criterion" in score:
-                            score["criterion"] = str(score["criterion"])
+                            crit = score["criterion"]
+                            score["criterion"] = crit.value if hasattr(crit, 'value') else str(crit)
                 
                 self.db.save_evaluation(
                     user_id=user_id,

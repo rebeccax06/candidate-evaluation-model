@@ -40,6 +40,8 @@ def init_auth_state():
         # Try to restore session from cookies using .get() for individual values
         cookie_user_id = controller.get(f'{COOKIE_PREFIX}_user_id')
         cookie_user_email = controller.get(f'{COOKIE_PREFIX}_user_email')
+        cookie_access_token = controller.get(f'{COOKIE_PREFIX}_access_token')
+        cookie_refresh_token = controller.get(f'{COOKIE_PREFIX}_refresh_token')
         
         if cookie_user_id and cookie_user_email:
             ss.user = {
@@ -47,6 +49,17 @@ def init_auth_state():
                 "email": cookie_user_email,
                 "created_at": ""
             }
+            
+            # Restore authenticated Supabase session so storage/db use the user JWT
+            if cookie_access_token and cookie_refresh_token:
+                try:
+                    client = get_supabase_client()
+                    client.auth.set_session(cookie_access_token, cookie_refresh_token)
+                    ss.supabase_client = client
+                except Exception:
+                    # Token may be expired; user will need to re-sign in
+                    ss.supabase_client = None
+            
             st.toast(f"Welcome back, {cookie_user_email}!")
     
     return True
@@ -123,10 +136,13 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
                 "created_at": str(response.user.created_at)
             }
             
-            # Save to cookies for persistence
+            # Save to cookies for persistence (include session tokens)
             try:
                 controller.set(f"{COOKIE_PREFIX}_user_id", response.user.id)
                 controller.set(f"{COOKIE_PREFIX}_user_email", response.user.email)
+                if response.session:
+                    controller.set(f"{COOKIE_PREFIX}_access_token", response.session.access_token)
+                    controller.set(f"{COOKIE_PREFIX}_refresh_token", response.session.refresh_token)
             except Exception as e:
                 st.warning(f"Could not save session cookie: {e}")
             
@@ -159,6 +175,8 @@ def sign_out() -> tuple[bool, str]:
         try:
             controller.remove(f"{COOKIE_PREFIX}_user_id")
             controller.remove(f"{COOKIE_PREFIX}_user_email")
+            controller.remove(f"{COOKIE_PREFIX}_access_token")
+            controller.remove(f"{COOKIE_PREFIX}_refresh_token")
         except Exception:
             pass
         
