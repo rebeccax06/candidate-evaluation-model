@@ -40,7 +40,8 @@ from candidate_evaluator.auth import (
     get_current_user,
     is_logged_in,
     require_api_key,
-    get_database
+    get_database,
+    get_auth_client
 )
 from candidate_evaluator.database import Database
 from candidate_evaluator.storage import Storage, cleanup_temp_files
@@ -66,7 +67,6 @@ def init_session_state():
 def get_storage() -> Storage:
     """Get or create Storage instance using the authenticated client."""
     if st.session_state.storage is None:
-        from candidate_evaluator.auth import get_auth_client
         # Use the same authenticated client that was used for sign-in
         st.session_state.storage = Storage(get_auth_client())
     return st.session_state.storage
