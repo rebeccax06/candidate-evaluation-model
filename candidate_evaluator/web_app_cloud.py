@@ -193,7 +193,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Settings"],
+            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Research", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -218,6 +218,10 @@ def main():
         batch_jobs_page(user)
     elif page == "Results":
         results_page(user)
+    elif page == "Analysis":
+        analysis_page(user)
+    elif page == "Research":
+        research_page(user)
     elif page == "Settings":
         settings_page(user)
 
@@ -831,6 +835,455 @@ def display_holistic_evaluation_result(result: HolisticEvaluationResult):
         st.markdown("#### Suggested Interview Questions")
         for q in result.questions_for_interview:
             st.markdown(f"- {q}")
+
+
+def get_user_results_as_objects(user: dict):
+    """Load user's evaluations and convert to result objects."""
+    db = get_database()
+    evaluations = db.get_user_evaluations(user["id"], limit=500)
+    
+    criteria_results = []
+    holistic_results = []
+    
+    for e in evaluations:
+        try:
+            if e.get("evaluation_type") == "criteria":
+                result = result_dict_to_evaluation_result(e["result"])
+                criteria_results.append(result)
+            elif e.get("evaluation_type") == "holistic":
+                result = result_dict_to_holistic_result(e["result"])
+                holistic_results.append(result)
+        except Exception:
+            pass
+    
+    return criteria_results, holistic_results
+
+
+def analysis_page(user: dict):
+    """Analysis dashboard."""
+    st.title("Analysis Dashboard")
+    
+    criteria_results, holistic_results = get_user_results_as_objects(user)
+    total_results = len(criteria_results) + len(holistic_results)
+    
+    if total_results == 0:
+        st.warning("No evaluation results found. Run some evaluations first!")
+        return
+    
+    st.markdown(f"**Analyzing {len(criteria_results)} criteria-based + {len(holistic_results)} holistic evaluations**")
+    
+    tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "Recommendations", "Score Comparison"])
+    
+    with tab1:
+        if criteria_results:
+            distribution_analysis(criteria_results)
+        else:
+            st.info("No criteria-based evaluations to analyze.")
+    
+    with tab2:
+        if criteria_results:
+            recommendation_analysis(criteria_results)
+        else:
+            st.info("Recommendations analysis requires criteria-based evaluations.")
+    
+    with tab3:
+        if criteria_results and holistic_results:
+            score_comparison_analysis(criteria_results, holistic_results)
+        else:
+            st.info("Need both criteria-based and holistic evaluations for comparison.")
+
+
+def distribution_analysis(all_results):
+    """Score distribution analysis."""
+    st.subheader("Score Distribution Analysis")
+    
+    overall_scores = [r.overall_score for r in all_results]
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Mean Score", f"{sum(overall_scores)/len(overall_scores):.2f}")
+    with col2:
+        st.metric("Median Score", f"{sorted(overall_scores)[len(overall_scores)//2]:.2f}")
+    with col3:
+        st.metric("Min Score", f"{min(overall_scores):.2f}")
+    with col4:
+        st.metric("Max Score", f"{max(overall_scores):.2f}")
+    
+    st.markdown("---")
+    
+    # Score distribution chart
+    st.subheader("Score Distribution")
+    score_df = pd.DataFrame({'Score': overall_scores})
+    st.bar_chart(score_df['Score'].value_counts().sort_index())
+    
+    # Criterion analysis
+    st.subheader("Criterion Score Averages")
+    
+    criterion_scores = {}
+    for result in all_results:
+        for score in result.scores:
+            crit_name = score.criterion.value.replace('_', ' ').title()
+            if crit_name not in criterion_scores:
+                criterion_scores[crit_name] = []
+            criterion_scores[crit_name].append(score.score)
+    
+    crit_data = []
+    for crit, scores in criterion_scores.items():
+        crit_data.append({
+            'Criterion': crit,
+            'Average': sum(scores) / len(scores),
+            'Min': min(scores),
+            'Max': max(scores)
+        })
+    
+    crit_df = pd.DataFrame(crit_data).sort_values('Average', ascending=False)
+    st.dataframe(crit_df, hide_index=True, use_container_width=True)
+
+
+def recommendation_analysis(all_results):
+    """Recommendation breakdown analysis."""
+    st.subheader("Recommendation Analysis")
+    
+    recommendations = {}
+    for result in all_results:
+        rec = result.recommendation if result.recommendation else "Unknown"
+        if rec not in recommendations:
+            recommendations[rec] = []
+        recommendations[rec].append(result)
+    
+    st.markdown(f"**{len(recommendations)} unique recommendation types**")
+    
+    for rec_type, candidates in sorted(recommendations.items(), key=lambda x: -len(x[1])):
+        with st.expander(f"{rec_type} ({len(candidates)} candidates)"):
+            if candidates:
+                avg = sum(c.overall_score for c in candidates) / len(candidates)
+                st.metric("Average Score", f"{avg:.2f}")
+                
+                for c in sorted(candidates, key=lambda x: -x.overall_score)[:5]:
+                    st.text(f"- {c.candidate.candidate_id}: {c.overall_score:.1f}/10")
+
+
+def score_comparison_analysis(criteria_results, holistic_results):
+    """Compare criteria-based vs holistic scores."""
+    st.subheader("Criteria vs Holistic Score Comparison")
+    
+    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    both_ids = set(criteria_by_id.keys()) & set(holistic_by_id.keys())
+    
+    if not both_ids:
+        st.info("No candidates have been evaluated with both methods.")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### Criteria-Based Stats")
+            scores = [r.overall_score for r in criteria_results]
+            st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
+            st.metric("Count", len(criteria_results))
+        
+        with col2:
+            st.markdown("### Holistic Stats")
+            scores = [r.overall_score for r in holistic_results]
+            interview_yes = sum(1 for r in holistic_results if r.interview_decision)
+            st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
+            st.metric("Interview Yes", f"{interview_yes}/{len(holistic_results)}")
+        return
+    
+    st.markdown(f"**{len(both_ids)} candidates evaluated with both methods**")
+    
+    comparison_data = []
+    for cid in both_ids:
+        cr = criteria_by_id[cid]
+        hr = holistic_by_id[cid]
+        comparison_data.append({
+            'Candidate': cid,
+            'Criteria Score': cr.overall_score,
+            'Holistic Score': hr.overall_score,
+            'Difference': cr.overall_score - hr.overall_score,
+            'Interview': 'Yes' if hr.interview_decision else 'No'
+        })
+    
+    df = pd.DataFrame(comparison_data)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if len(df) > 1:
+            correlation = df['Criteria Score'].corr(df['Holistic Score'])
+            st.metric("Score Correlation", f"{correlation:.3f}")
+        mad = df['Difference'].abs().mean()
+        st.metric("Mean Absolute Difference", f"{mad:.2f} points")
+    
+    with col2:
+        higher = sum(1 for d in df['Difference'] if d > 0.5)
+        lower = sum(1 for d in df['Difference'] if d < -0.5)
+        similar = len(df) - higher - lower
+        st.markdown("**Score Comparison:**")
+        st.markdown(f"- Criteria higher: {higher}")
+        st.markdown(f"- Holistic higher: {lower}")
+        st.markdown(f"- Similar: {similar}")
+    
+    st.dataframe(df.sort_values('Difference', key=abs, ascending=False), hide_index=True, use_container_width=True)
+
+
+def research_page(user: dict):
+    """Research dashboard for comparing evaluation methods."""
+    st.title("Research Dashboard")
+    st.markdown("Compare evaluation methods and analyze AI performance for research purposes.")
+    
+    criteria_results, holistic_results = get_user_results_as_objects(user)
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Criteria-Based Evaluations", len(criteria_results))
+    with col2:
+        st.metric("Holistic Evaluations", len(holistic_results))
+    with col3:
+        criteria_ids = {r.candidate.candidate_id for r in criteria_results}
+        holistic_ids = {r.candidate.candidate_id for r in holistic_results}
+        both_ids = criteria_ids & holistic_ids
+        st.metric("Candidates with Both", len(both_ids))
+    
+    if len(criteria_results) == 0 and len(holistic_results) == 0:
+        st.warning("No evaluation results found. Run some evaluations first!")
+        return
+    
+    tab1, tab2, tab3 = st.tabs(["Method Comparison", "Side-by-Side View", "Export Report"])
+    
+    with tab1:
+        research_method_comparison(criteria_results, holistic_results)
+    
+    with tab2:
+        research_side_by_side(criteria_results, holistic_results)
+    
+    with tab3:
+        research_export_report(criteria_results, holistic_results)
+
+
+def research_method_comparison(criteria_results, holistic_results):
+    """Compare criteria-based vs holistic evaluation methods."""
+    st.subheader("Evaluation Method Comparison")
+    
+    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    both_ids = set(criteria_by_id.keys()) & set(holistic_by_id.keys())
+    
+    if len(both_ids) == 0:
+        st.info("No candidates have been evaluated with both methods.")
+        
+        if criteria_results:
+            st.markdown("### Criteria-Based Results")
+            scores = [r.overall_score for r in criteria_results]
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
+            with col2:
+                st.metric("Min Score", f"{min(scores):.2f}")
+            with col3:
+                st.metric("Max Score", f"{max(scores):.2f}")
+        
+        if holistic_results:
+            st.markdown("### Holistic Results")
+            scores = [r.overall_score for r in holistic_results]
+            interview_yes = sum(1 for r in holistic_results if r.interview_decision)
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
+            with col2:
+                st.metric("Min Score", f"{min(scores):.2f}")
+            with col3:
+                st.metric("Max Score", f"{max(scores):.2f}")
+            with col4:
+                st.metric("Interview Yes", f"{interview_yes}/{len(holistic_results)}")
+        return
+    
+    st.markdown(f"**{len(both_ids)} candidates evaluated with both methods**")
+    
+    comparison_data = []
+    for cid in both_ids:
+        cr = criteria_by_id[cid]
+        hr = holistic_by_id[cid]
+        comparison_data.append({
+            'candidate_id': cid,
+            'criteria_score': cr.overall_score,
+            'holistic_score': hr.overall_score,
+            'criteria_rec': cr.recommendation,
+            'holistic_rec': hr.recommendation,
+            'holistic_interview': hr.interview_decision,
+            'score_diff': cr.overall_score - hr.overall_score
+        })
+    
+    df = pd.DataFrame(comparison_data)
+    
+    st.markdown("### Agreement Analysis")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if len(df) > 1:
+            correlation = df['criteria_score'].corr(df['holistic_score'])
+            st.metric("Score Correlation", f"{correlation:.3f}")
+        else:
+            st.metric("Score Correlation", "N/A")
+        
+        mad = df['score_diff'].abs().mean()
+        st.metric("Mean Absolute Difference", f"{mad:.2f} points")
+    
+    with col2:
+        higher = sum(1 for d in df['score_diff'] if d > 0.5)
+        lower = sum(1 for d in df['score_diff'] if d < -0.5)
+        similar = len(df) - higher - lower
+        
+        st.markdown("**Score Comparison:**")
+        st.markdown(f"- Criteria higher: {higher} ({higher/len(df)*100:.1f}%)")
+        st.markdown(f"- Holistic higher: {lower} ({lower/len(df)*100:.1f}%)")
+        st.markdown(f"- Similar (within 0.5): {similar} ({similar/len(df)*100:.1f}%)")
+    
+    st.markdown("### Detailed Comparison")
+    display_df = df[['candidate_id', 'criteria_score', 'holistic_score', 'score_diff', 'holistic_interview']].copy()
+    display_df.columns = ['Candidate', 'Criteria Score', 'Holistic Score', 'Difference', 'Interview Rec']
+    display_df = display_df.sort_values('Difference', key=abs, ascending=False)
+    st.dataframe(display_df, hide_index=True, use_container_width=True)
+
+
+def research_side_by_side(criteria_results, holistic_results):
+    """Side-by-side view of individual candidate evaluations."""
+    st.subheader("Side-by-Side Candidate View")
+    
+    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    all_ids = sorted(set(criteria_by_id.keys()) | set(holistic_by_id.keys()))
+    
+    if not all_ids:
+        st.info("No candidates to display.")
+        return
+    
+    selected_id = st.selectbox("Select Candidate", all_ids)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("### Criteria-Based Evaluation")
+        if selected_id in criteria_by_id:
+            cr = criteria_by_id[selected_id]
+            st.metric("Overall Score", f"{cr.overall_score:.1f}/10")
+            st.markdown(f"**Recommendation:** {cr.recommendation}")
+            
+            if cr.strengths:
+                st.markdown("**Strengths:**")
+                for s in cr.strengths[:3]:
+                    st.markdown(f"- {s}")
+            
+            if cr.areas_for_development:
+                st.markdown("**Areas for Development:**")
+                for a in cr.areas_for_development[:3]:
+                    st.markdown(f"- {a}")
+            
+            with st.expander("Score Breakdown"):
+                for score in sorted(cr.scores, key=lambda x: -x.score):
+                    st.markdown(f"- {score.criterion.value.replace('_', ' ').title()}: {score.score}/10")
+        else:
+            st.info("No criteria-based evaluation for this candidate.")
+    
+    with col2:
+        st.markdown("### Holistic Evaluation")
+        if selected_id in holistic_by_id:
+            hr = holistic_by_id[selected_id]
+            st.metric("Overall Score", f"{hr.overall_score:.1f}/10")
+            interview_text = "Yes" if hr.interview_decision else "No"
+            st.metric("Interview Decision", interview_text)
+            st.markdown(f"**Recommendation:** {hr.recommendation}")
+            st.markdown(f"**Innovation Potential:** {hr.innovation_potential.level.capitalize()}")
+            st.markdown(f"**Program Fit:** {hr.program_fit.level.capitalize()}")
+            
+            if hr.notable_qualities:
+                st.markdown("**Notable Qualities:**")
+                for q in hr.notable_qualities[:3]:
+                    st.markdown(f"- {q.quality}")
+            
+            if hr.red_flags:
+                st.markdown("**Red Flags:**")
+                for flag in hr.red_flags[:3]:
+                    flag_text = flag.flag if hasattr(flag, 'flag') else str(flag)
+                    st.warning(flag_text)
+            
+            with st.expander("Full Assessment"):
+                st.markdown(hr.overall_assessment)
+        else:
+            st.info("No holistic evaluation for this candidate.")
+
+
+def research_export_report(criteria_results, holistic_results):
+    """Export research comparison report."""
+    st.subheader("Export Research Report")
+    
+    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    both_ids = set(criteria_by_id.keys()) & set(holistic_by_id.keys())
+    
+    st.markdown("Generate a markdown report summarizing evaluation comparisons.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        include_criteria = st.checkbox("Include criteria-based results", value=True)
+    with col2:
+        include_holistic = st.checkbox("Include holistic results", value=True)
+    
+    if st.button("Generate Report"):
+        report_lines = [
+            "# Candidate Evaluation Research Report",
+            f"\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            "\n## Summary Statistics",
+            f"\n- Total criteria-based evaluations: {len(criteria_results)}",
+            f"- Total holistic evaluations: {len(holistic_results)}",
+            f"- Candidates with both evaluations: {len(both_ids)}",
+        ]
+        
+        if criteria_results and include_criteria:
+            scores = [r.overall_score for r in criteria_results]
+            report_lines.extend([
+                "\n## Criteria-Based Evaluation Summary",
+                f"\n- Mean score: {sum(scores)/len(scores):.2f}",
+                f"- Score range: {min(scores):.2f} - {max(scores):.2f}",
+            ])
+        
+        if holistic_results and include_holistic:
+            scores = [r.overall_score for r in holistic_results]
+            interview_yes = sum(1 for r in holistic_results if r.interview_decision)
+            report_lines.extend([
+                "\n## Holistic Evaluation Summary",
+                f"\n- Mean score: {sum(scores)/len(scores):.2f}",
+                f"- Score range: {min(scores):.2f} - {max(scores):.2f}",
+                f"- Interview recommendations: {interview_yes}/{len(holistic_results)} ({interview_yes/len(holistic_results)*100:.1f}%)",
+            ])
+        
+        if both_ids:
+            report_lines.extend([
+                "\n## Method Comparison (candidates with both evaluations)",
+            ])
+            for cid in sorted(both_ids):
+                cr = criteria_by_id[cid]
+                hr = holistic_by_id[cid]
+                diff = cr.overall_score - hr.overall_score
+                report_lines.append(f"\n### {cid}")
+                report_lines.append(f"- Criteria score: {cr.overall_score:.1f}")
+                report_lines.append(f"- Holistic score: {hr.overall_score:.1f}")
+                report_lines.append(f"- Difference: {diff:+.1f}")
+                report_lines.append(f"- Interview decision (holistic): {'Yes' if hr.interview_decision else 'No'}")
+        
+        report_content = "\n".join(report_lines)
+        
+        st.success("Report generated!")
+        
+        st.markdown("### Report Preview")
+        st.markdown(report_content)
+        
+        st.download_button(
+            label="Download Report",
+            data=report_content,
+            file_name=f"research_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md",
+            mime="text/markdown"
+        )
 
 
 if __name__ == "__main__":
