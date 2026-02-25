@@ -17,10 +17,14 @@ def get_supabase_client() -> Client:
     if not url or not key:
         try:
             import streamlit as st
-            url = st.secrets.get("SUPABASE_URL")
-            key = st.secrets.get("SUPABASE_KEY")
-        except Exception:
-            pass
+            # Try direct access (not .get()) as Streamlit secrets may not support .get()
+            if hasattr(st, 'secrets'):
+                url = url or st.secrets["SUPABASE_URL"]
+                key = key or st.secrets["SUPABASE_KEY"]
+        except KeyError as e:
+            raise ValueError(f"Missing secret: {e}. Please add SUPABASE_URL and SUPABASE_KEY to Streamlit secrets.")
+        except Exception as e:
+            raise ValueError(f"Error accessing Streamlit secrets: {e}")
     
     if not url or not key:
         raise ValueError(

@@ -147,6 +147,25 @@ def render_auth_ui() -> bool:
     
     st.markdown("---")
     
+    # Check if Supabase is configured before showing auth forms
+    try:
+        get_auth_client()
+    except Exception as e:
+        st.error("Supabase is not configured properly.")
+        st.code(str(e))
+        st.markdown("""
+        **To fix this:**
+        1. Go to your Streamlit Cloud app settings
+        2. Click on "Secrets"
+        3. Add the following:
+        ```
+        SUPABASE_URL = "https://your-project.supabase.co"
+        SUPABASE_KEY = "your-anon-public-key"
+        ```
+        4. Get these values from Supabase Dashboard → Settings → API
+        """)
+        return False
+    
     tab1, tab2 = st.tabs(["Sign In", "Sign Up"])
     
     with tab1:
