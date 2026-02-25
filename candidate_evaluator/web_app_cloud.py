@@ -456,39 +456,53 @@ def batch_evaluation_form(user: dict):
         )
         
         if st.button("Start Batch Evaluation", use_container_width=True):
-            with st.spinner("Uploading files and creating job..."):
-                try:
-                    storage = get_storage()
-                    db = get_database()
+            progress_bar = st.progress(0)
+            status_text = st.empty()
+            
+            try:
+                storage = get_storage()
+                db = get_database()
+                
+                file_paths = []
+                total_files = len(uploaded_files)
+                
+                for i, uploaded_file in enumerate(uploaded_files):
+                    status_text.text(f"Uploading {i+1}/{total_files}: {uploaded_file.name}")
+                    progress_bar.progress((i + 1) / total_files)
                     
-                    file_paths = []
-                    for uploaded_file in uploaded_files:
-                        file_data = uploaded_file.getbuffer().tobytes()
-                        storage_path = storage.upload_file(
-                            user_id=user["id"],
-                            file_data=file_data,
-                            filename=uploaded_file.name,
-                            content_type="application/pdf"
-                        )
-                        file_paths.append(storage_path)
-                    
-                    job = db.create_job(
+                    file_data = uploaded_file.getbuffer().tobytes()
+                    storage_path = storage.upload_file(
                         user_id=user["id"],
-                        job_name=job_name or f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}",
-                        job_type="batch",
-                        total_candidates=len(file_paths),
-                        file_paths=file_paths,
-                        evaluation_mode="holistic" if is_holistic else "criteria"
+                        file_data=file_data,
+                        filename=uploaded_file.name,
+                        content_type="application/pdf"
                     )
+                    file_paths.append(storage_path)
                     
-                    st.success(f"Job created! ID: `{job['id']}`")
-                    st.info("The background worker will process your candidates. You can close this page.")
-                    
-                    time.sleep(1)
-                    st.rerun()
-                    
-                except Exception as e:
-                    st.error(f"Error creating job: {e}")
+                    # Small delay to avoid rate limiting
+                    if i < total_files - 1:
+                        time.sleep(0.2)
+                
+                status_text.text("Creating job...")
+                job = db.create_job(
+                    user_id=user["id"],
+                    job_name=job_name or f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}",
+                    job_type="batch",
+                    total_candidates=len(file_paths),
+                    file_paths=file_paths,
+                    evaluation_mode="holistic" if is_holistic else "criteria"
+                )
+                
+                progress_bar.progress(1.0)
+                status_text.empty()
+                st.success(f"Job created! ID: `{job['id']}`")
+                st.info("The background worker will process your candidates. You can close this page.")
+                
+                time.sleep(1)
+                st.rerun()
+                
+            except Exception as e:
+                st.error(f"Error creating job: {e}")
 
 
 def batch_jobs_page(user: dict):
