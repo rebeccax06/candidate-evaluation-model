@@ -64,10 +64,11 @@ def init_session_state():
 
 
 def get_storage() -> Storage:
-    """Get or create Storage instance."""
+    """Get or create Storage instance using the authenticated client."""
     if st.session_state.storage is None:
-        from candidate_evaluator.database import get_supabase_client
-        st.session_state.storage = Storage(get_supabase_client())
+        from candidate_evaluator.auth import get_auth_client
+        # Use the same authenticated client that was used for sign-in
+        st.session_state.storage = Storage(get_auth_client())
     return st.session_state.storage
 
 
