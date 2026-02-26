@@ -1262,7 +1262,7 @@ def analysis_page(user: dict):
     
     st.markdown(f"**Analyzing {len(criteria_results)} criteria-based + {len(holistic_results)} holistic evaluations**")
     
-    tab1, tab2, tab3, tab4 = st.tabs(["Distribution Analysis", "AI vs Expert", "Decision Comparison", "Recommendations"])
+    tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "AI vs Expert", "Recommendations"])
     
     with tab1:
         sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
@@ -1284,9 +1284,6 @@ def analysis_page(user: dict):
             st.info("Expert comparison requires criteria-based evaluations.")
     
     with tab3:
-        decision_comparison_analysis(criteria_results, holistic_results)
-    
-    with tab4:
         sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
         with sub1:
             if criteria_results:
@@ -1782,6 +1779,20 @@ def decision_comparison_analysis(criteria_results, holistic_results):
 def admit_pattern_analysis_page(user: dict, api_key: str):
     """Admit Pattern Analysis - discover what distinguishes admitted from rejected candidates."""
     st.title("Admit Pattern Analysis")
+
+    page_tab1, page_tab2 = st.tabs(["Pattern Analysis", "Decision Comparison"])
+
+    with page_tab1:
+        _admit_pattern_tab(user, api_key)
+
+    with page_tab2:
+        criteria_results, holistic_results = get_user_results_as_objects(user)
+        st.markdown("Compare AI evaluation predictions against actual interview and admission decisions.")
+        decision_comparison_analysis(criteria_results, holistic_results)
+
+
+def _admit_pattern_tab(user: dict, api_key: str):
+    """Inner content for the Pattern Analysis tab."""
     st.markdown("Upload candidate applications with admit/reject labels to discover distinguishing patterns.")
 
     if 'admit_analysis_progress' in st.session_state:
