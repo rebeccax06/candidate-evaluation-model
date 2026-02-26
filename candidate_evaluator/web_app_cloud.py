@@ -1265,10 +1265,17 @@ def analysis_page(user: dict):
     tab1, tab2, tab3, tab4 = st.tabs(["Distribution Analysis", "AI vs Expert", "Decision Comparison", "Recommendations"])
     
     with tab1:
-        if criteria_results:
-            distribution_analysis(criteria_results)
-        else:
-            st.info("No criteria-based evaluations to analyze. Run criteria-based evaluations first.")
+        sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
+        with sub1:
+            if criteria_results:
+                distribution_analysis(criteria_results)
+            else:
+                st.info("No criteria-based evaluations to analyze. Run criteria-based evaluations first.")
+        with sub2:
+            if holistic_results:
+                holistic_distribution_analysis(holistic_results)
+            else:
+                st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
     
     with tab2:
         if criteria_results:
@@ -1280,10 +1287,17 @@ def analysis_page(user: dict):
         decision_comparison_analysis(criteria_results, holistic_results)
     
     with tab4:
-        if criteria_results:
-            recommendation_analysis(criteria_results)
-        else:
-            st.info("Recommendations analysis requires criteria-based evaluations.")
+        sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
+        with sub1:
+            if criteria_results:
+                recommendation_analysis(criteria_results)
+            else:
+                st.info("Recommendations analysis requires criteria-based evaluations.")
+        with sub2:
+            if holistic_results:
+                holistic_recommendation_analysis(holistic_results)
+            else:
+                st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
 
 
 def distribution_analysis(all_results):
@@ -1385,6 +1399,148 @@ def recommendation_analysis(all_results):
                 
                 for c in sorted(candidates, key=lambda x: -x.overall_score)[:5]:
                     st.text(f"- {c.candidate.candidate_id}: {c.overall_score:.1f}/10")
+
+
+def holistic_distribution_analysis(holistic_results):
+    """Score distribution analysis for holistic evaluations."""
+    st.subheader("Holistic Score Distribution Analysis")
+
+    overall_scores = [r.overall_score for r in holistic_results]
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Mean Score", f"{sum(overall_scores)/len(overall_scores):.2f}")
+    with col2:
+        st.metric("Median Score", f"{sorted(overall_scores)[len(overall_scores)//2]:.2f}")
+    with col3:
+        st.metric("Min Score", f"{min(overall_scores):.2f}")
+    with col4:
+        st.metric("Max Score", f"{max(overall_scores):.2f}")
+
+    interview_yes = sum(1 for r in holistic_results if r.interview_decision)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Interview Recommended", f"{interview_yes}/{len(holistic_results)}")
+    with col2:
+        st.metric("Interview Rate", f"{interview_yes/len(holistic_results)*100:.1f}%")
+    with col3:
+        avg_score_interview = (
+            sum(r.overall_score for r in holistic_results if r.interview_decision) / interview_yes
+            if interview_yes else 0
+        )
+        st.metric("Avg Score (Interview Yes)", f"{avg_score_interview:.2f}" if interview_yes else "N/A")
+
+    st.markdown("---")
+
+    # Score distribution chart
+    st.subheader("Score Distribution")
+    score_df = pd.DataFrame({'Score': overall_scores})
+    st.bar_chart(score_df['Score'].value_counts().sort_index())
+
+    # Innovation potential breakdown
+    st.subheader("Innovation Potential Distribution")
+    innovation_counts = {}
+    for r in holistic_results:
+        level = r.innovation_potential.level.capitalize()
+        innovation_counts[level] = innovation_counts.get(level, 0) + 1
+
+    innov_data = []
+    for level in ['High', 'Medium', 'Low']:
+        count = innovation_counts.get(level, 0)
+        pct = count / len(holistic_results) * 100
+        avg = (
+            sum(r.overall_score for r in holistic_results if r.innovation_potential.level.capitalize() == level) / count
+            if count else 0
+        )
+        innov_data.append({'Level': level, 'Count': count, 'Percentage': f"{pct:.1f}%", 'Avg Score': f"{avg:.2f}" if count else 'N/A'})
+    st.dataframe(pd.DataFrame(innov_data), hide_index=True, use_container_width=True)
+
+    # Program fit breakdown
+    st.subheader("Program Fit Distribution")
+    fit_counts = {}
+    for r in holistic_results:
+        level = r.program_fit.level.capitalize()
+        fit_counts[level] = fit_counts.get(level, 0) + 1
+
+    fit_data = []
+    for level in ['Strong', 'Moderate', 'Weak', 'High', 'Medium', 'Low']:
+        count = fit_counts.get(level, 0)
+        if count == 0:
+            continue
+        pct = count / len(holistic_results) * 100
+        avg = (
+            sum(r.overall_score for r in holistic_results if r.program_fit.level.capitalize() == level) / count
+            if count else 0
+        )
+        fit_data.append({'Level': level, 'Count': count, 'Percentage': f"{pct:.1f}%", 'Avg Score': f"{avg:.2f}"})
+    if fit_data:
+        st.dataframe(pd.DataFrame(fit_data), hide_index=True, use_container_width=True)
+
+    # Interview decision by score band
+    st.subheader("Interview Decision by Score Band")
+    bands = [(0, 4, "0–4"), (4, 6, "4–6"), (6, 8, "6–8"), (8, 10.1, "8–10")]
+    band_data = []
+    for low, high, label in bands:
+        group = [r for r in holistic_results if low <= r.overall_score < high]
+        if group:
+            yes = sum(1 for r in group if r.interview_decision)
+            band_data.append({
+                'Score Band': label,
+                'Candidates': len(group),
+                'Interview Yes': yes,
+                'Interview Rate': f"{yes/len(group)*100:.1f}%"
+            })
+    if band_data:
+        st.dataframe(pd.DataFrame(band_data), hide_index=True, use_container_width=True)
+
+
+def holistic_recommendation_analysis(holistic_results):
+    """Recommendation and decision breakdown for holistic evaluations."""
+    st.subheader("Holistic Recommendation Analysis")
+
+    # Group by recommendation
+    recommendations = {}
+    for result in holistic_results:
+        rec = result.recommendation if result.recommendation else "Unknown"
+        if rec not in recommendations:
+            recommendations[rec] = []
+        recommendations[rec].append(result)
+
+    st.markdown(f"**{len(recommendations)} unique recommendation types**")
+
+    for rec_type, candidates in sorted(recommendations.items(), key=lambda x: -len(x[1])):
+        with st.expander(f"{rec_type} ({len(candidates)} candidates)"):
+            if candidates:
+                avg = sum(c.overall_score for c in candidates) / len(candidates)
+                interview_yes = sum(1 for c in candidates if c.interview_decision)
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Average Score", f"{avg:.2f}")
+                with col2:
+                    st.metric("Interview Recommended", f"{interview_yes}/{len(candidates)}")
+                with col3:
+                    st.metric("Interview Rate", f"{interview_yes/len(candidates)*100:.1f}%")
+
+                for c in sorted(candidates, key=lambda x: -x.overall_score)[:5]:
+                    interview_icon = "✓" if c.interview_decision else "✗"
+                    st.text(f"- {c.candidate.candidate_id}: {c.overall_score:.1f}/10  {interview_icon} Interview")
+
+    st.markdown("---")
+    st.subheader("Innovation Potential by Recommendation")
+
+    innov_rec_data = []
+    for result in holistic_results:
+        innov_rec_data.append({
+            'Candidate': result.candidate.candidate_id,
+            'Score': result.overall_score,
+            'Recommendation': result.recommendation or 'Unknown',
+            'Innovation': result.innovation_potential.level.capitalize(),
+            'Program Fit': result.program_fit.level.capitalize(),
+            'Interview': 'Yes' if result.interview_decision else 'No'
+        })
+
+    df = pd.DataFrame(innov_rec_data).sort_values('Score', ascending=False)
+    st.dataframe(df, hide_index=True, use_container_width=True)
 
 
 def expert_comparison_analysis(all_results):
