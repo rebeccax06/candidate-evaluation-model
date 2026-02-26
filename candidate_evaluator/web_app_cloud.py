@@ -30,9 +30,13 @@ from candidate_evaluator.core.models import (
     HolisticEvaluationResult,
     InnovationPotential,
     ProgramFit,
-    NotableQuality
+    NotableQuality,
+    AdmitPatternAnalysisResult
 )
-from candidate_evaluator.utils.config import get_default_config
+from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
+from candidate_evaluator.exporters import CSVExporter, JSONExporter
+from candidate_evaluator.prompt_manager import PromptManager
+from candidate_evaluator.utils.config import get_default_config, Config, APIConfig
 from candidate_evaluator.auth import (
     init_auth_state,
     render_auth_ui,
@@ -85,8 +89,6 @@ def get_storage() -> Storage:
 def get_evaluator(api_key: str) -> CandidateEvaluator:
     """Get or create evaluator with user's API key."""
     if st.session_state.evaluator is None or st.session_state.get('current_api_key') != api_key:
-        # Create config directly with the user's API key
-        from candidate_evaluator.utils.config import Config, APIConfig
         config = Config(
             api=APIConfig(anthropic_api_key=api_key)
         )
@@ -208,7 +210,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Research", "Settings"],
+            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Admit Patterns", "Research", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -235,6 +237,8 @@ def main():
         results_page(user)
     elif page == "Analysis":
         analysis_page(user)
+    elif page == "Admit Patterns":
+        admit_pattern_analysis_page(user, api_key)
     elif page == "Research":
         research_page(user)
     elif page == "Settings":
@@ -652,6 +656,24 @@ def results_page(user: dict):
     criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
     holistic_evals = [e for e in evaluations if e.get("evaluation_type") == "holistic"]
     
+    criteria_results = []
+    for e in criteria_evals:
+        try:
+            criteria_results.append(result_dict_to_evaluation_result(e["result"]))
+        except Exception:
+            pass
+    
+    holistic_results = []
+    for e in holistic_evals:
+        try:
+            holistic_results.append(result_dict_to_holistic_result(e["result"]))
+        except Exception:
+            pass
+    
+    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
+    
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Criteria-Based", len(criteria_evals))
@@ -665,15 +687,48 @@ def results_page(user: dict):
     
     st.markdown("---")
     
-    tab1, tab2 = st.tabs([
+    tab1, tab2, tab3 = st.tabs([
         f"Criteria-Based ({len(criteria_evals)})",
-        f"Holistic ({len(holistic_evals)})"
+        f"Holistic ({len(holistic_evals)})",
+        f"Combined View ({len(both_ids)})"
     ])
     
     with tab1:
         if not criteria_evals:
             st.info("No criteria-based evaluations yet.")
         else:
+            exp_col1, exp_col2 = st.columns(2)
+            with exp_col1:
+                if st.button("Export Criteria (CSV)", use_container_width=True, key="export_csv"):
+                    if criteria_results:
+                        import tempfile as _tempfile
+                        _tmp = _tempfile.mkdtemp()
+                        csv_path = os.path.join(_tmp, "criteria_results.csv")
+                        CSVExporter.export_batch(criteria_results, csv_path)
+                        with open(csv_path, 'rb') as f:
+                            st.download_button(
+                                "Download CSV",
+                                data=f,
+                                file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.csv",
+                                mime="text/csv",
+                                key="dl_csv"
+                            )
+            with exp_col2:
+                if st.button("Export Criteria (JSON)", use_container_width=True, key="export_json"):
+                    if criteria_results:
+                        import tempfile as _tempfile
+                        _tmp = _tempfile.mkdtemp()
+                        json_path = os.path.join(_tmp, "criteria_results.json")
+                        JSONExporter.export_batch(criteria_results, json_path)
+                        with open(json_path, 'rb') as f:
+                            st.download_button(
+                                "Download JSON",
+                                data=f,
+                                file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.json",
+                                mime="application/json",
+                                key="dl_json"
+                            )
+            
             summary_data = []
             sorted_evals = sorted(criteria_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
             
@@ -713,6 +768,8 @@ def results_page(user: dict):
                     'Name': e.get('candidate_name') or '-',
                     'Score': f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else 'N/A',
                     'Interview': 'Yes' if result_data.get('interview_decision') else 'No',
+                    'Innovation': result_data.get('innovation_potential', {}).get('level', '-').capitalize() if isinstance(result_data.get('innovation_potential'), dict) else '-',
+                    'Program Fit': result_data.get('program_fit', {}).get('level', '-').capitalize() if isinstance(result_data.get('program_fit'), dict) else '-',
                     'Date': str(e.get('created_at', ''))[:10]
                 })
             
@@ -726,35 +783,140 @@ def results_page(user: dict):
                 eval_data = options[selected]
                 result = result_dict_to_holistic_result(eval_data["result"])
                 display_holistic_evaluation_result(result)
+    
+    with tab3:
+        if not both_ids:
+            st.info("No candidates have both evaluation types yet. Run both criteria-based and holistic evaluations on the same candidates to compare.")
+        else:
+            st.subheader(f"Candidates with Both Evaluations: {len(both_ids)}")
+            display_disparity_analysis(criteria_by_id, holistic_by_id, both_ids)
+            
+            st.subheader("Individual Candidate Comparison")
+            selected_id = st.selectbox("Select Candidate", both_ids, key="combined_view_selector")
+            
+            if selected_id:
+                criteria_result = criteria_by_id[selected_id]
+                holistic_result = holistic_by_id[selected_id]
+                display_comparison_summary(criteria_result, holistic_result)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("### Criteria-Based Evaluation")
+                    display_evaluation_result(criteria_result)
+                with col2:
+                    st.markdown("### Holistic Evaluation")
+                    display_holistic_evaluation_result(holistic_result)
+
+
+def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):
+    """Display statistical analysis of method disparity vs candidate spread."""
+    import numpy as np
+
+    if len(both_ids) < 3:
+        st.info("Need at least 3 candidates with both evaluations for disparity analysis.")
+        return
+
+    criteria_scores = [criteria_by_id[cid].overall_score for cid in both_ids]
+    holistic_scores = [holistic_by_id[cid].overall_score for cid in both_ids]
+    score_diffs = [criteria_by_id[cid].overall_score - holistic_by_id[cid].overall_score
+                   for cid in both_ids]
+
+    criteria_std = np.std(criteria_scores)
+    holistic_std = np.std(holistic_scores)
+    candidate_std = (criteria_std + holistic_std) / 2
+    method_disparity_std = np.std(score_diffs)
+    correlation = np.corrcoef(criteria_scores, holistic_scores)[0, 1]
+    disparity_ratio = method_disparity_std / candidate_std if candidate_std > 0 else 0
+
+    st.markdown("### Method Disparity Analysis")
+    st.caption("Comparing the spread of scores across candidates vs. the disagreement between evaluation methods.")
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Candidate Spread (σ)", f"{candidate_std:.2f} pts")
+    with col2:
+        st.metric("Method Disparity (σ)", f"{method_disparity_std:.2f} pts")
+    with col3:
+        st.metric("Disparity Ratio", f"{disparity_ratio:.2f}")
+    with col4:
+        st.metric("Correlation", f"{correlation:.2f}")
+
+    if disparity_ratio < 0.3:
+        st.success(f"**Methods strongly agree.** Method differences ({method_disparity_std:.2f}) are much smaller than candidate differences ({candidate_std:.2f}).")
+    elif disparity_ratio < 0.5:
+        st.info(f"**Methods mostly agree.** Method differences are moderate compared to candidate spread.")
+    elif disparity_ratio < 0.7:
+        st.warning(f"**Moderate disagreement.** Method choice affects scores nearly as much as candidate quality.")
+    else:
+        st.error(f"**Significant disagreement.** Method differences ({method_disparity_std:.2f}) are large relative to candidate spread ({candidate_std:.2f}).")
+
+    st.markdown("---")
+
+
+def display_comparison_summary(criteria_result, holistic_result):
+    """Display a comparison summary between criteria-based and holistic evaluations."""
+    score_diff = criteria_result.overall_score - holistic_result.overall_score
+
+    st.markdown("### Comparison Summary")
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Criteria Score", f"{criteria_result.overall_score:.1f}")
+    with col2:
+        st.metric("Holistic Score", f"{holistic_result.overall_score:.1f}")
+    with col3:
+        if score_diff > 0:
+            delta_label = "Criteria higher"
+        elif score_diff < 0:
+            delta_label = "Holistic higher"
+        else:
+            delta_label = "Equal"
+        st.metric("Score Difference", f"{abs(score_diff):.1f}", delta=delta_label)
+    with col4:
+        interview = "Yes" if holistic_result.interview_decision else "No"
+        st.metric("Interview (Holistic)", interview)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"**Criteria Recommendation:** {criteria_result.recommendation}")
+    with col2:
+        st.markdown(f"**Holistic Recommendation:** {holistic_result.recommendation}")
+
+    recs_match = criteria_result.recommendation.lower() == holistic_result.recommendation.lower()
+    if recs_match:
+        st.success("Recommendations align")
+    elif abs(score_diff) > 1.5:
+        st.warning(f"Significant score difference: {abs(score_diff):.1f} points")
+
+    st.markdown("---")
 
 
 def settings_page(user: dict):
     """Settings page."""
     st.title("Settings")
-    
+
     st.subheader("Account")
     st.markdown(f"**Email:** {user['email']}")
     st.markdown(f"**User ID:** {user['id']}")
-    
+
     st.markdown("---")
-    
+
     st.subheader("API Key")
-    
+
     db = get_database()
     current_key = db.get_user_api_key(user["id"])
-    
+
     if current_key:
         st.success("API key is configured")
         masked = current_key[:10] + "..." + current_key[-4:]
         st.code(masked)
-    
+
     with st.form("update_api_key"):
         new_key = st.text_input(
             "Update Anthropic API Key",
             type="password",
             placeholder="sk-ant-..."
         )
-        
         if st.form_submit_button("Update API Key"):
             if new_key and new_key.startswith("sk-ant-"):
                 db.update_user_api_key(user["id"], new_key)
@@ -762,109 +924,307 @@ def settings_page(user: dict):
                 st.rerun()
             else:
                 st.error("Please enter a valid Anthropic API key")
-    
+
     st.markdown("---")
-    
+
     st.subheader("Data")
-    
     evaluations = db.get_user_evaluations(user["id"])
     jobs = db.get_user_jobs(user["id"])
-    
     st.markdown(f"**Total evaluations:** {len(evaluations)}")
     st.markdown(f"**Total jobs:** {len(jobs)}")
+
+    st.markdown("---")
+
+    st.subheader("Criteria Weights")
+    st.caption("Default weights for each evaluation criterion (equal weighting).")
+    from candidate_evaluator.utils.config import CriteriaWeights
+    weights = CriteriaWeights()
+    criteria_list = [
+        'critical_thinking', 'coachability', 'curiosity', 'creativity',
+        'collaboration', 'follow_through', 'problem_solving_motivation',
+        'evidence_based', 'detail_orientation', 'communication', 'expertise_enabler'
+    ]
+    weight_data = [
+        {'Criterion': c.replace('_', ' ').title(), 'Weight': getattr(weights, c, 10)}
+        for c in criteria_list
+    ]
+    st.dataframe(pd.DataFrame(weight_data), hide_index=True, use_container_width=True)
+
+    st.markdown("---")
+
+    st.subheader("Prompt Editor")
+    st.caption("View and customize the prompts used for candidate evaluation.")
+
+    if 'prompt_manager' not in st.session_state:
+        st.session_state.prompt_manager = PromptManager()
+
+    prompt_manager = st.session_state.prompt_manager
+
+    prompt_options = {
+        "System Prompt": "system",
+        "Criteria-Based Template": "criteria",
+        "Holistic Template": "holistic"
+    }
+
+    selected_prompt_name = st.selectbox(
+        "Select Prompt to View/Edit",
+        list(prompt_options.keys()),
+        key="prompt_selector"
+    )
+    selected_prompt_type = prompt_options[selected_prompt_name]
+
+    metadata = prompt_manager.get_prompt_metadata(selected_prompt_type)
+
+    if metadata["is_custom"]:
+        st.info(f"Status: **Custom** (modified {metadata['updated_at'][:10] if metadata['updated_at'] else 'unknown'})")
+    else:
+        st.success("Status: **Default** (using built-in prompt)")
+
+    if selected_prompt_type == "system":
+        current_content = prompt_manager.get_system_prompt()
+    elif selected_prompt_type == "criteria":
+        current_content = prompt_manager.get_criteria_template()
+    else:
+        current_content = prompt_manager.get_holistic_template()
+
+    edited_content = st.text_area(
+        f"Edit {selected_prompt_name}",
+        value=current_content,
+        height=400,
+        key=f"prompt_editor_{selected_prompt_type}"
+    )
+
+    st.caption(f"Character count: {len(edited_content):,}")
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        if st.button("Save Changes", type="primary", use_container_width=True):
+            if edited_content != current_content:
+                if selected_prompt_type == "system":
+                    prompt_manager.save_system_prompt(edited_content)
+                elif selected_prompt_type == "criteria":
+                    prompt_manager.save_criteria_template(edited_content)
+                else:
+                    prompt_manager.save_holistic_template(edited_content)
+                st.success("Prompt saved successfully!")
+                st.rerun()
+            else:
+                st.warning("No changes to save.")
+    with col2:
+        if st.button("Reset to Default", use_container_width=True):
+            if metadata["is_custom"]:
+                prompt_manager.reset_to_default(selected_prompt_type)
+                st.success("Reset to default prompt!")
+                st.rerun()
+            else:
+                st.info("Already using default prompt.")
+    with col3:
+        if st.button("View Default", use_container_width=True):
+            default_content = prompt_manager.get_default_prompt(selected_prompt_type)
+            st.text_area(
+                "Default Prompt (read-only)",
+                value=default_content,
+                height=300,
+                disabled=True,
+                key="default_prompt_view"
+            )
+
+    if selected_prompt_type in ["criteria", "holistic"]:
+        with st.expander("Template Variables"):
+            st.markdown("""
+            **Available placeholders:**
+            - `{materials}` - Candidate application materials (required)
+            - `{criteria_details}` - Formatted criteria rubrics (criteria template only)
+
+            **Note:** Do not remove these placeholders or the evaluation will fail.
+            """)
 
 
 def display_evaluation_result(result: EvaluationResult):
     """Display a criteria-based evaluation result."""
-    st.markdown(f"### {result.candidate.candidate_id}")
     if result.candidate.name:
         st.caption(f"Name: {result.candidate.name}")
-    
-    col1, col2, col3 = st.columns(3)
+
+    if len(result.scores) < 11:
+        st.warning(f"Incomplete evaluation: only {len(result.scores)}/11 criteria scored. "
+                   f"This may be due to output truncation. Re-run this candidate for a complete evaluation.")
+
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Overall Score", f"{result.overall_score:.1f}/10")
     with col2:
-        st.metric("Recommendation", result.recommendation)
+        st.metric("Criteria", f"{len(result.scores)}/11")
     with col3:
-        st.metric("Criteria Evaluated", len(result.scores))
-    
-    st.markdown("#### Overall Assessment")
-    st.write(result.overall_assessment)
-    
-    if result.strengths:
-        st.markdown("#### Strengths")
-        for s in result.strengths:
-            st.markdown(f"- {s}")
-    
-    if result.areas_for_development:
-        st.markdown("#### Areas for Development")
-        for a in result.areas_for_development:
-            st.markdown(f"- {a}")
-    
-    st.markdown("#### Criterion Scores")
-    
-    for score in sorted(result.scores, key=lambda s: s.score, reverse=True):
-        with st.expander(f"{score.criterion.value}: {score.score}/10"):
-            st.markdown(f"**Reasoning:** {score.reasoning}")
-            st.markdown(f"**Confidence:** {score.confidence}")
-            
+        high_conf = sum(1 for s in result.scores if s.confidence == 'high')
+        st.metric("High Confidence", f"{high_conf}/{len(result.scores)}")
+    with col4:
+        st.metric("Recommendation", result.recommendation)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if result.strengths:
+            st.markdown("#### Strengths")
+            for s in result.strengths:
+                st.markdown(f"- {s}")
+    with col2:
+        if result.areas_for_development:
+            st.markdown("#### Areas for Development")
+            for a in result.areas_for_development:
+                st.markdown(f"- {a}")
+
+    st.markdown("#### Scores by Criterion")
+    score_data = pd.DataFrame([
+        {
+            'Criterion': score.criterion.value.replace('_', ' ').title(),
+            'Score': score.score,
+            'Confidence': score.confidence.capitalize()
+        }
+        for score in sorted(result.scores, key=lambda s: s.score, reverse=True)
+    ])
+    st.dataframe(score_data, hide_index=True, use_container_width=True)
+
+    chart_data = pd.DataFrame([
+        {'Criterion': s.criterion.value.replace('_', ' ').title(), 'Score': s.score}
+        for s in result.scores
+    ])
+    st.bar_chart(chart_data.set_index('Criterion'))
+
+    if result.overall_assessment:
+        with st.expander("Overall Assessment"):
+            st.write(result.overall_assessment)
+
+    with st.expander("View Detailed Evidence"):
+        for score in result.scores:
+            st.markdown(f"**{score.criterion.value.replace('_', ' ').title()}** - {score.score}/10 ({score.confidence})")
+            st.markdown(score.reasoning)
             if score.evidence:
-                st.markdown("**Evidence:**")
                 for ev in score.evidence:
-                    st.markdown(f"> \"{ev.quote}\"")
-                    st.caption(f"Source: {ev.source}")
+                    st.markdown(f"> *{ev.source}:* {ev.quote}")
+            st.markdown("---")
 
 
 def display_holistic_evaluation_result(result: HolisticEvaluationResult):
-    """Display a holistic evaluation result."""
-    st.markdown(f"### {result.candidate.candidate_id}")
+    """Display a holistic evaluation result (supports both old and enhanced formats)."""
     if result.candidate.name:
         st.caption(f"Name: {result.candidate.name}")
-    
-    col1, col2, col3 = st.columns(3)
+
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Overall Score", f"{result.overall_score:.1f}/10")
     with col2:
-        st.metric("Interview?", "Yes" if result.interview_decision else "No")
+        interview_text = "Yes" if result.interview_decision else "No"
+        st.metric("Interview Recommendation", interview_text)
     with col3:
-        st.metric("Innovation", result.innovation_potential.level.capitalize())
-    
+        innovation_conf = getattr(result.innovation_potential, 'confidence', 'medium')
+        st.metric("Innovation Potential", f"{result.innovation_potential.level.capitalize()} ({innovation_conf})")
+    with col4:
+        fit_conf = getattr(result.program_fit, 'confidence', 'medium')
+        st.metric("Program Fit", f"{result.program_fit.level.capitalize()} ({fit_conf})")
+
+    st.markdown(f"**Recommendation:** {result.recommendation}")
+
+    if hasattr(result, 'score_justification') and result.score_justification:
+        with st.expander("Score Justification"):
+            st.markdown(result.score_justification)
+
+    if hasattr(result, 'interview_decision_reasoning') and result.interview_decision_reasoning:
+        with st.expander("Interview Decision Reasoning"):
+            st.markdown(result.interview_decision_reasoning)
+
     st.markdown("#### Overall Assessment")
-    st.write(result.overall_assessment)
-    
-    st.markdown("#### Innovation Potential")
-    st.markdown(f"**Level:** {result.innovation_potential.level.capitalize()}")
-    st.write(result.innovation_potential.reasoning)
-    
-    st.markdown("#### Program Fit")
-    st.markdown(f"**Level:** {result.program_fit.level.capitalize()}")
-    
-    if result.program_fit.strengths_for_program:
-        st.markdown("**Strengths:**")
-        for s in result.program_fit.strengths_for_program:
-            st.markdown(f"- {s}")
-    
-    if result.program_fit.concerns:
-        st.markdown("**Concerns:**")
-        for c in result.program_fit.concerns:
-            st.markdown(f"- {c}")
-    
+    st.markdown(result.overall_assessment)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("#### Innovation Potential")
+        st.markdown(f"**Level:** {result.innovation_potential.level.capitalize()} (Confidence: {getattr(result.innovation_potential, 'confidence', 'medium')})")
+        st.markdown(result.innovation_potential.reasoning)
+
+        if hasattr(result.innovation_potential, 'evidence') and result.innovation_potential.evidence:
+            st.markdown("**Evidence:**")
+            for ev in result.innovation_potential.evidence:
+                if hasattr(ev, 'quote'):
+                    source_text = f" *({ev.source})*" if ev.source else ""
+                    st.markdown(f"> \"{ev.quote}\"{source_text}")
+                    if ev.context:
+                        st.caption(f"Context: {ev.context}")
+        elif result.innovation_potential.key_evidence:
+            st.markdown("**Key Evidence:**")
+            for ev in result.innovation_potential.key_evidence:
+                st.markdown(f"> {ev}")
+
+    with col2:
+        st.markdown("#### Program Fit")
+        st.markdown(f"**Level:** {result.program_fit.level.capitalize()} (Confidence: {getattr(result.program_fit, 'confidence', 'medium')})")
+
+        if hasattr(result.program_fit, 'detailed_analysis') and result.program_fit.detailed_analysis:
+            st.markdown(result.program_fit.detailed_analysis)
+
+        if result.program_fit.strengths_for_program:
+            st.markdown("**Strengths:**")
+            for s in result.program_fit.strengths_for_program:
+                st.markdown(f"- {s}")
+        if result.program_fit.concerns:
+            st.markdown("**Concerns:**")
+            for c in result.program_fit.concerns:
+                st.markdown(f"- {c}")
+
+        if hasattr(result.program_fit, 'evidence') and result.program_fit.evidence:
+            with st.expander("Supporting Evidence"):
+                for ev in result.program_fit.evidence:
+                    if hasattr(ev, 'quote'):
+                        source_text = f" *({ev.source})*" if ev.source else ""
+                        st.markdown(f"> \"{ev.quote}\"{source_text}")
+                        if ev.context:
+                            st.caption(f"Context: {ev.context}")
+
     if result.notable_qualities:
         st.markdown("#### Notable Qualities")
         for q in result.notable_qualities:
-            with st.expander(q.quality):
-                st.write(q.evidence)
-                st.caption(f"Significance: {q.significance}")
-    
+            confidence = getattr(q, 'confidence', 'medium')
+            with st.expander(f"{q.quality} (Confidence: {confidence})"):
+                if isinstance(q.evidence, list):
+                    st.markdown("**Evidence:**")
+                    for ev in q.evidence:
+                        if hasattr(ev, 'quote'):
+                            source_text = f" *({ev.source})*" if ev.source else ""
+                            st.markdown(f"> \"{ev.quote}\"{source_text}")
+                            if ev.context:
+                                st.caption(ev.context)
+                        else:
+                            st.markdown(f"> {ev}")
+                else:
+                    st.markdown(f"**Evidence:** {q.evidence}")
+                st.markdown(f"**Significance:** {q.significance}")
+
     if result.red_flags:
         st.markdown("#### Red Flags")
         for flag in result.red_flags:
-            st.warning(flag)
-    
+            if hasattr(flag, 'flag'):
+                severity = getattr(flag, 'severity', 'medium')
+                if severity == 'high':
+                    st.error(f"**{flag.flag}**")
+                elif severity == 'low':
+                    st.info(f"{flag.flag}")
+                else:
+                    st.warning(f"{flag.flag}")
+                if getattr(flag, 'evidence', ''):
+                    st.caption(f"Evidence: {flag.evidence}")
+            else:
+                st.warning(str(flag))
+
     if result.questions_for_interview:
         st.markdown("#### Suggested Interview Questions")
-        for q in result.questions_for_interview:
-            st.markdown(f"- {q}")
+        for i, q in enumerate(result.questions_for_interview, 1):
+            if hasattr(q, 'question'):
+                category = getattr(q, 'category', 'General')
+                purpose = getattr(q, 'purpose', '')
+                st.markdown(f"**{i}. [{category}]** {q.question}")
+                if purpose:
+                    st.caption(f"Purpose: {purpose}")
+            else:
+                st.markdown(f"{i}. {q}")
 
 
 def get_user_results_as_objects(user: dict):
@@ -902,35 +1262,40 @@ def analysis_page(user: dict):
     
     st.markdown(f"**Analyzing {len(criteria_results)} criteria-based + {len(holistic_results)} holistic evaluations**")
     
-    tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "Recommendations", "Score Comparison"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Distribution Analysis", "AI vs Expert", "Decision Comparison", "Recommendations"])
     
     with tab1:
         if criteria_results:
             distribution_analysis(criteria_results)
         else:
-            st.info("No criteria-based evaluations to analyze.")
+            st.info("No criteria-based evaluations to analyze. Run criteria-based evaluations first.")
     
     with tab2:
+        if criteria_results:
+            expert_comparison_analysis(criteria_results)
+        else:
+            st.info("Expert comparison requires criteria-based evaluations.")
+    
+    with tab3:
+        decision_comparison_analysis(criteria_results, holistic_results)
+    
+    with tab4:
         if criteria_results:
             recommendation_analysis(criteria_results)
         else:
             st.info("Recommendations analysis requires criteria-based evaluations.")
-    
-    with tab3:
-        if criteria_results and holistic_results:
-            score_comparison_analysis(criteria_results, holistic_results)
-        else:
-            st.info("Need both criteria-based and holistic evaluations for comparison.")
 
 
 def distribution_analysis(all_results):
     """Score distribution analysis."""
     st.subheader("Score Distribution Analysis")
     
+    from candidate_evaluator.core.distribution_analyzer import DistributionAnalyzer
+    analyzer = DistributionAnalyzer(all_results)
+    
     overall_scores = [r.overall_score for r in all_results]
     
     col1, col2, col3, col4 = st.columns(4)
-    
     with col1:
         st.metric("Mean Score", f"{sum(overall_scores)/len(overall_scores):.2f}")
     with col2:
@@ -941,6 +1306,34 @@ def distribution_analysis(all_results):
         st.metric("Max Score", f"{max(overall_scores):.2f}")
     
     st.markdown("---")
+    
+    # Percentile analysis
+    percentile = st.slider("Percentile Split", 25, 75, 50)
+    
+    if st.button("Analyze"):
+        top_group, bottom_group = analyzer.segment_by_percentile(percentile)
+        comparison = analyzer.compare_groups(top_group, bottom_group)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"### Top {100-percentile}% ({len(top_group)} candidates)")
+            if top_group:
+                top_analysis = analyzer.analyze_group(top_group)
+                st.metric("Mean Score", f"{top_analysis.mean_overall_score:.2f}")
+        with col2:
+            st.markdown(f"### Bottom {percentile}% ({len(bottom_group)} candidates)")
+            if bottom_group:
+                bottom_analysis = analyzer.analyze_group(bottom_group)
+                st.metric("Mean Score", f"{bottom_analysis.mean_overall_score:.2f}")
+        
+        st.markdown("### Most Discriminating Criteria")
+        for i, crit in enumerate(comparison.get('most_discriminating_criteria', []), 1):
+            name = crit['criterion'].replace('_', ' ').title()
+            st.markdown(f"**{i}. {name}**: {crit['difference']:.1f} point gap")
+        
+        st.markdown("### Insights")
+        for insight in comparison.get('insights', []):
+            st.info(insight)
     
     # Score distribution chart
     st.subheader("Score Distribution")
@@ -994,66 +1387,738 @@ def recommendation_analysis(all_results):
                     st.text(f"- {c.candidate.candidate_id}: {c.overall_score:.1f}/10")
 
 
-def score_comparison_analysis(criteria_results, holistic_results):
-    """Compare criteria-based vs holistic scores."""
-    st.subheader("Criteria vs Holistic Score Comparison")
-    
-    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
-    holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
-    both_ids = set(criteria_by_id.keys()) & set(holistic_by_id.keys())
-    
-    if not both_ids:
-        st.info("No candidates have been evaluated with both methods.")
-        
+def expert_comparison_analysis(all_results):
+    """AI vs Expert comparison."""
+    st.subheader("AI vs Expert Comparison")
+    st.info("Upload expert ratings to compare with AI evaluations.")
+
+    expert_file = st.file_uploader(
+        "Upload Expert Ratings",
+        type=['xlsx', 'xls', 'csv'],
+        help="Excel or CSV with expert ratings"
+    )
+
+    if expert_file:
+        try:
+            from candidate_evaluator.core.expert_comparison import ExpertComparisonAnalyzer
+            import tempfile as _tempfile
+
+            _tmp = _tempfile.mkdtemp()
+            _tmp_path = os.path.join(_tmp, expert_file.name)
+            with open(_tmp_path, 'wb') as f:
+                f.write(expert_file.getbuffer())
+
+            analyzer = ExpertComparisonAnalyzer()
+
+            with st.spinner("Loading expert ratings..."):
+                expert_ratings = analyzer.load_expert_ratings_from_excel(_tmp_path)
+
+            st.success(f"Loaded {len(expert_ratings)} expert ratings")
+            analyzer.set_ai_results(all_results)
+
+            threshold = st.slider("Interview Threshold", 1.0, 10.0, 6.0)
+
+            if st.button("Run Comparison"):
+                metrics = analyzer.compare(interview_threshold=threshold)
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Matched", f"{metrics.matched_candidates}/{metrics.total_candidates}")
+                with col2:
+                    st.metric("MAE", f"{metrics.overall_mae:.2f}")
+                with col3:
+                    st.metric("Correlation", f"{metrics.overall_correlation:.2f}")
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Sensitivity", f"{metrics.sensitivity*100:.1f}%" if metrics.sensitivity else "N/A")
+                with col2:
+                    st.metric("Specificity", f"{metrics.specificity*100:.1f}%" if metrics.specificity else "N/A")
+                with col3:
+                    st.metric("Cohen's Kappa", f"{metrics.cohens_kappa:.2f}" if metrics.cohens_kappa else "N/A")
+
+                if metrics.ai_bias:
+                    st.warning(f"Detected bias: {metrics.ai_bias}")
+
+        except Exception as e:
+            st.error(f"Error: {e}")
+
+
+def decision_comparison_analysis(criteria_results, holistic_results):
+    """Compare AI predictions against actual interview/admission decisions."""
+    st.subheader("Decision Comparison")
+    st.markdown("Compare AI evaluation predictions against actual interview and admission decisions.")
+
+    with st.expander("How to use", expanded=False):
+        st.markdown("""
+        **Upload a CSV or Excel file with columns:**
+        - `candidate_id`: Must match the candidate IDs from evaluations
+        - `interviewed`: Yes/No or True/False - whether the candidate was interviewed
+        - `admitted` (optional): Yes/No or True/False - whether the candidate was admitted
+
+        **The tool will calculate:**
+        - Sensitivity (true positive rate)
+        - Specificity (true negative rate)
+        - Cohen's Kappa (agreement statistic)
+        - Confusion matrix
+        """)
+
+    uploaded_file = st.file_uploader(
+        "Upload decisions file",
+        type=['csv', 'xlsx'],
+        help="CSV or Excel with candidate_id, interviewed, admitted columns"
+    )
+
+    if uploaded_file is None:
+        st.info("Upload a decisions file to compare AI predictions against actual outcomes.")
+        return
+
+    try:
+        if uploaded_file.name.endswith('.xlsx'):
+            decisions_df = pd.read_excel(uploaded_file)
+        else:
+            decisions_df = pd.read_csv(uploaded_file)
+    except Exception as e:
+        st.error(f"Error reading file: {e}")
+        return
+
+    decisions_df.columns = decisions_df.columns.str.lower().str.strip()
+
+    if 'candidate_id' not in decisions_df.columns:
+        st.error("File must have a 'candidate_id' column")
+        return
+    if 'interviewed' not in decisions_df.columns:
+        st.error("File must have an 'interviewed' column")
+        return
+
+    def normalize_bool(val):
+        if pd.isna(val):
+            return None
+        if isinstance(val, bool):
+            return val
+        return str(val).lower().strip() in ['yes', 'true', '1', 'y']
+
+    decisions_df['interviewed'] = decisions_df['interviewed'].apply(normalize_bool)
+    if 'admitted' in decisions_df.columns:
+        decisions_df['admitted'] = decisions_df['admitted'].apply(normalize_bool)
+
+    st.success(f"Loaded {len(decisions_df)} decision records")
+
+    st.markdown("### Select Evaluation Data")
+    data_source = st.radio(
+        "Compare against:",
+        ["Criteria-Based Evaluations", "Holistic Evaluations", "Both"],
+        horizontal=True
+    )
+
+    threshold = st.slider(
+        "Score threshold for positive AI prediction",
+        min_value=1.0, max_value=10.0, value=6.0, step=0.5,
+        help="Candidates scoring at or above this threshold are predicted as 'interview'"
+    )
+
+    if st.button("Run Comparison"):
+        results_to_compare = []
+
+        if data_source in ["Criteria-Based Evaluations", "Both"]:
+            for result in criteria_results:
+                results_to_compare.append({
+                    'candidate_id': result.candidate.candidate_id,
+                    'overall_score': result.overall_score,
+                    'ai_prediction': result.overall_score >= threshold,
+                    'source': 'criteria'
+                })
+
+        if data_source in ["Holistic Evaluations", "Both"]:
+            for result in holistic_results:
+                results_to_compare.append({
+                    'candidate_id': result.candidate.candidate_id,
+                    'overall_score': result.overall_score,
+                    'ai_prediction': result.interview_decision,
+                    'source': 'holistic'
+                })
+
+        if not results_to_compare:
+            st.warning("No evaluation results found for selected data source.")
+            return
+
+        ai_df = pd.DataFrame(results_to_compare)
+        merged = ai_df.merge(decisions_df, on='candidate_id', how='inner')
+
+        if len(merged) == 0:
+            st.error("No matching candidates found. Check that candidate IDs match.")
+            return
+
+        st.markdown(f"**Matched {len(merged)} candidates**")
+        st.markdown("### Interview Decision Comparison")
+
+        actual_interviewed = merged['interviewed'].values
+        ai_predicted = merged['ai_prediction'].values
+
+        valid_mask = [a is not None for a in actual_interviewed]
+        actual_interviewed = [actual_interviewed[i] for i in range(len(valid_mask)) if valid_mask[i]]
+        ai_predicted = [ai_predicted[i] for i in range(len(valid_mask)) if valid_mask[i]]
+
+        if len(actual_interviewed) == 0:
+            st.warning("No valid interview decisions to compare.")
+            return
+
+        tp = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if a and p)
+        tn = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if not a and not p)
+        fp = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if not a and p)
+        fn = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if a and not p)
+
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown("### Criteria-Based Stats")
-            scores = [r.overall_score for r in criteria_results]
-            st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
-            st.metric("Count", len(criteria_results))
-        
+            st.markdown("#### Confusion Matrix")
+            cm_df = pd.DataFrame(
+                [[tp, fn], [fp, tn]],
+                columns=['AI: Yes', 'AI: No'],
+                index=['Actual: Yes', 'Actual: No']
+            )
+            st.dataframe(cm_df, use_container_width=True)
+
         with col2:
-            st.markdown("### Holistic Stats")
-            scores = [r.overall_score for r in holistic_results]
-            interview_yes = sum(1 for r in holistic_results if r.interview_decision)
-            st.metric("Mean Score", f"{sum(scores)/len(scores):.2f}")
-            st.metric("Interview Yes", f"{interview_yes}/{len(holistic_results)}")
+            st.markdown("#### Key Metrics")
+            sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
+            st.metric("Sensitivity (True Positive Rate)", f"{sensitivity:.1%}")
+            specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+            st.metric("Specificity (True Negative Rate)", f"{specificity:.1%}")
+            accuracy = (tp + tn) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
+            st.metric("Overall Accuracy", f"{accuracy:.1%}")
+            p_o = (tp + tn) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
+            p_yes = ((tp + fn) / len(actual_interviewed)) * ((tp + fp) / len(actual_interviewed))
+            p_no = ((fp + tn) / len(actual_interviewed)) * ((fn + tn) / len(actual_interviewed))
+            p_e = p_yes + p_no
+            kappa = (p_o - p_e) / (1 - p_e) if (1 - p_e) != 0 else 0
+            kappa_interpretation = "Poor" if kappa < 0.2 else "Fair" if kappa < 0.4 else "Moderate" if kappa < 0.6 else "Good" if kappa < 0.8 else "Excellent"
+            st.metric("Cohen's Kappa", f"{kappa:.3f} ({kappa_interpretation})")
+
+        st.markdown("### Disagreement Analysis")
+        disagreements = merged[merged['ai_prediction'] != merged['interviewed']]
+        if len(disagreements) > 0:
+            st.markdown(f"**{len(disagreements)} candidates where AI and human disagree:**")
+            false_positives = disagreements[disagreements['ai_prediction'] & ~disagreements['interviewed']]
+            false_negatives = disagreements[~disagreements['ai_prediction'] & disagreements['interviewed']]
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(f"**False Positives ({len(false_positives)})** - AI recommended, not interviewed:")
+                for _, row in false_positives.head(10).iterrows():
+                    st.text(f"- {row['candidate_id']}: AI score {row['overall_score']:.1f}")
+            with col2:
+                st.markdown(f"**False Negatives ({len(false_negatives)})** - Not recommended, was interviewed:")
+                for _, row in false_negatives.head(10).iterrows():
+                    st.text(f"- {row['candidate_id']}: AI score {row['overall_score']:.1f}")
+        else:
+            st.success("Perfect agreement between AI and human decisions!")
+
+        st.markdown("### Bias Analysis")
+        ai_positive_rate = sum(ai_predicted) / len(ai_predicted) if len(ai_predicted) > 0 else 0
+        human_positive_rate = sum(actual_interviewed) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
+        if ai_positive_rate > human_positive_rate + 0.1:
+            st.warning(f"AI may be too lenient: AI recommends {ai_positive_rate:.1%} vs human {human_positive_rate:.1%}")
+        elif ai_positive_rate < human_positive_rate - 0.1:
+            st.warning(f"AI may be too strict: AI recommends {ai_positive_rate:.1%} vs human {human_positive_rate:.1%}")
+        else:
+            st.success(f"AI and human positive rates are similar: AI {ai_positive_rate:.1%}, Human {human_positive_rate:.1%}")
+
+
+def admit_pattern_analysis_page(user: dict, api_key: str):
+    """Admit Pattern Analysis - discover what distinguishes admitted from rejected candidates."""
+    st.title("Admit Pattern Analysis")
+    st.markdown("Upload candidate applications with admit/reject labels to discover distinguishing patterns.")
+
+    if 'admit_analysis_progress' in st.session_state:
+        progress = st.session_state['admit_analysis_progress']
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            if progress.get('completed'):
+                st.success(f"Previous analysis completed: {len(progress.get('candidate_summaries', []))} candidates evaluated")
+            else:
+                st.info(f"Analysis in progress: {progress.get('current_index', 0)} / {progress.get('total_candidates', '?')} candidates evaluated")
+        with col2:
+            if st.button("Reset / Start New", use_container_width=True):
+                for key in ['admit_analysis_progress', 'admit_analysis_file_paths', 'last_pattern_analysis', 'admit_mapping', 'admit_analysis_holistic']:
+                    if key in st.session_state:
+                        del st.session_state[key]
+                st.rerun()
+        st.markdown("---")
+
+    with st.expander("How to use", expanded=True):
+        st.markdown("""
+        **Step 1: Upload candidate application files**
+        - Upload PDF files containing candidate applications
+        - Each file should be one candidate's complete application
+
+        **Step 2: Upload admit mapping CSV**
+        - Create a CSV file with two columns: `filename` and `admit_status`
+        - Example:
+        ```
+        filename,admit_status
+        candidate_001_application.pdf,yes
+        candidate_002_application.pdf,no
+        ```
+
+        **Step 3: Run analysis**
+        - The system will evaluate each candidate, then analyze patterns.
+
+        **Note**: This process may take significant time (~1-2 minutes per candidate).
+        """)
+
+    st.markdown("---")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("1. Upload Candidate Applications")
+        uploaded_files = st.file_uploader(
+            "Upload candidate PDF files",
+            type=['pdf'],
+            accept_multiple_files=True,
+            help="Upload all candidate application PDFs",
+            key="admit_pattern_files"
+        )
+        if uploaded_files:
+            st.success(f"{len(uploaded_files)} files uploaded")
+            with st.expander("View files"):
+                for f in uploaded_files:
+                    st.text(f"- {f.name}")
+
+    with col2:
+        st.subheader("2. Upload Admit Mapping CSV")
+        mapping_file = st.file_uploader(
+            "Upload admit mapping CSV",
+            type=['csv'],
+            help="CSV with filename and admit_status columns",
+            key="admit_mapping_file"
+        )
+        if mapping_file:
+            try:
+                mapping_df = pd.read_csv(mapping_file)
+                mapping_df.columns = mapping_df.columns.str.lower().str.strip()
+
+                if 'filename' not in mapping_df.columns:
+                    st.error("CSV must have a 'filename' column")
+                elif 'admit_status' not in mapping_df.columns:
+                    st.error("CSV must have an 'admit_status' column")
+                else:
+                    def normalize_admit(val):
+                        if pd.isna(val):
+                            return None
+                        return str(val).lower().strip() in ['yes', 'true', '1', 'y', 'admitted', 'admit']
+
+                    mapping_df['admit_status'] = mapping_df['admit_status'].apply(normalize_admit)
+                    admitted_count = int(mapping_df['admit_status'].sum())
+                    rejected_count = len(mapping_df) - admitted_count
+                    st.success(f"Loaded {len(mapping_df)} mappings")
+                    col_a, col_b = st.columns(2)
+                    with col_a:
+                        st.metric("Admitted", admitted_count)
+                    with col_b:
+                        st.metric("Rejected", rejected_count)
+                    st.session_state['admit_mapping'] = mapping_df
+            except Exception as e:
+                st.error(f"Error reading CSV: {e}")
+
+    st.markdown("---")
+    st.subheader("3. Analysis Options")
+
+    eval_mode = st.radio(
+        "Evaluation mode for candidates",
+        ["Holistic (faster, recommended)", "Criteria-Based (detailed scores)"],
+        horizontal=True,
+        help="Holistic mode is faster and provides overall fit assessment."
+    )
+    use_holistic = eval_mode == "Holistic (faster, recommended)"
+
+    can_proceed = (uploaded_files and mapping_file and 'admit_mapping' in st.session_state)
+
+    analysis_in_progress = (
+        'admit_analysis_progress' in st.session_state and
+        not st.session_state['admit_analysis_progress'].get('completed', False)
+    )
+
+    if analysis_in_progress:
+        st.info("Continuing analysis...")
+        if 'admit_analysis_holistic' not in st.session_state:
+            st.session_state['admit_analysis_holistic'] = use_holistic
+        run_admit_pattern_analysis(uploaded_files, st.session_state['admit_analysis_holistic'], user, api_key)
+    elif st.button("Run Admit Pattern Analysis", disabled=not can_proceed, use_container_width=True):
+        st.session_state['admit_analysis_holistic'] = use_holistic
+        run_admit_pattern_analysis(uploaded_files, use_holistic, user, api_key)
+
+    st.markdown("---")
+    st.subheader("Previous Analysis Results")
+    display_admit_pattern_results_cloud()
+
+
+def run_admit_pattern_analysis(uploaded_files, use_holistic: bool, user: dict, api_key: str):
+    """Run the full admit pattern analysis pipeline (cloud version)."""
+    mapping_df = st.session_state.get('admit_mapping')
+    if mapping_df is None:
+        st.error("No admit mapping found")
         return
-    
-    st.markdown(f"**{len(both_ids)} candidates evaluated with both methods**")
-    
-    comparison_data = []
-    for cid in both_ids:
-        cr = criteria_by_id[cid]
-        hr = holistic_by_id[cid]
-        comparison_data.append({
-            'Candidate': cid,
-            'Criteria Score': cr.overall_score,
-            'Holistic Score': hr.overall_score,
-            'Difference': cr.overall_score - hr.overall_score,
-            'Interview': 'Yes' if hr.interview_decision else 'No'
-        })
-    
-    df = pd.DataFrame(comparison_data)
-    
+
+    admit_map = dict(zip(mapping_df['filename'], mapping_df['admit_status']))
+
+    # Save files to temp dir if not already done
+    if 'admit_analysis_file_paths' not in st.session_state:
+        file_paths = {}
+        if uploaded_files:
+            tmp_dir = tempfile.mkdtemp()
+            for uploaded_file in uploaded_files:
+                save_path = os.path.join(tmp_dir, uploaded_file.name)
+                with open(save_path, 'wb') as f:
+                    f.write(uploaded_file.getbuffer())
+                file_paths[uploaded_file.name] = save_path
+        st.session_state['admit_analysis_file_paths'] = file_paths
+    else:
+        file_paths = st.session_state['admit_analysis_file_paths']
+
+    matched_candidates = []
+    unmatched_files = []
+    for filename, filepath in file_paths.items():
+        if filename in admit_map:
+            matched_candidates.append({
+                'filename': filename,
+                'filepath': filepath,
+                'admit_status': admit_map[filename]
+            })
+        else:
+            unmatched_files.append(filename)
+
+    if unmatched_files:
+        st.warning(f"{len(unmatched_files)} files not found in mapping: {', '.join(unmatched_files[:5])}")
+
+    if not matched_candidates:
+        st.error("No files matched the admit mapping. Check that filenames in CSV match uploaded files exactly.")
+        return
+
+    if 'admit_analysis_progress' not in st.session_state:
+        st.session_state['admit_analysis_progress'] = {
+            'current_index': 0,
+            'total_candidates': len(matched_candidates),
+            'candidate_summaries': [],
+            'errors': [],
+            'completed': False,
+            'use_holistic': use_holistic,
+        }
+
+    progress = st.session_state['admit_analysis_progress']
+
+    if progress['completed']:
+        st.success("Analysis already completed! See results below.")
+        if 'last_pattern_analysis' in st.session_state:
+            _display_pattern_analysis_from_dict(st.session_state['last_pattern_analysis'])
+        return
+
+    st.info(f"Processing {len(matched_candidates)} matched candidates...")
+
+    evaluator = get_evaluator(api_key)
+    db = get_database()
+
+    progress_container = st.container()
+    with progress_container:
+        progress_bar = st.progress(progress['current_index'] / len(matched_candidates))
+        status_text = st.empty()
+        error_container = st.empty()
+        skipped_container = st.empty()
+        skipped_count = 0
+
+        start_index = progress['current_index']
+
+        for i in range(start_index, len(matched_candidates)):
+            candidate = matched_candidates[i]
+            candidate_id = Path(candidate['filename']).stem
+
+            status_text.text(f"Evaluating {i+1}/{len(matched_candidates)}: {candidate_id}")
+
+            try:
+                if use_holistic:
+                    result = evaluator.evaluate_candidate_holistic(
+                        candidate_id=candidate_id,
+                        material_paths=[candidate['filepath']]
+                    )
+                    result_dict = result.model_dump()
+                    result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
+
+                    db.save_evaluation(
+                        user_id=user["id"],
+                        candidate_id=candidate_id,
+                        evaluation_type="holistic",
+                        result=result_dict
+                    )
+
+                    summary = {
+                        'candidate_id': candidate_id,
+                        'admit_status': candidate['admit_status'],
+                        'overall_score': result.overall_score,
+                        'recommendation': result.recommendation,
+                        'innovation_potential': result.innovation_potential.level,
+                        'program_fit': result.program_fit.level,
+                        'interview_decision': result.interview_decision,
+                        'strengths': result.program_fit.strengths_for_program,
+                        'weaknesses': result.program_fit.concerns,
+                        'red_flags': [rf.flag if hasattr(rf, 'flag') else str(rf) for rf in result.red_flags[:3]],
+                        'notable_qualities': [q.quality for q in result.notable_qualities[:5]]
+                    }
+                else:
+                    result = evaluator.evaluate_candidate(
+                        candidate_id=candidate_id,
+                        material_paths=[candidate['filepath']]
+                    )
+                    result_dict = result.model_dump()
+                    result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
+                    for score in result_dict.get("scores", []):
+                        if "criterion" in score:
+                            crit = score["criterion"]
+                            score["criterion"] = crit.value if hasattr(crit, 'value') else str(crit)
+
+                    db.save_evaluation(
+                        user_id=user["id"],
+                        candidate_id=candidate_id,
+                        evaluation_type="criteria",
+                        result=result_dict
+                    )
+
+                    summary = {
+                        'candidate_id': candidate_id,
+                        'admit_status': candidate['admit_status'],
+                        'overall_score': result.overall_score,
+                        'recommendation': result.recommendation,
+                        'scores': {score.criterion.value: score.score for score in result.scores},
+                        'strengths': result.strengths,
+                        'weaknesses': result.areas_for_development
+                    }
+
+                progress['candidate_summaries'].append(summary)
+
+            except Exception as e:
+                error_msg = f"Failed to evaluate {candidate_id}: {e}"
+                progress['errors'].append(error_msg)
+                error_container.warning(error_msg)
+
+            progress['current_index'] = i + 1
+            progress_bar.progress((i + 1) / len(matched_candidates))
+            st.session_state['admit_analysis_progress'] = progress
+
+            if i < len(matched_candidates) - 1:
+                time.sleep(0.5)
+                st.rerun()
+
+    candidate_summaries = progress['candidate_summaries']
+    status_text.text(f"Evaluated {len(candidate_summaries)}/{len(matched_candidates)} candidates")
+
+    if len(candidate_summaries) < 2:
+        st.error("Need at least 2 successfully evaluated candidates for pattern analysis")
+        return
+
+    st.info("Running pattern analysis...")
+
+    try:
+        config = Config(api=APIConfig(anthropic_api_key=api_key))
+        analyzer = AdmitPatternAnalyzer(
+            api_key=api_key,
+            model=config.api.model,
+            max_tokens=config.api.max_tokens
+        )
+
+        basic_stats = analyzer.calculate_basic_statistics(candidate_summaries)
+
+        st.subheader("Basic Statistics")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Total Candidates", basic_stats['total_candidates'])
+        with col2:
+            st.metric("Admitted", basic_stats['admitted_count'])
+        with col3:
+            st.metric("Rejected", basic_stats['rejected_count'])
+        with col4:
+            rate = basic_stats.get('admission_rate', 0) * 100
+            st.metric("Admission Rate", f"{rate:.1f}%")
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Admitted Mean Score", f"{basic_stats.get('admitted_mean_score', 0):.2f}")
+        with col2:
+            st.metric("Rejected Mean Score", f"{basic_stats.get('rejected_mean_score', 0):.2f}")
+        with col3:
+            st.metric("Score Difference", f"{basic_stats.get('score_difference', 0):.2f}")
+
+        if basic_stats.get('criterion_differences'):
+            st.markdown("### Most Discriminating Criteria")
+            for crit in basic_stats['criterion_differences'][:5]:
+                name = crit['criterion'].replace('_', ' ').title()
+                st.markdown(f"- **{name}**: {crit['difference']:.1f} point gap (Admitted: {crit['admitted_mean']:.1f}, Rejected: {crit['rejected_mean']:.1f})")
+
+        st.info("Running detailed pattern analysis with Claude...")
+        pattern_result = analyzer.analyze_patterns(candidate_summaries)
+
+        progress['completed'] = True
+        st.session_state['admit_analysis_progress'] = progress
+        st.session_state['last_pattern_analysis'] = pattern_result.model_dump()
+
+        st.success("Analysis complete!")
+        display_pattern_analysis_result(pattern_result)
+
+    except Exception as e:
+        st.error(f"Pattern analysis failed: {e}")
+        import traceback
+        st.code(traceback.format_exc())
+
+
+def display_admit_pattern_results_cloud():
+    """Display previous admit pattern analysis results from session state."""
+    if 'last_pattern_analysis' not in st.session_state:
+        st.info("No previous pattern analyses found in this session. Run an analysis to see results here.")
+        return
+
+    _display_pattern_analysis_from_dict(st.session_state['last_pattern_analysis'])
+
+
+def display_pattern_analysis_result(result: AdmitPatternAnalysisResult):
+    """Display a pattern analysis result."""
+    _display_pattern_analysis_from_dict(result.model_dump())
+
+
+def _display_pattern_analysis_from_dict(data):
+    """Display pattern analysis from a dict or AdmitPatternAnalysisResult object."""
+    if hasattr(data, 'model_dump'):
+        data = data.model_dump()
+
+    st.markdown("---")
+    st.header("Pattern Analysis Results")
+
+    st.subheader("Executive Summary")
+    st.markdown(data.get('executive_summary', 'No summary available'))
+
+    st.subheader("Score Comparison")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Total Analyzed", data.get('total_candidates', 0))
+    with col2:
+        st.metric("Admitted", data.get('admitted_count', 0))
+    with col3:
+        st.metric("Rejected", data.get('rejected_count', 0))
+    with col4:
+        st.metric("Score Gap", f"{data.get('score_difference', 0):.2f}")
+
     col1, col2 = st.columns(2)
     with col1:
-        if len(df) > 1:
-            correlation = df['Criteria Score'].corr(df['Holistic Score'])
-            st.metric("Score Correlation", f"{correlation:.3f}")
-        mad = df['Difference'].abs().mean()
-        st.metric("Mean Absolute Difference", f"{mad:.2f} points")
-    
+        st.metric("Admitted Mean Score", f"{data.get('admitted_mean_score', 0):.2f}/10")
     with col2:
-        higher = sum(1 for d in df['Difference'] if d > 0.5)
-        lower = sum(1 for d in df['Difference'] if d < -0.5)
-        similar = len(df) - higher - lower
-        st.markdown("**Score Comparison:**")
-        st.markdown(f"- Criteria higher: {higher}")
-        st.markdown(f"- Holistic higher: {lower}")
-        st.markdown(f"- Similar: {similar}")
-    
-    st.dataframe(df.sort_values('Difference', key=abs, ascending=False), hide_index=True, use_container_width=True)
+        st.metric("Rejected Mean Score", f"{data.get('rejected_mean_score', 0):.2f}/10")
+
+    key_patterns = data.get('key_patterns', [])
+    if key_patterns:
+        st.subheader("Key Distinguishing Patterns")
+        for category in key_patterns:
+            if hasattr(category, 'importance'):
+                importance = category.importance
+                category_name = category.category_name
+                description = category.description
+                patterns = category.patterns or []
+            else:
+                importance = category.get('importance', 'medium')
+                category_name = category.get('category_name', 'Unknown')
+                description = category.get('description', '')
+                patterns = category.get('patterns', [])
+
+            importance_color = {'high': '🔴', 'medium': '🟡', 'low': '🟢'}.get(importance, '⚪')
+            with st.expander(f"{importance_color} {category_name} ({importance.upper()} importance)"):
+                st.markdown(description)
+                for pattern in patterns:
+                    if hasattr(pattern, 'pattern'):
+                        p_text = pattern.pattern
+                        admitted_ex = pattern.admitted_examples or []
+                        rejected_ex = pattern.rejected_examples or []
+                    else:
+                        p_text = pattern.get('pattern', '')
+                        admitted_ex = pattern.get('admitted_examples', [])
+                        rejected_ex = pattern.get('rejected_examples', [])
+                    st.markdown(f"**Pattern:** {p_text}")
+                    if admitted_ex:
+                        st.markdown("*Admitted examples:*")
+                        for ex in admitted_ex[:3]:
+                            st.markdown(f"  - {ex}")
+                    if rejected_ex:
+                        st.markdown("*Rejected counter-examples:*")
+                        for ex in rejected_ex[:3]:
+                            st.markdown(f"  - {ex}")
+                    st.markdown("---")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Common Strengths (Admitted)")
+        for strength in data.get('admitted_strengths', []):
+            st.markdown(f"✓ {strength}")
+        if not data.get('admitted_strengths'):
+            st.info("No common strengths identified")
+    with col2:
+        st.subheader("Common Weaknesses (Rejected)")
+        for weakness in data.get('rejected_weaknesses', []):
+            st.markdown(f"✗ {weakness}")
+        if not data.get('rejected_weaknesses'):
+            st.info("No common weaknesses identified")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Surprising Admits")
+        surprising_admits = data.get('surprising_admits', [])
+        for case in surprising_admits:
+            c = case if isinstance(case, dict) else (case.model_dump() if hasattr(case, 'model_dump') else {})
+            st.warning(f"**{c.get('candidate_id', 'Unknown')}** (Score: {c.get('score', 'N/A')})")
+            st.caption(c.get('reason', ''))
+            if c.get('possible_explanation'):
+                st.caption(f"Possible explanation: {c.get('possible_explanation')}")
+        if not surprising_admits:
+            st.info("No surprising admits identified")
+    with col2:
+        st.subheader("Surprising Rejects")
+        surprising_rejects = data.get('surprising_rejects', [])
+        for case in surprising_rejects:
+            c = case if isinstance(case, dict) else (case.model_dump() if hasattr(case, 'model_dump') else {})
+            st.warning(f"**{c.get('candidate_id', 'Unknown')}** (Score: {c.get('score', 'N/A')})")
+            st.caption(c.get('reason', ''))
+            if c.get('possible_explanation'):
+                st.caption(f"Possible explanation: {c.get('possible_explanation')}")
+        if not surprising_rejects:
+            st.info("No surprising rejects identified")
+
+    metadata = data.get('metadata', {})
+    if isinstance(metadata, dict) and metadata.get('predictive_factors'):
+        st.subheader("Predictive Factors")
+        for factor in metadata['predictive_factors']:
+            f = factor if isinstance(factor, dict) else {}
+            strength_icon = {'strong': '💪', 'moderate': '👍', 'weak': '👌'}.get(f.get('strength', ''), '•')
+            st.markdown(f"{strength_icon} **{f.get('factor', '')}**: {f.get('direction', '')}")
+            st.caption(f.get('evidence', ''))
+
+    if data.get('methodology_notes'):
+        with st.expander("Methodology Notes"):
+            st.markdown(data['methodology_notes'])
+
+    with st.expander("View All Candidate Data"):
+        candidate_summaries = data.get('candidate_summaries', [])
+        if candidate_summaries:
+            display_data = []
+            for c in candidate_summaries:
+                row = {
+                    'Candidate ID': c.get('candidate_id', ''),
+                    'Admit Status': 'Admitted' if c.get('admit_status') else 'Rejected',
+                    'Score': c.get('overall_score', 0),
+                    'Recommendation': c.get('recommendation', '')
+                }
+                display_data.append(row)
+            df = pd.DataFrame(display_data).sort_values('Score', ascending=False)
+            st.dataframe(df, hide_index=True, use_container_width=True)
+
+    st.download_button(
+        label="Download Analysis (JSON)",
+        data=json.dumps(data, indent=2, default=str),
+        file_name=f"admit_pattern_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+        mime="application/json"
+    )
 
 
 def research_page(user: dict):
@@ -1169,6 +2234,11 @@ def research_method_comparison(criteria_results, holistic_results):
         st.markdown(f"- Holistic higher: {lower} ({lower/len(df)*100:.1f}%)")
         st.markdown(f"- Similar (within 0.5): {similar} ({similar/len(df)*100:.1f}%)")
     
+    st.markdown("### Score Comparison Chart")
+    chart_df = df[['criteria_score', 'holistic_score']].copy()
+    chart_df.columns = ['Criteria-Based', 'Holistic']
+    st.scatter_chart(chart_df)
+
     st.markdown("### Detailed Comparison")
     display_df = df[['candidate_id', 'criteria_score', 'holistic_score', 'score_diff', 'holistic_interview']].copy()
     display_df.columns = ['Candidate', 'Criteria Score', 'Holistic Score', 'Difference', 'Interview Rec']
@@ -1234,8 +2304,13 @@ def research_side_by_side(criteria_results, holistic_results):
             if hr.red_flags:
                 st.markdown("**Red Flags:**")
                 for flag in hr.red_flags[:3]:
-                    flag_text = flag.flag if hasattr(flag, 'flag') else str(flag)
-                    st.warning(flag_text)
+                    if hasattr(flag, 'flag'):
+                        severity = getattr(flag, 'severity', 'medium').lower()
+                        severity_icons = {'high': '🔴', 'medium': '🟡', 'low': '🔵'}
+                        icon = severity_icons.get(severity, '🟡')
+                        st.markdown(f"{icon} {flag.flag}  \n<small>Severity: {severity.capitalize()}</small>", unsafe_allow_html=True)
+                    else:
+                        st.warning(str(flag))
             
             with st.expander("Full Assessment"):
                 st.markdown(hr.overall_assessment)
