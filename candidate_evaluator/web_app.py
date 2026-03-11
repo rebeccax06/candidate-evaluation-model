@@ -240,7 +240,7 @@ def interview_selection_page():
     st.markdown(
         "Select the top *N* candidates to interview from a pool of holistic evaluations. "
         "The system performs a compact first-pass ranking across all candidates, then a deeper "
-        "final comparison restricted to the top pool — keeping context-window usage low."
+        "final comparison restricted to the top pool."
     )
 
     output_dir = Path("./results")
@@ -1039,10 +1039,14 @@ def results_page():
         else:
             # Results table for holistic
             st.subheader("Holistic Results")
+            sorted_holistic = sorted(holistic_results, key=lambda r: r.overall_score, reverse=True)
+            n_holistic = len(sorted_holistic)
             holistic_summary = []
-            for rank, result in enumerate(sorted(holistic_results, key=lambda r: r.overall_score, reverse=True), 1):
+            for rank, result in enumerate(sorted_holistic, 1):
+                pct = 100.0 if n_holistic == 1 else round(100.0 * (n_holistic - rank) / (n_holistic - 1))
                 holistic_summary.append({
                     'Rank': rank,
+                    'Percentile': f"{pct}th",
                     'Candidate ID': result.candidate.candidate_id,
                     'Name': result.candidate.name or '-',
                     'Score': f"{result.overall_score:.1f}/10",
@@ -1476,7 +1480,7 @@ def analysis_page():
 
     st.markdown(f"**Analyzing {len(all_results)} criteria-based + {len(holistic_results)} holistic evaluations**")
 
-    tab1, tab2, tab3, tab4 = st.tabs(["Distribution Analysis", "AI vs Expert", "Decision Comparison", "Recommendations"])
+    tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "AI vs Expert", "Recommendations"])
 
     with tab1:
         if all_results:
@@ -1491,9 +1495,6 @@ def analysis_page():
             st.info("Expert comparison requires criteria-based evaluations.")
 
     with tab3:
-        decision_comparison_analysis(all_results, holistic_results, output_dir)
-
-    with tab4:
         if all_results:
             recommendation_analysis(all_results)
         else:
@@ -1614,34 +1615,43 @@ def expert_comparison_analysis(all_results, output_dir):
 
 
 def decision_comparison_analysis(criteria_results, holistic_results, output_dir):
-    """Compare AI predictions against actual interview/admission decisions."""
+    """Compare AI predictions against actual admission decisions."""
     st.subheader("Decision Comparison")
-    st.markdown("Compare AI evaluation predictions against actual interview and admission decisions.")
+    st.markdown("Compare AI evaluation predictions against actual admission decisions.")
 
     # Instructions
     with st.expander("How to use", expanded=False):
         st.markdown("""
-        **Upload a CSV or Excel file with columns:**
+        **Upload a CSV file with columns:**
         - `candidate_id`: Must match the candidate IDs from evaluations
-        - `interviewed`: Yes/No or True/False - whether the candidate was interviewed
-        - `admitted` (optional): Yes/No or True/False - whether the candidate was admitted
+        - `admitted`: Yes/No — whether the candidate was actually admitted
+
+        **Example:**
+        ```
+        candidate_id,admitted
+        Tomberg_Spencer_app,yes
+        Prado Larrea_Michaela_app,yes
+        Nagesh_Nitish_app2,no
+        ```
 
         **The tool will calculate:**
         - Sensitivity (true positive rate)
         - Specificity (true negative rate)
         - Cohen's Kappa (agreement statistic)
         - Confusion matrix
+        - Per-dimension bias breakdown (holistic evaluations only)
         """)
 
     # File upload
     uploaded_file = st.file_uploader(
         "Upload decisions file",
         type=['csv', 'xlsx'],
-        help="CSV or Excel with candidate_id, interviewed, admitted columns"
+        help="CSV with candidate_id and admitted columns",
+        key="decision_comparison_uploader"
     )
 
     if uploaded_file is None:
-        st.info("Upload a decisions file to compare AI predictions against actual outcomes.")
+        st.info("Upload a decisions file to compare AI predictions against actual admit outcomes.")
         return
 
     # Load decisions
@@ -1658,14 +1668,14 @@ def decision_comparison_analysis(criteria_results, holistic_results, output_dir)
     decisions_df.columns = decisions_df.columns.str.lower().str.strip()
 
     if 'candidate_id' not in decisions_df.columns:
-        st.error("File must have a 'candidate_id' column")
+        st.error("File must have a `candidate_id` column")
         return
 
-    if 'interviewed' not in decisions_df.columns:
-        st.error("File must have an 'interviewed' column")
+    if 'admitted' not in decisions_df.columns:
+        st.error("File must have an `admitted` column (yes/no)")
         return
 
-    # Normalize boolean columns
+    # Normalize boolean column
     def normalize_bool(val):
         if pd.isna(val):
             return None
@@ -1674,11 +1684,9 @@ def decision_comparison_analysis(criteria_results, holistic_results, output_dir)
         val_str = str(val).lower().strip()
         return val_str in ['yes', 'true', '1', 'y']
 
-    decisions_df['interviewed'] = decisions_df['interviewed'].apply(normalize_bool)
-    if 'admitted' in decisions_df.columns:
-        decisions_df['admitted'] = decisions_df['admitted'].apply(normalize_bool)
+    decisions_df['admitted'] = decisions_df['admitted'].apply(normalize_bool)
 
-    st.success(f"Loaded {len(decisions_df)} decision records")
+    st.success(f"Loaded {len(decisions_df)} admission records")
 
     # Select data source for comparison
     st.markdown("### Select Evaluation Data")
@@ -1731,26 +1739,26 @@ def decision_comparison_analysis(criteria_results, holistic_results, output_dir)
 
         st.markdown(f"**Matched {len(merged)} candidates**")
 
-        # Calculate metrics for interview decisions
-        st.markdown("### Interview Decision Comparison")
+        # Calculate metrics
+        st.markdown("### Admit Decision Comparison")
 
-        actual_interviewed = merged['interviewed'].values
+        actual_admitted = merged['admitted'].values
         ai_predicted = merged['ai_prediction'].values
 
         # Remove any None values
-        valid_mask = [a is not None for a in actual_interviewed]
-        actual_interviewed = [actual_interviewed[i] for i in range(len(valid_mask)) if valid_mask[i]]
+        valid_mask = [a is not None for a in actual_admitted]
+        actual_admitted = [actual_admitted[i] for i in range(len(valid_mask)) if valid_mask[i]]
         ai_predicted = [ai_predicted[i] for i in range(len(valid_mask)) if valid_mask[i]]
 
-        if len(actual_interviewed) == 0:
-            st.warning("No valid interview decisions to compare.")
+        if len(actual_admitted) == 0:
+            st.warning("No valid admit decisions to compare.")
             return
 
         # Calculate confusion matrix
-        tp = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if a and p)
-        tn = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if not a and not p)
-        fp = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if not a and p)
-        fn = sum(1 for a, p in zip(actual_interviewed, ai_predicted) if a and not p)
+        tp = sum(1 for a, p in zip(actual_admitted, ai_predicted) if a and p)
+        tn = sum(1 for a, p in zip(actual_admitted, ai_predicted) if not a and not p)
+        fp = sum(1 for a, p in zip(actual_admitted, ai_predicted) if not a and p)
+        fn = sum(1 for a, p in zip(actual_admitted, ai_predicted) if a and not p)
 
         # Display confusion matrix
         col1, col2 = st.columns(2)
@@ -1760,37 +1768,33 @@ def decision_comparison_analysis(criteria_results, holistic_results, output_dir)
             cm_df = pd.DataFrame(
                 [[tp, fn], [fp, tn]],
                 columns=['AI: Yes', 'AI: No'],
-                index=['Actual: Yes', 'Actual: No']
+                index=['Actual Admit: Yes', 'Actual Admit: No']
             )
             st.dataframe(cm_df, use_container_width=True)
 
         with col2:
             st.markdown("#### Key Metrics")
 
-            # Sensitivity (recall)
             sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
             st.metric(
                 "Sensitivity (True Positive Rate)",
                 f"{sensitivity:.1%}",
-                help=f"AI identified {sensitivity:.1%} of candidates who were actually interviewed"
+                help=f"AI identified {sensitivity:.1%} of candidates who were actually admitted"
             )
 
-            # Specificity
             specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
             st.metric(
                 "Specificity (True Negative Rate)",
                 f"{specificity:.1%}",
-                help=f"AI correctly rejected {specificity:.1%} of candidates not interviewed"
+                help=f"AI correctly rejected {specificity:.1%} of candidates not admitted"
             )
 
-            # Accuracy
-            accuracy = (tp + tn) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
+            accuracy = (tp + tn) / len(actual_admitted) if len(actual_admitted) > 0 else 0
             st.metric("Overall Accuracy", f"{accuracy:.1%}")
 
-            # Cohen's Kappa
-            p_o = (tp + tn) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
-            p_yes = ((tp + fn) / len(actual_interviewed)) * ((tp + fp) / len(actual_interviewed))
-            p_no = ((fp + tn) / len(actual_interviewed)) * ((fn + tn) / len(actual_interviewed))
+            p_o = (tp + tn) / len(actual_admitted) if len(actual_admitted) > 0 else 0
+            p_yes = ((tp + fn) / len(actual_admitted)) * ((tp + fp) / len(actual_admitted))
+            p_no = ((fp + tn) / len(actual_admitted)) * ((fn + tn) / len(actual_admitted))
             p_e = p_yes + p_no
             kappa = (p_o - p_e) / (1 - p_e) if (1 - p_e) != 0 else 0
 
@@ -1801,42 +1805,119 @@ def decision_comparison_analysis(criteria_results, holistic_results, output_dir)
                 help="Measures agreement beyond chance"
             )
 
-        # High disagreement candidates
+        # Disagreement analysis
         st.markdown("### Disagreement Analysis")
 
-        disagreements = merged[merged['ai_prediction'] != merged['interviewed']]
+        disagreements = merged[merged['ai_prediction'] != merged['admitted']]
 
         if len(disagreements) > 0:
-            st.markdown(f"**{len(disagreements)} candidates where AI and human disagree:**")
+            st.markdown(f"**{len(disagreements)} candidates where AI and actual admit decision disagree:**")
 
-            false_positives = disagreements[disagreements['ai_prediction'] & ~disagreements['interviewed']]
-            false_negatives = disagreements[~disagreements['ai_prediction'] & disagreements['interviewed']]
+            false_positives = disagreements[disagreements['ai_prediction'] & ~disagreements['admitted']]
+            false_negatives = disagreements[~disagreements['ai_prediction'] & disagreements['admitted']]
 
             col1, col2 = st.columns(2)
 
             with col1:
-                st.markdown(f"**False Positives ({len(false_positives)})** - AI recommended, not interviewed:")
+                st.markdown(f"**False Positives ({len(false_positives)})** — AI recommended, not admitted:")
                 for _, row in false_positives.head(10).iterrows():
                     st.text(f"- {row['candidate_id']}: AI score {row['overall_score']:.1f}")
 
             with col2:
-                st.markdown(f"**False Negatives ({len(false_negatives)})** - Not recommended, was interviewed:")
+                st.markdown(f"**False Negatives ({len(false_negatives)})** — Not recommended, was admitted:")
                 for _, row in false_negatives.head(10).iterrows():
                     st.text(f"- {row['candidate_id']}: AI score {row['overall_score']:.1f}")
         else:
-            st.success("Perfect agreement between AI and human decisions!")
+            st.success("Perfect agreement between AI predictions and actual admit decisions!")
 
         # Bias detection
         st.markdown("### Bias Analysis")
         ai_positive_rate = sum(ai_predicted) / len(ai_predicted) if len(ai_predicted) > 0 else 0
-        human_positive_rate = sum(actual_interviewed) / len(actual_interviewed) if len(actual_interviewed) > 0 else 0
+        human_positive_rate = sum(actual_admitted) / len(actual_admitted) if len(actual_admitted) > 0 else 0
 
         if ai_positive_rate > human_positive_rate + 0.1:
-            st.warning(f"AI may be too lenient: AI recommends {ai_positive_rate:.1%} vs human {human_positive_rate:.1%}")
+            st.warning(f"AI may be too lenient: AI recommends {ai_positive_rate:.1%} vs actual admit rate {human_positive_rate:.1%}")
         elif ai_positive_rate < human_positive_rate - 0.1:
-            st.warning(f"AI may be too strict: AI recommends {ai_positive_rate:.1%} vs human {human_positive_rate:.1%}")
+            st.warning(f"AI may be too strict: AI recommends {ai_positive_rate:.1%} vs actual admit rate {human_positive_rate:.1%}")
         else:
-            st.success(f"AI and human positive rates are similar: AI {ai_positive_rate:.1%}, Human {human_positive_rate:.1%}")
+            st.success(f"AI and actual admit rates are similar: AI {ai_positive_rate:.1%}, Actual {human_positive_rate:.1%}")
+
+        # Per-dimension systematic bias (holistic only — requires dimension fields)
+        holistic_in_merged = merged[merged['source'] == 'holistic'] if 'source' in merged.columns else pd.DataFrame()
+
+        if not holistic_in_merged.empty:
+            holistic_obj_map = {r.candidate.candidate_id: r for r in holistic_results}
+
+            rows_dim = []
+            for _, row in holistic_in_merged.iterrows():
+                obj = holistic_obj_map.get(row['candidate_id'])
+                if obj is None:
+                    continue
+                outcome = "Correct" if row['ai_prediction'] == row['admitted'] else (
+                    "False Positive" if row['ai_prediction'] else "False Negative"
+                )
+                rows_dim.append({
+                    'candidate_id': row['candidate_id'],
+                    'overall_score': obj.overall_score,
+                    'program_fit': obj.program_fit.level.lower(),
+                    'program_fit_confidence': obj.program_fit.confidence.lower(),
+                    'innovation': obj.innovation_potential.level.lower(),
+                    'innovation_confidence': obj.innovation_potential.confidence.lower(),
+                    'red_flags': len(obj.red_flags) if isinstance(obj.red_flags, list) else 0,
+                    'outcome': outcome,
+                    'ai_said': row['ai_prediction'],
+                    'actual': row['admitted'],
+                })
+
+            if rows_dim:
+                dim_df = pd.DataFrame(rows_dim)
+                fp_df = dim_df[dim_df['outcome'] == 'False Positive']
+                fn_df = dim_df[dim_df['outcome'] == 'False Negative']
+                correct_df = dim_df[dim_df['outcome'] == 'Correct']
+
+                st.markdown("#### Per-Dimension Breakdown")
+                st.caption(
+                    "Compares average dimension signals between correctly predicted, "
+                    "false-positive, and false-negative candidates."
+                )
+
+                def _level_to_num(val):
+                    return {'high': 3, 'strong': 3, 'medium': 2, 'moderate': 2, 'low': 1, 'weak': 1}.get(str(val), 2)
+
+                for label, subset in [("False Positives (AI over-predicted)", fp_df),
+                                       ("False Negatives (AI under-predicted)", fn_df),
+                                       ("Correct predictions", correct_df)]:
+                    if subset.empty:
+                        continue
+                    with st.expander(f"{label} — {len(subset)} candidate(s)"):
+                        avg_score = subset['overall_score'].mean()
+                        avg_fit = subset['program_fit'].map(_level_to_num).mean()
+                        avg_inn = subset['innovation'].map(_level_to_num).mean()
+                        avg_rf = subset['red_flags'].mean()
+
+                        c1, c2, c3, c4 = st.columns(4)
+                        c1.metric("Avg score", f"{avg_score:.1f}/10")
+                        c2.metric("Avg program fit", f"{avg_fit:.2f}/3")
+                        c3.metric("Avg innovation", f"{avg_inn:.2f}/3")
+                        c4.metric("Avg red flags", f"{avg_rf:.1f}")
+
+                        # Distribution of program fit levels
+                        fit_counts = subset['program_fit'].value_counts().to_dict()
+                        inn_counts = subset['innovation'].value_counts().to_dict()
+                        st.markdown(
+                            f"Program fit: {fit_counts}  |  "
+                            f"Innovation: {inn_counts}"
+                        )
+
+                # Score distribution comparison table
+                st.markdown("#### Score Distribution by Outcome")
+                score_summary = (
+                    dim_df.groupby('outcome')['overall_score']
+                    .agg(['mean', 'min', 'max', 'count'])
+                    .rename(columns={'mean': 'Mean', 'min': 'Min', 'max': 'Max', 'count': 'N'})
+                    .round(2)
+                )
+                st.dataframe(score_summary, use_container_width=True)
 
 
 def recommendation_analysis(all_results):
@@ -1898,8 +1979,23 @@ def _clear_progress_from_disk():
 
 
 def admit_pattern_analysis_page():
-    """Admit Pattern Analysis - discover what distinguishes admitted from rejected candidates."""
+    """Admit Pattern Analysis - discover patterns and compare AI accuracy against actual decisions."""
     st.title("Admit Pattern Analysis")
+
+    page_tab1, page_tab2 = st.tabs(["Pattern Analysis", "Decision Comparison"])
+
+    with page_tab1:
+        _admit_pattern_tab()
+
+    with page_tab2:
+        output_dir = Path("./results")
+        criteria_results = load_all_results_from_disk(output_dir)
+        holistic_results = load_all_holistic_results_from_disk(output_dir)
+        decision_comparison_analysis(criteria_results, holistic_results, output_dir)
+
+
+def _admit_pattern_tab():
+    """Core admit pattern analysis content (formerly the full page)."""
     st.markdown("Upload candidate applications with admit/reject labels to discover distinguishing patterns.")
     
     # Load progress from disk if not in session state
