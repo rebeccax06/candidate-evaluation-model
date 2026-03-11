@@ -22,7 +22,8 @@ from candidate_evaluator.core.models import (
     NotableQuality,
     HolisticEvidence,
     RedFlag,
-    InterviewQuestion
+    InterviewQuestion,
+    InterviewSelectionResult,
 )
 from candidate_evaluator.core.research_generator import ResearchReportGenerator
 from candidate_evaluator.core.research_models import ResearchEvaluationReport
@@ -32,7 +33,9 @@ from candidate_evaluator.prompts.evaluation_prompts import (
     SYSTEM_PROMPT,
     get_evaluation_prompt,
     get_comparison_prompt,
-    get_holistic_evaluation_prompt
+    get_holistic_evaluation_prompt,
+    get_holistic_ranking_prompt,
+    get_holistic_selection_prompt,
 )
 from candidate_evaluator.prompt_manager import PromptManager
 
@@ -267,6 +270,135 @@ class CandidateEvaluator:
 
         logger.info("Comparison completed")
         return result
+
+    def select_interviews_holistic(
+        self,
+        evaluations: List[HolisticEvaluationResult],
+        n_interviews: int,
+        pool_multiplier: float = 2.0,
+    ) -> InterviewSelectionResult:
+        """
+        Two-phase, context-window-efficient interview selection over holistic evaluations.
+
+        Phase 1 — Initial ranking (skipped when the candidate pool is small enough):
+            All candidates are ranked using their compact ``to_summary_dict()``
+            representations.  No raw materials are re-sent to the model.
+
+        Phase 2 — Final selection:
+            Only the top ``pool_size`` candidates (determined by ``pool_multiplier``)
+            are passed to Claude for a deeper comparison, and exactly ``n_interviews``
+            are selected.
+
+        Args:
+            evaluations:     List of already-computed HolisticEvaluationResult objects.
+            n_interviews:    Number of interview slots to fill.
+            pool_multiplier: How many times ``n_interviews`` to include in the Phase-2
+                             pool (minimum pool size is ``n_interviews + 2``).
+
+        Returns:
+            InterviewSelectionResult with ranked + selected candidate IDs.
+
+        Raises:
+            ValueError: If ``n_interviews`` is less than 1 or exceeds the pool.
+        """
+        if n_interviews < 1:
+            raise ValueError("n_interviews must be at least 1")
+        if n_interviews > len(evaluations):
+            raise ValueError(
+                f"n_interviews ({n_interviews}) exceeds the number of candidates "
+                f"({len(evaluations)})"
+            )
+
+        start_time = time.time()
+        all_ids = [e.candidate.candidate_id for e in evaluations]
+
+        # Determine intermediate pool size
+        pool_size = min(
+            len(evaluations),
+            max(n_interviews + 2, int(n_interviews * pool_multiplier)),
+        )
+
+        # ------------------------------------------------------------------ #
+        # Phase 1 – initial ranking across the full candidate set              #
+        # (skipped when every candidate will already fit in the Phase-2 pool)  #
+        # ------------------------------------------------------------------ #
+        ranking_template = self.prompt_manager.get_ranking_template()
+
+        if pool_size >= len(evaluations):
+            # Pool covers all candidates — no LLM call needed; sort by score
+            logger.info(
+                "Pool size covers all candidates — skipping Phase-1 LLM ranking, "
+                "using score-based order."
+            )
+            ranked_all = sorted(
+                all_ids,
+                key=lambda cid: next(
+                    (e.overall_score for e in evaluations if e.candidate.candidate_id == cid),
+                    0.0,
+                ),
+                reverse=True,
+            )
+            phase1_rationale = "Score-based pre-sort (Phase 1 LLM call skipped: pool covers all candidates)."
+        else:
+            logger.info(
+                f"Phase 1: ranking all {len(evaluations)} candidates …"
+            )
+            ranking_prompt = get_holistic_ranking_prompt(evaluations, template=ranking_template)
+            response1 = self._call_claude_api(ranking_prompt)
+            ranking_data = self._parse_comparison_response(response1)
+            ranked_all = ranking_data.get("ranking", [])
+            phase1_rationale = ranking_data.get("ranking_rationale", "")
+
+            # Guard against missing or extra IDs returned by the model
+            ranked_set = set(ranked_all)
+            missing = [cid for cid in all_ids if cid not in ranked_set]
+            ranked_all = ranked_all + missing  # append any the model omitted
+
+        # ------------------------------------------------------------------ #
+        # Phase 2 – deep comparison within the top pool                        #
+        # ------------------------------------------------------------------ #
+        pool_ids = ranked_all[:pool_size]
+        eval_by_id = {e.candidate.candidate_id: e for e in evaluations}
+        pool_evals = [eval_by_id[cid] for cid in pool_ids if cid in eval_by_id]
+
+        logger.info(
+            f"Phase 2: selecting {n_interviews} from top-{len(pool_evals)} pool …"
+        )
+        selection_template = self.prompt_manager.get_selection_template()
+        selection_prompt = get_holistic_selection_prompt(
+            pool_evals, n_interviews, template=selection_template
+        )
+        response2 = self._call_claude_api(selection_prompt)
+        selection_data = self._parse_comparison_response(response2)
+
+        selected_ids = selection_data.get("selected", [])
+        # Fallback: take the top-N from the pool if the model returns nothing
+        if not selected_ids:
+            selected_ids = pool_ids[:n_interviews]
+
+        elapsed = time.time() - start_time
+        logger.info(
+            f"Interview selection completed in {elapsed:.2f}s — "
+            f"selected {len(selected_ids)} of {len(evaluations)} candidates."
+        )
+
+        return InterviewSelectionResult(
+            selected_candidate_ids=selected_ids,
+            pool_candidate_ids=pool_ids,
+            all_candidate_ids_ranked=ranked_all,
+            n_interviews_requested=n_interviews,
+            selection_rationale=selection_data.get("selection_rationale", ""),
+            candidate_notes=selection_data.get("candidate_notes", {}),
+            pool_multiplier=pool_multiplier,
+            metadata={
+                "model": self.config.api.model,
+                "processing_time_seconds": elapsed,
+                "n_total_candidates": len(evaluations),
+                "pool_size": len(pool_evals),
+                "phase1_rationale": phase1_rationale,
+                "timestamp": datetime.now().isoformat(),
+            },
+        )
 
     def evaluate_candidate_holistic(
         self,

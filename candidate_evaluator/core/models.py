@@ -236,6 +236,32 @@ class HolisticEvaluationResult(BaseModel):
         }
 
 
+class InterviewSelectionResult(BaseModel):
+    """Result of the two-phase, context-window-efficient interview selection process."""
+
+    selected_candidate_ids: List[str] = Field(
+        description="Final N candidate IDs to interview, ordered strongest-first"
+    )
+    pool_candidate_ids: List[str] = Field(
+        description="Intermediate top-pool IDs passed into Phase 2 (superset of selected)"
+    )
+    all_candidate_ids_ranked: List[str] = Field(
+        description="All candidate IDs ranked by Phase 1 (empty if Phase 1 was skipped)"
+    )
+    n_interviews_requested: int = Field(description="Number of interview slots requested")
+    selection_rationale: str = Field(
+        default="", description="Claude's explanation of the final selection"
+    )
+    candidate_notes: Dict[str, str] = Field(
+        default_factory=dict,
+        description="Per-candidate notes from the selection step"
+    )
+    pool_multiplier: float = Field(
+        default=2.0, description="Multiplier used to size the intermediate pool"
+    )
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
 class ComparisonResult(BaseModel):
     """Comparison of multiple candidates"""
     candidates: List[EvaluationResult]

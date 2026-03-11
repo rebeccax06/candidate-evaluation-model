@@ -31,7 +31,8 @@ from candidate_evaluator.core.models import (
     InnovationPotential,
     ProgramFit,
     NotableQuality,
-    AdmitPatternAnalysisResult
+    AdmitPatternAnalysisResult,
+    InterviewSelectionResult,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
 from candidate_evaluator.exporters import CSVExporter, JSONExporter
@@ -210,7 +211,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Admit Patterns", "Research", "Settings"],
+            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -235,6 +236,8 @@ def main():
         batch_jobs_page(user)
     elif page == "Results":
         results_page(user)
+    elif page == "Interview Selection":
+        interview_selection_page(user, api_key)
     elif page == "Analysis":
         analysis_page(user)
     elif page == "Admit Patterns":
@@ -243,6 +246,226 @@ def main():
         research_page(user)
     elif page == "Settings":
         settings_page(user)
+
+
+_SELECTION_EVAL_TYPE = "interview_selection"
+_SELECTION_CANDIDATE_ID = "__interview_selection__"
+
+
+def _save_selection_result_cloud(user_id: str, result: InterviewSelectionResult) -> None:
+    """Persist an InterviewSelectionResult to Supabase (upsert via delete+insert)."""
+    db = get_database()
+    # Remove any previous selection result for this user before inserting the new one
+    try:
+        existing = db.get_user_evaluations(
+            user_id, evaluation_type=_SELECTION_EVAL_TYPE, limit=10
+        )
+        for row in existing:
+            db.delete_evaluation(row["id"], user_id)
+    except Exception:
+        pass
+    db.save_evaluation(
+        user_id=user_id,
+        candidate_id=_SELECTION_CANDIDATE_ID,
+        evaluation_type=_SELECTION_EVAL_TYPE,
+        result=json.loads(json.dumps(result.model_dump(), default=str)),
+    )
+
+
+def _load_selection_result_cloud(user_id: str) -> InterviewSelectionResult | None:
+    """Load the most recent InterviewSelectionResult from Supabase, or None."""
+    db = get_database()
+    rows = db.get_user_evaluations(user_id, evaluation_type=_SELECTION_EVAL_TYPE, limit=1)
+    if not rows:
+        return None
+    try:
+        return InterviewSelectionResult(**rows[0]["result"])
+    except Exception:
+        return None
+
+
+def interview_selection_page(user: dict, api_key: str):
+    """Two-phase, context-window-efficient interview-selection page."""
+    st.title("Interview Selection")
+    st.markdown(
+        "Select the top *N* candidates to interview from a pool of holistic evaluations. "
+        "The system performs a compact first-pass ranking across all candidates, then a deeper "
+        "final comparison restricted to the top pool — keeping context-window usage low."
+    )
+
+    # Load holistic evaluations from Supabase
+    _, holistic_results = get_user_results_as_objects(user)
+
+    if not holistic_results:
+        st.warning(
+            "No holistic evaluations found. "
+            "Run evaluations in **Holistic** mode first (New Evaluation or Batch Jobs)."
+        )
+        return
+
+    st.info(f"Found **{len(holistic_results)}** holistic evaluation(s) available.")
+
+    # Restore last saved result into session state on first load
+    session_key = f"interview_selection_result_{user['id']}"
+    if session_key not in st.session_state:
+        st.session_state[session_key] = _load_selection_result_cloud(user["id"])
+
+    # ------------------------------------------------------------------ #
+    # Configuration                                                         #
+    # ------------------------------------------------------------------ #
+    st.markdown("### Configuration")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        n_interviews = st.number_input(
+            "Number of candidates to interview",
+            min_value=1,
+            max_value=len(holistic_results),
+            value=min(3, len(holistic_results)),
+            step=1,
+            help="How many candidates should be selected for interviews.",
+        )
+
+    with col2:
+        pool_multiplier = st.slider(
+            "Pool multiplier (Phase-2 pool = N × multiplier)",
+            min_value=1.5,
+            max_value=5.0,
+            value=2.0,
+            step=0.5,
+            help=(
+                "Controls how many candidates enter the deeper Phase-2 comparison. "
+                "Higher values are more thorough but use more context window."
+            ),
+        )
+
+    pool_size = min(
+        len(holistic_results),
+        max(int(n_interviews) + 2, int(int(n_interviews) * pool_multiplier)),
+    )
+    st.caption(
+        f"Phase-2 pool will contain **{pool_size}** candidate(s) "
+        f"(out of {len(holistic_results)} total)."
+    )
+
+    # ------------------------------------------------------------------ #
+    # Candidate overview                                                    #
+    # ------------------------------------------------------------------ #
+    with st.expander("Available candidates", expanded=False):
+        overview = []
+        for r in sorted(holistic_results, key=lambda x: x.overall_score, reverse=True):
+            overview.append(
+                {
+                    "Candidate ID": r.candidate.candidate_id,
+                    "Name": r.candidate.name or "-",
+                    "Score": f"{r.overall_score:.1f}/10",
+                    "Interview (individual)": "Yes" if r.interview_decision else "No",
+                    "Innovation": r.innovation_potential.level.capitalize(),
+                    "Program Fit": r.program_fit.level.capitalize(),
+                }
+            )
+        st.dataframe(pd.DataFrame(overview), hide_index=True, use_container_width=True)
+
+    # ------------------------------------------------------------------ #
+    # Run selection                                                         #
+    # ------------------------------------------------------------------ #
+    if st.button("Run Interview Selection", use_container_width=True, type="primary"):
+        evaluator = get_evaluator(api_key)
+        with st.spinner("Running two-phase selection …"):
+            try:
+                result: InterviewSelectionResult = evaluator.select_interviews_holistic(
+                    evaluations=holistic_results,
+                    n_interviews=int(n_interviews),
+                    pool_multiplier=float(pool_multiplier),
+                )
+                st.session_state[session_key] = result
+                _save_selection_result_cloud(user["id"], result)
+            except Exception as exc:
+                st.error(f"Selection failed: {exc}")
+                return
+
+    # ------------------------------------------------------------------ #
+    # Display results (persists across reloads via Supabase + session)     #
+    # ------------------------------------------------------------------ #
+    result: InterviewSelectionResult = st.session_state.get(session_key)
+    if result is None:
+        return
+
+    col_hdr, col_clear = st.columns([5, 1])
+    with col_clear:
+        if st.button("Clear result", use_container_width=True):
+            st.session_state[session_key] = None
+            try:
+                db = get_database()
+                existing = db.get_user_evaluations(
+                    user["id"], evaluation_type=_SELECTION_EVAL_TYPE, limit=10
+                )
+                for row in existing:
+                    db.delete_evaluation(row["id"], user["id"])
+            except Exception:
+                pass
+            st.rerun()
+
+    st.success(
+        f"Selected **{len(result.selected_candidate_ids)}** candidate(s) for interview "
+        f"from a pool of {len(result.pool_candidate_ids)} finalists "
+        f"(total evaluated: {result.metadata.get('n_total_candidates', '?')})."
+    )
+
+    # Final selections table
+    st.markdown("### Selected for Interview")
+    eval_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+    selected_rows = []
+    for rank, cid in enumerate(result.selected_candidate_ids, 1):
+        ev = eval_by_id.get(cid)
+        note = result.candidate_notes.get(cid, "")
+        selected_rows.append(
+            {
+                "Rank": rank,
+                "Candidate ID": cid,
+                "Name": ev.candidate.name if ev else "-",
+                "Score": f"{ev.overall_score:.1f}/10" if ev else "-",
+                "Program Fit": ev.program_fit.level.capitalize() if ev else "-",
+                "Innovation": ev.innovation_potential.level.capitalize() if ev else "-",
+                "Red Flags": len(ev.red_flags) if ev and isinstance(ev.red_flags, list) else 0,
+                "Note": note,
+            }
+        )
+    st.dataframe(pd.DataFrame(selected_rows), hide_index=True, use_container_width=True)
+
+    if result.selection_rationale:
+        st.markdown("**Selection rationale:**")
+        st.info(result.selection_rationale)
+
+    # Phase-1 full ranking
+    if result.all_candidate_ids_ranked:
+        with st.expander("Phase-1 ranking (all candidates)", expanded=False):
+            phase1_rows = []
+            phase1_rationale = result.metadata.get("phase1_rationale", "")
+            for rank, cid in enumerate(result.all_candidate_ids_ranked, 1):
+                ev = eval_by_id.get(cid)
+                in_pool = cid in result.pool_candidate_ids
+                phase1_rows.append(
+                    {
+                        "Rank": rank,
+                        "Candidate ID": cid,
+                        "Name": ev.candidate.name if ev else "-",
+                        "Score": f"{ev.overall_score:.1f}/10" if ev else "-",
+                        "In Phase-2 Pool": "Yes" if in_pool else "No",
+                        "Selected": "✓" if cid in result.selected_candidate_ids else "",
+                    }
+                )
+            st.dataframe(
+                pd.DataFrame(phase1_rows), hide_index=True, use_container_width=True
+            )
+            if phase1_rationale:
+                st.caption(f"Ranking rationale: {phase1_rationale}")
+
+    elapsed = result.metadata.get("processing_time_seconds")
+    if elapsed:
+        st.caption(
+            f"Completed in {elapsed:.1f}s using {result.metadata.get('model', 'unknown model')}."
+        )
 
 
 def dashboard_page(user: dict, api_key: str):
@@ -963,7 +1186,9 @@ def settings_page(user: dict):
     prompt_options = {
         "System Prompt": "system",
         "Criteria-Based Template": "criteria",
-        "Holistic Template": "holistic"
+        "Holistic Template": "holistic",
+        "Interview Ranking Template": "ranking",
+        "Interview Selection Template": "selection",
     }
 
     selected_prompt_name = st.selectbox(
@@ -984,8 +1209,12 @@ def settings_page(user: dict):
         current_content = prompt_manager.get_system_prompt()
     elif selected_prompt_type == "criteria":
         current_content = prompt_manager.get_criteria_template()
-    else:
+    elif selected_prompt_type == "holistic":
         current_content = prompt_manager.get_holistic_template()
+    elif selected_prompt_type == "ranking":
+        current_content = prompt_manager.get_ranking_template()
+    else:
+        current_content = prompt_manager.get_selection_template()
 
     edited_content = st.text_area(
         f"Edit {selected_prompt_name}",
@@ -1004,8 +1233,12 @@ def settings_page(user: dict):
                     prompt_manager.save_system_prompt(edited_content)
                 elif selected_prompt_type == "criteria":
                     prompt_manager.save_criteria_template(edited_content)
-                else:
+                elif selected_prompt_type == "holistic":
                     prompt_manager.save_holistic_template(edited_content)
+                elif selected_prompt_type == "ranking":
+                    prompt_manager.save_ranking_template(edited_content)
+                else:
+                    prompt_manager.save_selection_template(edited_content)
                 st.success("Prompt saved successfully!")
                 st.rerun()
             else:
@@ -1029,15 +1262,40 @@ def settings_page(user: dict):
                 key="default_prompt_view"
             )
 
-    if selected_prompt_type in ["criteria", "holistic"]:
+    if selected_prompt_type in ["criteria", "holistic", "ranking", "selection"]:
         with st.expander("Template Variables"):
-            st.markdown("""
-            **Available placeholders:**
-            - `{materials}` - Candidate application materials (required)
-            - `{criteria_details}` - Formatted criteria rubrics (criteria template only)
+            if selected_prompt_type == "criteria":
+                st.markdown("""
+**Available placeholders:**
+- `{materials}` — Candidate application materials (required)
+- `{criteria_details}` — Formatted criteria rubrics (required)
 
-            **Note:** Do not remove these placeholders or the evaluation will fail.
-            """)
+**Note:** Do not remove these placeholders or the evaluation will fail.
+""")
+            elif selected_prompt_type == "holistic":
+                st.markdown("""
+**Available placeholders:**
+- `{materials}` — Candidate application materials (required)
+
+**Note:** Do not remove this placeholder or the evaluation will fail.
+""")
+            elif selected_prompt_type == "ranking":
+                st.markdown("""
+**Available placeholders:**
+- `{n_candidates}` — Total number of candidates being ranked (required)
+- `{candidates_data}` — Formatted candidate profiles (required)
+
+**Note:** Candidate profiles are generated automatically from each candidate's holistic evaluation.
+""")
+            elif selected_prompt_type == "selection":
+                st.markdown("""
+**Available placeholders:**
+- `{n_pool}` — Number of candidates in the final pool (required)
+- `{n_interviews}` — Number of candidates to select (required)
+- `{candidates_data}` — Formatted candidate profiles, including notable qualities (required)
+
+**Note:** Candidate profiles are generated automatically from each candidate's holistic evaluation.
+""")
 
 
 def display_evaluation_result(result: EvaluationResult):

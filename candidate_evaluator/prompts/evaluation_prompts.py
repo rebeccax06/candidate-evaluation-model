@@ -1,7 +1,12 @@
 """Prompt templates for candidate evaluation using Claude API"""
 
-from typing import Dict, List
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Dict, List, Optional
 from candidate_evaluator.core.models import EvaluationCriterion
+
+if TYPE_CHECKING:
+    from candidate_evaluator.core.models import HolisticEvaluationResult
 
 
 SYSTEM_PROMPT = """You are an expert candidate evaluator with deep experience in talent assessment and selection. Your role is to provide objective, evidence-based evaluations using Behaviorally Anchored Rating Scales (BARS).
@@ -1291,3 +1296,269 @@ def _format_candidate_summary(candidate: Dict, status: str) -> str:
     
     lines.append("")  # Empty line between candidates
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Interview-selection prompts (two-phase, context-window-efficient)
+# ---------------------------------------------------------------------------
+
+HOLISTIC_RANKING_PROMPT_TEMPLATE = """# Candidate Ranking for Interview Selection
+
+You are acting as a senior admissions reviewer for a competitive fellowship program.
+Your task is to rank ALL {n_candidates} candidates from strongest to weakest based on
+how well they fit the program — not just their numeric score.
+
+## Program Description
+
+This is a competitive fellowship program seeking candidates who can:
+- Drive innovation and creative problem-solving in their field
+- Translate research into practical impact
+- Work effectively across disciplines and with diverse teams
+- Demonstrate sustained commitment to challenging problems
+- Learn, grow, and adapt based on feedback and new evidence
+- Communicate complex ideas effectively to varied audiences
+
+The program values candidates who show genuine evidence of these qualities through
+their actions and achievements, not just stated intentions.
+
+## Ranking Criteria (apply in this priority order)
+
+1. **Program Fit** — How directly do the candidate's demonstrated strengths match
+   what the program is looking for? Strong > Moderate > Weak, with confidence level
+   as a multiplier (high confidence strong fit outranks low confidence strong fit).
+
+2. **Innovation Potential** — Is there genuine, specific evidence of creative,
+   impactful thinking? High-confidence assessments outweigh low-confidence ones.
+
+3. **Evidence Quality** — Concrete, specific achievements backed by multiple sources
+   outrank vague aspirations or self-reported qualities without corroboration.
+
+4. **Red Flags** — High-severity flags are near-disqualifying. Multiple medium-severity
+   flags compound. Absence of red flags is a meaningful positive signal.
+
+5. **Overall Score** — Use as a tiebreaker when holistic signals are otherwise equal.
+
+## Candidate Profiles
+
+{candidates_data}
+
+---
+
+## Task
+
+Rank ALL {n_candidates} candidates from strongest to weakest for program fit and
+interview selection. Write one sentence per candidate explaining the key reason
+they placed where they did.
+
+## Output
+
+Respond with valid JSON only — no prose outside the JSON block:
+
+```json
+{{
+  "ranking": ["candidate_id_1", "candidate_id_2", ...],
+  "ranking_rationale": "2-3 sentences summarising the overall ranking logic and what separated the top candidates from the rest.",
+  "candidate_reasoning": {{
+    "candidate_id": "One sentence on why this candidate placed where they did."
+  }}
+}}
+```
+
+The `ranking` list MUST contain ALL {n_candidates} candidate IDs exactly once, ordered strongest-first.
+"""
+
+
+HOLISTIC_SELECTION_PROMPT_TEMPLATE = """# Final Interview-Candidate Selection
+
+You are the final decision-maker for a competitive fellowship program.
+From a pre-screened pool of {n_pool} strong candidates, select exactly {n_interviews}
+to invite for interview.
+
+## Program Description
+
+This is a competitive fellowship program seeking candidates who can:
+- Drive innovation and creative problem-solving in their field
+- Translate research into practical impact
+- Work effectively across disciplines and with diverse teams
+- Demonstrate sustained commitment to challenging problems
+- Learn, grow, and adapt based on feedback and new evidence
+- Communicate complex ideas effectively to varied audiences
+
+The program values candidates who show genuine evidence of these qualities through
+their actions and achievements, not just stated intentions.
+
+## Selection Principles
+
+Apply these principles when choosing your final {n_interviews}:
+
+- **Program Fit First**: Prioritise candidates whose demonstrated strengths directly
+  match what the program values most.
+- **Evidence Over Claims**: A candidate with fewer but concrete achievements ranks
+  above one with many vague aspirations.
+- **Confidence Matters**: High-confidence assessments are worth more than the same
+  assessment at low confidence.
+- **Red Flags Are Disqualifying**: High-severity red flags should prevent selection
+  unless offset by exceptional, well-evidenced strengths.
+- **Cohort Diversity**: Where candidates are otherwise comparable, prefer a group
+  with complementary rather than identical strengths.
+
+## Finalist Profiles
+
+{candidates_data}
+
+---
+
+## Task
+
+Select EXACTLY {n_interviews} candidate(s) to invite for interview.
+For every candidate in the pool — selected or not — write 1-2 sentences explaining
+your decision.
+
+## Output
+
+Respond with valid JSON only — no prose outside the JSON block:
+
+```json
+{{
+  "selected": ["candidate_id_1", "candidate_id_2", ...],
+  "selection_rationale": "2-3 sentences explaining the overall selection logic: what the selected group has in common and why the others were not chosen.",
+  "candidate_notes": {{
+    "candidate_id": "1-2 sentences on why this candidate was selected or not selected, citing the decisive factor."
+  }}
+}}
+```
+
+The `selected` list MUST contain EXACTLY {n_interviews} candidate ID(s), ordered strongest-first.
+"""
+
+
+# ---------------------------------------------------------------------------
+# Candidate profile formatters for the two-phase selection prompts
+# ---------------------------------------------------------------------------
+
+def _format_ranking_candidate(evaluation: HolisticEvaluationResult) -> str:
+    """
+    Format a full HolisticEvaluationResult into a rich text block for Phase-1 ranking.
+
+    Includes reasoning snippets so the model can make program-fit judgements rather
+    than relying solely on numeric scores.
+    """
+    cid = evaluation.candidate.candidate_id
+    name_part = f" — {evaluation.candidate.name}" if evaluation.candidate.name else ""
+
+    # Red-flag summary
+    red_flags = evaluation.red_flags if isinstance(evaluation.red_flags, list) else []
+    high_rf = sum(1 for rf in red_flags if getattr(rf, "severity", "medium") == "high")
+    med_rf = sum(1 for rf in red_flags if getattr(rf, "severity", "medium") == "medium")
+    rf_detail = ", ".join(
+        getattr(rf, "flag", str(rf)) for rf in red_flags[:3]
+    ) or "None identified"
+
+    # Program-fit strengths/concerns (up to 2 each, compact)
+    pf = evaluation.program_fit
+    strengths_text = "; ".join(pf.strengths_for_program[:2]) or "Not specified"
+    concerns_text = "; ".join(pf.concerns[:2]) or "None noted"
+
+    # Truncate long reasoning fields to keep context tight
+    def _truncate(text: str, limit: int = 200) -> str:
+        return text[:limit].rstrip() + "…" if len(text) > limit else text
+
+    lines = [
+        f"### {cid}{name_part}",
+        f"**Score**: {evaluation.overall_score}/10  |  "
+        f"**Recommendation**: {evaluation.recommendation}  |  "
+        f"**Individual interview decision**: {'Yes' if evaluation.interview_decision else 'No'}",
+        f"**Interview decision reasoning**: {_truncate(evaluation.interview_decision_reasoning, 180)}",
+        "",
+        f"**Innovation Potential**: {evaluation.innovation_potential.level.upper()} "
+        f"(confidence: {evaluation.innovation_potential.confidence})",
+        f"  → {_truncate(evaluation.innovation_potential.reasoning, 200)}",
+        "",
+        f"**Program Fit**: {pf.level.upper()} (confidence: {pf.confidence})",
+        f"  → {_truncate(pf.detailed_analysis, 200)}",
+        f"  → Strengths for program: {strengths_text}",
+        f"  → Concerns: {concerns_text}",
+        "",
+        f"**Red Flags**: {len(red_flags)} total "
+        f"({high_rf} high-severity, {med_rf} medium-severity)",
+        f"  → {rf_detail}",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _format_selection_candidate(evaluation: HolisticEvaluationResult) -> str:
+    """
+    Format a full HolisticEvaluationResult into a rich text block for Phase-2 selection.
+
+    Includes notable qualities on top of everything in the ranking formatter, giving
+    the model more signal for final differentiation within a strong pool.
+    """
+    base = _format_ranking_candidate(evaluation)
+
+    # Notable qualities (up to 3, with significance)
+    qualities = evaluation.notable_qualities[:3]
+    if qualities:
+        quality_lines = ["**Notable Qualities**:"]
+        for q in qualities:
+            sig = getattr(q, "significance", "")
+            quality_lines.append(
+                f"  - {q.quality} (confidence: {getattr(q, 'confidence', 'medium')})"
+                + (f" — {sig}" if sig else "")
+            )
+        return base + "\n".join(quality_lines) + "\n"
+
+    return base
+
+
+def get_holistic_ranking_prompt(
+    evaluations: List[HolisticEvaluationResult],
+    template: Optional[str] = None,
+) -> str:
+    """
+    Build the Phase-1 ranking prompt from a list of HolisticEvaluationResult objects.
+
+    Args:
+        evaluations: Full holistic evaluation results for all candidates.
+        template: Optional custom template string (must contain ``{n_candidates}``
+                  and ``{candidates_data}`` placeholders).  Defaults to
+                  ``HOLISTIC_RANKING_PROMPT_TEMPLATE``.
+
+    Returns:
+        Formatted ranking prompt string.
+    """
+    if template is None:
+        template = HOLISTIC_RANKING_PROMPT_TEMPLATE
+    candidates_text = "\n".join(_format_ranking_candidate(e) for e in evaluations)
+    return template.format(
+        n_candidates=len(evaluations),
+        candidates_data=candidates_text,
+    )
+
+
+def get_holistic_selection_prompt(
+    evaluations: List[HolisticEvaluationResult],
+    n_interviews: int,
+    template: Optional[str] = None,
+) -> str:
+    """
+    Build the Phase-2 selection prompt from top-pool HolisticEvaluationResult objects.
+
+    Args:
+        evaluations: Full holistic evaluation results for the top-pool candidates.
+        n_interviews: Exact number of candidates to select.
+        template: Optional custom template string (must contain ``{n_pool}``,
+                  ``{n_interviews}``, and ``{candidates_data}`` placeholders).
+                  Defaults to ``HOLISTIC_SELECTION_PROMPT_TEMPLATE``.
+
+    Returns:
+        Formatted selection prompt string.
+    """
+    if template is None:
+        template = HOLISTIC_SELECTION_PROMPT_TEMPLATE
+    candidates_text = "\n".join(_format_selection_candidate(e) for e in evaluations)
+    return template.format(
+        n_pool=len(evaluations),
+        n_interviews=n_interviews,
+        candidates_data=candidates_text,
+    )

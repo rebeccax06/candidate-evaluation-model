@@ -9,7 +9,7 @@ from typing import Optional, Dict, Any
 class PromptManager:
     """Manages custom evaluation prompts with persistent storage."""
 
-    PROMPT_TYPES = ["system", "criteria", "holistic"]
+    PROMPT_TYPES = ["system", "criteria", "holistic", "ranking", "selection"]
 
     def __init__(self, prompts_dir: Optional[Path] = None):
         """
@@ -29,12 +29,16 @@ class PromptManager:
         from candidate_evaluator.prompts.evaluation_prompts import (
             SYSTEM_PROMPT,
             EVALUATION_PROMPT_TEMPLATE,
-            HOLISTIC_EVALUATION_PROMPT
+            HOLISTIC_EVALUATION_PROMPT,
+            HOLISTIC_RANKING_PROMPT_TEMPLATE,
+            HOLISTIC_SELECTION_PROMPT_TEMPLATE,
         )
         self._defaults = {
             "system": SYSTEM_PROMPT,
             "criteria": EVALUATION_PROMPT_TEMPLATE,
-            "holistic": HOLISTIC_EVALUATION_PROMPT
+            "holistic": HOLISTIC_EVALUATION_PROMPT,
+            "ranking": HOLISTIC_RANKING_PROMPT_TEMPLATE,
+            "selection": HOLISTIC_SELECTION_PROMPT_TEMPLATE,
         }
 
     def _get_prompt_path(self, prompt_type: str) -> Path:
@@ -104,6 +108,28 @@ class PromptManager:
     def save_holistic_template(self, content: str, name: Optional[str] = None) -> None:
         """Save a custom holistic template."""
         self._save_prompt("holistic", content, name)
+
+    def get_ranking_template(self) -> str:
+        """Get the interview-ranking template (custom or default)."""
+        custom = self._load_custom_prompt("ranking")
+        if custom and custom.get("content"):
+            return custom["content"]
+        return self._defaults["ranking"]
+
+    def save_ranking_template(self, content: str, name: Optional[str] = None) -> None:
+        """Save a custom interview-ranking template."""
+        self._save_prompt("ranking", content, name)
+
+    def get_selection_template(self) -> str:
+        """Get the interview-selection template (custom or default)."""
+        custom = self._load_custom_prompt("selection")
+        if custom and custom.get("content"):
+            return custom["content"]
+        return self._defaults["selection"]
+
+    def save_selection_template(self, content: str, name: Optional[str] = None) -> None:
+        """Save a custom interview-selection template."""
+        self._save_prompt("selection", content, name)
 
     def reset_to_default(self, prompt_type: str) -> None:
         """Reset a prompt to its default value by deleting the custom file."""
