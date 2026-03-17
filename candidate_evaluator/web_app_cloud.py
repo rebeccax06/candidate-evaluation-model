@@ -1020,6 +1020,25 @@ def _render_batch_results(
                     display_holistic_evaluation_result(holistic_result)
 
 
+def _infer_job_ids_for_evaluations(evaluations: list, jobs: list, db) -> None:
+    """When job_id is missing on evaluations, infer it from per-job queries (same as Batch Jobs tab). Mutates evaluations in place."""
+    eval_ids_missing_job = {e.get("id") for e in evaluations if not e.get("job_id")}
+    if not eval_ids_missing_job:
+        return
+    eval_id_to_job_id = {}
+    for job in jobs:
+        jid = str(job.get("id") or "")
+        if not jid:
+            continue
+        for ev in db.get_job_evaluations(jid):
+            eid = ev.get("id")
+            if eid and eid in eval_ids_missing_job:
+                eval_id_to_job_id[eid] = jid
+    for e in evaluations:
+        if not e.get("job_id") and e.get("id") in eval_id_to_job_id:
+            e["job_id"] = eval_id_to_job_id[e["id"]]
+
+
 def results_page(user: dict):
     """View all evaluation results, separated by batch."""
     st.title("Evaluation Results")
@@ -1031,6 +1050,9 @@ def results_page(user: dict):
     if not evaluations:
         st.info("No evaluation results yet. Run some evaluations first!")
         return
+    
+    # Ensure batch jobs show up separated even if job_id is missing from the main query (e.g. API/DB quirk)
+    _infer_job_ids_for_evaluations(evaluations, jobs, db)
     
     batches = _group_evaluations_by_batch(evaluations, jobs)
     criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
