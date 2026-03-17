@@ -519,7 +519,8 @@ def dashboard_page(user: dict, api_key: str):
                         score = eval_data.get('overall_score')
                         st.markdown(f"**{score:.1f}**/10" if score else "N/A")
                     with rcol3:
-                        st.caption(eval_data.get('recommendation', '')[:20] or '-')
+                        rec = (eval_data.get('recommendation') or '')[:20] or '-'
+                        st.caption(rec)
                     st.markdown("---")
         else:
             st.info("No evaluations yet. Select 'New Evaluation' to get started.")
@@ -865,96 +866,85 @@ def render_job_card(job: dict, db: Database, user: dict, show_actions: bool = Tr
         st.markdown("---")
 
 
-def results_page(user: dict):
-    """View all evaluation results."""
-    st.title("Evaluation Results")
-    
-    db = get_database()
-    evaluations = db.get_user_evaluations(user["id"], limit=200)
-    
-    if not evaluations:
-        st.info("No evaluation results yet. Run some evaluations first!")
-        return
-    
-    criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
-    holistic_evals = [e for e in evaluations if e.get("evaluation_type") == "holistic"]
-    
+def _group_evaluations_by_batch(evaluations: list, jobs: list) -> list:
+    """Group evaluations by batch (job_id). Returns list of (batch_key, batch_label, evals)."""
+    job_map = {str(j["id"]): j for j in jobs}
+    groups = {}  # batch_key -> list of evals
+    for e in evaluations:
+        jid = e.get("job_id")
+        if jid:
+            key = str(jid)
+        else:
+            key = "_single"
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(e)
+
+    # Build list: (key, label, evals). Put _single last; sort batch keys by job created_at desc.
+    single = groups.pop("_single", None)
+    batch_list = []
+    for jid, evals in groups.items():
+        job = job_map.get(jid, {})
+        created = job.get("created_at") or ""
+        batch_list.append((jid, label_for_job(job, jid), evals, created))
+    batch_list.sort(key=lambda x: x[3] or "", reverse=True)
+
+    out = [(k, lbl, ev) for k, lbl, ev, _ in batch_list]
+    if single:
+        out.append(("_single", "Single / ad-hoc evaluations", single))
+    return out
+
+
+def label_for_job(job: dict, job_id: str) -> str:
+    name = (job.get("job_name") or "").strip() or str(job_id)[:24]
+    created = job.get("created_at") or ""
+    if created:
+        try:
+            date_part = str(created)[:10]
+        except Exception:
+            date_part = ""
+    else:
+        date_part = ""
+    return f"{name}" + (f" ({date_part})" if date_part else "")
+
+
+def _render_batch_results(
+    batch_key: str,
+    batch_label: str,
+    batch_evals: list,
+) -> None:
+    """Render Criteria / Holistic / Combined tabs for one batch of evaluations."""
+    criteria_evals = [e for e in batch_evals if e.get("evaluation_type") == "criteria"]
+    holistic_evals = [e for e in batch_evals if e.get("evaluation_type") == "holistic"]
     criteria_results = []
     for e in criteria_evals:
         try:
             criteria_results.append(result_dict_to_evaluation_result(e["result"]))
         except Exception:
             pass
-    
     holistic_results = []
     for e in holistic_evals:
         try:
             holistic_results.append(result_dict_to_holistic_result(e["result"]))
         except Exception:
             pass
-    
     criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
     holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
     both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Criteria-Based", len(criteria_evals))
-    with col2:
-        st.metric("Holistic", len(holistic_evals))
-    with col3:
-        st.metric("Total", len(evaluations))
-    with col4:
-        if st.button("Refresh", use_container_width=True):
-            st.rerun()
-    
-    st.markdown("---")
-    
+
     tab1, tab2, tab3 = st.tabs([
         f"Criteria-Based ({len(criteria_evals)})",
         f"Holistic ({len(holistic_evals)})",
-        f"Combined View ({len(both_ids)})"
+        f"Combined ({len(both_ids)})"
     ])
-    
+    k = batch_key.replace("-", "_")[:30]
+
     with tab1:
         if not criteria_evals:
-            st.info("No criteria-based evaluations yet.")
+            st.info("No criteria-based evaluations in this batch.")
         else:
-            exp_col1, exp_col2 = st.columns(2)
-            with exp_col1:
-                if st.button("Export Criteria (CSV)", use_container_width=True, key="export_csv"):
-                    if criteria_results:
-                        import tempfile as _tempfile
-                        _tmp = _tempfile.mkdtemp()
-                        csv_path = os.path.join(_tmp, "criteria_results.csv")
-                        CSVExporter.export_batch(criteria_results, csv_path)
-                        with open(csv_path, 'rb') as f:
-                            st.download_button(
-                                "Download CSV",
-                                data=f,
-                                file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.csv",
-                                mime="text/csv",
-                                key="dl_csv"
-                            )
-            with exp_col2:
-                if st.button("Export Criteria (JSON)", use_container_width=True, key="export_json"):
-                    if criteria_results:
-                        import tempfile as _tempfile
-                        _tmp = _tempfile.mkdtemp()
-                        json_path = os.path.join(_tmp, "criteria_results.json")
-                        JSONExporter.export_batch(criteria_results, json_path)
-                        with open(json_path, 'rb') as f:
-                            st.download_button(
-                                "Download JSON",
-                                data=f,
-                                file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.json",
-                                mime="application/json",
-                                key="dl_json"
-                            )
-            
             summary_data = []
             sorted_evals = sorted(criteria_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
-            
             for rank, e in enumerate(sorted_evals, 1):
                 summary_data.append({
                     'Rank': rank,
@@ -964,26 +954,21 @@ def results_page(user: dict):
                     'Date': str(e.get('created_at', ''))[:10],
                     'Recommendation': (e.get('recommendation') or '')[:30]
                 })
-            
             st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
-            
             st.subheader("Candidate Details")
             options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
-            selected = st.selectbox("Select candidate", list(options.keys()), key="criteria_select")
-            
+            selected = st.selectbox("Select candidate", list(options.keys()), key=f"crit_{k}")
             if selected:
-                eval_data = options[selected]
-                result = result_dict_to_evaluation_result(eval_data["result"])
+                result = result_dict_to_evaluation_result(options[selected]["result"])
                 display_evaluation_result(result)
-    
+
     with tab2:
         if not holistic_evals:
-            st.info("No holistic evaluations yet.")
+            st.info("No holistic evaluations in this batch.")
         else:
             summary_data = []
             sorted_evals = sorted(holistic_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
             n_h = len(sorted_evals)
-
             for rank, e in enumerate(sorted_evals, 1):
                 result_data = e.get("result", {})
                 pct = 100 if n_h == 1 else round(100.0 * (n_h - rank) / (n_h - 1))
@@ -998,40 +983,199 @@ def results_page(user: dict):
                     'Program Fit': result_data.get('program_fit', {}).get('level', '-').capitalize() if isinstance(result_data.get('program_fit'), dict) else '-',
                     'Date': str(e.get('created_at', ''))[:10]
                 })
-
             st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
-            
             st.subheader("Candidate Details")
             options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
-            selected = st.selectbox("Select candidate", list(options.keys()), key="holistic_select")
-            
+            selected = st.selectbox("Select candidate", list(options.keys()), key=f"hol_{k}")
             if selected:
-                eval_data = options[selected]
-                result = result_dict_to_holistic_result(eval_data["result"])
+                result = result_dict_to_holistic_result(options[selected]["result"])
                 display_holistic_evaluation_result(result)
-    
+
     with tab3:
         if not both_ids:
-            st.info("No candidates have both evaluation types yet. Run both criteria-based and holistic evaluations on the same candidates to compare.")
+            st.info("No candidates in this batch have both evaluation types.")
         else:
-            st.subheader(f"Candidates with Both Evaluations: {len(both_ids)}")
+            st.subheader(f"Candidates with Both: {len(both_ids)}")
             display_disparity_analysis(criteria_by_id, holistic_by_id, both_ids)
-            
-            st.subheader("Individual Candidate Comparison")
-            selected_id = st.selectbox("Select Candidate", both_ids, key="combined_view_selector")
-            
+            selected_id = st.selectbox("Select Candidate", both_ids, key=f"comb_{k}")
             if selected_id:
                 criteria_result = criteria_by_id[selected_id]
                 holistic_result = holistic_by_id[selected_id]
                 display_comparison_summary(criteria_result, holistic_result)
-                
                 col1, col2 = st.columns(2)
                 with col1:
-                    st.markdown("### Criteria-Based Evaluation")
+                    st.markdown("### Criteria-Based")
                     display_evaluation_result(criteria_result)
                 with col2:
-                    st.markdown("### Holistic Evaluation")
+                    st.markdown("### Holistic")
                     display_holistic_evaluation_result(holistic_result)
+
+
+def results_page(user: dict):
+    """View all evaluation results, separated by batch."""
+    st.title("Evaluation Results")
+    
+    db = get_database()
+    evaluations = db.get_user_evaluations(user["id"], limit=200)
+    jobs = db.get_user_jobs(user["id"], limit=100)
+    
+    if not evaluations:
+        st.info("No evaluation results yet. Run some evaluations first!")
+        return
+    
+    batches = _group_evaluations_by_batch(evaluations, jobs)
+    criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
+    holistic_evals = [e for e in evaluations if e.get("evaluation_type") == "holistic"]
+    
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        st.metric("Batches", len(batches))
+    with col2:
+        st.metric("Criteria-Based", len(criteria_evals))
+    with col3:
+        st.metric("Holistic", len(holistic_evals))
+    with col4:
+        st.metric("Total", len(evaluations))
+    with col5:
+        if st.button("Refresh", use_container_width=True):
+            st.rerun()
+    
+    st.markdown("---")
+    view_mode = st.radio("View", ["By batch", "All combined"], horizontal=True, key="results_view_mode")
+    st.markdown("---")
+    
+    if view_mode == "By batch":
+        for batch_key, batch_label, batch_evals in batches:
+            n = len(batch_evals)
+            with st.expander(f"**{batch_label}** — {n} evaluation(s)", expanded=(len(batches) == 1)):
+                _render_batch_results(batch_key, batch_label, batch_evals)
+    else:
+        criteria_results = []
+        for e in criteria_evals:
+            try:
+                criteria_results.append(result_dict_to_evaluation_result(e["result"]))
+            except Exception:
+                pass
+        holistic_results = []
+        for e in holistic_evals:
+            try:
+                holistic_results.append(result_dict_to_holistic_result(e["result"]))
+            except Exception:
+                pass
+        criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+        holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
+        both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
+        
+        tab1, tab2, tab3 = st.tabs([
+            f"Criteria-Based ({len(criteria_evals)})",
+            f"Holistic ({len(holistic_evals)})",
+            f"Combined View ({len(both_ids)})"
+        ])
+        
+        with tab1:
+            if not criteria_evals:
+                st.info("No criteria-based evaluations yet.")
+            else:
+                exp_col1, exp_col2 = st.columns(2)
+                with exp_col1:
+                    if st.button("Export Criteria (CSV)", use_container_width=True, key="export_csv"):
+                        if criteria_results:
+                            import tempfile as _tempfile
+                            _tmp = _tempfile.mkdtemp()
+                            csv_path = os.path.join(_tmp, "criteria_results.csv")
+                            CSVExporter.export_batch(criteria_results, csv_path)
+                            with open(csv_path, 'rb') as f:
+                                st.download_button(
+                                    "Download CSV",
+                                    data=f,
+                                    file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.csv",
+                                    mime="text/csv",
+                                    key="dl_csv"
+                                )
+                with exp_col2:
+                    if st.button("Export Criteria (JSON)", use_container_width=True, key="export_json"):
+                        if criteria_results:
+                            import tempfile as _tempfile
+                            _tmp = _tempfile.mkdtemp()
+                            json_path = os.path.join(_tmp, "criteria_results.json")
+                            JSONExporter.export_batch(criteria_results, json_path)
+                            with open(json_path, 'rb') as f:
+                                st.download_button(
+                                    "Download JSON",
+                                    data=f,
+                                    file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.json",
+                                    mime="application/json",
+                                    key="dl_json"
+                                )
+                summary_data = []
+                sorted_evals = sorted(criteria_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
+                for rank, e in enumerate(sorted_evals, 1):
+                    summary_data.append({
+                        'Rank': rank,
+                        'Candidate ID': e.get('candidate_id', ''),
+                        'Name': e.get('candidate_name') or '-',
+                        'Score': f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else 'N/A',
+                        'Date': str(e.get('created_at', ''))[:10],
+                        'Recommendation': (e.get('recommendation') or '')[:30]
+                    })
+                st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
+                st.subheader("Candidate Details")
+                options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
+                selected = st.selectbox("Select candidate", list(options.keys()), key="criteria_select")
+                if selected:
+                    eval_data = options[selected]
+                    result = result_dict_to_evaluation_result(eval_data["result"])
+                    display_evaluation_result(result)
+        
+        with tab2:
+            if not holistic_evals:
+                st.info("No holistic evaluations yet.")
+            else:
+                summary_data = []
+                sorted_evals = sorted(holistic_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
+                n_h = len(sorted_evals)
+                for rank, e in enumerate(sorted_evals, 1):
+                    result_data = e.get("result", {})
+                    pct = 100 if n_h == 1 else round(100.0 * (n_h - rank) / (n_h - 1))
+                    summary_data.append({
+                        'Rank': rank,
+                        'Percentile': f"{pct}th",
+                        'Candidate ID': e.get('candidate_id', ''),
+                        'Name': e.get('candidate_name') or '-',
+                        'Score': f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else 'N/A',
+                        'Interview': 'Yes' if result_data.get('interview_decision') else 'No',
+                        'Innovation': result_data.get('innovation_potential', {}).get('level', '-').capitalize() if isinstance(result_data.get('innovation_potential'), dict) else '-',
+                        'Program Fit': result_data.get('program_fit', {}).get('level', '-').capitalize() if isinstance(result_data.get('program_fit'), dict) else '-',
+                        'Date': str(e.get('created_at', ''))[:10]
+                    })
+                st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
+                st.subheader("Candidate Details")
+                options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
+                selected = st.selectbox("Select candidate", list(options.keys()), key="holistic_select")
+                if selected:
+                    eval_data = options[selected]
+                    result = result_dict_to_holistic_result(eval_data["result"])
+                    display_holistic_evaluation_result(result)
+        
+        with tab3:
+            if not both_ids:
+                st.info("No candidates have both evaluation types yet. Run both criteria-based and holistic evaluations on the same candidates to compare.")
+            else:
+                st.subheader(f"Candidates with Both Evaluations: {len(both_ids)}")
+                display_disparity_analysis(criteria_by_id, holistic_by_id, both_ids)
+                st.subheader("Individual Candidate Comparison")
+                selected_id = st.selectbox("Select Candidate", both_ids, key="combined_view_selector")
+                if selected_id:
+                    criteria_result = criteria_by_id[selected_id]
+                    holistic_result = holistic_by_id[selected_id]
+                    display_comparison_summary(criteria_result, holistic_result)
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.markdown("### Criteria-Based Evaluation")
+                        display_evaluation_result(criteria_result)
+                    with col2:
+                        st.markdown("### Holistic Evaluation")
+                        display_holistic_evaluation_result(holistic_result)
 
 
 def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):
