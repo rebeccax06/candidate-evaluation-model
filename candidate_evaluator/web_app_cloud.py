@@ -867,7 +867,7 @@ def render_job_card(job: dict, db: Database, user: dict, show_actions: bool = Tr
 
 
 def _group_evaluations_by_batch(evaluations: list, jobs: list) -> list:
-    """Group evaluations by batch (job_id). Returns list of (batch_key, batch_label, evals)."""
+    """Group evaluations by batch (job_id). Single/ad-hoc evals are sub-grouped by date. Returns list of (batch_key, batch_label, evals)."""
     job_map = {str(j["id"]): j for j in jobs}
     groups = {}  # batch_key -> list of evals
     for e in evaluations:
@@ -875,23 +875,32 @@ def _group_evaluations_by_batch(evaluations: list, jobs: list) -> list:
         if jid:
             key = str(jid)
         else:
-            key = "_single"
+            # Sub-group single/ad-hoc by date (YYYY-MM-DD) so they don't all appear as one block
+            created = e.get("created_at")
+            date_part = str(created)[:10] if created else "no_date"
+            key = f"_single_{date_part}"
         if key not in groups:
             groups[key] = []
         groups[key].append(e)
 
-    # Build list: (key, label, evals). Put _single last; sort batch keys by job created_at desc.
-    single = groups.pop("_single", None)
+    # Batch jobs: (key, label, evals, sort_key)
     batch_list = []
-    for jid, evals in groups.items():
-        job = job_map.get(jid, {})
-        created = job.get("created_at") or ""
-        batch_list.append((jid, label_for_job(job, jid), evals, created))
+    single_groups = []
+    for key, evals in groups.items():
+        if key.startswith("_single_"):
+            date_part = key.replace("_single_", "")
+            label = f"Single / ad-hoc — {date_part}" if date_part != "no_date" else "Single / ad-hoc (no date)"
+            single_groups.append((key, label, evals, date_part))
+        else:
+            job = job_map.get(key, {})
+            created = job.get("created_at") or ""
+            batch_list.append((key, label_for_job(job, key), evals, created))
     batch_list.sort(key=lambda x: x[3] or "", reverse=True)
+    single_groups.sort(key=lambda x: x[3], reverse=True)
 
     out = [(k, lbl, ev) for k, lbl, ev, _ in batch_list]
-    if single:
-        out.append(("_single", "Single / ad-hoc evaluations", single))
+    for k, lbl, ev, _ in single_groups:
+        out.append((k, lbl, ev))
     return out
 
 
@@ -1041,7 +1050,16 @@ def results_page(user: dict):
             st.rerun()
     
     st.markdown("---")
-    view_mode = st.radio("View", ["By batch", "All combined"], horizontal=True, key="results_view_mode")
+    view_mode = st.radio(
+        "View",
+        ["By batch", "All combined"],
+        index=0,
+        horizontal=True,
+        key="results_view_mode",
+        help="By batch: each run or date in its own section. All combined: single flat list."
+    )
+    if view_mode == "By batch":
+        st.caption("Results are grouped by batch job or by date for single evaluations.")
     st.markdown("---")
     
     if view_mode == "By batch":
