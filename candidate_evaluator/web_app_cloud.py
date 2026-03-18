@@ -917,6 +917,52 @@ def label_for_job(job: dict, job_id: str) -> str:
     return f"{name}" + (f" ({date_part})" if date_part else "")
 
 
+def _eval_row_id(e: dict) -> str:
+    eid = e.get("id")
+    return str(eid) if eid is not None else ""
+
+
+def _sections_split_by_batch_jobs(jobs: list, db, all_evaluations: list) -> list:
+    """
+    Build one section per batch job using get_job_evaluations (same data as Batch Jobs tab),
+    then sections for evaluations not tied to any job (by date).
+    """
+    placed: set = set()
+    sections = []
+    sorted_jobs = sorted(jobs, key=lambda j: j.get("created_at") or "", reverse=True)
+    for job in sorted_jobs:
+        jid = str(job.get("id") or "")
+        if not jid:
+            continue
+        evs = db.get_job_evaluations(jid)
+        if not evs:
+            continue
+        short_id = f"{jid[:8]}…{jid[-4:]}" if len(jid) > 14 else jid
+        label = f"{label_for_job(job, jid)} · Batch ID {short_id}"
+        sections.append((jid, label, evs))
+        for e in evs:
+            rid = _eval_row_id(e)
+            if rid:
+                placed.add(rid)
+    orphans = [e for e in all_evaluations if _eval_row_id(e) and _eval_row_id(e) not in placed]
+    if not orphans:
+        return sections
+    by_date: dict = {}
+    for e in orphans:
+        d = str(e.get("created_at") or "")[:10] or "no_date"
+        k = f"_orphan_{d}"
+        by_date.setdefault(k, []).append(e)
+    for k in sorted(by_date.keys(), reverse=True):
+        d = k.replace("_orphan_", "")
+        lbl = (
+            f"Not from a batch job — {d}"
+            if d != "no_date"
+            else "Not from a batch job"
+        )
+        sections.append((k, lbl, by_date[k]))
+    return sections
+
+
 def _render_batch_results(
     batch_key: str,
     batch_label: str,
@@ -1044,23 +1090,42 @@ def results_page(user: dict):
     st.title("Evaluation Results")
     
     db = get_database()
-    evaluations = db.get_user_evaluations(user["id"], limit=200)
-    jobs = db.get_user_jobs(user["id"], limit=100)
+    evaluations = db.get_user_evaluations(user["id"], limit=500)
+    jobs = db.get_user_jobs(user["id"], limit=300)
     
     if not evaluations:
         st.info("No evaluation results yet. Run some evaluations first!")
         return
     
-    # Ensure batch jobs show up separated even if job_id is missing from the main query (e.g. API/DB quirk)
     _infer_job_ids_for_evaluations(evaluations, jobs, db)
     
-    batches = _group_evaluations_by_batch(evaluations, jobs)
     criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
     holistic_evals = [e for e in evaluations if e.get("evaluation_type") == "holistic"]
     
+    st.markdown("---")
+    display_mode = st.selectbox(
+        "**Display mode**",
+        [
+            "Split by batch — one section per job (matches Batch Jobs tab)",
+            "Everything together — single combined list (tabs below)",
+        ],
+        index=0,
+        key="results_display_mode_main",
+        help="Use “Split by batch” to see each run in its own section.",
+    )
+    split_by_batch = display_mode.startswith("Split")
+    batches_split = None
+    if split_by_batch:
+        batches_split = _sections_split_by_batch_jobs(jobs, db, evaluations)
+    job_section_count = (
+        sum(1 for k, _, _ in batches_split if not str(k).startswith("_orphan_"))
+        if batches_split
+        else "—"
+    )
+    st.markdown("---")
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        st.metric("Batches", len(batches))
+        st.metric("Batches", job_section_count)
     with col2:
         st.metric("Criteria-Based", len(criteria_evals))
     with col3:
@@ -1072,22 +1137,16 @@ def results_page(user: dict):
             st.rerun()
     
     st.markdown("---")
-    view_mode = st.radio(
-        "View",
-        ["By batch", "All combined"],
-        index=0,
-        horizontal=True,
-        key="results_view_mode",
-        help="By batch: each run or date in its own section. All combined: single flat list."
-    )
-    if view_mode == "By batch":
-        st.caption("Results are grouped by batch job or by date for single evaluations.")
-    st.markdown("---")
     
-    if view_mode == "By batch":
-        for batch_key, batch_label, batch_evals in batches:
+    if split_by_batch:
+        if not batches_split:
+            st.info("No batch-linked evaluations found. Run a batch job from **Batch Jobs**, or switch to **Everything together**.")
+        for batch_key, batch_label, batch_evals in (batches_split or []):
             n = len(batch_evals)
-            with st.expander(f"**{batch_label}** — {n} evaluation(s)", expanded=(len(batches) == 1)):
+            with st.expander(
+                f"{batch_label} — {n} evaluation(s)",
+                expanded=(len(batches_split or []) <= 3),
+            ):
                 _render_batch_results(batch_key, batch_label, batch_evals)
     else:
         criteria_results = []
