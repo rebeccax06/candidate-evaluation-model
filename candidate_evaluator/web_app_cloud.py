@@ -1106,8 +1106,8 @@ def results_page(user: dict):
     display_mode = st.selectbox(
         "**Display mode**",
         [
-            "Split by batch — one section per job (matches Batch Jobs tab)",
-            "Everything together — single combined list (tabs below)",
+            "Split by batch — one section per job",
+            "Everything together — single combined list",
         ],
         index=0,
         key="results_display_mode_main",
