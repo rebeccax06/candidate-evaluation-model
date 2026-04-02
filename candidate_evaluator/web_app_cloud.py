@@ -16,11 +16,16 @@ import tempfile
 import os
 import json
 import time
+import hashlib
+import traceback
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
+import numpy as np
 
 from candidate_evaluator.core.evaluator import CandidateEvaluator
+from candidate_evaluator.core.distribution_analyzer import DistributionAnalyzer
+from candidate_evaluator.core.expert_comparison import ExpertComparisonAnalyzer
 from candidate_evaluator.core.models import (
     EvaluationResult,
     CandidateProfile,
@@ -37,7 +42,7 @@ from candidate_evaluator.core.models import (
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
 from candidate_evaluator.exporters import CSVExporter, JSONExporter
 from candidate_evaluator.prompt_manager import PromptManager
-from candidate_evaluator.utils.config import get_default_config, Config, APIConfig
+from candidate_evaluator.utils.config import get_default_config, Config, APIConfig, CriteriaWeights
 from candidate_evaluator.auth import (
     init_auth_state,
     render_auth_ui,
@@ -172,8 +177,9 @@ def result_dict_to_holistic_result(data: dict) -> HolisticEvaluationResult:
         if isinstance(q, dict):
             notable_qualities.append(NotableQuality(
                 quality=q.get('quality', ''),
+                confidence=q.get('confidence', 'medium'),
                 evidence=q.get('evidence', ''),
-                significance=q.get('significance', '')
+                significance=q.get('significance', ''),
             ))
     
     return HolisticEvaluationResult(
@@ -963,14 +969,16 @@ def _sections_split_by_batch_jobs(jobs: list, db, all_evaluations: list) -> list
     return sections
 
 
-def _render_batch_results(
-    batch_key: str,
-    batch_label: str,
-    batch_evals: list,
-) -> None:
-    """Render Criteria / Holistic / Combined tabs for one batch of evaluations."""
+def _split_eval_rows_by_type(batch_evals: list) -> tuple:
+    """Partition evaluation DB rows into criteria vs holistic lists (same as Results / Analysis)."""
     criteria_evals = [e for e in batch_evals if e.get("evaluation_type") == "criteria"]
     holistic_evals = [e for e in batch_evals if e.get("evaluation_type") == "holistic"]
+    return criteria_evals, holistic_evals
+
+
+def _batch_evals_to_parsed_results(batch_evals: list) -> tuple:
+    """Build (criteria_results, holistic_results) pydantic objects from evaluation DB rows."""
+    criteria_evals, holistic_evals = _split_eval_rows_by_type(batch_evals)
     criteria_results = []
     for e in criteria_evals:
         try:
@@ -983,6 +991,17 @@ def _render_batch_results(
             holistic_results.append(result_dict_to_holistic_result(e["result"]))
         except Exception:
             pass
+    return criteria_results, holistic_results
+
+
+def _render_batch_results(
+    batch_key: str,
+    batch_label: str,
+    batch_evals: list,
+) -> None:
+    """Render Criteria / Holistic / Combined tabs for one batch of evaluations."""
+    criteria_evals, holistic_evals = _split_eval_rows_by_type(batch_evals)
+    criteria_results, holistic_results = _batch_evals_to_parsed_results(batch_evals)
     criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
     holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
     both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
@@ -1066,6 +1085,12 @@ def _render_batch_results(
                     display_holistic_evaluation_result(holistic_result)
 
 
+def _analysis_widget_key(batch_key: str, widget_family: str) -> str:
+    """Stable short key for Streamlit widgets when the same analysis UI is repeated per batch."""
+    digest = hashlib.md5(f"{batch_key}|{widget_family}".encode()).hexdigest()[:16]
+    return f"an_{digest}"
+
+
 def _infer_job_ids_for_evaluations(evaluations: list, jobs: list, db) -> None:
     """When job_id is missing on evaluations, infer it from per-job queries (same as Batch Jobs tab). Mutates evaluations in place."""
     eval_ids_missing_job = {e.get("id") for e in evaluations if not e.get("job_id")}
@@ -1085,22 +1110,69 @@ def _infer_job_ids_for_evaluations(evaluations: list, jobs: list, db) -> None:
             e["job_id"] = eval_id_to_job_id[e["id"]]
 
 
+_NO_BATCH_SCOPE_MSG = (
+    "No batch-linked evaluations found. Run a batch job from **Batch Jobs**, "
+    "or switch to **Everything together**."
+)
+_NO_BATCH_SCOPE_MSG_EXPERT = (
+    "No batch-linked evaluations found. Switch to **Everything together** "
+    "or run evaluations from **Batch Jobs**."
+)
+
+
+def _load_user_evaluations_context(user: dict, limit_evals: int = 500, limit_jobs: int = 300):
+    """
+    Shared load path for Results and Analysis: DB rows, job inference, typed row splits.
+    Returns None if the user has no evaluations.
+    """
+    db = get_database()
+    evaluations = db.get_user_evaluations(user["id"], limit=limit_evals)
+    jobs = db.get_user_jobs(user["id"], limit=limit_jobs)
+    if not evaluations:
+        return None
+    _infer_job_ids_for_evaluations(evaluations, jobs, db)
+    criteria_evals, holistic_evals = _split_eval_rows_by_type(evaluations)
+    return {
+        "db": db,
+        "evaluations": evaluations,
+        "jobs": jobs,
+        "criteria_evals": criteria_evals,
+        "holistic_evals": holistic_evals,
+        "n_criteria": len(criteria_evals),
+        "n_holistic": len(holistic_evals),
+    }
+
+
+def _parsed_sections_for_scope(split_by_batch: bool, batches_split, evaluations: list) -> list:
+    """
+    Build (batch_key, batch_label, batch_eval_rows, criteria_results, holistic_results) per section.
+    Used so Analysis parses each batch once and matches Results batch grouping.
+    """
+    if split_by_batch:
+        if not batches_split:
+            return []
+        return [
+            (k, lbl, ev, *_batch_evals_to_parsed_results(ev))
+            for k, lbl, ev in batches_split
+        ]
+    c_res, h_res = _batch_evals_to_parsed_results(evaluations)
+    return [("_all", "All evaluations", evaluations, c_res, h_res)]
+
+
 def results_page(user: dict):
     """View all evaluation results, separated by batch."""
     st.title("Evaluation Results")
-    
-    db = get_database()
-    evaluations = db.get_user_evaluations(user["id"], limit=500)
-    jobs = db.get_user_jobs(user["id"], limit=300)
-    
-    if not evaluations:
+
+    ctx = _load_user_evaluations_context(user)
+    if ctx is None:
         st.info("No evaluation results yet. Run some evaluations first!")
         return
-    
-    _infer_job_ids_for_evaluations(evaluations, jobs, db)
-    
-    criteria_evals = [e for e in evaluations if e.get("evaluation_type") == "criteria"]
-    holistic_evals = [e for e in evaluations if e.get("evaluation_type") == "holistic"]
+
+    db = ctx["db"]
+    evaluations = ctx["evaluations"]
+    jobs = ctx["jobs"]
+    criteria_evals = ctx["criteria_evals"]
+    holistic_evals = ctx["holistic_evals"]
     
     st.markdown("---")
     display_mode = st.selectbox(
@@ -1140,7 +1212,7 @@ def results_page(user: dict):
     
     if split_by_batch:
         if not batches_split:
-            st.info("No batch-linked evaluations found. Run a batch job from **Batch Jobs**, or switch to **Everything together**.")
+            st.info(_NO_BATCH_SCOPE_MSG)
         for batch_key, batch_label, batch_evals in (batches_split or []):
             n = len(batch_evals)
             with st.expander(
@@ -1149,18 +1221,7 @@ def results_page(user: dict):
             ):
                 _render_batch_results(batch_key, batch_label, batch_evals)
     else:
-        criteria_results = []
-        for e in criteria_evals:
-            try:
-                criteria_results.append(result_dict_to_evaluation_result(e["result"]))
-            except Exception:
-                pass
-        holistic_results = []
-        for e in holistic_evals:
-            try:
-                holistic_results.append(result_dict_to_holistic_result(e["result"]))
-            except Exception:
-                pass
+        criteria_results, holistic_results = _batch_evals_to_parsed_results(evaluations)
         criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
         holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
         both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
@@ -1179,8 +1240,7 @@ def results_page(user: dict):
                 with exp_col1:
                     if st.button("Export Criteria (CSV)", use_container_width=True, key="export_csv"):
                         if criteria_results:
-                            import tempfile as _tempfile
-                            _tmp = _tempfile.mkdtemp()
+                            _tmp = tempfile.mkdtemp()
                             csv_path = os.path.join(_tmp, "criteria_results.csv")
                             CSVExporter.export_batch(criteria_results, csv_path)
                             with open(csv_path, 'rb') as f:
@@ -1194,8 +1254,7 @@ def results_page(user: dict):
                 with exp_col2:
                     if st.button("Export Criteria (JSON)", use_container_width=True, key="export_json"):
                         if criteria_results:
-                            import tempfile as _tempfile
-                            _tmp = _tempfile.mkdtemp()
+                            _tmp = tempfile.mkdtemp()
                             json_path = os.path.join(_tmp, "criteria_results.json")
                             JSONExporter.export_batch(criteria_results, json_path)
                             with open(json_path, 'rb') as f:
@@ -1279,8 +1338,6 @@ def results_page(user: dict):
 
 def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):
     """Display statistical analysis of method disparity vs candidate spread."""
-    import numpy as np
-
     if len(both_ids) < 3:
         st.info("Need at least 3 candidates with both evaluations for disparity analysis.")
         return
@@ -1406,7 +1463,6 @@ def settings_page(user: dict):
 
     st.subheader("Criteria Weights")
     st.caption("Default weights for each evaluation criterion (equal weighting).")
-    from candidate_evaluator.utils.config import CriteriaWeights
     weights = CriteriaWeights()
     criteria_list = [
         'critical_thinking', 'coachability', 'curiosity', 'creativity',
@@ -1607,6 +1663,80 @@ def display_evaluation_result(result: EvaluationResult):
             st.markdown("---")
 
 
+def _holistic_evidence_dict_block(ev: dict) -> None:
+    """Render quote/source/context evidence dict as readable text (not Python repr)."""
+    quote = (ev.get("quote") or "").strip()
+    source = (ev.get("source") or "").strip()
+    context = (ev.get("context") or "").strip()
+    if source:
+        st.markdown(f"**Source:** {source}")
+    if context:
+        st.markdown(f"**Context:** {context}")
+    if quote:
+        st.markdown(quote)
+
+
+def _render_notable_quality_evidence(evidence) -> None:
+    """Notable quality evidence: string, dict, list of dicts, or HolisticEvidence-like objects."""
+    if evidence is None or evidence == "":
+        return
+    if isinstance(evidence, dict):
+        _holistic_evidence_dict_block(evidence)
+        return
+    if isinstance(evidence, str):
+        st.markdown(evidence)
+        return
+    if isinstance(evidence, list):
+        if evidence:
+            st.markdown("**Evidence:**")
+        for ev in evidence:
+            if isinstance(ev, dict):
+                _holistic_evidence_dict_block(ev)
+            elif hasattr(ev, "quote"):
+                source_text = f" *({ev.source})*" if getattr(ev, "source", None) else ""
+                st.markdown(f"> \"{ev.quote}\"{source_text}")
+                if getattr(ev, "context", None):
+                    st.caption(ev.context)
+            else:
+                st.markdown(f"> {ev}")
+        return
+    st.markdown(str(evidence))
+
+
+def _red_flag_parts(flag) -> tuple:
+    """Return (flag_text, evidence_text, severity) for RedFlag models or dicts."""
+    if isinstance(flag, dict):
+        return (
+            (flag.get("flag") or "").strip(),
+            (flag.get("evidence") or "").strip(),
+            str(flag.get("severity") or "medium").lower(),
+        )
+    if hasattr(flag, "flag"):
+        return (
+            str(flag.flag).strip(),
+            str(getattr(flag, "evidence", "") or "").strip(),
+            str(getattr(flag, "severity", "medium") or "medium").lower(),
+        )
+    return str(flag).strip(), "", "medium"
+
+
+def _interview_question_parts(q) -> tuple:
+    """Return (category, purpose, question) for InterviewQuestion models or dicts."""
+    if isinstance(q, dict):
+        return (
+            (q.get("category") or "General").strip(),
+            (q.get("purpose") or "").strip(),
+            (q.get("question") or "").strip(),
+        )
+    if hasattr(q, "question"):
+        return (
+            str(getattr(q, "category", None) or "General").strip(),
+            str(getattr(q, "purpose", None) or "").strip(),
+            str(q.question).strip(),
+        )
+    return "General", "", str(q).strip()
+
+
 def display_holistic_evaluation_result(result: HolisticEvaluationResult):
     """Display a holistic evaluation result (supports both old and enhanced formats)."""
     if result.candidate.name:
@@ -1688,128 +1818,225 @@ def display_holistic_evaluation_result(result: HolisticEvaluationResult):
         for q in result.notable_qualities:
             confidence = getattr(q, 'confidence', 'medium')
             with st.expander(f"{q.quality} (Confidence: {confidence})"):
-                if isinstance(q.evidence, list):
-                    st.markdown("**Evidence:**")
-                    for ev in q.evidence:
-                        if hasattr(ev, 'quote'):
-                            source_text = f" *({ev.source})*" if ev.source else ""
-                            st.markdown(f"> \"{ev.quote}\"{source_text}")
-                            if ev.context:
-                                st.caption(ev.context)
-                        else:
-                            st.markdown(f"> {ev}")
-                else:
-                    st.markdown(f"**Evidence:** {q.evidence}")
+                _render_notable_quality_evidence(q.evidence)
                 st.markdown(f"**Significance:** {q.significance}")
 
     if result.red_flags:
         st.markdown("#### Red Flags")
         for flag in result.red_flags:
-            if hasattr(flag, 'flag'):
-                severity = getattr(flag, 'severity', 'medium')
-                if severity == 'high':
-                    st.error(f"**{flag.flag}**")
-                elif severity == 'low':
-                    st.info(f"{flag.flag}")
-                else:
-                    st.warning(f"{flag.flag}")
-                if getattr(flag, 'evidence', ''):
-                    st.caption(f"Evidence: {flag.evidence}")
-            else:
+            flag_text, evidence_text, severity = _red_flag_parts(flag)
+            if not flag_text:
                 st.warning(str(flag))
+                continue
+            st.markdown(f"#### {flag_text}")
+            st.caption(f"Severity: {severity.capitalize()}")
+            if evidence_text:
+                st.markdown(evidence_text)
 
     if result.questions_for_interview:
         st.markdown("#### Suggested Interview Questions")
-        for i, q in enumerate(result.questions_for_interview, 1):
-            if hasattr(q, 'question'):
-                category = getattr(q, 'category', 'General')
-                purpose = getattr(q, 'purpose', '')
-                st.markdown(f"**{i}. [{category}]** {q.question}")
-                if purpose:
-                    st.caption(f"Purpose: {purpose}")
-            else:
-                st.markdown(f"{i}. {q}")
+        for q in result.questions_for_interview:
+            category, purpose, question = _interview_question_parts(q)
+            st.markdown(f"#### {category}")
+            if purpose:
+                st.markdown(f"**{purpose}**")
+            if question:
+                st.markdown(question)
+            st.markdown("")
 
 
 def get_user_results_as_objects(user: dict):
-    """Load user's evaluations and convert to result objects."""
-    db = get_database()
-    evaluations = db.get_user_evaluations(user["id"], limit=500)
-    
-    criteria_results = []
-    holistic_results = []
-    
-    for e in evaluations:
-        try:
-            if e.get("evaluation_type") == "criteria":
-                result = result_dict_to_evaluation_result(e["result"])
-                criteria_results.append(result)
-            elif e.get("evaluation_type") == "holistic":
-                result = result_dict_to_holistic_result(e["result"])
-                holistic_results.append(result)
-        except Exception:
-            pass
-    
-    return criteria_results, holistic_results
+    """Load user's evaluations and convert to result objects (same parsing as Results / Analysis)."""
+    ctx = _load_user_evaluations_context(user)
+    if ctx is None:
+        return [], []
+    return _batch_evals_to_parsed_results(ctx["evaluations"])
 
 
 def analysis_page(user: dict):
     """Analysis dashboard."""
     st.title("Analysis Dashboard")
-    
-    criteria_results, holistic_results = get_user_results_as_objects(user)
-    total_results = len(criteria_results) + len(holistic_results)
-    
-    if total_results == 0:
+
+    ctx = _load_user_evaluations_context(user)
+    if ctx is None:
         st.warning("No evaluation results found. Run some evaluations first!")
         return
-    
-    st.markdown(f"**Analyzing {len(criteria_results)} criteria-based + {len(holistic_results)} holistic evaluations**")
-    
+
+    db = ctx["db"]
+    evaluations = ctx["evaluations"]
+    jobs = ctx["jobs"]
+    n_criteria = ctx["n_criteria"]
+    n_holistic = ctx["n_holistic"]
+
+    display_mode = st.selectbox(
+        "**Analysis scope**",
+        [
+            "Everything together — all evaluations",
+            "By batch — one section per batch job",
+        ],
+        index=0,
+        key="analysis_display_mode",
+        help="Match a single batch job (batch ID) or combine every evaluation in your account.",
+    )
+    split_by_batch = display_mode.startswith("By batch")
+    batches_split = (
+        _sections_split_by_batch_jobs(jobs, db, evaluations) if split_by_batch else None
+    )
+    sections = _parsed_sections_for_scope(split_by_batch, batches_split, evaluations)
+    expanded_batches = len(sections) <= 3 if split_by_batch else False
+
+    st.markdown(f"**{n_criteria} criteria-based + {n_holistic} holistic evaluations**")
+
     tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "AI vs Expert", "Recommendations"])
-    
+
     with tab1:
-        sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
+        sub1, sub2 = st.tabs([f"Criteria-Based ({n_criteria})", f"Holistic ({n_holistic})"])
         with sub1:
-            if criteria_results:
-                distribution_analysis(criteria_results)
-            else:
+            if split_by_batch and not sections:
+                st.info(_NO_BATCH_SCOPE_MSG)
+            elif not n_criteria:
                 st.info("No criteria-based evaluations to analyze. Run criteria-based evaluations first.")
-        with sub2:
-            if holistic_results:
-                holistic_distribution_analysis(holistic_results)
+            elif split_by_batch:
+                for batch_key, batch_label, _ev, c_res, _h in sections:
+                    nc = len(c_res)
+                    with st.expander(
+                        f"{batch_label} — {nc} criteria-based",
+                        expanded=expanded_batches,
+                    ):
+                        if c_res:
+                            distribution_analysis(
+                                c_res, key_prefix=_analysis_widget_key(batch_key, "cdist")
+                            )
+                        else:
+                            st.info("No criteria-based evaluations in this batch.")
             else:
+                _, _, _, c_res, _ = sections[0]
+                distribution_analysis(c_res, key_prefix="analysis_dist_crit_all")
+        with sub2:
+            if split_by_batch and not sections:
+                st.info(_NO_BATCH_SCOPE_MSG)
+            elif not n_holistic:
                 st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
-    
+            elif split_by_batch:
+                for batch_key, batch_label, _ev, _c, h_res in sections:
+                    nh = len(h_res)
+                    with st.expander(
+                        f"{batch_label} — {nh} holistic",
+                        expanded=expanded_batches,
+                    ):
+                        if h_res:
+                            holistic_distribution_analysis(h_res)
+                        else:
+                            st.info("No holistic evaluations in this batch.")
+            else:
+                _, _, _, _c, h_res = sections[0]
+                holistic_distribution_analysis(h_res)
+
     with tab2:
-        if criteria_results:
-            expert_comparison_analysis(criteria_results)
-        else:
+        if n_criteria == 0:
             st.info("Expert comparison requires criteria-based evaluations.")
-    
+        else:
+            st.subheader("AI vs Expert Comparison")
+            st.info(
+                "Upload expert ratings to compare with AI evaluations. "
+                "When using **By batch**, the same file is used for each batch; metrics are per batch."
+            )
+            expert_file = st.file_uploader(
+                "Upload Expert Ratings",
+                type=["xlsx", "xls", "csv"],
+                help="Excel or CSV with expert ratings",
+                key="analysis_expert_ratings_global",
+            )
+            expert_ratings = None
+            if expert_file:
+                try:
+                    _tmp = tempfile.mkdtemp()
+                    _tmp_path = os.path.join(_tmp, expert_file.name)
+                    with open(_tmp_path, "wb") as f:
+                        f.write(expert_file.getbuffer())
+                    with st.spinner("Loading expert ratings..."):
+                        _loader = ExpertComparisonAnalyzer()
+                        expert_ratings = _loader.load_expert_ratings_from_excel(_tmp_path)
+                    st.success(f"Loaded {len(expert_ratings)} expert ratings")
+                except Exception as e:
+                    st.error(f"Error: {e}")
+                    expert_ratings = None
+
+            if expert_ratings is not None:
+                if split_by_batch and not sections:
+                    st.info(_NO_BATCH_SCOPE_MSG_EXPERT)
+                elif split_by_batch:
+                    for batch_key, batch_label, _ev, c_res, _h in sections:
+                        with st.expander(
+                            f"{batch_label} — {len(c_res)} criteria-based",
+                            expanded=expanded_batches,
+                        ):
+                            if c_res:
+                                _render_expert_comparison_inner(
+                                    c_res,
+                                    expert_ratings,
+                                    _analysis_widget_key(batch_key, "expert"),
+                                )
+                            else:
+                                st.info("No criteria-based evaluations in this batch.")
+                else:
+                    _, _, _, c_res, _ = sections[0]
+                    _render_expert_comparison_inner(
+                        c_res, expert_ratings, "analysis_expert_all"
+                    )
+
     with tab3:
-        sub1, sub2 = st.tabs([f"Criteria-Based ({len(criteria_results)})", f"Holistic ({len(holistic_results)})"])
+        sub1, sub2 = st.tabs([f"Criteria-Based ({n_criteria})", f"Holistic ({n_holistic})"])
         with sub1:
-            if criteria_results:
-                recommendation_analysis(criteria_results)
-            else:
+            if split_by_batch and not sections:
+                st.info(_NO_BATCH_SCOPE_MSG)
+            elif not n_criteria:
                 st.info("Recommendations analysis requires criteria-based evaluations.")
-        with sub2:
-            if holistic_results:
-                holistic_recommendation_analysis(holistic_results)
+            elif split_by_batch:
+                for batch_key, batch_label, _ev, c_res, _h in sections:
+                    with st.expander(
+                        f"{batch_label} — {len(c_res)} criteria-based",
+                        expanded=expanded_batches,
+                    ):
+                        if c_res:
+                            recommendation_analysis(
+                                c_res, key_prefix=_analysis_widget_key(batch_key, "rec_c")
+                            )
+                        else:
+                            st.info("No criteria-based evaluations in this batch.")
             else:
+                _, _, _, c_res, _ = sections[0]
+                recommendation_analysis(c_res, key_prefix="analysis_rec_crit_all")
+        with sub2:
+            if split_by_batch and not sections:
+                st.info(_NO_BATCH_SCOPE_MSG)
+            elif not n_holistic:
                 st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
+            elif split_by_batch:
+                for batch_key, batch_label, _ev, _c, h_res in sections:
+                    with st.expander(
+                        f"{batch_label} — {len(h_res)} holistic",
+                        expanded=expanded_batches,
+                    ):
+                        if h_res:
+                            holistic_recommendation_analysis(
+                                h_res, key_prefix=_analysis_widget_key(batch_key, "rec_h")
+                            )
+                        else:
+                            st.info("No holistic evaluations in this batch.")
+            else:
+                _, _, _, _c, h_res = sections[0]
+                holistic_recommendation_analysis(h_res, key_prefix="analysis_rec_hol_all")
 
 
-def distribution_analysis(all_results):
+def distribution_analysis(all_results, key_prefix="dist_default"):
     """Score distribution analysis."""
     st.subheader("Score Distribution Analysis")
-    
-    from candidate_evaluator.core.distribution_analyzer import DistributionAnalyzer
+
     analyzer = DistributionAnalyzer(all_results)
-    
+
     overall_scores = [r.overall_score for r in all_results]
-    
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Mean Score", f"{sum(overall_scores)/len(overall_scores):.2f}")
@@ -1819,13 +2046,14 @@ def distribution_analysis(all_results):
         st.metric("Min Score", f"{min(overall_scores):.2f}")
     with col4:
         st.metric("Max Score", f"{max(overall_scores):.2f}")
-    
+
     st.markdown("---")
-    
-    # Percentile analysis
-    percentile = st.slider("Percentile Split", 25, 75, 50)
-    
-    if st.button("Analyze"):
+
+    percentile = st.slider(
+        "Percentile Split", 25, 75, 50, key=f"{key_prefix}_percentile_split"
+    )
+
+    if st.button("Analyze", key=f"{key_prefix}_analyze_distribution"):
         top_group, bottom_group = analyzer.segment_by_percentile(percentile)
         comparison = analyzer.compare_groups(top_group, bottom_group)
         
@@ -1879,21 +2107,26 @@ def distribution_analysis(all_results):
     st.dataframe(crit_df, hide_index=True, use_container_width=True)
 
 
-def recommendation_analysis(all_results):
+def recommendation_analysis(all_results, key_prefix="rec_default"):
     """Recommendation breakdown analysis."""
     st.subheader("Recommendation Analysis")
-    
+
     recommendations = {}
     for result in all_results:
         rec = result.recommendation if result.recommendation else "Unknown"
         if rec not in recommendations:
             recommendations[rec] = []
         recommendations[rec].append(result)
-    
+
     st.markdown(f"**{len(recommendations)} unique recommendation types**")
-    
-    for rec_type, candidates in sorted(recommendations.items(), key=lambda x: -len(x[1])):
-        with st.expander(f"{rec_type} ({len(candidates)} candidates)"):
+
+    for i, (rec_type, candidates) in enumerate(
+        sorted(recommendations.items(), key=lambda x: -len(x[1]))
+    ):
+        with st.expander(
+            f"{rec_type} ({len(candidates)} candidates)",
+            key=f"{key_prefix}_rec_exp_{i}",
+        ):
             if candidates:
                 avg = sum(c.overall_score for c in candidates) / len(candidates)
                 st.metric("Average Score", f"{avg:.2f}")
@@ -1995,11 +2228,10 @@ def holistic_distribution_analysis(holistic_results):
         st.dataframe(pd.DataFrame(band_data), hide_index=True, use_container_width=True)
 
 
-def holistic_recommendation_analysis(holistic_results):
+def holistic_recommendation_analysis(holistic_results, key_prefix="hol_rec_default"):
     """Recommendation and decision breakdown for holistic evaluations."""
     st.subheader("Holistic Recommendation Analysis")
 
-    # Group by recommendation
     recommendations = {}
     for result in holistic_results:
         rec = result.recommendation if result.recommendation else "Unknown"
@@ -2009,8 +2241,13 @@ def holistic_recommendation_analysis(holistic_results):
 
     st.markdown(f"**{len(recommendations)} unique recommendation types**")
 
-    for rec_type, candidates in sorted(recommendations.items(), key=lambda x: -len(x[1])):
-        with st.expander(f"{rec_type} ({len(candidates)} candidates)"):
+    for i, (rec_type, candidates) in enumerate(
+        sorted(recommendations.items(), key=lambda x: -len(x[1]))
+    ):
+        with st.expander(
+            f"{rec_type} ({len(candidates)} candidates)",
+            key=f"{key_prefix}_hol_rec_exp_{i}",
+        ):
             if candidates:
                 avg = sum(c.overall_score for c in candidates) / len(candidates)
                 interview_yes = sum(1 for c in candidates if c.interview_decision)
@@ -2044,58 +2281,68 @@ def holistic_recommendation_analysis(holistic_results):
     st.dataframe(df, hide_index=True, use_container_width=True)
 
 
+def _render_expert_comparison_inner(all_results, expert_ratings, key_prefix: str):
+    """Run AI vs expert comparison UI for a fixed expert_ratings list and criteria AI results."""
+    analyzer = ExpertComparisonAnalyzer()
+    analyzer.expert_ratings = expert_ratings
+    analyzer.set_ai_results(all_results)
+
+    threshold = st.slider(
+        "Interview Threshold",
+        1.0,
+        10.0,
+        6.0,
+        key=f"{key_prefix}_interview_threshold",
+    )
+
+    if st.button("Run Comparison", key=f"{key_prefix}_run_expert_comparison"):
+        metrics = analyzer.compare(interview_threshold=threshold)
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Matched", f"{metrics.matched_candidates}/{metrics.total_candidates}")
+        with col2:
+            st.metric("MAE", f"{metrics.overall_mae:.2f}")
+        with col3:
+            st.metric("Correlation", f"{metrics.overall_correlation:.2f}")
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Sensitivity", f"{metrics.sensitivity*100:.1f}%" if metrics.sensitivity else "N/A")
+        with col2:
+            st.metric("Specificity", f"{metrics.specificity*100:.1f}%" if metrics.specificity else "N/A")
+        with col3:
+            st.metric("Cohen's Kappa", f"{metrics.cohens_kappa:.2f}" if metrics.cohens_kappa else "N/A")
+
+        if metrics.ai_bias:
+            st.warning(f"Detected bias: {metrics.ai_bias}")
+
+
 def expert_comparison_analysis(all_results):
-    """AI vs Expert comparison."""
+    """AI vs Expert comparison (single scope; analysis dashboard uses batch-aware flow)."""
     st.subheader("AI vs Expert Comparison")
     st.info("Upload expert ratings to compare with AI evaluations.")
 
     expert_file = st.file_uploader(
         "Upload Expert Ratings",
-        type=['xlsx', 'xls', 'csv'],
-        help="Excel or CSV with expert ratings"
+        type=["xlsx", "xls", "csv"],
+        help="Excel or CSV with expert ratings",
+        key="standalone_expert_comparison_upload",
     )
 
     if expert_file:
         try:
-            from candidate_evaluator.core.expert_comparison import ExpertComparisonAnalyzer
-            import tempfile as _tempfile
-
-            _tmp = _tempfile.mkdtemp()
+            _tmp = tempfile.mkdtemp()
             _tmp_path = os.path.join(_tmp, expert_file.name)
-            with open(_tmp_path, 'wb') as f:
+            with open(_tmp_path, "wb") as f:
                 f.write(expert_file.getbuffer())
 
-            analyzer = ExpertComparisonAnalyzer()
-
             with st.spinner("Loading expert ratings..."):
-                expert_ratings = analyzer.load_expert_ratings_from_excel(_tmp_path)
+                _loader = ExpertComparisonAnalyzer()
+                expert_ratings = _loader.load_expert_ratings_from_excel(_tmp_path)
 
             st.success(f"Loaded {len(expert_ratings)} expert ratings")
-            analyzer.set_ai_results(all_results)
-
-            threshold = st.slider("Interview Threshold", 1.0, 10.0, 6.0)
-
-            if st.button("Run Comparison"):
-                metrics = analyzer.compare(interview_threshold=threshold)
-
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.metric("Matched", f"{metrics.matched_candidates}/{metrics.total_candidates}")
-                with col2:
-                    st.metric("MAE", f"{metrics.overall_mae:.2f}")
-                with col3:
-                    st.metric("Correlation", f"{metrics.overall_correlation:.2f}")
-
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.metric("Sensitivity", f"{metrics.sensitivity*100:.1f}%" if metrics.sensitivity else "N/A")
-                with col2:
-                    st.metric("Specificity", f"{metrics.specificity*100:.1f}%" if metrics.specificity else "N/A")
-                with col3:
-                    st.metric("Cohen's Kappa", f"{metrics.cohens_kappa:.2f}" if metrics.cohens_kappa else "N/A")
-
-                if metrics.ai_bias:
-                    st.warning(f"Detected bias: {metrics.ai_bias}")
+            _render_expert_comparison_inner(all_results, expert_ratings, "standalone_expert_cmp")
 
         except Exception as e:
             st.error(f"Error: {e}")
@@ -2718,7 +2965,6 @@ def run_admit_pattern_analysis(uploaded_files, use_holistic: bool, user: dict, a
 
     except Exception as e:
         st.error(f"Pattern analysis failed: {e}")
-        import traceback
         st.code(traceback.format_exc())
 
 
