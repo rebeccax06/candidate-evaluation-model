@@ -73,10 +73,11 @@ class Database:
         job_type: str,
         total_candidates: int,
         file_paths: list[str],
-        evaluation_mode: str = "criteria"
+        evaluation_mode: str = "criteria",
+        role: Optional[str] = None
     ) -> dict:
         """Create a new batch job."""
-        result = self.client.table("jobs").insert({
+        job_data = {
             "user_id": user_id,
             "job_name": job_name,
             "job_type": job_type,
@@ -85,8 +86,11 @@ class Database:
             "completed_candidates": 0,
             "failed_candidates": 0,
             "file_paths": file_paths,
-            "evaluation_mode": evaluation_mode
-        }).execute()
+            "evaluation_mode": evaluation_mode,
+        }
+        if role:
+            job_data["role"] = role
+        result = self.client.table("jobs").insert(job_data).execute()
         return result.data[0] if result.data else None
     
     def get_job(self, job_id: str) -> Optional[dict]:
@@ -177,6 +181,15 @@ class Database:
         candidate_name: Optional[str] = None
     ) -> dict:
         """Save an evaluation result."""
+        role = result.get("role")
+        role_specific = result.get("role_specific_assessment")
+        role_specific_score = None
+        if isinstance(role_specific, dict) and role_specific.get("score") is not None:
+            try:
+                role_specific_score = float(role_specific["score"])
+            except (TypeError, ValueError):
+                pass
+
         data = {
             "user_id": user_id,
             "candidate_id": candidate_id,
@@ -184,11 +197,15 @@ class Database:
             "evaluation_type": evaluation_type,
             "result": result,
             "overall_score": result.get("overall_score"),
-            "recommendation": result.get("recommendation")
+            "recommendation": result.get("recommendation"),
         }
+        if role:
+            data["role"] = role
+        if role_specific_score is not None:
+            data["role_specific_score"] = role_specific_score
         if job_id:
             data["job_id"] = job_id
-        
+
         db_result = self.client.table("evaluations").insert(data).execute()
         return db_result.data[0] if db_result.data else None
     
@@ -201,12 +218,15 @@ class Database:
         self,
         user_id: str,
         evaluation_type: Optional[str] = None,
+        role: Optional[str] = None,
         limit: int = 100
     ) -> list[dict]:
         """Get all evaluations for a user."""
         query = self.client.table("evaluations").select("*").eq("user_id", user_id)
         if evaluation_type:
             query = query.eq("evaluation_type", evaluation_type)
+        if role:
+            query = query.eq("role", role)
         result = query.order("created_at", desc=True).limit(limit).execute()
         return result.data or []
     

@@ -121,6 +121,7 @@ class BackgroundWorker:
             max_tokens = job_config.get("max_tokens", 8192)
             evaluation_mode = job_config.get("evaluation_mode", "criteria")
             is_holistic = evaluation_mode == "holistic"
+            role = job_config.get("role")
 
             if not api_key:
                 raise ValueError("No API key provided in job config or environment")
@@ -179,7 +180,8 @@ class BackgroundWorker:
                         result = evaluator.evaluate_candidate_holistic(
                             candidate_id=candidate_id,
                             material_paths=[file_path],
-                            candidate_name=None
+                            candidate_name=None,
+                            role=role
                         )
                         # Save holistic result
                         with open(result_path, 'w', encoding='utf-8') as f:
@@ -198,7 +200,8 @@ class BackgroundWorker:
                         result = evaluator.evaluate_candidate(
                             candidate_id=candidate_id,
                             material_paths=[file_path],
-                            candidate_name=None
+                            candidate_name=None,
+                            role=role
                         )
                         # Save criteria-based result
                         JSONExporter.export_evaluation(result, result_path)

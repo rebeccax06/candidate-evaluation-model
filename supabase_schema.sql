@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     job_type TEXT NOT NULL DEFAULT 'batch',
     status TEXT NOT NULL DEFAULT 'pending',  -- pending, processing, completed, failed, cancelled
     evaluation_mode TEXT NOT NULL DEFAULT 'criteria',  -- criteria or holistic
+    role TEXT,  -- optional role-specific context: clinician, engineer, phd
     total_candidates INTEGER NOT NULL DEFAULT 0,
     completed_candidates INTEGER NOT NULL DEFAULT 0,
     failed_candidates INTEGER NOT NULL DEFAULT 0,
@@ -47,6 +48,8 @@ CREATE TABLE IF NOT EXISTS evaluations (
     candidate_id TEXT NOT NULL,
     candidate_name TEXT,
     evaluation_type TEXT NOT NULL,  -- 'criteria' or 'holistic'
+    role TEXT,  -- optional: clinician, engineer, phd
+    role_specific_score NUMERIC,  -- score from role_specific_assessment
     result JSONB NOT NULL,  -- Full evaluation result
     overall_score NUMERIC,
     recommendation TEXT,
@@ -194,3 +197,16 @@ CREATE POLICY "Users can delete own files"
         bucket_id = 'candidate-materials' 
         AND (storage.foldername(name))[1] = auth.uid()::text
     );
+
+-- ============================================================================
+-- MIGRATION: Add role column to jobs (for existing deployments)
+-- ============================================================================
+ALTER TABLE jobs ADD COLUMN IF NOT EXISTS role TEXT;
+
+-- ============================================================================
+-- MIGRATION: Add role columns to evaluations (for existing deployments)
+-- ============================================================================
+ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS role TEXT;
+ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS role_specific_score NUMERIC;
+CREATE INDEX IF NOT EXISTS idx_evaluations_role ON evaluations(role);
+CREATE INDEX IF NOT EXISTS idx_evaluations_role_specific_score ON evaluations(role_specific_score);

@@ -38,11 +38,21 @@ from candidate_evaluator.core.models import (
     NotableQuality,
     AdmitPatternAnalysisResult,
     InterviewSelectionResult,
+    parse_role_specific_assessment,
+)
+from candidate_evaluator.utils.role_results import (
+    ROLE_ORDER,
+    ROLE_LABELS,
+    eval_row_role,
+    group_eval_rows_by_role,
+    sort_eval_rows_by_role_score,
+    build_role_ranking_row_from_eval_row,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
 from candidate_evaluator.exporters import CSVExporter, JSONExporter
 from candidate_evaluator.prompt_manager import PromptManager
 from candidate_evaluator.utils.config import get_default_config, Config, APIConfig, CriteriaWeights
+from candidate_evaluator.utils.worker_health import is_background_worker_likely_available
 from candidate_evaluator.auth import (
     init_auth_state,
     render_auth_ui,
@@ -145,6 +155,10 @@ def result_dict_to_evaluation_result(data: dict) -> EvaluationResult:
         strengths=data.get('strengths', []),
         areas_for_development=data.get('areas_for_development', []),
         recommendation=data['recommendation'],
+        role=data.get('role'),
+        role_specific_assessment=parse_role_specific_assessment(
+            data.get('role_specific_assessment')
+        ),
         metadata=data.get('metadata', {})
     )
 
@@ -193,6 +207,10 @@ def result_dict_to_holistic_result(data: dict) -> HolisticEvaluationResult:
         overall_score=float(data.get('overall_score', 5.0)),
         recommendation=data.get('recommendation', ''),
         interview_decision=data.get('interview_decision', False),
+        role=data.get('role'),
+        role_specific_assessment=parse_role_specific_assessment(
+            data.get('role_specific_assessment')
+        ),
         metadata=data.get('metadata', {})
     )
 
@@ -548,11 +566,18 @@ def dashboard_page(user: dict, api_key: str):
             st.info("No active jobs")
 
 
+ROLE_OPTIONS = {
+    "Clinician": "clinician",
+    "Engineer / Tech": "engineer",
+    "PhD": "phd",
+}
+
+
 def new_evaluation_page(user: dict, api_key: str):
     """New evaluation page."""
     st.title("New Evaluation")
     
-    tab1, tab2 = st.tabs(["Single Candidate", "Batch Upload"])
+    tab1, tab2, tab3 = st.tabs(["Single Candidate", "Batch Upload", "Role-Specific Evaluation"])
     
     with tab1:
         single_evaluation_form(user, api_key)
@@ -560,71 +585,86 @@ def new_evaluation_page(user: dict, api_key: str):
     with tab2:
         batch_evaluation_form(user)
 
+    with tab3:
+        role_specific_evaluation_form(user, api_key)
 
-def single_evaluation_form(user: dict, api_key: str):
+
+def single_evaluation_form(user: dict, api_key: str, role: str | None = None, key_prefix: str = ""):
     """Single candidate evaluation form."""
-    st.markdown("### Evaluate a Single Candidate")
-    
+    title = "### Evaluate a Single Candidate"
+    if role:
+        role_label = next((k for k, v in ROLE_OPTIONS.items() if v == role), role)
+        title = f"### Evaluate a Single {role_label} Candidate"
+    st.markdown(title)
+
     eval_mode = st.radio(
         "Evaluation Mode",
         ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
-        horizontal=True
+        horizontal=True,
+        key=f"{key_prefix}single_eval_mode"
     )
     is_holistic = eval_mode == "Holistic (program fit)"
-    
+
+    if role:
+        st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
     if is_holistic:
         st.info("Holistic mode evaluates overall program fit and innovation potential.")
-    
+
     col1, col2 = st.columns([2, 1])
-    
+
     with col1:
         candidate_id = st.text_input(
             "Candidate ID",
-            placeholder="e.g., CAND001"
+            placeholder="e.g., CAND001",
+            key=f"{key_prefix}single_candidate_id"
         )
-        
+
         candidate_name = st.text_input(
             "Name (optional)",
-            placeholder="e.g., John Doe"
+            placeholder="e.g., John Doe",
+            key=f"{key_prefix}single_candidate_name"
         )
-        
+
         uploaded_files = st.file_uploader(
             "Upload Application Materials",
             type=['pdf', 'docx', 'txt', 'md'],
-            accept_multiple_files=True
+            accept_multiple_files=True,
+            key=f"{key_prefix}single_uploader"
         )
-    
+
     with col2:
         st.markdown("#### Supported Formats")
         st.markdown("- PDF, Word, Text, Markdown")
         st.markdown("#### Tips")
         st.markdown("- Include all relevant materials")
         st.markdown("- More context = better evaluation")
-    
-    if st.button("Evaluate Candidate", disabled=not (candidate_id and uploaded_files)):
+
+    if st.button("Evaluate Candidate", disabled=not (candidate_id and uploaded_files), key=f"{key_prefix}single_eval_btn"):
         with st.spinner("Evaluating candidate... This may take a minute."):
+            material_paths = []
             try:
                 temp_dir = tempfile.mkdtemp()
                 material_paths = []
-                
+
                 for uploaded_file in uploaded_files:
                     temp_path = os.path.join(temp_dir, uploaded_file.name)
                     with open(temp_path, 'wb') as f:
                         f.write(uploaded_file.getbuffer())
                     material_paths.append(temp_path)
-                
+
                 evaluator = get_evaluator(api_key)
                 db = get_database()
-                
+
                 if is_holistic:
                     result = evaluator.evaluate_candidate_holistic(
                         candidate_id=candidate_id,
                         material_paths=material_paths,
-                        candidate_name=candidate_name or None
+                        candidate_name=candidate_name or None,
+                        role=role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
-                    
+
                     db.save_evaluation(
                         user_id=user["id"],
                         candidate_id=candidate_id,
@@ -632,14 +672,15 @@ def single_evaluation_form(user: dict, api_key: str):
                         result=result_dict,
                         candidate_name=candidate_name
                     )
-                    
+
                     st.success("Holistic evaluation completed!")
                     display_holistic_evaluation_result(result)
                 else:
                     result = evaluator.evaluate_candidate(
                         candidate_id=candidate_id,
                         material_paths=material_paths,
-                        candidate_name=candidate_name or None
+                        candidate_name=candidate_name or None,
+                        role=role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
@@ -647,7 +688,7 @@ def single_evaluation_form(user: dict, api_key: str):
                         if "criterion" in score:
                             crit = score["criterion"]
                             score["criterion"] = crit.value if hasattr(crit, 'value') else str(crit)
-                    
+
                     db.save_evaluation(
                         user_id=user["id"],
                         candidate_id=candidate_id,
@@ -655,10 +696,10 @@ def single_evaluation_form(user: dict, api_key: str):
                         result=result_dict,
                         candidate_name=candidate_name
                     )
-                    
+
                     st.success("Evaluation completed!")
                     display_evaluation_result(result)
-                
+
             except Exception as e:
                 st.error(f"Error during evaluation: {e}")
             finally:
@@ -669,54 +710,194 @@ def single_evaluation_form(user: dict, api_key: str):
                         pass
 
 
-def batch_evaluation_form(user: dict):
+def _run_role_batch_sequential_cloud(
+    user: dict,
+    api_key: str,
+    uploaded_files,
+    is_holistic: bool,
+    role: str,
+) -> None:
+    """Run role-specific batch evaluations inline when the background worker is unavailable."""
+    evaluator = get_evaluator(api_key)
+    db = get_database()
+    evaluation_mode = "holistic" if is_holistic else "criteria"
+
+    total = len(uploaded_files)
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    completed = 0
+    failed: list[tuple[str, str]] = []
+
+    st.info(
+        "Background worker is unavailable. Running evaluations sequentially in your browser. "
+        "Keep this tab open until finished."
+    )
+
+    temp_dir = tempfile.mkdtemp()
+    try:
+        for i, uploaded_file in enumerate(uploaded_files):
+            candidate_id = Path(uploaded_file.name).stem
+            status_text.text(f"Evaluating {i + 1}/{total}: {candidate_id}")
+            progress_bar.progress(i / total if total else 0)
+
+            temp_path = os.path.join(temp_dir, uploaded_file.name)
+            with open(temp_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+
+            try:
+                if is_holistic:
+                    result = evaluator.evaluate_candidate_holistic(
+                        candidate_id=candidate_id,
+                        material_paths=[temp_path],
+                        role=role,
+                    )
+                else:
+                    result = evaluator.evaluate_candidate(
+                        candidate_id=candidate_id,
+                        material_paths=[temp_path],
+                        role=role,
+                    )
+
+                result_dict = result.model_dump()
+                result_dict["candidate"]["evaluation_date"] = str(
+                    result_dict["candidate"]["evaluation_date"]
+                )
+                if not is_holistic:
+                    for score in result_dict.get("scores", []):
+                        if "criterion" in score:
+                            crit = score["criterion"]
+                            score["criterion"] = crit.value if hasattr(crit, "value") else str(crit)
+
+                db.save_evaluation(
+                    user_id=user["id"],
+                    candidate_id=candidate_id,
+                    evaluation_type=evaluation_mode,
+                    result=result_dict,
+                )
+                completed += 1
+            except Exception as e:
+                failed.append((candidate_id, str(e)))
+            finally:
+                try:
+                    os.unlink(temp_path)
+                except OSError:
+                    pass
+    finally:
+        try:
+            os.rmdir(temp_dir)
+        except OSError:
+            pass
+
+    progress_bar.progress(1.0)
+    status_text.empty()
+
+    if completed:
+        st.success(f"Completed {completed}/{total} evaluations.")
+    if failed:
+        st.error(f"Failed {len(failed)} candidate(s):")
+        for candidate_id, err in failed:
+            st.text(f"- {candidate_id}: {err}")
+
+
+def batch_evaluation_form(
+    user: dict,
+    role: str | None = None,
+    key_prefix: str = "",
+    api_key: str | None = None,
+):
     """Batch evaluation form with background processing."""
-    st.markdown("### Batch Evaluation")
-    st.markdown("Upload multiple PDF files to evaluate in the background. You can close this page and the evaluation will continue.")
-    
+    title = "### Batch Evaluation"
+    if role:
+        role_label = next((k for k, v in ROLE_OPTIONS.items() if v == role), role)
+        title = f"### Batch {role_label} Evaluation"
+    st.markdown(title)
+    if role:
+        st.markdown(
+            "Upload multiple PDF files to evaluate in the background when the worker is available. "
+            "If the background worker is down, evaluations run sequentially in this browser session."
+        )
+    else:
+        st.markdown(
+            "Upload multiple PDF files to evaluate in the background. "
+            "You can close this page and the evaluation will continue."
+        )
+
     eval_mode = st.radio(
         "Evaluation Mode",
         ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
         horizontal=True,
-        key="batch_eval_mode"
+        key=f"{key_prefix}batch_eval_mode"
     )
     is_holistic = eval_mode == "Holistic (program fit)"
-    
+
+    if role:
+        st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
+
     uploaded_files = st.file_uploader(
         "Upload Candidate PDFs",
         type=['pdf'],
         accept_multiple_files=True,
         help="One PDF per candidate. Filename becomes the candidate ID.",
-        key="batch_uploader"
+        key=f"{key_prefix}batch_uploader"
     )
-    
+
     if uploaded_files:
         st.markdown(f"**{len(uploaded_files)} files selected**")
-        
+
         with st.expander("View files"):
             for f in uploaded_files:
                 st.text(f"- {f.name}")
-        
+
         job_name = st.text_input(
             "Job Name (optional)",
-            placeholder="e.g., Spring 2026 Applicants"
+            placeholder="e.g., Spring 2026 Applicants",
+            key=f"{key_prefix}batch_job_name"
         )
-        
-        if st.button("Start Batch Evaluation", use_container_width=True):
+
+        run_sequential = False
+        if role and api_key:
+            col_bg, col_seq = st.columns(2)
+            with col_bg:
+                start_clicked = st.button(
+                    "Start Batch Evaluation (Background)",
+                    use_container_width=True,
+                    key=f"{key_prefix}batch_eval_btn",
+                )
+            with col_seq:
+                run_sequential = st.button(
+                    "Run Sequentially Now",
+                    use_container_width=True,
+                    key=f"{key_prefix}batch_seq_btn",
+                    help="Process candidates one-by-one in this browser tab. Use when the background worker is down.",
+                )
+        else:
+            start_clicked = st.button(
+                "Start Batch Evaluation",
+                use_container_width=True,
+                key=f"{key_prefix}batch_eval_btn",
+            )
+
+        if run_sequential:
+            _run_role_batch_sequential_cloud(
+                user, api_key, uploaded_files, is_holistic, role
+            )
+            return
+
+        if start_clicked:
             progress_bar = st.progress(0)
             status_text = st.empty()
-            
+
             try:
                 storage = get_storage()
                 db = get_database()
-                
+
                 file_paths = []
                 total_files = len(uploaded_files)
-                
+
                 for i, uploaded_file in enumerate(uploaded_files):
                     status_text.text(f"Uploading {i+1}/{total_files}: {uploaded_file.name}")
                     progress_bar.progress((i + 1) / total_files)
-                    
+
                     file_data = uploaded_file.getbuffer().tobytes()
                     storage_path = storage.upload_file(
                         user_id=user["id"],
@@ -725,31 +906,62 @@ def batch_evaluation_form(user: dict):
                         content_type="application/pdf"
                     )
                     file_paths.append(storage_path)
-                    
-                    # Small delay to avoid rate limiting
+
                     if i < total_files - 1:
                         time.sleep(0.2)
-                
+
                 status_text.text("Creating job...")
+                default_job_name = f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}"
+                if role:
+                    role_label = next((k for k, v in ROLE_OPTIONS.items() if v == role), role)
+                    default_job_name = f"{role_label} {default_job_name}"
                 job = db.create_job(
                     user_id=user["id"],
-                    job_name=job_name or f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}",
+                    job_name=job_name or default_job_name,
                     job_type="batch",
                     total_candidates=len(file_paths),
                     file_paths=file_paths,
-                    evaluation_mode="holistic" if is_holistic else "criteria"
+                    evaluation_mode="holistic" if is_holistic else "criteria",
+                    role=role
                 )
-                
+
                 progress_bar.progress(1.0)
                 status_text.empty()
                 st.success(f"Job created! ID: `{job['id']}`")
                 st.info("The background worker will process your candidates. You can close this page.")
-                
+
                 time.sleep(1)
                 st.rerun()
-                
+
             except Exception as e:
                 st.error(f"Error creating job: {e}")
+
+
+def role_specific_evaluation_form(user: dict, api_key: str):
+    """Role-specific evaluation form with role and mode selectors."""
+    st.markdown("### Role-Specific Evaluation")
+    st.caption(
+        "Evaluate candidates with role-tailored guidance appended to the system prompt. "
+        "Works with both Criteria-Based and Holistic modes."
+    )
+
+    selected_role_label = st.radio(
+        "Candidate Role",
+        list(ROLE_OPTIONS.keys()),
+        horizontal=True,
+        key="role_specific_role_selector"
+    )
+    role = ROLE_OPTIONS[selected_role_label]
+
+    st.info(f"Evaluating as **{selected_role_label}** — role-specific calibration will be applied.")
+
+    sub_tab1, sub_tab2 = st.tabs(["Single Candidate", "Batch Upload"])
+
+    with sub_tab1:
+        single_evaluation_form(user, api_key, role=role, key_prefix="role_single_")
+
+    with sub_tab2:
+        batch_evaluation_form(user, role=role, key_prefix="role_batch_", api_key=api_key)
 
 
 def batch_jobs_page(user: dict):
@@ -1006,10 +1218,12 @@ def _render_batch_results(
     holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
     both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
 
-    tab1, tab2, tab3 = st.tabs([
+    role_eval_count = sum(1 for e in batch_evals if eval_row_role(e))
+    tab1, tab2, tab3, tab4 = st.tabs([
         f"Criteria-Based ({len(criteria_evals)})",
         f"Holistic ({len(holistic_evals)})",
-        f"Combined ({len(both_ids)})"
+        f"Combined ({len(both_ids)})",
+        f"Role Rankings ({role_eval_count})",
     ])
     k = batch_key.replace("-", "_")[:30]
 
@@ -1083,6 +1297,58 @@ def _render_batch_results(
                 with col2:
                     st.markdown("### Holistic")
                     display_holistic_evaluation_result(holistic_result)
+
+    with tab4:
+        _render_role_specific_rankings(batch_evals, key_prefix=f"batch_{k}_")
+
+
+def _render_role_specific_rankings(batch_evals: list, key_prefix: str = "") -> None:
+    """Render role-specific leaderboards grouped by specialty."""
+    role_evals = [e for e in batch_evals if eval_row_role(e)]
+    if not role_evals:
+        st.info(
+            "No role-specific evaluations in this set. Use **New Evaluation → "
+            "Role-Specific Evaluation** to evaluate by specialty."
+        )
+        return
+
+    st.caption(
+        "Candidates ranked by **role-specific score** within each specialty "
+        "(ties broken by overall Catalyst score)."
+    )
+    grouped = group_eval_rows_by_role(role_evals)
+
+    for role in ROLE_ORDER:
+        rows = grouped.get(role, [])
+        if not rows:
+            continue
+        sorted_rows = sort_eval_rows_by_role_score(rows)
+        n = len(sorted_rows)
+        st.markdown(f"### {ROLE_LABELS[role]} ({n})")
+        summary = [
+            build_role_ranking_row_from_eval_row(rank, row, n)
+            for rank, row in enumerate(sorted_rows, 1)
+        ]
+        st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
+
+        options = {}
+        for row in sorted_rows:
+            cid = row.get("candidate_id", "")
+            rs = build_role_ranking_row_from_eval_row(1, row, n)["Role Score"]
+            options[f"{cid} ({rs})"] = row
+        selected = st.selectbox(
+            f"View {ROLE_LABELS[role]} candidate",
+            list(options.keys()),
+            key=f"{key_prefix}role_sel_{role}",
+        )
+        if selected:
+            row = options[selected]
+            result_data = row["result"]
+            if row.get("evaluation_type") == "holistic":
+                display_holistic_evaluation_result(result_dict_to_holistic_result(result_data))
+            else:
+                display_evaluation_result(result_dict_to_evaluation_result(result_data))
+        st.markdown("---")
 
 
 def _analysis_widget_key(batch_key: str, widget_family: str) -> str:
@@ -1195,7 +1461,8 @@ def results_page(user: dict):
         else "—"
     )
     st.markdown("---")
-    col1, col2, col3, col4, col5 = st.columns(5)
+    role_eval_count = sum(1 for e in evaluations if eval_row_role(e))
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
         st.metric("Batches", job_section_count)
     with col2:
@@ -1203,8 +1470,10 @@ def results_page(user: dict):
     with col3:
         st.metric("Holistic", len(holistic_evals))
     with col4:
-        st.metric("Total", len(evaluations))
+        st.metric("Role-Specific", role_eval_count)
     with col5:
+        st.metric("Total", len(evaluations))
+    with col6:
         if st.button("Refresh", use_container_width=True):
             st.rerun()
     
@@ -1226,10 +1495,11 @@ def results_page(user: dict):
         holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
         both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
         
-        tab1, tab2, tab3 = st.tabs([
+        tab1, tab2, tab3, tab4 = st.tabs([
             f"Criteria-Based ({len(criteria_evals)})",
             f"Holistic ({len(holistic_evals)})",
-            f"Combined View ({len(both_ids)})"
+            f"Combined View ({len(both_ids)})",
+            f"Role Rankings ({role_eval_count})",
         ])
         
         with tab1:
@@ -1334,6 +1604,9 @@ def results_page(user: dict):
                     with col2:
                         st.markdown("### Holistic Evaluation")
                         display_holistic_evaluation_result(holistic_result)
+
+        with tab4:
+            _render_role_specific_rankings(evaluations, key_prefix="all_")
 
 
 def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):
@@ -1491,6 +1764,9 @@ def settings_page(user: dict):
         "Holistic Template": "holistic",
         "Interview Ranking Template": "ranking",
         "Interview Selection Template": "selection",
+        "Clinician Role Prompt": "clinician",
+        "Engineer / Tech Role Prompt": "engineer",
+        "PhD Role Prompt": "phd",
     }
 
     selected_prompt_name = st.selectbox(
@@ -1507,6 +1783,12 @@ def settings_page(user: dict):
     else:
         st.success("Status: **Default** (using built-in prompt)")
 
+    if selected_prompt_type in PromptManager.ROLE_PROMPT_TYPES:
+        st.caption(
+            "This role prompt is **appended** to the System Prompt during role-specific evaluations. "
+            "It works with both Criteria-Based and Holistic modes."
+        )
+
     if selected_prompt_type == "system":
         current_content = prompt_manager.get_system_prompt()
     elif selected_prompt_type == "criteria":
@@ -1515,8 +1797,14 @@ def settings_page(user: dict):
         current_content = prompt_manager.get_holistic_template()
     elif selected_prompt_type == "ranking":
         current_content = prompt_manager.get_ranking_template()
-    else:
+    elif selected_prompt_type == "selection":
         current_content = prompt_manager.get_selection_template()
+    elif selected_prompt_type == "clinician":
+        current_content = prompt_manager.get_clinician_prompt()
+    elif selected_prompt_type == "engineer":
+        current_content = prompt_manager.get_engineer_prompt()
+    else:
+        current_content = prompt_manager.get_phd_prompt()
 
     edited_content = st.text_area(
         f"Edit {selected_prompt_name}",
@@ -1539,8 +1827,10 @@ def settings_page(user: dict):
                     prompt_manager.save_holistic_template(edited_content)
                 elif selected_prompt_type == "ranking":
                     prompt_manager.save_ranking_template(edited_content)
-                else:
+                elif selected_prompt_type == "selection":
                     prompt_manager.save_selection_template(edited_content)
+                elif selected_prompt_type in PromptManager.ROLE_PROMPT_TYPES:
+                    prompt_manager.save_role_prompt(selected_prompt_type, edited_content)
                 st.success("Prompt saved successfully!")
                 st.rerun()
             else:
@@ -1600,10 +1890,70 @@ def settings_page(user: dict):
 """)
 
 
+def display_role_specific_assessment(assessment) -> None:
+    """Display structured role-specific assessment when present."""
+    if not assessment:
+        return
+    if hasattr(assessment, "model_dump"):
+        assessment = assessment.model_dump()
+
+    role_label = assessment.get("role", "unknown").replace("_", " ").title()
+    marker = assessment.get("marker", "Role-specific assessment")
+    score = assessment.get("score")
+    confidence = assessment.get("confidence", "medium")
+
+    st.markdown(f"#### Role-Specific Assessment ({role_label})")
+    cols = st.columns(3)
+    with cols[0]:
+        if score is not None:
+            st.metric(marker, f"{score}/10")
+    with cols[1]:
+        st.metric("Confidence", str(confidence).capitalize())
+    with cols[2]:
+        extra_fields = {
+            k: v for k, v in assessment.items()
+            if k not in {
+                "role", "marker", "score", "confidence", "reasoning",
+                "evidence", "evidence_gaps",
+            } and v
+        }
+        if extra_fields:
+            first_key, first_val = next(iter(extra_fields.items()))
+            st.metric(first_key.replace("_", " ").title(), str(first_val).replace("_", " "))
+
+    if assessment.get("reasoning"):
+        st.markdown(assessment["reasoning"])
+
+    for key, value in assessment.items():
+        if key in {"role", "marker", "score", "confidence", "reasoning", "evidence", "evidence_gaps"}:
+            continue
+        if value:
+            st.caption(f"**{key.replace('_', ' ').title()}:** {str(value).replace('_', ' ')}")
+
+    evidence = assessment.get("evidence") or []
+    if evidence:
+        with st.expander("Role-Specific Evidence"):
+            for ev in evidence:
+                if isinstance(ev, dict):
+                    _holistic_evidence_dict_block(ev)
+                else:
+                    st.markdown(str(ev))
+                st.markdown("---")
+
+    gaps = assessment.get("evidence_gaps") or []
+    if gaps:
+        st.markdown("**Evidence gaps for interview:**")
+        for gap in gaps:
+            st.markdown(f"- {gap}")
+
+
 def display_evaluation_result(result: EvaluationResult):
     """Display a criteria-based evaluation result."""
     if result.candidate.name:
         st.caption(f"Name: {result.candidate.name}")
+
+    if result.role:
+        st.caption(f"Role context: **{result.role.replace('_', ' ').title()}**")
 
     if len(result.scores) < 11:
         st.warning(f"Incomplete evaluation: only {len(result.scores)}/11 criteria scored. "
@@ -1652,6 +2002,8 @@ def display_evaluation_result(result: EvaluationResult):
     if result.overall_assessment:
         with st.expander("Overall Assessment"):
             st.write(result.overall_assessment)
+
+    display_role_specific_assessment(result.role_specific_assessment)
 
     with st.expander("View Detailed Evidence"):
         for score in result.scores:
@@ -1742,6 +2094,9 @@ def display_holistic_evaluation_result(result: HolisticEvaluationResult):
     if result.candidate.name:
         st.caption(f"Name: {result.candidate.name}")
 
+    if result.role:
+        st.caption(f"Role context: **{result.role.replace('_', ' ').title()}**")
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Overall Score", f"{result.overall_score:.1f}/10")
@@ -1767,6 +2122,8 @@ def display_holistic_evaluation_result(result: HolisticEvaluationResult):
 
     st.markdown("#### Overall Assessment")
     st.markdown(result.overall_assessment)
+
+    display_role_specific_assessment(result.role_specific_assessment)
 
     col1, col2 = st.columns(2)
 

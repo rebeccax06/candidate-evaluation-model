@@ -94,6 +94,85 @@ class CandidateProfile(BaseModel):
     evaluation_date: datetime = Field(default_factory=datetime.now)
 
 
+class RoleSpecificEvidence(BaseModel):
+    """Evidence item within a role-specific assessment."""
+    quote: str = Field(default="", description="Exact quote from materials")
+    source: str = Field(default="", description="Source document name")
+    context: str = Field(default="", description="What this evidence demonstrates")
+
+
+class RoleSpecificAssessment(BaseModel):
+    """Structured role-specific assessment (clinician, engineer, or phd)."""
+    role: str = Field(description="clinician, engineer, or phd")
+    marker: str = Field(default="", description="Primary role-specific marker label")
+    score: float = Field(ge=1, le=10, description="Role-specific score from 1-10")
+    confidence: str = Field(default="medium", description="low, medium, or high")
+    reasoning: str = Field(default="", description="Evidence-based role assessment")
+    evidence: List[RoleSpecificEvidence] = Field(default_factory=list)
+    evidence_gaps: List[str] = Field(default_factory=list)
+    # PhD-specific
+    research_evidence_level: Optional[str] = None
+    publication_strength: Optional[str] = None
+    research_ownership: Optional[str] = None
+    # Clinician-specific
+    challenge_complexity: Optional[str] = None
+    need_investigation_stage: Optional[str] = None
+    systems_thinking: Optional[str] = None
+    # Engineer-specific
+    build_stage: Optional[str] = None
+    ownership_clarity: Optional[str] = None
+    user_grounding: Optional[str] = None
+
+    @validator('confidence')
+    def validate_confidence(cls, v):
+        if v is None:
+            return "medium"
+        v = str(v).lower()
+        if 'high' in v:
+            return 'high'
+        if 'low' in v:
+            return 'low'
+        return 'medium'
+
+
+def parse_role_specific_assessment(data: Any) -> Optional[RoleSpecificAssessment]:
+    """Parse role_specific_assessment from API/DB data, tolerating partial responses."""
+    if not data or not isinstance(data, dict):
+        return None
+    if not data.get("role") or data.get("score") is None:
+        return None
+    try:
+        score = float(data["score"])
+    except (TypeError, ValueError):
+        return None
+    evidence = []
+    for ev in data.get("evidence") or []:
+        if isinstance(ev, dict):
+            evidence.append(RoleSpecificEvidence(
+                quote=ev.get("quote", ""),
+                source=ev.get("source", ""),
+                context=ev.get("context", ""),
+            ))
+    return RoleSpecificAssessment(
+        role=str(data["role"]).lower(),
+        marker=data.get("marker", ""),
+        score=score,
+        confidence=data.get("confidence", "medium"),
+        reasoning=data.get("reasoning", ""),
+        evidence=evidence,
+        evidence_gaps=data.get("evidence_gaps") or [],
+        research_evidence_level=data.get("research_evidence_level"),
+        publication_strength=data.get("publication_strength"),
+        research_ownership=data.get("research_ownership"),
+        challenge_complexity=data.get("challenge_complexity"),
+        need_investigation_stage=data.get("need_investigation_stage"),
+        systems_thinking=data.get("systems_thinking"),
+        build_stage=data.get("build_stage"),
+        ownership_clarity=data.get("ownership_clarity"),
+        user_grounding=data.get("user_grounding"),
+    )
+
+
 class EvaluationResult(BaseModel):
     """Complete evaluation result for a candidate"""
     candidate: CandidateProfile
@@ -114,6 +193,14 @@ class EvaluationResult(BaseModel):
     )
     recommendation: str = Field(
         description="Overall recommendation (e.g., 'Strong fit', 'Potential fit with development', etc.)"
+    )
+    role: Optional[str] = Field(
+        default=None,
+        description="Role-specific evaluation context (clinician, engineer, phd)"
+    )
+    role_specific_assessment: Optional[RoleSpecificAssessment] = Field(
+        default=None,
+        description="Structured role-specific assessment when role evaluation is used"
     )
     metadata: Dict[str, Any] = Field(
         default_factory=dict,
@@ -211,6 +298,14 @@ class HolisticEvaluationResult(BaseModel):
     recommendation: str = Field(description="Strong fit / Potential fit / Not recommended")
     interview_decision: bool = Field(description="Binary recommendation for interview")
     interview_decision_reasoning: str = Field(default="", description="Reasoning for interview decision")
+    role: Optional[str] = Field(
+        default=None,
+        description="Role-specific evaluation context (clinician, engineer, phd)"
+    )
+    role_specific_assessment: Optional[RoleSpecificAssessment] = Field(
+        default=None,
+        description="Structured role-specific assessment when role evaluation is used"
+    )
     metadata: Dict[str, Any] = Field(
         default_factory=dict,
         description="Additional metadata (model used, processing time, etc.)"

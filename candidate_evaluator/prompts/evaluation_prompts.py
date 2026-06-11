@@ -1562,3 +1562,18 @@ def get_holistic_selection_prompt(
         n_interviews=n_interviews,
         candidates_data=candidates_text,
     )
+
+
+# ---------------------------------------------------------------------------
+# Role-specific system prompt addenda (appended to SYSTEM_PROMPT)
+# ---------------------------------------------------------------------------
+
+from candidate_evaluator.prompts.role_prompts import (
+    CLINICIAN_ROLE_PROMPT,
+    ENGINEER_ROLE_PROMPT,
+    PHD_ROLE_PROMPT,
+    ROLE_ALIASES,
+    ROLE_PROMPTS,
+    get_role_addendum,
+    normalize_role,
+)

@@ -9,7 +9,8 @@ from typing import Optional, Dict, Any
 class PromptManager:
     """Manages custom evaluation prompts with persistent storage."""
 
-    PROMPT_TYPES = ["system", "criteria", "holistic", "ranking", "selection"]
+    PROMPT_TYPES = ["system", "criteria", "holistic", "ranking", "selection", "clinician", "engineer", "phd"]
+    ROLE_PROMPT_TYPES = ["clinician", "engineer", "phd"]
 
     def __init__(self, prompts_dir: Optional[Path] = None):
         """
@@ -32,13 +33,21 @@ class PromptManager:
             HOLISTIC_EVALUATION_PROMPT,
             HOLISTIC_RANKING_PROMPT_TEMPLATE,
             HOLISTIC_SELECTION_PROMPT_TEMPLATE,
+            CLINICIAN_ROLE_PROMPT,
+            ENGINEER_ROLE_PROMPT,
+            PHD_ROLE_PROMPT,
         )
+        from candidate_evaluator.prompts.role_prompts import normalize_role
+        self._normalize_role = normalize_role
         self._defaults = {
             "system": SYSTEM_PROMPT,
             "criteria": EVALUATION_PROMPT_TEMPLATE,
             "holistic": HOLISTIC_EVALUATION_PROMPT,
             "ranking": HOLISTIC_RANKING_PROMPT_TEMPLATE,
             "selection": HOLISTIC_SELECTION_PROMPT_TEMPLATE,
+            "clinician": CLINICIAN_ROLE_PROMPT,
+            "engineer": ENGINEER_ROLE_PROMPT,
+            "phd": PHD_ROLE_PROMPT,
         }
 
     def _get_prompt_path(self, prompt_type: str) -> Path:
@@ -130,6 +139,65 @@ class PromptManager:
     def save_selection_template(self, content: str, name: Optional[str] = None) -> None:
         """Save a custom interview-selection template."""
         self._save_prompt("selection", content, name)
+
+    def get_clinician_prompt(self) -> str:
+        """Get the clinician role prompt addendum (custom or default)."""
+        custom = self._load_custom_prompt("clinician")
+        if custom and custom.get("content"):
+            return custom["content"]
+        return self._defaults["clinician"]
+
+    def save_clinician_prompt(self, content: str, name: Optional[str] = None) -> None:
+        """Save a custom clinician role prompt."""
+        self._save_prompt("clinician", content, name)
+
+    def get_engineer_prompt(self) -> str:
+        """Get the engineer/tech role prompt addendum (custom or default)."""
+        custom = self._load_custom_prompt("engineer")
+        if custom and custom.get("content"):
+            return custom["content"]
+        return self._defaults["engineer"]
+
+    def save_engineer_prompt(self, content: str, name: Optional[str] = None) -> None:
+        """Save a custom engineer/tech role prompt."""
+        self._save_prompt("engineer", content, name)
+
+    def get_phd_prompt(self) -> str:
+        """Get the PhD role prompt addendum (custom or default)."""
+        custom = self._load_custom_prompt("phd")
+        if custom and custom.get("content"):
+            return custom["content"]
+        return self._defaults["phd"]
+
+    def save_phd_prompt(self, content: str, name: Optional[str] = None) -> None:
+        """Save a custom PhD role prompt."""
+        self._save_prompt("phd", content, name)
+
+    def get_role_prompt(self, role: str) -> str:
+        """Get the role-specific prompt addendum for a given role."""
+        normalized = self._normalize_role(role)
+        if normalized == "clinician":
+            return self.get_clinician_prompt()
+        if normalized == "engineer":
+            return self.get_engineer_prompt()
+        if normalized == "phd":
+            return self.get_phd_prompt()
+        raise ValueError(f"Invalid role: {role}")
+
+    def save_role_prompt(self, role: str, content: str, name: Optional[str] = None) -> None:
+        """Save a custom role-specific prompt."""
+        role = role.lower()
+        if role not in self.ROLE_PROMPT_TYPES:
+            raise ValueError(f"Invalid role: {role}")
+        self._save_prompt(role, content, name)
+
+    def build_system_prompt(self, role: Optional[str] = None) -> str:
+        """Build the full system prompt, optionally appending a role-specific addendum."""
+        system_prompt = self.get_system_prompt()
+        if not role:
+            return system_prompt
+        role_addendum = self.get_role_prompt(role)
+        return f"{system_prompt}\n\n---\n\n{role_addendum}"
 
     def reset_to_default(self, prompt_type: str) -> None:
         """Reset a prompt to its default value by deleting the custom file."""

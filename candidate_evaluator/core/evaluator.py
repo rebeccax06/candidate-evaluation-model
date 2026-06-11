@@ -24,6 +24,7 @@ from candidate_evaluator.core.models import (
     RedFlag,
     InterviewQuestion,
     InterviewSelectionResult,
+    parse_role_specific_assessment,
 )
 from candidate_evaluator.core.research_generator import ResearchReportGenerator
 from candidate_evaluator.core.research_models import ResearchEvaluationReport
@@ -66,7 +67,8 @@ class CandidateEvaluator:
         candidate_id: str,
         material_paths: List[str],
         candidate_name: Optional[str] = None,
-        custom_criteria: Optional[List[str]] = None
+        custom_criteria: Optional[List[str]] = None,
+        role: Optional[str] = None
     ) -> EvaluationResult:
         """
         Evaluate a candidate based on their application materials.
@@ -76,6 +78,7 @@ class CandidateEvaluator:
             material_paths: List of paths to candidate materials
             candidate_name: Optional name of the candidate
             custom_criteria: Optional custom evaluation criteria
+            role: Optional role-specific context (clinician, engineer, phd)
 
         Returns:
             EvaluationResult object
@@ -83,7 +86,7 @@ class CandidateEvaluator:
         Raises:
             ValueError: If materials cannot be processed or evaluation fails
         """
-        logger.info(f"Starting evaluation for candidate: {candidate_id}")
+        logger.info(f"Starting evaluation for candidate: {candidate_id}" + (f" (role: {role})" if role else ""))
         start_time = time.time()
 
         # Process files
@@ -99,7 +102,7 @@ class CandidateEvaluator:
 
         # Call Claude API
         logger.info("Calling Claude API for evaluation...")
-        response = self._call_claude_api(prompt)
+        response = self._call_claude_api(prompt, role=role)
 
         # Parse response
         logger.info("Parsing evaluation response...")
@@ -171,6 +174,10 @@ class CandidateEvaluator:
             strengths=evaluation_data.get('strengths', []),
             areas_for_development=evaluation_data.get('areas_for_development', []),
             recommendation=evaluation_data.get('recommendation', ''),
+            role=role,
+            role_specific_assessment=parse_role_specific_assessment(
+                evaluation_data.get('role_specific_assessment')
+            ),
             metadata={
                 'model': self.config.api.model,
                 'processing_time_seconds': processing_time,
@@ -405,7 +412,8 @@ class CandidateEvaluator:
         candidate_id: str,
         material_paths: List[str],
         candidate_name: Optional[str] = None,
-        program_description: Optional[str] = None
+        program_description: Optional[str] = None,
+        role: Optional[str] = None
     ) -> HolisticEvaluationResult:
         """
         Evaluate a candidate using holistic (criteria-free) approach.
@@ -419,6 +427,7 @@ class CandidateEvaluator:
             material_paths: List of paths to candidate materials
             candidate_name: Optional name of the candidate
             program_description: Optional custom program description
+            role: Optional role-specific context (clinician, engineer, phd)
 
         Returns:
             HolisticEvaluationResult object
@@ -426,7 +435,7 @@ class CandidateEvaluator:
         Raises:
             ValueError: If materials cannot be processed or evaluation fails
         """
-        logger.info(f"Starting holistic evaluation for candidate: {candidate_id}")
+        logger.info(f"Starting holistic evaluation for candidate: {candidate_id}" + (f" (role: {role})" if role else ""))
         start_time = time.time()
 
         # Process files
@@ -449,7 +458,7 @@ class CandidateEvaluator:
             try:
                 if attempt == 0:
                     logger.info("Calling Claude API for holistic evaluation...")
-                    response = self._call_claude_api(prompt)
+                    response = self._call_claude_api(prompt, role=role)
                 else:
                     # Retry with explicit JSON correction request
                     logger.warning(f"Retry attempt {attempt} due to JSON parsing failure")
@@ -463,7 +472,7 @@ Do NOT include any text outside the JSON structure.
 
 Original request:
 {prompt}"""
-                    response = self._call_claude_api(retry_prompt)
+                    response = self._call_claude_api(retry_prompt, role=role)
 
                 # Parse response
                 logger.info("Parsing holistic evaluation response...")
@@ -586,6 +595,10 @@ Original request:
             recommendation=evaluation_data.get('recommendation', ''),
             interview_decision=evaluation_data.get('interview_decision', False),
             interview_decision_reasoning=evaluation_data.get('interview_decision_reasoning', ''),
+            role=role,
+            role_specific_assessment=parse_role_specific_assessment(
+                evaluation_data.get('role_specific_assessment')
+            ),
             metadata={
                 'model': self.config.api.model,
                 'processing_time_seconds': processing_time,
@@ -816,12 +829,13 @@ Original request:
 
         return '\n'.join(repaired_lines)
 
-    def _call_claude_api(self, prompt: str) -> str:
+    def _call_claude_api(self, prompt: str, role: Optional[str] = None) -> str:
         """
         Call Claude API with the given prompt.
 
         Args:
             prompt: User prompt
+            role: Optional role-specific context to append to system prompt
 
         Returns:
             API response text
@@ -830,8 +844,7 @@ Original request:
             Exception: If API call fails
         """
         try:
-            # Use custom system prompt if available
-            system_prompt = self.prompt_manager.get_system_prompt()
+            system_prompt = self.prompt_manager.build_system_prompt(role)
 
             message = self.client.messages.create(
                 model=self.config.api.model,
@@ -1099,13 +1112,27 @@ Original request:
                     f"Found {len(found_criteria)}/11. Consider increasing max_tokens."
                 )
 
+            role_specific_assessment = None
+            if overall_data:
+                role_specific_assessment = overall_data.get('role_specific_assessment')
+            if role_specific_assessment is None:
+                for block in json_blocks:
+                    try:
+                        data = json.loads(block)
+                        if isinstance(data, dict) and 'role_specific_assessment' in data:
+                            role_specific_assessment = data['role_specific_assessment']
+                            break
+                    except json.JSONDecodeError:
+                        continue
+
             # Combine parsed data
             result = {
                 'criterion_scores': criterion_scores,
                 'overall_assessment': overall_data.get('overall_assessment', '') if overall_data else '',
                 'strengths': overall_data.get('strengths', []) if overall_data else [],
                 'areas_for_development': overall_data.get('areas_for_development', []) if overall_data else [],
-                'recommendation': overall_data.get('recommendation', '') if overall_data else ''
+                'recommendation': overall_data.get('recommendation', '') if overall_data else '',
+                'role_specific_assessment': role_specific_assessment,
             }
 
             return result

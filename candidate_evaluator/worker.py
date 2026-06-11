@@ -74,6 +74,7 @@ class Worker:
         file_paths = job.get("file_paths", [])
         evaluation_mode = job.get("evaluation_mode", "criteria")
         is_holistic = evaluation_mode == "holistic"
+        role = job.get("role")
         
         logger.info(f"Processing job {job_id} with {len(file_paths)} candidates")
         
@@ -111,7 +112,8 @@ class Worker:
                 if is_holistic:
                     result = evaluator.evaluate_candidate_holistic(
                         candidate_id=candidate_id,
-                        material_paths=temp_paths
+                        material_paths=temp_paths,
+                        role=role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(
@@ -120,7 +122,8 @@ class Worker:
                 else:
                     result = evaluator.evaluate_candidate(
                         candidate_id=candidate_id,
-                        material_paths=temp_paths
+                        material_paths=temp_paths,
+                        role=role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(
