@@ -44,6 +44,12 @@ class JSONExporter:
             'recommendation': result.recommendation,
             'strengths': result.strengths,
             'areas_for_development': result.areas_for_development,
+            'role': getattr(result, 'role', None),
+            'role_specific_assessment': (
+                result.role_specific_assessment.model_dump()
+                if getattr(result, 'role_specific_assessment', None) is not None
+                else None
+            ),
             'scores': [
                 {
                     'criterion': score.criterion.value,

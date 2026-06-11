@@ -695,6 +695,82 @@ def single_evaluation_form(role: str | None = None, key_prefix: str = ""):
                 st.error(f"Error during evaluation: {e}")
 
 
+def _run_role_batch_sequential_local(
+    uploaded_files,
+    is_holistic: bool,
+    role: str,
+    output_dir: str,
+) -> None:
+    """Run role-specific batch evaluations inline (no background worker)."""
+    evaluator = st.session_state.evaluator
+    out_path = Path(output_dir or "./results")
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    total = len(uploaded_files)
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    completed = 0
+    failed: list[tuple[str, str]] = []
+
+    st.info(
+        "Running evaluations sequentially in this session. Keep this tab open until finished."
+    )
+
+    temp_dir = tempfile.mkdtemp()
+    try:
+        for i, uploaded_file in enumerate(uploaded_files):
+            candidate_id = Path(uploaded_file.name).stem
+            status_text.text(f"Evaluating {i + 1}/{total}: {candidate_id}")
+            progress_bar.progress(i / total if total else 0)
+
+            temp_path = os.path.join(temp_dir, uploaded_file.name)
+            with open(temp_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+
+            try:
+                if is_holistic:
+                    result = evaluator.evaluate_candidate_holistic(
+                        candidate_id=candidate_id,
+                        material_paths=[temp_path],
+                        role=role,
+                    )
+                    json_path = out_path / f"{candidate_id}_holistic_evaluation.json"
+                    with open(json_path, "w", encoding="utf-8") as f:
+                        json.dump(result.model_dump(), f, indent=2, default=str)
+                else:
+                    result = evaluator.evaluate_candidate(
+                        candidate_id=candidate_id,
+                        material_paths=[temp_path],
+                        role=role,
+                    )
+                    json_path = out_path / f"{candidate_id}_evaluation.json"
+                    JSONExporter.export_evaluation(result, json_path)
+                    st.session_state.evaluation_results.append(result)
+                completed += 1
+            except Exception as e:
+                failed.append((candidate_id, str(e)))
+            finally:
+                try:
+                    os.unlink(temp_path)
+                except OSError:
+                    pass
+    finally:
+        try:
+            os.rmdir(temp_dir)
+        except OSError:
+            pass
+
+    progress_bar.progress(1.0)
+    status_text.empty()
+
+    if completed:
+        st.success(f"Completed {completed}/{total} evaluations. Results saved to {out_path}.")
+    if failed:
+        st.error(f"Failed {len(failed)} candidate(s):")
+        for candidate_id, err in failed:
+            st.text(f"- {candidate_id}: {err}")
+
+
 def batch_evaluation_form(role: str | None = None, key_prefix: str = ""):
     """Batch evaluation form with background processing."""
     title = "### Batch Evaluation"
@@ -702,7 +778,13 @@ def batch_evaluation_form(role: str | None = None, key_prefix: str = ""):
         role_label = next((k for k, v in ROLE_OPTIONS.items() if v == role), role)
         title = f"### Batch {role_label} Evaluation"
     st.markdown(title)
-    st.markdown("Upload multiple PDF files to evaluate in the background. You can navigate away and the evaluation will continue running.")
+    if role:
+        st.markdown(
+            "Upload multiple PDF files. Use the background worker, or run sequentially in this session "
+            "if the worker is unavailable."
+        )
+    else:
+        st.markdown("Upload multiple PDF files to evaluate in the background. You can navigate away and the evaluation will continue running.")
 
     st.markdown("#### Evaluation Mode")
     batch_eval_mode = st.radio(
@@ -752,7 +834,36 @@ def batch_evaluation_form(role: str | None = None, key_prefix: str = ""):
                 key=f"{key_prefix}batch_output_dir"
             )
 
-        if st.button("Start Batch Evaluation", use_container_width=True, key=f"{key_prefix}batch_eval_btn"):
+        run_sequential = False
+        if role:
+            col_bg, col_seq = st.columns(2)
+            with col_bg:
+                start_clicked = st.button(
+                    "Start Batch Evaluation (Background)",
+                    use_container_width=True,
+                    key=f"{key_prefix}batch_eval_btn",
+                )
+            with col_seq:
+                run_sequential = st.button(
+                    "Run Sequentially Now",
+                    use_container_width=True,
+                    key=f"{key_prefix}batch_seq_btn",
+                    help="Process candidates one-by-one in this session. Use when the background worker is down.",
+                )
+        else:
+            start_clicked = st.button(
+                "Start Batch Evaluation",
+                use_container_width=True,
+                key=f"{key_prefix}batch_eval_btn",
+            )
+
+        if run_sequential:
+            _run_role_batch_sequential_local(
+                uploaded_files, batch_is_holistic, role, output_dir
+            )
+            return
+
+        if start_clicked:
             temp_dir = tempfile.mkdtemp()
             candidate_files = {}
 

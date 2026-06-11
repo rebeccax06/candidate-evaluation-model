@@ -686,7 +686,8 @@ def get_evaluation_prompt(
     materials_text: str,
     custom_criteria: List[str] = None,
     use_all_criteria: bool = True,
-    criteria_subset: List[EvaluationCriterion] = None
+    criteria_subset: List[EvaluationCriterion] = None,
+    role: str = None
 ) -> str:
     """
     Generate evaluation prompt with materials and criteria.
@@ -754,10 +755,13 @@ def get_evaluation_prompt(
 
     criteria_section = "\n\n".join(criteria_details_text)
 
-    return EVALUATION_PROMPT_TEMPLATE.format(
+    formatted = EVALUATION_PROMPT_TEMPLATE.format(
         materials=materials_text,
         criteria_details=criteria_section
     )
+    if role:
+        formatted += get_role_output_instruction(role)
+    return formatted
 
 
 def get_comparison_prompt(candidates_evaluations: List[Dict]) -> str:
@@ -1041,7 +1045,7 @@ Provide your comprehensive holistic evaluation now in JSON format. Be thorough -
 """
 
 
-def get_holistic_evaluation_prompt(materials_text: str, program_description: str = None) -> str:
+def get_holistic_evaluation_prompt(materials_text: str, program_description: str = None, role: str = None) -> str:
     """
     Generate holistic evaluation prompt (Dr. Gray's suggested mode).
 
@@ -1069,7 +1073,10 @@ The program values candidates who show genuine evidence of these qualities throu
             program_description
         )
 
-    return prompt.format(materials=materials_text)
+    formatted = prompt.format(materials=materials_text)
+    if role:
+        formatted += get_role_output_instruction(role)
+    return formatted
 
 
 # Admit Pattern Analysis Prompt
@@ -1575,5 +1582,6 @@ from candidate_evaluator.prompts.role_prompts import (
     ROLE_ALIASES,
     ROLE_PROMPTS,
     get_role_addendum,
+    get_role_output_instruction,
     normalize_role,
 )

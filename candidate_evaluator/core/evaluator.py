@@ -98,7 +98,7 @@ class CandidateEvaluator:
         logger.info(f"Total materials length: {len(combined_materials)} characters")
 
         # Generate evaluation prompt
-        prompt = get_evaluation_prompt(combined_materials, custom_criteria)
+        prompt = get_evaluation_prompt(combined_materials, custom_criteria, role=role)
 
         # Call Claude API
         logger.info("Calling Claude API for evaluation...")
@@ -447,7 +447,7 @@ class CandidateEvaluator:
         logger.info(f"Total materials length: {len(combined_materials)} characters")
 
         # Generate holistic evaluation prompt
-        prompt = get_holistic_evaluation_prompt(combined_materials, program_description)
+        prompt = get_holistic_evaluation_prompt(combined_materials, program_description, role=role)
 
         # Call Claude API with retry logic for JSON parsing failures
         max_retries = 2

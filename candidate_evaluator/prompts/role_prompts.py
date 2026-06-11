@@ -726,3 +726,70 @@ def get_role_addendum(role: Optional[str]) -> str:
         )
 
     return ROLE_PROMPTS[normalized_role]
+
+
+_ROLE_OUTPUT_SCHEMAS = {
+    "phd": """"role_specific_assessment": {
+  "role": "phd",
+  "marker": "Research ownership and strength",
+  "score": 7,
+  "confidence": "low|medium|high",
+  "research_evidence_level": "none|limited|moderate|strong|exceptional",
+  "publication_strength": "none_or_not_shown|limited|moderate|strong|exceptional",
+  "research_ownership": "unclear|supporting_contributor|substantial_contributor|primary_driver",
+  "reasoning": "Concise evidence-based assessment of research contribution and Catalyst relevance.",
+  "evidence": [{"quote": "Exact verbatim quote", "source": "document_name", "context": "What this demonstrates"}],
+  "evidence_gaps": ["Important missing information to investigate in an interview"]
+}""",
+    "clinician": """"role_specific_assessment": {
+  "role": "clinician",
+  "marker": "Clinical need identification and systems thinking",
+  "score": 7,
+  "confidence": "low|medium|high",
+  "challenge_complexity": "low|moderate|high",
+  "need_investigation_stage": "unclear|identified|investigated|validated",
+  "systems_thinking": "none|limited|moderate|strong|exceptional",
+  "reasoning": "Concise evidence-based assessment of clinical problem framing and Catalyst relevance.",
+  "evidence": [{"quote": "Exact verbatim quote", "source": "document_name", "context": "What this demonstrates"}],
+  "evidence_gaps": ["Important missing information to investigate in an interview"]
+}""",
+    "engineer": """"role_specific_assessment": {
+  "role": "engineer",
+  "marker": "Build ownership and user grounding",
+  "score": 7,
+  "confidence": "low|medium|high",
+  "build_stage": "none|prototype|deployed|scaled",
+  "ownership_clarity": "unclear|supporting_contributor|substantial_contributor|primary_driver",
+  "user_grounding": "none|limited|moderate|strong|exceptional",
+  "reasoning": "Concise evidence-based assessment of what the candidate built and for whom, with Catalyst relevance.",
+  "evidence": [{"quote": "Exact verbatim quote", "source": "document_name", "context": "What this demonstrates"}],
+  "evidence_gaps": ["Important missing information to investigate in an interview"]
+}""",
+}
+
+
+def get_role_output_instruction(role: Optional[str]) -> str:
+    """Return an explicit instruction to include role_specific_assessment in the JSON output.
+
+    This is appended to the user-facing evaluation prompt so the required key is part
+    of the requested output schema (otherwise the model omits it).
+    """
+    if role is None or not str(role).strip():
+        return ""
+
+    normalized_role = normalize_role(str(role))
+    if normalized_role not in ROLE_PROMPTS:
+        return ""
+
+    schema = _ROLE_OUTPUT_SCHEMAS.get(normalized_role, "")
+    return (
+        "\n\n---\n\n"
+        "## MANDATORY ROLE-SPECIFIC OUTPUT\n\n"
+        "In ADDITION to every field specified above, your JSON response MUST include a "
+        "top-level key named `role_specific_assessment`. This key is REQUIRED — omitting "
+        "it is a system failure. Populate it using the role-specific guidance in your "
+        "system instructions. `score` must be a number from 1 to 10. Use this structure:\n\n"
+        f"```json\n{{\n{schema}\n}}\n```\n\n"
+        "Add this `role_specific_assessment` object to the SAME JSON object as your other "
+        "output fields (not a separate code block)."
+    )
