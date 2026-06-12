@@ -1307,39 +1307,44 @@ def _render_role_specific_rankings_local(results: list) -> None:
 
     st.caption(
         "Candidates ranked by **role-specific score** within each specialty "
-        "(ties broken by overall Catalyst score)."
+        "(ties broken by overall Catalyst score). Each specialty has its own tab."
     )
     grouped = group_results_by_role(role_results)
 
-    for role in ROLE_ORDER:
-        items = grouped.get(role, [])
-        if not items:
-            continue
-        sorted_items = sort_results_by_role_score(items)
-        n = len(sorted_items)
-        st.markdown(f"### {ROLE_LABELS[role]} ({n})")
-        summary = [
-            build_role_ranking_row_from_result(rank, result, n)
-            for rank, result in enumerate(sorted_items, 1)
-        ]
-        st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
+    role_tabs = st.tabs([
+        f"{ROLE_LABELS[role]} ({len(grouped.get(role, []))})"
+        for role in ROLE_ORDER
+    ])
 
-        options = {}
-        for result in sorted_items:
-            rs = build_role_ranking_row_from_result(1, result, n)["Role Score"]
-            options[f"{result.candidate.candidate_id} ({rs})"] = result
-        selected = st.selectbox(
-            f"View {ROLE_LABELS[role]} candidate",
-            list(options.keys()),
-            key=f"local_role_sel_{role}",
-        )
-        if selected:
-            result = options[selected]
-            if isinstance(result, HolisticEvaluationResult):
-                display_holistic_evaluation_result(result)
-            else:
-                display_evaluation_result(result)
-        st.markdown("---")
+    for role, role_tab in zip(ROLE_ORDER, role_tabs):
+        with role_tab:
+            items = grouped.get(role, [])
+            if not items:
+                st.info(f"No {ROLE_LABELS[role]} evaluations yet.")
+                continue
+            sorted_items = sort_results_by_role_score(items)
+            n = len(sorted_items)
+            summary = [
+                build_role_ranking_row_from_result(rank, result, n)
+                for rank, result in enumerate(sorted_items, 1)
+            ]
+            st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
+
+            options = {}
+            for result in sorted_items:
+                rs = build_role_ranking_row_from_result(1, result, n)["Role Score"]
+                options[f"{result.candidate.candidate_id} ({rs})"] = result
+            selected = st.selectbox(
+                f"View {ROLE_LABELS[role]} candidate",
+                list(options.keys()),
+                key=f"local_role_sel_{role}",
+            )
+            if selected:
+                result = options[selected]
+                if isinstance(result, HolisticEvaluationResult):
+                    display_holistic_evaluation_result(result)
+                else:
+                    display_evaluation_result(result)
 
 
 def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):

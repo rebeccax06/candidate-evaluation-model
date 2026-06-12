@@ -1314,41 +1314,46 @@ def _render_role_specific_rankings(batch_evals: list, key_prefix: str = "") -> N
 
     st.caption(
         "Candidates ranked by **role-specific score** within each specialty "
-        "(ties broken by overall Catalyst score)."
+        "(ties broken by overall Catalyst score). Each specialty has its own tab."
     )
     grouped = group_eval_rows_by_role(role_evals)
 
-    for role in ROLE_ORDER:
-        rows = grouped.get(role, [])
-        if not rows:
-            continue
-        sorted_rows = sort_eval_rows_by_role_score(rows)
-        n = len(sorted_rows)
-        st.markdown(f"### {ROLE_LABELS[role]} ({n})")
-        summary = [
-            build_role_ranking_row_from_eval_row(rank, row, n)
-            for rank, row in enumerate(sorted_rows, 1)
-        ]
-        st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
+    role_tabs = st.tabs([
+        f"{ROLE_LABELS[role]} ({len(grouped.get(role, []))})"
+        for role in ROLE_ORDER
+    ])
 
-        options = {}
-        for row in sorted_rows:
-            cid = row.get("candidate_id", "")
-            rs = build_role_ranking_row_from_eval_row(1, row, n)["Role Score"]
-            options[f"{cid} ({rs})"] = row
-        selected = st.selectbox(
-            f"View {ROLE_LABELS[role]} candidate",
-            list(options.keys()),
-            key=f"{key_prefix}role_sel_{role}",
-        )
-        if selected:
-            row = options[selected]
-            result_data = row["result"]
-            if row.get("evaluation_type") == "holistic":
-                display_holistic_evaluation_result(result_dict_to_holistic_result(result_data))
-            else:
-                display_evaluation_result(result_dict_to_evaluation_result(result_data))
-        st.markdown("---")
+    for role, role_tab in zip(ROLE_ORDER, role_tabs):
+        with role_tab:
+            rows = grouped.get(role, [])
+            if not rows:
+                st.info(f"No {ROLE_LABELS[role]} evaluations yet.")
+                continue
+            sorted_rows = sort_eval_rows_by_role_score(rows)
+            n = len(sorted_rows)
+            summary = [
+                build_role_ranking_row_from_eval_row(rank, row, n)
+                for rank, row in enumerate(sorted_rows, 1)
+            ]
+            st.dataframe(pd.DataFrame(summary), hide_index=True, use_container_width=True)
+
+            options = {}
+            for row in sorted_rows:
+                cid = row.get("candidate_id", "")
+                rs = build_role_ranking_row_from_eval_row(1, row, n)["Role Score"]
+                options[f"{cid} ({rs})"] = row
+            selected = st.selectbox(
+                f"View {ROLE_LABELS[role]} candidate",
+                list(options.keys()),
+                key=f"{key_prefix}role_sel_{role}",
+            )
+            if selected:
+                row = options[selected]
+                result_data = row["result"]
+                if row.get("evaluation_type") == "holistic":
+                    display_holistic_evaluation_result(result_dict_to_holistic_result(result_data))
+                else:
+                    display_evaluation_result(result_dict_to_evaluation_result(result_data))
 
 
 def _analysis_widget_key(batch_key: str, widget_family: str) -> str:
