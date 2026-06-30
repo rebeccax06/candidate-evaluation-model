@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T23:43:35.463385",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 149.26981782913208,
+    "materials_character_count": 54479
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpxk2erasx.pdf"
+    ],
+    "candidate_id": "Shvedova_Maria_app",
+    "evaluation_date": "2026-02-25 23:43:35.463202"
+  },
+  "red_flags": [
+    {
+      "flag": "Vague, passive-voice claims about entrepreneurial activity with zero specifics",
+      "evidence": "Application states: 'I evaluated the IP landscape and freedom-to-operate for a potential senolytic-based wound healing startup and began shaping a translational strategy.' No details provided about: what databases were searched, what patents were identified, what freedom-to-operate issues were found, what the translational strategy entails, or what decisions resulted from this evaluation. This is classic application fluff - sounds impressive but provides no verifiable information. Expert raters would score this 3-4: hard to know what was actually done.",
+      "severity": "high"
+    },
+    {
+      "flag": "Generic, evidence-light letters of recommendation",
+      "evidence": "Roh's letter uses phrases like 'exceptional,' 'strategically minded,' and 'precisely the kind of cross-disciplinary thinker' but provides only one concrete example (the senolytic study). Sharov's letter states she is 'uniquely talented' and 'deeply intellectually curious' without a single specific incident beyond restating CV achievements. Both letters lack the detailed behavioral examples that would make them credible. This suggests recommenders don't have specific evidence of innovation capability or are writing formulaic academic letters.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of customer discovery, user research, or problem validation outside the lab",
+      "evidence": "Application contains zero mention of talking to potential users, clinicians who treat chronic wounds, patients with healing problems, or other stakeholders. No evidence of testing assumptions, building prototypes, or iterative development. The program values 'translating research into practical impact' but there's no evidence she has attempted to understand the practical context beyond her own research.",
+      "severity": "high"
+    },
+    {
+      "flag": "Transactional motivation - seeking training rather than bringing innovation experience",
+      "evidence": "Application states: 'I lack formal training in venture creation. Catalyst offers practical exposure to identifying real-world problems, validating ideas, and early product development - skills I need to build a viable company.' This frames the program as filling her gaps rather than a collaborative innovation opportunity. Sharov confirms: 'Maria is now seeking the kind of practical, team-based experience that Catalyst offers to bridge the gap between discovery science and innovation.' This is honest but suggests she hasn't attempted to learn these skills independently.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No demonstrated experience working across disciplines beyond standard academic collaboration",
+      "evidence": "Application claims 'Cross-sector experience in academia and clinical research' but all listed positions are at universities and academic medical centers (BU, MGH, Harvard, Mayo, Yale, Siberian State Medical). No industry experience, no startup experience, no work with engineers, designers, business people, or other non-research disciplines. The claim about 'coordinated across collaborators' on the senescence project provides no details about who these collaborators were or what interdisciplinary challenges were overcome.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Multiple stated qualities without supporting evidence",
+      "evidence": "Application contains: 'I bring scientific diligence, fast learning, and strategic thinking to unfamiliar challenges' (stated, not demonstrated); 'Skilled in identifying therapeutic targets, evaluating scientific risk, and aligning biological insight with translational potential' (stated competencies without specific examples); 'Genuine motivation for socially impactful work' (stated motivation without evidence of action). These are classic application fluff statements that expert raters would discount heavily.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Left clinical training (surgery residency) after PGY-2 to return to research - unclear commitment to clinical innovation",
+      "evidence": "CV shows Surgery Residency at Mayo Clinic (PGY-1, 2022-2023) and Yale (PGY-2, 2023-2024), then returned to research position at BU (08/2024-present). Application doesn't explain this decision. While not necessarily negative, it raises questions about whether her primary interest is basic research rather than clinical application or patient-facing innovation.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "No demonstrated experience with customer discovery, problem validation, or iterative product development",
+      "Entrepreneurial exploration appears recent and superficial - vague claims about 'evaluating IP' with zero specifics about methodology or findings",
+      "Views program as training to fill gaps rather than collaborative innovation opportunity",
+      "No evidence of working across disciplines beyond standard academic collaboration - all experience within academic medicine",
+      "Passive voice descriptions of entrepreneurial activity suggest limited personal agency or ownership",
+      "Letters of recommendation are generic and provide minimal specific examples of innovation or creative problem-solving"
+    ],
+    "evidence": [
+      {
+        "quote": "I'm interested in Catalyst because I'm actively evaluating the IP and development path for a potential startup. While I have a strong background in clinical medicine and translational aging research, I lack formal training in venture creation. Catalyst offers practical exposure to identifying real-world problems, validating ideas, and early product development - skills I need to build a viable company.",
+        "source": "tmpxk2erasx.pdf",
+        "context": "Reveals transactional motivation - seeking training rather than bringing innovation experience. The phrase 'skills I need' indicates gaps rather than readiness."
+      },
+      {
+        "quote": "Beyond benchwork, I initiated discussions with our tech transfer office to evaluate IP potential and therapeutic strategy.",
+        "source": "tmpxk2erasx.pdf",
+        "context": "Shows some proactive engagement with commercialization pathway, but 'initiated discussions' is vague - what was discussed? What was learned? No outcomes described."
+      },
+      {
+        "quote": "I evaluated the IP landscape and freedom-to-operate for a potential senolytic-based wound healing startup and began shaping a translational strategy. While new to this space, I bring scientific diligence, fast learning, and strategic thinking to unfamiliar challenges.",
+        "source": "tmpxk2erasx.pdf",
+        "context": "Only concrete claim of entrepreneurial activity, but entirely passive voice with no specifics. 'While new to this space' confirms lack of experience. 'Fast learning' and 'strategic thinking' are stated qualities without evidence."
+      },
+      {
+        "quote": "Maria is now seeking the kind of practical, team-based experience that Catalyst offers to bridge the gap between discovery science and innovation.",
+        "source": "LORs.pdf (Sharov letter)",
+        "context": "Recommender confirms she lacks innovation experience and is seeking it through the program. This is honest but raises questions about readiness."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate's fit with the program is mixed. On the positive side, she has a genuine research foundation that could be translated into practical impact - her senolytic wound healing work addresses a real clinical need (chronic wounds in aging populations) and she has generated preliminary efficacy data in preclinical models. She has also engaged with her tech transfer office, showing some awareness of the IP development process. Her clinical background as a former surgery resident provides direct exposure to unmet medical needs, which could inform problem identification. The program values candidates who can 'translate research into practical impact' and she has the scientific substrate to potentially do this.\n\nHowever, significant concerns exist about her readiness and motivation. Her stated reason for applying is purely to fill gaps: 'I lack formal training in venture creation' and need 'practical exposure to identifying real-world problems, validating ideas, and early product development.' This suggests she views Catalyst as a training program rather than a collaborative innovation experience. The program seeks candidates who 'demonstrate sustained commitment to challenging problems' but her entrepreneurial exploration appears very recent and superficial. There is no evidence she has attempted customer discovery, built prototypes, or tested assumptions outside the lab. Her claim to be 'actively evaluating IP and feasibility for a potential startup' is undermined by the complete absence of specifics about what this evaluation has revealed or what decisions it has informed. The passive voice construction ('IP was evaluated') suggests limited personal agency. Most concerning is the lack of evidence for working 'across disciplines and with diverse teams' - all her experience is within academic medicine and basic science. Her 'cross-sector experience' claim lists only universities and hospitals, not industry, startups, or non-research settings.",
+    "strengths_for_program": [
+      "Strong scientific foundation with genuine research productivity (30+ publications, independent project leadership)",
+      "Translatable research focus on senolytic therapy for wound healing - addresses real clinical need with preliminary efficacy data",
+      "Clinical background provides direct exposure to unmet medical needs and patient perspectives",
+      "Has initiated contact with tech transfer office, showing some awareness of IP development process",
+      "Supervisor confirms she frames questions in terms of clinical relevance and therapeutic potential"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Demonstrated Research Productivity and Scientific Rigor",
+      "evidence": [
+        {
+          "quote": "30+ peer-reviewed publications including first-author papers in Aging Cell, JBMR Plus, Plastic and Reconstructive Surgery, and other respected journals",
+          "source": "Shvedova_Maria_CV.pdf",
+          "context": "Substantial publication record demonstrates ability to execute research projects and communicate findings. This is concrete output, not stated capability."
+        },
+        {
+          "quote": "Selected for Butler-Williams Scholars Program in aging research for junior faculty (08/2025), WHS 2023 Annual Meeting Award for Top Highest Scoring Presentations, WHS 2023 Young Investigators Award",
+          "source": "Shvedova_Maria_CV.pdf",
+          "context": "Competitive recognition from external evaluators validates research quality. These are merit-based awards, not participation trophies."
+        },
+        {
+          "quote": "She independently designed and executed a preclinical study demonstrating that topical senolytic therapy can reduce senescent cell burden and accelerate tissue repair in aged mice. Her ability to design impactful experiments, analyze results critically, and identify translational endpoints is exceptional.",
+          "source": "LORs.pdf (Roh letter)",
+          "context": "Supervisor provides specific example of independent research capability with translational focus. The word 'independently' is important - shows she can drive projects without constant supervision."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Strong research foundation is essential for science-based innovation. Her ability to generate data, publish findings, and secure competitive recognition demonstrates she can execute complex projects - a transferable skill for startup development."
+    },
+    {
+      "quality": "Translational Mindset in Research Framing",
+      "evidence": [
+        {
+          "quote": "She consistently frames questions in terms of clinical relevance and therapeutic potential. She considers how interventions might be delivered, regulated, and scaled.",
+          "source": "LORs.pdf (Roh letter)",
+          "context": "Supervisor observation suggests she thinks beyond basic science to practical application. However, this is stated by recommender rather than demonstrated through specific examples."
+        },
+        {
+          "quote": "Beyond benchwork, I initiated discussions with our tech transfer office to evaluate IP potential and therapeutic strategy.",
+          "source": "tmpxk2erasx.pdf",
+          "context": "Shows proactive engagement with commercialization pathway, though details are vague. At minimum, demonstrates awareness that research needs IP strategy."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Translational thinking is valuable for innovation programs, but the evidence here is limited. The supervisor's observation is positive but not backed by specific examples of how this mindset led to different research decisions or outcomes."
+    },
+    {
+      "quality": "Clinical Exposure to Unmet Medical Needs",
+      "evidence": [
+        {
+          "quote": "Surgery Residency at Mayo Clinic, AZ (PGY-1, 2022-2023) and Yale School of Medicine, CT (PGY-2, 2023-2024)",
+          "source": "Shvedova_Maria_CV.pdf",
+          "context": "Direct clinical experience provides firsthand exposure to patient problems and healthcare delivery challenges. This is concrete experience, not theoretical knowledge."
+        },
+        {
+          "quote": "Clinical background in surgery with deep understanding of unmet medical needs.",
+          "source": "tmpxk2erasx.pdf",
+          "context": "While this is a stated quality, it's backed by documented clinical training. The claim of 'deep understanding' is harder to verify without specific examples."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Clinical experience is valuable for identifying real-world problems and understanding user needs. However, the candidate left residency after PGY-2 to return to research, suggesting research is her primary focus rather than clinical innovation."
+    },
+    {
+      "quality": "Persistence and Work Capacity",
+      "evidence": [
+        {
+          "quote": "Completed MD (2006-2012), PhD in Biomedical Engineering (2012-2016), Surgery Residency in Russia (2012-2014), then postdoctoral training at MGH/Harvard (2017-2020) and BU (2020-present), plus US surgery residency (2022-2024)",
+          "source": "Shvedova_Maria_CV.pdf",
+          "context": "Extensive training across multiple institutions and countries demonstrates sustained effort and ability to navigate complex systems. This is a long, demanding path."
+        },
+        {
+          "quote": "Trained multiple students and fellows in complex techniques including mouse microsurgeries, CRISPR procedures, and molecular biology methods",
+          "source": "Shvedova_Maria_CV.pdf",
+          "context": "Teaching others requires mastery of techniques and patience. Shows she can transfer knowledge and mentor junior researchers."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Building a startup requires sustained effort and resilience. Her training trajectory shows she can commit to long-term goals and handle demanding workloads. However, this is academic persistence, not entrepreneurial persistence - different contexts."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Maria Shvedova presents as a highly credentialed translational researcher with substantial scientific output and a clear pivot toward commercialization. Her CV demonstrates genuine research productivity: she has published 30+ peer-reviewed papers, led multiple independent projects, and secured competitive recognition including the Butler-Williams Scholars Program and multiple WHS awards. Her work on senescence in chronic wounds shows concrete outcomes - she \"designed and executed preclinical studies showing that senolytics improve healing in aged skin\" (tmpxk2erasx.pdf, application) and published this work demonstrating \"topical senolytic treatment with ABT-263 improves delayed wound healing\" (CV). Her supervisor Daniel Roh confirms she \"independently designed and executed a preclinical study demonstrating that topical senolytic therapy can reduce senescent cell burden and accelerate tissue repair in aged mice\" (LORs.pdf). This is real, demonstrated research capability, not stated qualities.\n\nHowever, the application reveals significant gaps in innovation and entrepreneurial experience. Her stated motivation is purely transactional: \"I lack formal training in venture creation\" and seeks \"practical exposure to identifying real-world problems, validating ideas, and early product development\" (application). She describes herself as \"actively evaluating IP and development path for a potential startup\" but provides zero specifics about what this evaluation entailed, what she learned, or what decisions resulted. The claim \"I evaluated the IP landscape and freedom-to-operate for a potential senolytic-based wound healing startup\" (application) is passive voice with no methodology, findings, or outcomes described. This is exactly the type of vague statement that expert raters would score 3-4 - hard to know what this actually means.\n\nThe letters of recommendation are concerningly generic. Roh's letter uses phrases like \"exceptional,\" \"strategically minded,\" and \"precisely the kind of cross-disciplinary thinker\" but provides only one concrete example (the senolytic study already on her CV). Sharov's letter is even weaker, stating she is \"uniquely talented\" and \"deeply intellectually curious\" without a single specific incident or achievement beyond restating her CV. Both letters read as formulaic academic endorsements rather than evidence-based assessments of innovation potential. The absence of specific examples of creative problem-solving, pivoting based on feedback, or translating research insights into practical applications is notable.\n\nMost critically, there is no evidence of the candidate working \"across disciplines and with diverse teams\" in any meaningful way beyond standard academic collaboration. Her \"cross-sector experience\" claim lists only academic institutions (BU, MGH, Harvard). The statement about \"coordinated across collaborators\" on the senescence project provides no details about who, how, or what challenges were overcome. Her non-expertise activity is described as \"exploring the path from research to company formation\" - pure exploration with no demonstrated learning or output. This application is approximately 70% research credentials and 30% aspirational statements about wanting to learn entrepreneurship, with minimal evidence of having actually done innovation work.",
+  "score_justification": "This score reflects a candidate with strong scientific credentials but limited demonstrated innovation experience. On the positive side: (1) Genuine research productivity with 30+ publications and competitive recognition (Butler-Williams Scholar, WHS awards); (2) Independent project leadership on translatable research (senolytic wound healing); (3) Clinical background providing exposure to unmet medical needs; (4) Supervisor confirmation of translational thinking. These are real strengths, not application fluff. However, significant concerns prevent a higher score: (1) Vague, passive-voice claims about entrepreneurial activity ('evaluated IP landscape') with zero specifics - expert raters would score this 3-4 as hard to assess; (2) No evidence of customer discovery, user research, or problem validation outside the lab; (3) Generic letters of recommendation lacking specific examples of innovation or creative problem-solving; (4) Transactional motivation (seeking training to fill gaps rather than bringing innovation experience); (5) No demonstrated experience working across disciplines beyond standard academic collaboration. The application is approximately 70% research credentials and 30% aspirational statements about wanting to learn entrepreneurship. While she has the scientific foundation to potentially succeed in innovation, the lack of evidence for actual entrepreneurial action or cross-disciplinary collaboration is concerning. She appears to be at the very beginning of her innovation journey, seeking Catalyst as a training program rather than bringing innovation experience to build upon. A score of 5.5 reflects moderate potential with significant reservations - she could succeed if highly motivated to learn, but the evidence suggests she may not be ready for a program that expects participants to drive innovation projects rather than just learn about them.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "I lead a project on senescence in chronic wounds, where I designed and executed preclinical studies showing that senolytics improve healing in aged skin. I identified key experimental questions, developed protocols, and coordinated across collaborators.",
+        "source": "tmpxk2erasx.pdf",
+        "context": "Demonstrates independent research leadership and ability to drive a project from conception to results. This is concrete scientific capability."
+      },
+      {
+        "quote": "She independently designed and executed a preclinical study demonstrating that topical senolytic therapy can reduce senescent cell burden and accelerate tissue repair in aged mice.",
+        "source": "LORs.pdf (Roh letter)",
+        "context": "Corroborates the research achievement and confirms independent execution. Shows ability to generate translatable results."
+      },
+      {
+        "quote": "I evaluated the IP landscape and freedom-to-operate for a potential senolytic-based wound healing startup and began shaping a translational strategy. While new to this space, I bring scientific diligence, fast learning, and strategic thinking to unfamiliar challenges.",
+        "source": "tmpxk2erasx.pdf",
+        "context": "This is the only evidence of entrepreneurial activity, but it's entirely passive voice with no specifics. What did the evaluation reveal? What strategy emerged? This reads as exploration rather than execution. The phrase 'while new to this space' confirms lack of experience."
+      },
+      {
+        "quote": "She consistently frames questions in terms of clinical relevance and therapeutic potential. She considers how interventions might be delivered, regulated, and scaled, and is eager to build the skills needed to translate research into practical solutions.",
+        "source": "LORs.pdf (Roh letter)",
+        "context": "Suggests translational thinking but is stated by supervisor rather than demonstrated through specific examples. The word 'eager' indicates future orientation rather than current capability."
+      }
+    ],
+    "reasoning": "The candidate demonstrates strong scientific capability but limited evidence of innovation mindset or entrepreneurial action. Her research productivity is genuine and substantial - 30+ publications, multiple first-author papers in respected journals, and independent project leadership. The senolytic wound healing work shows she can identify a therapeutic target, design experiments, and generate translatable results. Roh confirms she \"consistently frames questions in terms of clinical relevance and therapeutic potential\" and \"considers how interventions might be delivered, regulated, and scaled\" (LORs.pdf). This suggests some translational thinking.\n\nHowever, the evidence for actual innovation is thin. The IP evaluation she mentions is described in pure passive voice: \"I evaluated the IP landscape and freedom-to-operate\" with zero details about methodology, findings, or decisions made. Did she conduct patent searches? Identify blocking patents? Assess design-around strategies? We don't know. The claim about \"began shaping a translational strategy\" is equally vague - what strategy? What were the key decisions? What trade-offs did she consider? The application contains no evidence of customer discovery, problem validation, or iterative development. Her stated reason for applying is that she \"lacks formal training in venture creation\" - this is honest but suggests she hasn't attempted to learn these skills independently through reading, online courses, or informal conversations with entrepreneurs. The phrase \"actively evaluating IP and feasibility\" appears twice but remains completely unsubstantiated. An expert evaluator would score this claim 3-4: stated but not demonstrated, hard to assess what was actually done.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether the IP evaluation claim is real or application fluff. A genuine evaluation would involve specific patent searches, identification of blocking patents, and analysis of design-around strategies. Vague answers would confirm this is overstated.",
+      "category": "Probe claimed skill",
+      "question": "You mentioned evaluating the IP landscape and freedom-to-operate for a senolytic wound healing startup. Walk me through specifically what you did - what databases did you search, what key patents did you identify, and what did you conclude about freedom-to-operate?"
+    },
+    {
+      "purpose": "Assess depth of translational thinking. A real strategy would include target indication, delivery method, regulatory pathway, development milestones, and resource requirements. Generic answers would indicate superficial exploration.",
+      "category": "Probe claimed skill",
+      "question": "You said you 'began shaping a translational strategy' for the senolytic wound healing approach. What are the key elements of that strategy? What were the major decision points and trade-offs you considered?"
+    },
+    {
+      "purpose": "Determine if she has done any customer discovery or user research. The program values understanding real-world problems, but there's no evidence of this in the application. If she hasn't done this, it's a significant gap.",
+      "category": "Verify experience",
+      "question": "Tell me about a time when you talked to potential end-users or customers about your wound healing research. Who did you talk to, what did you learn, and how did it change your thinking?"
+    },
+    {
+      "purpose": "Understand her career priorities and whether she's genuinely committed to translational innovation or primarily interested in academic research. The decision to leave clinical training is significant and deserves explanation.",
+      "category": "Assess motivation",
+      "question": "You left surgery residency after PGY-2 to return to research. Walk me through that decision - what were you optimizing for, and how does that connect to your interest in Catalyst and potential startup formation?"
+    },
+    {
+      "purpose": "Assess self-directed learning and genuine interest in entrepreneurship. Strong candidates typically show initiative in learning new domains even without formal training. Lack of self-directed learning would be concerning.",
+      "category": "Explore concern",
+      "question": "The application mentions you lack formal training in venture creation. What have you done on your own to learn about entrepreneurship, customer discovery, or product development? What books have you read, courses taken, or entrepreneurs talked to?"
+    },
+    {
+      "purpose": "Evaluate ability to work across disciplines. The application claims cross-disciplinary experience but provides no specific examples. This question tests whether she has actually done this or if it's aspirational.",
+      "category": "Test fit",
+      "question": "Catalyst involves working in teams with people from very different backgrounds - engineers, designers, business people. Tell me about a time when you worked closely with someone from a completely different discipline. What was challenging about it and how did you navigate those challenges?"
+    },
+    {
+      "purpose": "Test whether translational thinking is real or just supervisor praise. A genuine example would show how considering delivery, regulation, or scalability influenced research design decisions.",
+      "category": "Probe claimed skill",
+      "question": "Your supervisor says you 'consistently frame questions in terms of clinical relevance and therapeutic potential.' Give me a specific example of a research question you framed this way, and explain how that framing led to different experimental choices than a purely basic science approach."
+    },
+    {
+      "purpose": "Determine if she has a concrete project in mind or is seeking general training. The program works best for candidates with specific innovation goals, not those seeking broad exposure.",
+      "category": "Assess fit",
+      "question": "Catalyst is designed for people who are actively building something, not just exploring. If you were accepted, what specific project would you work on during the program, and what would you hope to accomplish by the end?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview recommended despite concerns because: (1) Strong scientific foundation could translate to innovation if properly channeled; (2) Translatable research focus (senolytic wound healing) addresses real clinical need; (3) Clinical background provides valuable perspective on unmet medical needs; (4) Honest about gaps rather than overstating experience. However, the interview should focus heavily on probing the vague entrepreneurial claims, assessing self-directed learning about innovation, and determining whether she has concrete project plans or is seeking general training. Key questions to resolve: Has she done any real IP analysis or customer discovery? Can she work effectively across disciplines? Is she genuinely committed to building something or primarily interested in academic research? The interview will be critical in determining whether the lack of innovation evidence reflects inexperience that can be overcome with the right support, or fundamental misalignment with the program's action-oriented approach. If she cannot provide specific details about her IP evaluation, has done no customer discovery, and lacks concrete project plans, the recommendation would shift to 'not recommended.' The score of 5.5 puts her right at the borderline - interview performance will determine final decision."
+}

@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T23:51:54.067831",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 163.86046934127808,
+    "materials_character_count": 22240
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpwlwz0nu2.pdf"
+    ],
+    "candidate_id": "Sinha_Diviya_app",
+    "evaluation_date": "2026-02-25 23:51:54.067713"
+  },
+  "red_flags": [
+    {
+      "flag": "No publications after 10+ years of research (PhD 2011-2021, Research Specialist 2022-2023)",
+      "evidence": "CV lists conference presentations but zero peer-reviewed publications. For someone claiming expertise in 'Translational Bench-to-Bedside Applications' and 'Cancer Immunotherapy' with a completed PhD and additional research year, absence of publications is highly concerning. Statement 'I am currently between full-time employment positions while I work on my doctoral manuscripts' (tmpwlwz0nu2.pdf, page 5) suggests papers still not published 4+ years after PhD completion (2021).",
+      "severity": "high"
+    },
+    {
+      "flag": "Application dominated by generic stated qualities without specific evidence",
+      "evidence": "Opening statement: 'I possess strong analytical skills and problem-solving experience in academic and industrial settings. Passionate about tackling impactful healthcare challenges, I thrive in collaborative environments' (tmpwlwz0nu2.pdf, page 1). Competencies section: 'Problem-solving using a combinatorial approach that balances quick assessments of overall impact with thorough troubleshooting of technical challenges, Leadership and teamwork with dedicated colleagues from diverse backgrounds' (tmpwlwz0nu2.pdf, page 1-2). These are textbook examples of application fluff - could apply to any candidate, no specific examples provided.",
+      "severity": "high"
+    },
+    {
+      "flag": "Vague descriptions of research contributions using passive voice",
+      "evidence": "'Our experimental approach revealed the beneficial effects of ultrasound on skin vaccination and established a robust framework' (tmpwlwz0nu2.pdf, page 3) - who is 'our'? What was candidate's specific contribution? 'I successfully correlated ultrasound energy with the induced T cell response' (tmpwlwz0nu2.pdf, page 3) - no methodology, no validation, no metrics provided. Passive constructions obscure actual contributions.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of leadership despite claiming it as core competency",
+      "evidence": "Claims 'Leadership and teamwork with dedicated colleagues from diverse backgrounds' (tmpwlwz0nu2.pdf, page 1-2) but provides no examples of leading teams, mentoring others, or driving projects. Hackathon description says 'Led a team of 4 biomedical professionals' (tmpwlwz0nu2.pdf, page 5) but this is a short-term event, not sustained leadership. Teaching experience shows TA work only, no course development or mentorship programs.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear career trajectory and commitment",
+      "evidence": "'I am currently between full-time employment positions while I work on my doctoral manuscripts and apply for postdoctoral opportunities' (tmpwlwz0nu2.pdf, page 5). Completed PhD in 2021, worked as Research Specialist 2022-2023, then AbbVie 2023-2024, now unemployed and job searching. Pattern suggests difficulty finding or committing to positions. Active postdoc search raises questions about program commitment if position secured mid-program.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No patents, clinical trials, or translational outcomes despite claiming translational expertise",
+      "evidence": "Lists 'Translational Bench-to-Bedside Applications' as domain expertise (tmpwlwz0nu2.pdf, page 1) but CV shows no patents, no clinical trials, no FDA submissions, no products developed. After 10+ years working on 'cancer immunotherapy' and 'skin vaccination,' there's no evidence of translation beyond bench research.",
+      "severity": "high"
+    },
+    {
+      "flag": "Motivation focused on personal gain rather than program contribution",
+      "evidence": "'As a Fellow in the Catalyst program, I look forward to contributing, learning, and gaining critical experience for a successful career in healthcare. I'm eager to grow and excited about the program's potential' (tmpwlwz0nu2.pdf, page 1). Emphasis is on 'learning,' 'gaining critical experience,' 'eager to grow' - what candidate hopes to extract from program rather than unique value they bring to cohort.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Recent shift to routine industry work away from innovation",
+      "evidence": "AbbVie role (2023-2024) described as 'Upstream cell culture monoclonal antibodies (mAbs) production and downstream purification process development' (tmpwlwz0nu2.pdf, page 3) - this is routine biomanufacturing process optimization, not innovative research. Suggests candidate may be moving away from innovation toward more routine technical work.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "No evidence of publications, patents, or tangible research outputs after 10+ years of graduate work and research",
+      "Application heavily reliant on stated qualities rather than demonstrated achievements with specific outcomes",
+      "Unclear commitment given active job search for postdoctoral positions that may conflict with program",
+      "Limited evidence of leadership - no examples of leading teams, mentoring, or driving projects to completion",
+      "Motivation appears more focused on personal career development than contributing unique value to program cohort",
+      "Recent career shift to routine industry work (AbbVie process development) suggests move away from innovation"
+    ],
+    "evidence": [
+      {
+        "quote": "I am a recent MIT PhD graduate with an interdisciplinary background in life sciences and engineering. I possess strong analytical skills and problem-solving experience in academic and industrial settings. Passionate about tackling impactful healthcare challenges, I thrive in collaborative environments.",
+        "source": "tmpwlwz0nu2.pdf, page 1",
+        "context": "This opening statement is entirely generic fluff - could apply to thousands of candidates. No specific examples, no concrete achievements, just stated qualities. Red flag for lack of demonstrated impact."
+      },
+      {
+        "quote": "As a Fellow in the Catalyst program, I look forward to contributing, learning, and gaining critical experience for a successful career in healthcare. I'm eager to grow and excited about the program's potential.",
+        "source": "tmpwlwz0nu2.pdf, page 1",
+        "context": "Motivation is entirely about what candidate hopes to gain ('learning,' 'gaining critical experience,' 'eager to grow') rather than what unique value they bring. Suggests program is viewed as career development opportunity rather than mutual contribution."
+      },
+      {
+        "quote": "I collaborated with an immunology lab at Harvard. This partnership confirmed my hypothesis and allowed us to investigate true immunological outcomes like T cell responses.",
+        "source": "tmpwlwz0nu2.pdf, page 2-3",
+        "context": "Shows ability to initiate interdisciplinary collaboration, which aligns with program goal of working across disciplines. However, uses passive voice and doesn't specify what the candidate personally contributed versus what the Harvard lab did."
+      },
+      {
+        "quote": "I am currently between full-time employment positions while I work on my doctoral manuscripts and apply for postdoctoral opportunities.",
+        "source": "tmpwlwz0nu2.pdf, page 5",
+        "context": "Indicates availability for program but also suggests divided attention and potential commitment issues if postdoc position is secured mid-program. Also concerning that manuscripts are still being written years after PhD completion (2021)."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate's fit with the program is mixed. On the positive side, they demonstrate awareness of interdisciplinary collaboration, having worked across chemical engineering and immunology. The statement about learning \"how to seek help, network, and highlight the benefits of collaboration\" (tmpwlwz0nu2.pdf, page 2) suggests some collaborative capacity, though this is stated rather than demonstrated with specific examples. The candidate's current career transition (\"currently in between full-time positions\") and active job search for postdoctoral positions creates availability for the program, as they note \"My calendar is open for the upcoming months\" (tmpwlwz0nu2.pdf, page 5). However, this also raises questions about commitment - will they remain engaged if they secure a demanding postdoc position mid-program?\n\nSignificant concerns exist regarding several program goals. For \"translate research into practical impact,\" the candidate has minimal evidence despite 10+ years in research. No publications, no patents, no clinical trials, no products developed. The AbbVie experience was in routine process development, not translation of novel research. For \"drive innovation and creative problem-solving,\" the evidence is weak - mostly stated qualities like \"I possess strong analytical skills and problem-solving experience\" (tmpwlwz0nu2.pdf, page 1) without concrete examples. The application's opening statement is particularly concerning: \"I am passionate about tackling impactful healthcare challenges, I thrive in collaborative environments\" (tmpwlwz0nu2.pdf, page 1) - this is exactly the kind of generic fluff that signals lack of genuine demonstrated impact. For \"communicate complex ideas effectively,\" there's one science slam finalist placement but no evidence of publications, presentations at major conferences, or successful grant proposals beyond the 2014 Ragon grant. The candidate's motivation statement focuses heavily on what they hope to gain (\"learning, and gaining critical experience for a successful career in healthcare. I look forward to contributing, learning\") rather than what unique value they bring to the cohort.",
+    "strengths_for_program": [
+      "Interdisciplinary background spanning chemical engineering and immunology, demonstrated by PhD minor in immunology and collaboration with Harvard immunology lab",
+      "Currently available with flexible schedule, able to commit to program time requirements",
+      "Some industry experience at AbbVie providing exposure to biomanufacturing and process development",
+      "Academic pedigree from strong institutions (MIT PhD, IIT Kanpur undergraduate)"
+    ]
+  },
+  "overall_score": 4.5,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "Interdisciplinary Awareness",
+      "evidence": [
+        {
+          "quote": "For my doctoral thesis on ultrasound for skin vaccination, I found that while engineers focused on drug delivery through the skin, they often overlooked the immunological impacts. Recognizing that immune responses involve more than just antibody titers, I collaborated with an immunology lab at Harvard.",
+          "source": "tmpwlwz0nu2.pdf, page 2-3",
+          "context": "Shows ability to recognize gaps between disciplines and initiate collaboration to address them."
+        },
+        {
+          "quote": "Without a biology course since high school and lacking knowledge of key concepts, my journey into immunology involved overcoming significant challenges through curiosity, collaboration, and resilience.",
+          "source": "tmpwlwz0nu2.pdf, page 2",
+          "context": "Demonstrates willingness to learn outside core expertise, though the statement is somewhat generic about 'curiosity, collaboration, and resilience' without specific examples."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Program values working across disciplines. Candidate shows some capacity for this, though evidence is limited to one collaboration and lacks specifics about outcomes."
+    },
+    {
+      "quality": "Academic Credentials",
+      "evidence": [
+        {
+          "quote": "Doctor of Philosophy in Chemical Engineering, GPA: 4.7/5.0",
+          "source": "tmpwlwz0nu2.pdf, page 7",
+          "context": "Strong academic performance at MIT."
+        },
+        {
+          "quote": "Bachelor of Technology in Chemical Engineering, GPA: 9.6/10. Awarded the Proficiency Medal for the best Senior Thesis and the General Proficiency Medal for the best Academic Performance in Chemical Engineering in 2009. Awarded the 'Gargi Award' for the female student with the highest undergraduate GPA from 2005 to 2009.",
+          "source": "tmpwlwz0nu2.pdf, page 7",
+          "context": "Exceptional undergraduate performance at top Indian institution with multiple academic awards."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates strong technical foundation and ability to excel in rigorous academic environments. However, academic performance alone doesn't predict innovation capacity or practical impact."
+    },
+    {
+      "quality": "Grant Writing Ability",
+      "evidence": [
+        {
+          "quote": "Co-lead author of a 115K Ragon Innovation Grant in 2014 for developing an effective HIV vaccination strategy.",
+          "source": "tmpwlwz0nu2.pdf, page 7",
+          "context": "Successfully secured research funding, though this was 11 years ago and there's no evidence of outcomes or follow-on funding."
+        },
+        {
+          "quote": "Awarded the 50K Faculty for the Future Fellowship from the Schlumberger Foundation in 2015.",
+          "source": "tmpwlwz0nu2.pdf, page 7",
+          "context": "Received competitive fellowship, though this is a diversity/support fellowship rather than merit-based research grant."
+        }
+      ],
+      "confidence": "low",
+      "significance": "Some demonstrated ability to secure funding, but limited and dated evidence. No recent grants or evidence of sustained funding success."
+    },
+    {
+      "quality": "Communication Skills",
+      "evidence": [
+        {
+          "quote": "Top 8 finalist at the 2023 annual GAIN23 (German Academic International Network) Science SLAM for the most engaging, entertaining, and scientific thesis research presentation in a 5-minute pitch.",
+          "source": "tmpwlwz0nu2.pdf, page 7",
+          "context": "Demonstrates ability to present research engagingly to general audiences."
+        },
+        {
+          "quote": "Effective oral/written communication tailored to the audience and stakeholders.",
+          "source": "tmpwlwz0nu2.pdf, page 1-2",
+          "context": "Stated quality without specific examples or evidence of tailoring communication to different audiences."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Program values effective communication. Science slam performance shows some ability, but lack of publications or conference presentations is concerning for written/scientific communication."
+    },
+    {
+      "quality": "Process Development Experience",
+      "evidence": [
+        {
+          "quote": "Upstream cell culture monoclonal antibodies (mAbs) production and downstream purification process development subject to the dynamic demand of approved patient mAbs and those in process during clinical trial phases. Bioreactor process optimization for high and consistent yield of mAb production over cell culture cycle for mAbs varying in biometabolic production and drug chemistry.",
+          "source": "tmpwlwz0nu2.pdf, page 3",
+          "context": "One year of industry experience in biomanufacturing process development at AbbVie."
+        },
+        {
+          "quote": "Contributed to more than 5 project presentations in the annual innovation symposium as part of investigative teams on upstream and downstream process development.",
+          "source": "tmpwlwz0nu2.pdf, page 3",
+          "context": "Participated in multiple projects, though role is described as 'part of investigative teams' rather than leading."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Provides some practical industry experience, but this is routine process work rather than innovation. May be useful for understanding manufacturing constraints in translational work."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Diviya Sinha presents as a technically competent PhD graduate with solid academic credentials (MIT PhD in Chemical Engineering, GPA 4.7/5.0, IIT Kanpur undergraduate GPA 9.6/10) and a research focus on ultrasound-assisted drug delivery and immunotherapy. However, the application is heavily laden with generic statements and lacks the concrete, specific evidence of innovation and impact that would distinguish a strong candidate. The statement \"I am a recent MIT PhD graduate with an interdisciplinary background in life sciences and engineering. I possess strong analytical skills and problem-solving experience\" (tmpwlwz0nu2.pdf, page 1) exemplifies the pervasive fluff throughout - these are stated qualities without demonstration. The candidate's core research contribution appears to be recognizing that \"engineers focused on drug delivery through the skin, they often overlooked the immunological impacts\" (tmpwlwz0nu2.pdf, page 2) and subsequently collaborating with an immunology lab at Harvard to investigate T cell responses. While this shows some interdisciplinary awareness, the description remains vague about actual innovations or outcomes achieved.\n\nThe CV reveals a concerning pattern: despite 10+ years of graduate work (2011-2021 PhD, plus 2022-2023 as Research Specialist), there are no publications listed, no patents mentioned, and no concrete metrics of research impact beyond winning a science slam competition and receiving grants. The candidate states they \"successfully correlated ultrasound energy with the induced T cell response\" (tmpwlwz0nu2.pdf, page 3) but provides no data, no publication reference, no validation of this correlation's significance. For someone claiming expertise in \"Translational Bench-to-Bedside Applications\" and \"Cancer Immunotherapy\" (tmpwlwz0nu2.pdf, page 1), the absence of tangible translational outcomes or clinical progress is notable. The one year at AbbVie (2023-2024) as \"Biologist III\" in process development suggests a shift away from research innovation toward routine biomanufacturing work, with descriptions like \"Upstream cell culture monoclonal antibodies production and downstream purification process development\" (tmpwlwz0nu2.pdf, page 3) that read as standard industry responsibilities rather than innovative contributions.\n\nThe candidate's self-described strengths in \"Leadership and teamwork with dedicated colleagues from diverse backgrounds\" (tmpwlwz0nu2.pdf, page 1-2) lack any specific examples of leading teams, mentoring others, or driving collaborative projects to completion. The teaching experience section shows TA work for two courses in 2013, but no evidence of sustained mentorship or educational innovation. The most concrete achievement appears to be co-leading a \"115K Ragon Innovation Grant in 2014 for developing an effective HIV vaccination strategy\" (tmpwlwz0nu2.pdf, page 7), but there's no follow-up on what this grant produced or whether the strategy was successful. The application reads as someone with solid technical training who has not yet demonstrated the ability to drive independent innovation or translate research into measurable impact - concerning for a program seeking candidates who can \"drive innovation and creative problem-solving\" and \"translate research into practical impact.\"",
+  "score_justification": "This score reflects significant concerns that outweigh the candidate's solid academic credentials. While Diviya has strong educational background (MIT PhD 4.7/5.0 GPA, IIT Kanpur 9.6/10 GPA with top academic awards), the application is dominated by stated qualities without concrete evidence of innovation or impact. The most critical red flag is zero publications after 10+ years of research (PhD 2011-2021, Research Specialist 2022-2023), which is highly unusual for someone claiming expertise in translational research and cancer immunotherapy. The core research contribution - recognizing immunological effects of ultrasound treatment - is described vaguely without specific methodology, outcomes, or validation. Statements like 'I successfully correlated ultrasound energy with the induced T cell response' (tmpwlwz0nu2.pdf, page 3) lack the specificity expected from rigorous research (no correlation coefficient, no p-values, no publication). The application relies heavily on generic fluff: 'I possess strong analytical skills and problem-solving experience,' 'Passionate about tackling impactful healthcare challenges, I thrive in collaborative environments' (tmpwlwz0nu2.pdf, page 1) - these could describe any candidate and provide no evidence of actual capabilities. The claimed 'leadership and teamwork' competency has no supporting examples of leading teams or mentoring others. The one year at AbbVie involved routine process development work, not innovation. The candidate's motivation appears focused on personal career development ('learning, and gaining critical experience') rather than contributing unique value to the program. Career instability (PhD 2021, multiple short positions, currently unemployed and job searching) raises commitment concerns. The 2014 Ragon grant ($115K) shows some early promise, but with no evidence of outcomes 11 years later, this doesn't offset the pattern of limited tangible impact. A score of 4.5 reflects that while the candidate has technical competence and academic credentials, they have not demonstrated the innovation capacity, research productivity, or translational impact expected for a competitive innovation fellowship program.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "Having a fresh perspective outside of a specific field allows an investigator to identify potential issues and collaborate effectively. For my doctoral thesis on ultrasound for skin vaccination, I found that while engineers focused on drug delivery through the skin, they often overlooked the immunological impacts.",
+        "source": "tmpwlwz0nu2.pdf, page 2-3",
+        "context": "This shows interdisciplinary awareness and ability to identify gaps, but is stated in generic terms without specific examples of what immunological impacts were discovered or how this changed the field's understanding."
+      },
+      {
+        "quote": "Our experimental approach revealed the beneficial effects of ultrasound on skin vaccination and established a robust framework for exploring other dermal vaccination technologies.",
+        "source": "tmpwlwz0nu2.pdf, page 3",
+        "context": "Claims to have established a 'robust framework' but provides no evidence of this framework being adopted, published, or validated by others. The passive voice ('revealed') obscures who did what and what the actual innovation was."
+      },
+      {
+        "quote": "Co-lead author of a 115K Ragon Innovation Grant in 2014 for developing an effective HIV vaccination strategy.",
+        "source": "tmpwlwz0nu2.pdf, page 7",
+        "context": "Demonstrates ability to secure research funding for innovative ideas, but there's no follow-up on outcomes, publications, or whether the HIV vaccination strategy was successful. Grant was 11 years ago with no evidence of results."
+      },
+      {
+        "quote": "Top 8 finalist at the 2023 annual GAIN23 (German Academic International Network) Science SLAM for the most engaging, entertaining, and scientific thesis research presentation in a 5-minute pitch.",
+        "source": "tmpwlwz0nu2.pdf, page 7",
+        "context": "Shows ability to communicate research engagingly, but science slams reward presentation skills more than innovation quality. Being top 8 finalist (not winner) is modest recognition."
+      }
+    ],
+    "reasoning": "The candidate demonstrates some capacity for interdisciplinary thinking by recognizing gaps between engineering and immunology perspectives, but the evidence of actual innovation is limited and mostly stated rather than demonstrated. The core claimed innovation - that ultrasound treatment has immunological effects beyond simple drug delivery - is described in vague terms without concrete validation. The statement \"I successfully correlated ultrasound energy with the induced T cell response, addressing the shortcomings of focusing solely on antibody titers\" (tmpwlwz0nu2.pdf, page 3) uses passive construction and provides no specifics about the correlation methodology, statistical significance, or how this advances the field. A truly innovative contribution would include publications, citations, follow-on work by others, or clinical translation - none of which are evidenced.\n\nThe candidate's work history suggests incremental technical contributions rather than breakthrough innovations. At AbbVie, the described work is standard process optimization: \"Bioreactor process optimization for high and consistent yield of mAb production\" and \"Investigated different separation membranes and chromatographic purification materials\" (tmpwlwz0nu2.pdf, page 3). These are competent technical activities but not innovative. The 2025 hackathon project on \"Theranostic Microbe Profiler\" for antibiotic resistance shows some creative problem-solving ability, but leading \"a team of 4 biomedical professionals\" (tmpwlwz0nu2.pdf, page 5) in a short hackathon is not evidence of sustained innovation capacity. The absence of publications after 10+ years of research is a significant red flag - innovative researchers publish their findings. The candidate may have solid technical skills and interdisciplinary awareness, but has not yet demonstrated the ability to generate novel, validated, impactful innovations that advance their field.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether vague research claims are backed by actual rigorous work. If candidate cannot provide specific methodology and results, this suggests the contribution was less substantial than claimed.",
+      "category": "Verify experience",
+      "question": "You mention successfully correlating ultrasound energy with induced T cell response in your thesis. Can you walk me through the specific methodology you used, the statistical analysis performed, and the key quantitative findings? What was the correlation coefficient and p-value?"
+    },
+    {
+      "purpose": "Determine if leadership claim is real or fluff. Looking for concrete example with candidate's specific actions and measurable outcomes, not generic descriptions of being 'part of a team.'",
+      "category": "Probe claimed skill",
+      "question": "You list 'leadership and teamwork' as a core competency. Can you describe a specific situation where you led a team through a significant challenge? What was your role, what decisions did you make, and what was the outcome?"
+    },
+    {
+      "purpose": "Understand the significant red flag of no publications. Legitimate reasons might exist (advisor issues, negative results), but this is critical for assessing research productivity and innovation validation.",
+      "category": "Assess innovation capacity",
+      "question": "After 10+ years of research on ultrasound-assisted immunotherapy, why haven't you published your findings in peer-reviewed journals? What has prevented publication, and what is the current status of your manuscripts?"
+    },
+    {
+      "purpose": "Test whether translational expertise is real or just a buzzword. Strong candidates should articulate specific FDA pathways, manufacturing challenges, clinical trial design, etc.",
+      "category": "Test translational thinking",
+      "question": "You claim expertise in 'translational bench-to-bedside applications.' What specific steps would be required to move your ultrasound skin vaccination work from your PhD research toward clinical application? What are the key regulatory, manufacturing, and clinical hurdles?"
+    },
+    {
+      "purpose": "Understand career instability and assess commitment risk. Need to know if candidate will remain engaged if they secure demanding position mid-program.",
+      "category": "Explore concern",
+      "question": "Your career path shows PhD completion in 2021, research specialist role 2022-2023, AbbVie 2023-2024, and now you're between positions. Can you explain this trajectory and what you're looking for in your next role? How would a postdoc position affect your commitment to this program?"
+    },
+    {
+      "purpose": "Determine if candidate truly drove interdisciplinary work or just participated passively. Looking for evidence of intellectual contribution, not just 'collaboration' as buzzword.",
+      "category": "Probe interdisciplinary work",
+      "question": "You describe collaborating with a Harvard immunology lab. What specifically did you contribute to that collaboration versus what the immunology experts contributed? How did you handle disagreements about experimental design or interpretation?"
+    },
+    {
+      "purpose": "Force candidate to articulate concrete impact beyond generic claims. Will reveal whether they understand what 'impact' means and whether they have actually achieved it.",
+      "category": "Assess program fit",
+      "question": "This program emphasizes translating research into practical impact. Looking at your CV, what do you consider your most impactful contribution to date, and how do you measure that impact? What evidence do you have that your work has influenced the field or benefited patients?"
+    },
+    {
+      "purpose": "Assess whether communication skills extend beyond entertaining presentations to rigorous scientific discourse. Science slams reward showmanship; need evidence of technical communication.",
+      "category": "Test communication skills",
+      "question": "You were a top 8 finalist in a science slam. That's great for public engagement, but how do you communicate complex technical findings to scientific peers? Can you describe a time when you had to defend your research findings to skeptical experts?"
+    },
+    {
+      "purpose": "Test whether claimed innovation has been validated by field adoption. If no one else has used the framework, it may not be as robust or impactful as claimed.",
+      "category": "Verify claimed innovation",
+      "question": "You state that your work 'established a robust framework for exploring other dermal vaccination technologies.' Has anyone else adopted this framework? Can you point to specific examples of other researchers or companies using your approach?"
+    },
+    {
+      "purpose": "Assess genuine learning and growth versus generic claims. Looking for specific incident, reflection on failure, and evidence of behavior change - hallmarks of real learning.",
+      "category": "Assess learning and growth",
+      "question": "You mention learning from your doctoral experience about 'focusing on potential impact and effectively communicating this to stakeholders.' Can you give a specific example where you initially failed to communicate impact effectively, what you learned, and how you changed your approach?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is NO based on multiple high-severity red flags that cannot be adequately addressed in an interview setting. The absence of publications after 10+ years of research is disqualifying for a program seeking innovation leaders - this suggests either research was not rigorous enough to publish, candidate lacks follow-through, or results were not significant. The pervasive use of generic stated qualities without specific evidence ('strong analytical skills,' 'passionate about healthcare challenges,' 'thrive in collaborative environments') indicates either inability to articulate concrete achievements or lack of such achievements. The vague descriptions of research contributions using passive voice ('our experimental approach revealed,' 'established a robust framework') without specific outcomes, metrics, or validation suggest the actual contributions may be minimal. For a competitive fellowship program with limited slots, interviewing this candidate would consume resources better spent on candidates with demonstrated track records of innovation and impact. The application shows someone with solid technical training but lacking evidence of the independent innovation, research productivity, and translational thinking the program requires. Even if interview revealed hidden strengths, the fundamental gaps (no publications, no patents, no translational outcomes, no clear leadership examples) are too significant to overcome. Score of 4.5 is below the 6.0 threshold for interview consideration, and the high-severity red flags reinforce this decision."
+}

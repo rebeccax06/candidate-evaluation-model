@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T21:58:43.819851",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 153.47977137565613,
+    "materials_character_count": 25173
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpfzuhgyh4.pdf"
+    ],
+    "candidate_id": "Katari_Ravi_app",
+    "evaluation_date": "2026-02-25 21:58:43.819685"
+  },
+  "red_flags": [
+    {
+      "flag": "Missing Reference Letters - Procedural Failure",
+      "evidence": "\"I am writing a short note in regards to the application process for the Catalyst program. I spent a fair bit of time writing thoughtful answers to the prompted questions. Nevertheless, I was unaware that two reference letters were required for upload.\" (catalyst_cover.pdf). This represents either insufficient attention to application requirements or last-minute preparation, both concerning for a competitive fellowship.",
+      "severity": "high"
+    },
+    {
+      "flag": "Pattern of Short-Term Commitments Across Multiple Roles",
+      "evidence": "\"Mount Sinai West/Morningside, Attending Physician, New York, NY 7/2020 -1/2022\" (18 months); \"Boston Consulting Group, Consultant, New York, NY (full-time) 1/2022 -8/2023\" (19 months); \"DigitalDx Ventures, Fellow, Menlo Park, CA 5/2024 -8/2024\" (3 months); plus multiple concurrent part-time clinical roles (CV). This pattern raises serious questions about ability to sustain commitment to challenging long-term problems, a core program requirement.",
+      "severity": "high"
+    },
+    {
+      "flag": "Application Heavy on Generic Claims, Light on Specific Evidence",
+      "evidence": "Multiple instances of fluff: \"I am driven and motivated by curiosity\" (stated quality, not demonstrated); \"The fellowship, to me, represents an opportunity to articulate and actualize a balance between reckless innovation and social responsibility\" (philosophical musing without examples); \"I believe my record demonstrates that\" (self-assertion without specific supporting evidence). The application relies heavily on generic statements rather than concrete examples of achievements.",
+      "severity": "high"
+    },
+    {
+      "flag": "Passive Voice and Vague Descriptions of Contributions",
+      "evidence": "\"I helped launch a digital health unit\" (what specifically did you do?); \"guided the client through the acquisition\" (what was your role versus the team's?); \"Conducted industry research to determine best practices\" (standard consulting work, not innovation); \"Employed rigorous market research\" (generic description). These passive constructions make it impossible to assess individual contributions versus team efforts.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Declining Research Productivity",
+      "evidence": "CV shows concentration of publications in 2013-2016 period during residency/fellowship, with minimal recent scholarly output. Most recent substantive research appears to be 2015-2016. Since transitioning to consulting (2022) and venture work (2024), no evidence of continued research contributions. This suggests movement away from hands-on research/innovation toward purely evaluative roles.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Defensive and Somewhat Confrontational Tone",
+      "evidence": "\"I pivoted from medicine to management consulting which, unapologetically, was a dramatic shift\" (defensive about career change); \"Biomedical research and federal funding for science and empirical reality is at a low point, currently. When ordinary people see major institutions in a state of denial about this--or failing to acknowledge it, it is demoralizing and diminishing. You should know that I hold that opinion.\" (confrontational tone in optional question). This tone suggests potential difficulty with feedback or collaborative environments.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited Evidence of Leading Transformative Projects",
+      "evidence": "No clear examples in application of projects where candidate was primary driver of innovation with measurable transformative impact. Most examples involve contributing to team efforts (research publications as co-author), executing standard professional duties (clinical work, consulting deliverables), or evaluating others' work (due diligence). The most specific claimed achievement is \"guided the client through the acquisition of a digital sleep health company\" but role and impact are vague.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear Motivation for Catalyst Program",
+      "evidence": "Interest statement focuses on abstract concepts (\"balance between reckless innovation and social responsibility\", \"institutional empiricism\") rather than specific problems to solve or innovations to create. States \"The emphasis on a 'clinical needs-driven approach' as opposed to funding or academic incentives stands out to me immediately\" but doesn't explain what specific clinical needs he wants to address or what he wants to build. This suggests attraction to program philosophy rather than clear project vision.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Pattern of frequent career changes raises questions about sustained commitment to challenging problems",
+      "Recent work emphasizes evaluation/analysis over creation/innovation",
+      "Application contains significant generic claims without specific supporting evidence",
+      "Missing reference letters suggests insufficient preparation or attention to requirements",
+      "Limited evidence of leading transformative projects or driving measurable impact",
+      "Most substantive research contributions appear to be from early career (2013-2016), with minimal recent scholarly output"
+    ],
+    "evidence": [
+      {
+        "quote": "I pivoted from medicine to management consulting which, unapologetically, was a dramatic shift in environment. I do not have an MBA. And until that point, I had not opened up Excel or Powerpoint in over a decade.",
+        "source": "tmpfzuhgyh4.pdf (application)",
+        "context": "Demonstrates willingness to step outside comfort zone, but also shows pattern of major career pivots that may indicate difficulty with sustained focus. The tone ('unapologetically') suggests defensiveness about this pattern."
+      },
+      {
+        "quote": "Mount Sinai West/Morningside, Attending Physician, New York, NY 7/2020 -1/2022; Boston Consulting Group, Consultant, New York, NY (full-time) 1/2022 -8/2023; DigitalDx Ventures, Fellow, Menlo Park, CA 5/2024 -8/2024",
+        "source": "tmpfzuhgyh4.pdf (CV)",
+        "context": "Shows pattern of 1-2 year commitments across different roles and sectors. Raises questions about ability to sustain long-term commitment to challenging problems as required by program."
+      },
+      {
+        "quote": "The fellowship, to me, represents an opportunity to articulate and actualize a balance between reckless innovation and social responsibility.",
+        "source": "tmpfzuhgyh4.pdf (application)",
+        "context": "Philosophical statement about program goals but provides no examples of how candidate has previously balanced these forces. This is aspirational rather than demonstrated capability."
+      },
+      {
+        "quote": "I am writing a short note in regards to the application process for the Catalyst program. I spent a fair bit of time writing thoughtful answers to the prompted questions. Nevertheless, I was unaware that two reference letters were required for upload.",
+        "source": "tmpfzuhgyh4.pdf (catalyst_cover.pdf)",
+        "context": "Procedural failure suggests either insufficient attention to application requirements or last-minute preparation. Concerning for a competitive fellowship program."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Katari's fit with the Catalyst program is mixed, with some alignment on paper but significant concerns about depth of commitment and demonstrated capabilities. On the positive side, he has exposure to multiple relevant domains: clinical medicine, academic research, business consulting, and venture capital. This breadth could theoretically enable cross-disciplinary thinking. His clinical background provides direct exposure to healthcare problems, which aligns with the program's emphasis on translating research into practical impact. His consulting experience at BCG suggests some exposure to commercialization thinking, and his venture fellowship indicates interest in the innovation ecosystem.\n\nHowever, several factors raise concerns about fit. First, his pattern of frequent career changes (academic medicine 2020-2022, consulting 2022-2023, multiple part-time clinical roles, venture fellowship 2024) suggests potential difficulty with sustained commitment to long-term challenging problems - a key program requirement. The program seeks candidates who \"demonstrate sustained commitment to challenging problems,\" but his CV shows a pattern of 1-2 year stints across different roles. Second, his application emphasizes evaluation and analysis over creation and implementation. The program values \"driving innovation and creative problem-solving,\" but most of his recent work involves assessing others' innovations (due diligence at DigitalDx, market research at BCG) rather than building his own solutions.\n\nThird, the application contains significant fluff that suggests misalignment with the program's evidence-based culture. Statements like \"I admire that ethos but it needs to be responsibly deployed. Defining 'needs' requires institutional empiricism\" (application) are abstract philosophizing without concrete examples of how he has practiced this. The program seeks candidates who \"show genuine evidence of these qualities through their actions and achievements, not just stated intentions\" - yet much of his application consists of stated intentions. His claim that \"Biomedical research and federal funding for science and empirical reality is at a low point, currently\" (application) shows awareness of systemic issues but doesn't demonstrate how he has worked to address them. Finally, the missing reference letters and last-minute cover note (\"I was unaware that two reference letters were required for upload\" - catalyst_cover.pdf) suggest either insufficient preparation or inattention to program requirements, both concerning for a competitive fellowship.",
+    "strengths_for_program": [
+      "Clinical experience provides direct exposure to healthcare problems and patient needs",
+      "Diverse experience across research, consulting, and venture capital could enable cross-disciplinary thinking",
+      "Publication record demonstrates ability to contribute to academic discourse and communicate complex ideas",
+      "Consulting experience may provide frameworks for thinking about commercialization and implementation"
+    ]
+  },
+  "overall_score": 5.2,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Breadth of Experience Across Healthcare Ecosystem",
+      "evidence": [
+        {
+          "quote": "Clinical medicine, particularly emergency medicine, trauma, and critical care. I manage teams of doctors, nurses, residents, and medical students in all presentations of critical ailments",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Demonstrates direct clinical experience with acute care and team management"
+        },
+        {
+          "quote": "Boston Consulting Group, Consultant, New York, NY (full-time) 1/2022 -8/2023; Digital Health; Helped launch a digital health and medicine business unit for a major global biopharmaceutical company",
+          "source": "tmpfzuhgyh4.pdf (CV and application)",
+          "context": "Shows exposure to business strategy and commercialization in healthcare"
+        },
+        {
+          "quote": "DigitalDx Ventures, Fellow, Menlo Park, CA 5/2024 -8/2024; Conduct due diligence on potential investment opportunities on AI-driven solutions in the diagnostic space",
+          "source": "tmpfzuhgyh4.pdf (CV)",
+          "context": "Indicates exposure to venture capital and early-stage innovation evaluation"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This breadth could theoretically enable cross-disciplinary problem-solving and understanding of multiple stakeholder perspectives (clinical, business, investment). However, breadth without depth may also indicate lack of sustained focus."
+    },
+    {
+      "quality": "Academic Research Productivity (Historical)",
+      "evidence": [
+        {
+          "quote": "Academic research, I have published over 20 articles as primary or co-author on a variety of subjects including tissue engineering, public health, global health, and foreign affairs",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Demonstrates ability to contribute to scholarly discourse"
+        },
+        {
+          "quote": "Peloso A, Urbani L, Cravedi P, Katari R, Maghsoudlou P, Fallas ME, Sordi V, Citro A, Purroy C, Niu G, McQuilling JP, Sittadjody S, Farney AC, Iskandar SS, Zambon JP, Rogers S, Stratta RJ, Opara EC, Piemonti L, Furdui CM, Soker S, De Coppi P, Orlando G. The Human Pancreas as a Source of Protolerogenic Extracellular Matrix Scaffold for a New-generation Bioartificial Endocrine Pancreas. Ann Surg. 2016;264(1):169-179",
+          "source": "tmpfzuhgyh4.pdf (CV)",
+          "context": "High-impact publication in major surgical journal, though as middle author in large team"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates ability to contribute to complex research projects and communicate findings. However, most publications are from 2013-2016 period, with minimal recent scholarly output, raising questions about current research engagement."
+    },
+    {
+      "quality": "Willingness to Take Career Risks",
+      "evidence": [
+        {
+          "quote": "I pivoted from medicine to management consulting which, unapologetically, was a dramatic shift in environment. I do not have an MBA. And until that point, I had not opened up Excel or Powerpoint in over a decade. Calling it a learning curve is a bit of an understatement.",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Shows willingness to enter unfamiliar territory without traditional credentials"
+        },
+        {
+          "quote": "I am driven and motivated by curiosity and venturing outside of my comfort zone. I believe my record demonstrates that.",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Self-assessment of risk-taking tendency, though this is stated rather than demonstrated through specific examples of calculated risks with outcomes"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Could indicate adaptability and comfort with uncertainty, valuable for innovation work. However, could also indicate restlessness or difficulty finding sustained focus. The defensive tone ('unapologetically') is concerning."
+    },
+    {
+      "quality": "Awareness of Healthcare System Issues",
+      "evidence": [
+        {
+          "quote": "Biomedical research and federal funding for science and empirical reality is at a low point, currently. When ordinary people see major institutions in a state of denial about this--or failing to acknowledge it, it is demoralizing and diminishing. You should know that I hold that opinion.",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Shows awareness of systemic challenges in biomedical research funding"
+        },
+        {
+          "quote": "Earlier, at the Center for Economic and Policy Research, I co-authored multiple white papers on pharmaceutical policy. This work sharpened my skills in distilling complex data into actionable insights, informing public debates on drug pricing and transparency.",
+          "source": "tmpfzuhgyh4.pdf (application)",
+          "context": "Demonstrates engagement with healthcare policy issues"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Awareness of systemic issues could inform problem selection and solution design. However, awareness alone without demonstrated action to address these issues is of limited value. The somewhat confrontational tone in the 'what else should we know' response is concerning."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Ravi Katari presents a profile characterized by significant career pivoting and breadth of experience, but with critical weaknesses in demonstrated innovation and depth of impact. His trajectory shows a physician who has moved from academic emergency medicine to management consulting to venture capital, accumulating diverse experiences but leaving limited evidence of sustained, transformative contributions in any single domain. The application contains substantial fluff and generic claims that lack concrete supporting evidence.\n\nThe strongest concrete evidence in his materials relates to his extensive publication record in tissue engineering and regenerative medicine (\"over 20 articles as primary or co-author\" per application, with CV showing approximately 40+ publications). However, these publications appear concentrated during his residency/early career (2013-2016 period), with minimal recent scholarly output. His BCG consulting work is described in generic terms: \"Helped launch a digital health unit\" and \"Conducted industry research\" (application, tmpfzuhgyh4.pdf) - these are passive constructions that obscure his actual individual contributions. The most specific claim is \"guided the client through the acquisition of a digital sleep health company\" (application), but even this lacks detail about his role versus the broader team's work.\n\nA major concern is the prevalence of stated qualities without demonstration. He claims to be \"driven and motivated by curiosity\" (application) but this is self-assertion, not evidence. He states the Catalyst program represents \"an opportunity to articulate and actualize a balance between reckless innovation and social responsibility\" (application) - this is philosophical musing, not a track record of balancing these forces. His core competencies list includes \"Clinical medicine, particularly emergency medicine, trauma, and critical care. I manage teams of doctors, nurses, residents, and medical students\" (application) - but managing teams in standard clinical practice is expected baseline competency, not distinctive achievement. The application is notably thin on specific innovations he has personally driven, problems he has uniquely solved, or measurable impacts he has created beyond routine professional duties.\n\nThe missing reference letters (\"I was unaware that two reference letters were required for upload\" - catalyst_cover.pdf) represent a significant procedural red flag, suggesting either inattention to application requirements or last-minute application preparation. His stated reason for interest in Catalyst - the \"clinical needs-driven approach\" and comparing it to \"move fast and break things\" while seeking \"responsible deployment\" - reads as buzzword-heavy without concrete examples of how he has previously balanced innovation with responsibility. Overall, this is a candidate with interesting breadth but questionable depth, whose application relies heavily on generic claims and whose most substantive achievements appear to be in his past rather than recent trajectory.",
+  "score_justification": "Ravi Katari receives a score of 5.2, placing him in the moderate/borderline range. This score reflects a candidate with interesting breadth of experience but significant concerns about depth of impact, sustained commitment, and demonstrated innovation capability. On the positive side, he has genuine exposure to multiple relevant domains (clinical medicine, research, consulting, venture capital) and a strong historical publication record in tissue engineering. His willingness to make major career pivots demonstrates some comfort with uncertainty. However, these strengths are substantially outweighed by concerning patterns. The application is heavy on generic claims and light on specific evidence of individual contributions. Key achievements are described in passive voice that obscures his actual role ('helped launch', 'guided through'). His pattern of 1-2 year commitments across six different roles in five years raises serious questions about sustained focus - a core program requirement. Most concerning, his recent trajectory has moved away from hands-on research/innovation toward purely evaluative roles (due diligence, market research), with no recent scholarly output since 2016. The missing reference letters represent a significant procedural failure. His stated interest in Catalyst focuses on abstract philosophy rather than specific problems to solve. While he has potential based on his diverse background, the evidence suggests he may be better suited for evaluative or advisory roles than for driving transformative innovations requiring sustained commitment. The score of 5.2 reflects meaningful concerns that outweigh moderate strengths, placing him below the typical threshold for strong candidates but not entirely ruling out potential if interview reveals hidden depth.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "At Boston Consulting Group, I helped launch a digital health unit for a major pharmaceutical client. I led market research to identify high-impact therapeutic areas and guided the client through the acquisition of a digital sleep health company.",
+        "source": "tmpfzuhgyh4.pdf (application)",
+        "context": "This is the most specific business achievement claimed, but uses passive/vague language ('helped launch', 'guided through') that obscures individual contribution. No innovation described, only facilitation of existing processes."
+      },
+      {
+        "quote": "Academic research, I have published over 20 articles as primary or co-author on a variety of subjects including tissue engineering, public health, global health, and foreign affairs.",
+        "source": "tmpfzuhgyh4.pdf (application)",
+        "context": "Demonstrates research productivity but lacks specifics about innovative contributions. CV shows most publications are co-authored, making individual innovative contributions unclear. Publication activity appears concentrated in 2013-2016 period."
+      },
+      {
+        "quote": "Conduct due diligence on potential investment opportunities on AI-driven solutions in the diagnostic space. We focus on market opportunity, competitive advantage, diagnostic accuracy, and leadership salience",
+        "source": "tmpfzuhgyh4.pdf (CV)",
+        "context": "Recent work (2024) involves evaluation of others' innovations rather than creating innovations. This is analytical work, not innovative problem-solving or creation."
+      },
+      {
+        "quote": "The emphasis on a 'clinical needs-driven approach' as opposed to funding or academic incentives stands out to me immediately. It resembles the new entrepreneurial adage of the moment: move fast and break things. I admire that ethos but it needs to be responsibly deployed.",
+        "source": "tmpfzuhgyh4.pdf (application)",
+        "context": "Statement of philosophy about innovation but provides no examples of how candidate has personally practiced this approach. This is aspirational thinking, not demonstrated capability."
+      }
+    ],
+    "reasoning": "Katari's innovation potential is difficult to assess with confidence due to the gap between stated aspirations and demonstrated achievements. His most concrete innovative work appears in his early-career tissue engineering research, where he contributed to multiple publications on organ bioengineering and regenerative medicine. However, these contributions appear to be as part of research teams rather than as a primary innovator driving novel approaches. The publications list shows him as co-author on most papers, with titles like \"The Human Pancreas as a Source of Protolerogenic Extracellular Matrix Scaffold\" and \"Kidney transplantation, bioengineering and regeneration\" (CV, tmpfzuhgyh4.pdf), but his specific innovative contributions versus standard research assistance roles are unclear.\n\nHis BCG consulting experience is described in ways that suggest application of existing frameworks rather than novel innovation: \"Conducted industry research to determine best practices\" and \"Employed rigorous market research to estimate the size of the untapped sleep apnea market\" (application). These are analytical tasks, not innovative problem-solving. The most potentially innovative claim is helping \"launch a digital health unit for a major global biopharmaceutical company\" and guiding \"the client through the acquisition of a digital sleep health company\" (application), but the passive voice and lack of specifics about his unique contributions make it impossible to assess whether he was driving innovation or executing standard consulting deliverables. His DigitalDx Ventures fellowship involved \"due diligence on potential investment opportunities\" (CV) - again, evaluation rather than creation.\n\nThe concerning pattern is a career trajectory that has moved away from hands-on research/development toward increasingly evaluative and advisory roles. His stated interest in Catalyst emphasizes \"defining needs\" and \"institutional empiricism\" rather than describing innovations he wants to create. He pivoted \"from medicine to management consulting\" without an MBA and claims this demonstrates being \"driven and motivated by curiosity and venturing outside of my comfort zone\" (application), but career pivoting alone is not evidence of innovation capacity - it could equally indicate restlessness or lack of sustained focus. Without concrete examples of novel solutions he has personally developed, tested, and implemented, his innovation potential remains speculative.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether vague claims about 'helping' and 'guiding' represent substantive individual contributions or standard junior consultant support work. Looking for specifics about methodology, individual analysis, and measurable outcomes.",
+      "category": "Probe claimed skill",
+      "question": "You mention helping launch a digital health unit at BCG and guiding a client through acquisition of a sleep health company. Walk me through your specific role in that acquisition - what analyses did you personally conduct, what recommendations did you make, and what was the outcome?"
+    },
+    {
+      "purpose": "Directly address the pattern of short-term commitments and assess whether this represents strategic career building, restlessness, or difficulty with sustained focus. Critical given program requires long-term commitment.",
+      "category": "Verify experience",
+      "question": "Your CV shows you've had six different primary roles in the past five years, plus multiple concurrent part-time positions. What drives these frequent transitions, and how do you think about sustained commitment to long-term challenging problems?"
+    },
+    {
+      "purpose": "Test whether candidate has actually led innovative projects versus evaluated or supported others' innovations. Looking for concrete example with clear individual contribution and measurable outcomes, not team achievements or stated qualities.",
+      "category": "Assess innovation capability",
+      "question": "Tell me about a specific innovation you personally drove from concept to implementation. What was the problem, what solution did you create, what obstacles did you overcome, and what was the measurable impact?"
+    },
+    {
+      "purpose": "Understand motivation for program and whether candidate has clear vision for what they want to build. Also probes whether recent career trajectory away from hands-on work represents strategic choice or lack of opportunity.",
+      "category": "Explore concern",
+      "question": "Your most recent work has been in due diligence and evaluation roles rather than hands-on research or development. What draws you back toward creating innovations rather than continuing to evaluate them? What specific problem do you want to solve through Catalyst?"
+    },
+    {
+      "purpose": "Assess whether confrontational tone in application reflects productive critical thinking or potential difficulty collaborating within institutional settings. Program requires working effectively with diverse stakeholders and institutions.",
+      "category": "Test fit",
+      "question": "You wrote that biomedical research funding is 'at a low point' and that institutions are 'in a state of denial' about this. How do you see yourself working within institutional structures to drive innovation, given this perspective? Can you give an example of how you've successfully navigated institutional constraints in the past?"
+    },
+    {
+      "purpose": "Distinguish between career pivoting (which could indicate restlessness) and genuine intellectual risk-taking and innovation. Looking for specific example of creative problem-solving with concrete outcome.",
+      "category": "Probe claimed skill",
+      "question": "You describe yourself as driven by curiosity and venturing outside your comfort zone. Beyond career changes, can you give me a specific example of a time you took an intellectual or creative risk - tried an unconventional approach to a problem, challenged conventional wisdom with data, or pursued an idea others thought wouldn't work?"
+    },
+    {
+      "purpose": "Understand whether declining research productivity represents strategic career shift or loss of research engagement. Important for assessing current capability and interest in research-oriented innovation work.",
+      "category": "Verify experience",
+      "question": "Your publication record is impressive but appears concentrated in 2013-2016. What research or scholarly work have you done in the past three years? Why the shift away from publishing?"
+    },
+    {
+      "purpose": "Test practical feasibility of participation given pattern of multiple concurrent commitments. Also assesses seriousness of interest - strong candidates should have concrete plan for making time.",
+      "category": "Assess fit",
+      "question": "The Catalyst program requires approximately 20% time commitment over 7 months. Given your current portfolio of part-time clinical roles and other commitments, walk me through specifically how you would structure your time. What would you reduce or eliminate to make space for this program?"
+    }
+  ],
+  "interview_decision_reasoning": "Despite significant concerns, I recommend interviewing Katari, but with low confidence in ultimate selection. The decision to interview is based on three factors: (1) His diverse background across clinical medicine, research, consulting, and venture capital is genuinely unusual and could theoretically enable unique cross-disciplinary insights if he can demonstrate depth beyond breadth; (2) His historical research productivity, while dated, shows he has contributed to substantive work in the past; (3) The application materials alone cannot definitively rule out the possibility that he has concrete achievements and clear vision that he simply failed to articulate effectively in writing. However, the interview should be approached with high skepticism and clear objectives: verify whether vague claims represent real individual contributions, probe the pattern of short-term commitments, assess whether he has specific innovation vision versus abstract interest in program philosophy, and test whether his recent trajectory away from hands-on work represents strategic choice or lack of capability. The interview should focus on concrete examples and specific outcomes, rejecting generic responses. If he cannot provide clear evidence of leading transformative projects, demonstrating sustained commitment capability, and articulating specific problems he wants to solve, he should not advance. The bar for converting this interview into an offer should be high given the multiple red flags. This is a 'prove me wrong' interview rather than a 'confirm positive signals' interview."
+}

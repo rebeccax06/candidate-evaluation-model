@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T22:21:02.860756",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 166.5769007205963,
+    "materials_character_count": 35152
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmptedmumpb.pdf"
+    ],
+    "candidate_id": "MacIntyre_Michael_app",
+    "evaluation_date": "2026-02-25 22:21:02.860608"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on generic self-description without supporting evidence - multiple instances of stated qualities ('I thrive in interdisciplinary collaboration', 'I specialize in...') that should score 1-3 per evaluation guidelines",
+      "evidence": "\"I specialize in forensic and clinical psychiatry with expertise in violence risk assessment, threat management, and the legal-psychiatric interface. My work spans healthcare ethics, policy development, novel therapeutics such as psilocybin, and the responsible use of artificial intelligence in psychiatry. I have extensive experience teaching and mentoring, particularly within the VA. I thrive in interdisciplinary collaboration\" (tmptedmumpb.pdf, p.2) - This entire paragraph is self-description without specific examples or outcomes.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Primary innovation example (AI testimony platform) lacks critical details on development process, validation, adoption, or outcomes - appears to be early-stage work presented as achievement",
+      "evidence": "\"co-developed an IRB-exempt research platform that uses AI to simulate psychiatric testimony\" (p.3) - No information on: co-developer roles, technical challenges solved, user testing results, adoption metrics, or validation data. Passive 'co-developed' obscures individual contribution level.",
+      "severity": "high"
+    },
+    {
+      "flag": "Disruptive Behavior Committee improvements described without any outcome metrics - no data on incident reduction, efficiency gains, or measurable impact",
+      "evidence": "\"instituted evidenced-based best practices in the violence risk assessment process and raised the quality of record keeping to national standards\" (LOR, p.14) - No metrics provided on: reduction in workplace violence incidents, improvement in case resolution times, cost savings, or staff satisfaction changes.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Explicitly positions himself as seeking to develop innovation skills rather than demonstrating existing track record - suggests limited prior innovation experience",
+      "evidence": "\"I am eager to learn how to identify unmet medical needs, partner across disciplines, and build thoughtful, scalable solutions... I'm applying to Catalyst to grow. I seek the structure, mentorship, and community to guide the next phase of my work.\" (p.2) - Language indicates he is seeking to acquire these capabilities, not demonstrating them.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Recommendation letters contain significant generic praise without specific examples - Dr. Appel's letter emphasizes personal qualities over concrete achievements",
+      "evidence": "\"He is a truly delightful human being—easygoing, affable and charming. He is held in high regard for his integrity and authenticity... he is the consummate team player\" (LOR, p.17) - This type of generic praise should be discounted per evaluation guidelines.",
+      "severity": "low"
+    },
+    {
+      "flag": "Research portfolio heavily weighted toward theoretical/analytical work rather than empirical implementation studies - limited evidence of testing interventions or measuring outcomes",
+      "evidence": "CV lists 20+ publications (pages 7-9), but titles indicate primarily legal commentaries, ethical analyses, and case discussions rather than empirical studies: 'Legal and ethics concerns of psilocybin', 'Ethical considerations for the use of artificial intelligence', 'Voluntary intoxication and mens rea', etc. No randomized trials, implementation studies, or outcome evaluations visible.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Conservatorship initiative described in present progressive tense ('developing') with no timeline or implementation status - unclear if this is planned vs. executed work",
+      "evidence": "\"led strategic planning of a new initiative in the forensic psychiatry division developing a system for the assessment and management of Veterans\" (CV, p.9) - Use of 'developing' suggests ongoing/future work rather than completed achievement.",
+      "severity": "medium"
+    },
+    {
+      "flag": "ABC News experience appears time-limited (single month listed) with no specific examples of articles written or audience impact metrics",
+      "evidence": "CV lists 'ABC News Medical Unit July 2018' (p.10) with no end date or duration specified. Application states 'Please see my author page on ABC News at https://abcnews.go.com/author/michael_macintyre for a list of published articles' (p.11) but no metrics on article reach, impact, or number of publications provided in application materials.",
+      "severity": "low"
+    },
+    {
+      "flag": "No evidence of prior entrepreneurial activity, product development outside academic setting, or experience scaling solutions beyond single institution",
+      "evidence": "No evidence found in CV or application of: startup involvement, product launches, multi-site implementations, commercialization experience, or scaling innovations beyond UCLA/VA Greater Los Angeles.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Limited evidence of taking innovations from concept through implementation to measurable impact - projects described are early-stage or lack outcome data",
+      "Research portfolio heavily weighted toward theoretical/analytical work rather than empirical implementation studies",
+      "Interdisciplinary collaboration is stated but not convincingly demonstrated with specific examples of integrating different fields",
+      "Application contains significant generic self-description ('I thrive in interdisciplinary collaboration') without supporting evidence",
+      "Explicitly positions himself as seeking to develop innovation skills rather than demonstrating existing innovation track record",
+      "No evidence of prior entrepreneurial activity, product development, or scaling solutions beyond single institution"
+    ],
+    "evidence": [
+      {
+        "quote": "As a VA forensic and clinical psychiatrist, I routinely confront complex systems where patient care, safety, and access break down. I am eager to learn how to identify unmet medical needs, partner across disciplines, and build thoughtful, scalable solutions.",
+        "source": "tmptedmumpb.pdf, page 2",
+        "context": "Shows problem awareness but explicitly states he is 'eager to learn' these skills rather than demonstrating them. Positions as learner seeking development."
+      },
+      {
+        "quote": "led strategic planning of a new initiative in the forensic psychiatry division developing a system for the assessment and management of Veterans requiring LPS or probate conservatorship for Veterans at 11 locations in a 5-county area of Southern California",
+        "source": "CV, tmptedmumpb.pdf page 9",
+        "context": "Demonstrates ability to identify systems-level problems at scale. However, described as 'developing' (ongoing) with no implementation timeline or outcomes provided."
+      },
+      {
+        "quote": "I collaborated with journalists, editors, and producers to ensure accuracy and public relevance. My contributions included reviewing evolving medical stories, shaping evidence-based messaging, and authoring content on diverse topics beyond psychiatry",
+        "source": "tmptedmumpb.pdf, page 3-4",
+        "context": "Shows ability to work with non-medical professionals and communicate to general audiences. However, this is translation/communication work rather than interdisciplinary innovation."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Dr. MacIntyre's fit with the Catalyst program is mixed. He operates in a high-need environment (VA mental health, forensic psychiatry) with clear opportunities for innovation, and shows awareness of systems-level problems. His statement \"As a VA forensic and clinical psychiatrist, I routinely confront complex systems where patient care, safety, and access break down\" (tmptedmumpb.pdf, p.2) demonstrates problem awareness. However, the application lacks evidence of translating this awareness into implemented solutions with measurable impact. The program seeks candidates who \"translate research into practical impact\" - his research portfolio is primarily theoretical/analytical rather than implementation-focused. Of 20+ publications listed, most are legal commentaries, case analyses, and ethical frameworks rather than empirical studies of interventions or innovations.\n\nHis interdisciplinary experience is stated but not convincingly demonstrated. He claims \"I thrive in interdisciplinary collaboration\" (p.2) but the evidence is thin. The ABC News role shows ability to work outside psychiatry: \"I worked outside my clinical and forensic expertise to analyze and translate complex medical research into accessible content for the general public\" (p.3-4). However, this is communication/translation work, not true interdisciplinary innovation where different fields are integrated to solve problems. The AI platform potentially represents interdisciplinary work (psychiatry + technology + education) but the application provides no details on how he navigated technical challenges or collaborated with engineers/designers. His publication collaborations appear to be primarily within forensic psychiatry circles.\n\nThe program values \"sustained commitment to challenging problems\" - here he shows strength. His forensic psychiatry specialization represents a challenging, underserved area. Dr. Keram notes his work \"directly impacting the lives of veterans and their care teams\" (p.14) through the Disruptive Behavior Committee. His conservatorship initiative addresses a genuine gap: \"developing a system for the assessment and management of Veterans requiring LPS or probate conservatorship for Veterans at 11 locations in a 5-county area\" (CV, p.9). This shows problem identification at scale, though implementation status is unclear. His motivation appears genuine - the application emphasizes serving vulnerable populations (veterans, forensic patients) rather than career advancement. However, the program also seeks candidates who can \"drive innovation and creative problem-solving\" - the evidence here is limited to early-stage projects without demonstrated outcomes.",
+    "strengths_for_program": [
+      "Works in high-need VA environment with clear opportunities for systems innovation in mental health and forensic psychiatry",
+      "Demonstrates awareness of complex systems problems and gaps in care delivery, particularly around workplace violence and conservatorship processes",
+      "Shows ability to communicate complex ideas to diverse audiences through ABC News work and teaching roles",
+      "Has established credibility and relationships within VA system as Co-Chair of Disruptive Behavior Committee and fellowship leadership",
+      "Genuine commitment to underserved populations (veterans, forensic patients) rather than purely academic interests"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Established Academic Productivity and Scholarly Impact",
+      "evidence": [
+        {
+          "quote": "This paper proved transformative in the area of boundary ethics and was later chosen as one of the core articles for the nationwide recertification examination in forensic psychiatry.",
+          "source": "LOR from Dr. Appel, tmptedmumpb.pdf page 16",
+          "context": "Demonstrates ability to produce influential scholarship with measurable adoption at national level"
+        },
+        {
+          "quote": "The range of Dr. MacIntyre's scholarly interests is staggering. He has collaborated with me on papers in the fields of artificial intelligence, psychedelic regulation, emergency triage, physician reputation management",
+          "source": "LOR from Dr. Appel, tmptedmumpb.pdf page 16",
+          "context": "Shows intellectual breadth and sustained publication productivity across multiple topic areas"
+        },
+        {
+          "quote": "CV lists 20+ peer-reviewed publications in journals including Journal of the American Academy of Psychiatry and the Law, Behavioral Sciences and the Law, Academic Psychiatry, Psychiatry Research",
+          "source": "CV, tmptedmumpb.pdf pages 7-9",
+          "context": "Demonstrates consistent scholarly output in respected journals, though primarily analytical/theoretical rather than empirical"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Shows capacity for rigorous thinking and ability to influence field through scholarship. However, academic writing is different from innovation implementation - this quality alone doesn't predict success in building and scaling solutions."
+    },
+    {
+      "quality": "Effective Teaching and Mentorship Capabilities",
+      "evidence": [
+        {
+          "quote": "In each of the past three years, the residents have ranked him as their top presenter.",
+          "source": "LOR from Dr. Appel, tmptedmumpb.pdf page 16",
+          "context": "Objective evidence of teaching effectiveness through consistent top rankings from learners"
+        },
+        {
+          "quote": "He redesigned the fellowship didactic curriculum to better meet the fellows' needs as their knowledge base and experience expand during the year. He is thoughtful and intentional in his approach to teaching, actively seeking mentorship and collaborating with colleagues.",
+          "source": "LOR from Dr. Keram, tmptedmumpb.pdf page 14",
+          "context": "Shows ability to improve educational systems based on learner needs, demonstrates reflective practice"
+        },
+        {
+          "quote": "He has mentored medical students, residents, and fellows, fostering critical thinking and ethical rigor in the next generation of psychiatrists.",
+          "source": "LOR from Dr. Keram, tmptedmumpb.pdf page 14",
+          "context": "Demonstrates sustained commitment to developing others across multiple levels of training"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Strong teaching ability is valuable for the program as fellows need to communicate ideas and train others. However, this is a traditional academic strength rather than innovation-specific capability."
+    },
+    {
+      "quality": "Systems-Level Problem Identification in Healthcare",
+      "evidence": [
+        {
+          "quote": "As Co-Chair of the VA Disruptive Behavior Committee, I oversee complex workplace violence cases, applying forensic psychiatric expertise to protect both patients and staff. This role sharpened my understanding of system vulnerabilities",
+          "source": "tmptedmumpb.pdf, page 2-3",
+          "context": "Shows ability to identify systemic problems at organizational level, though implementation outcomes not specified"
+        },
+        {
+          "quote": "led strategic planning of a new initiative in the forensic psychiatry division developing a system for the assessment and management of Veterans requiring LPS or probate conservatorship for Veterans at 11 locations in a 5-county area",
+          "source": "CV, tmptedmumpb.pdf page 9",
+          "context": "Demonstrates recognition of multi-site systems gaps and attempt to address at scale, though project status unclear"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Ability to identify systems-level problems is critical for innovation. However, problem identification alone is insufficient - need evidence of solution implementation and impact measurement."
+    },
+    {
+      "quality": "Ethical Rigor and Responsible Innovation Mindset",
+      "evidence": [
+        {
+          "quote": "Healthcare Ethics Consultant – Certified (HEC-C)",
+          "source": "CV, tmptedmumpb.pdf page 7",
+          "context": "Formal certification in healthcare ethics demonstrates commitment beyond stated interest"
+        },
+        {
+          "quote": "co-developed an IRB-exempt research platform that uses AI to simulate psychiatric testimony... The project required integrating ethical frameworks, technical design, and user feedback",
+          "source": "tmptedmumpb.pdf, page 3",
+          "context": "Shows consideration of ethical dimensions in technology development, though specifics of integration unclear"
+        },
+        {
+          "quote": "His openness to feedback, intellectual curiosity, and ability to work across disciplines make him ideally suited to Catalyst's needs-driven approach.",
+          "source": "LOR from Dr. Keram, tmptedmumpb.pdf page 15",
+          "context": "Recommender notes openness to feedback, suggesting receptivity to learning and iteration"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Ethical grounding is valuable for responsible innovation, particularly in healthcare AI and vulnerable populations. This could be a differentiating strength if combined with stronger implementation evidence."
+    },
+    {
+      "quality": "Communication to Non-Expert Audiences",
+      "evidence": [
+        {
+          "quote": "I served on the ABC News Medical Unit as a national medical contributor... I worked outside my clinical and forensic expertise to analyze and translate complex medical research into accessible content for the general public.",
+          "source": "tmptedmumpb.pdf, page 3",
+          "context": "Demonstrates ability to communicate medical concepts to general public through major media outlet"
+        },
+        {
+          "quote": "This experience strengthened my ability to communicate clearly with non-medical audiences, adapt quickly to new subject areas, and consider the broader societal impact of scientific information.",
+          "source": "tmptedmumpb.pdf, page 4",
+          "context": "Shows reflection on communication skills development, though specific examples of impact not provided"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Ability to communicate to diverse audiences is important for innovation adoption and stakeholder engagement. However, the ABC News role appears time-limited (listed as 'July 2018' only) and no specific articles or audience reach metrics provided."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Michael MacIntyre presents as a forensic psychiatrist with established clinical credentials and a growing academic portfolio, but the application reveals significant reliance on stated qualities rather than demonstrated innovation. His CV shows productivity in traditional academic metrics (publications, teaching, committee work), yet the materials lack concrete evidence of transformative problem-solving or innovation leadership. The application states he is \"eager to learn how to identify unmet medical needs, partner across disciplines, and build thoughtful, scalable solutions\" (tmptedmumpb.pdf, p.2) - this phrasing indicates he is seeking to develop these skills rather than demonstrating them. His core competencies list reads as generic self-description: \"I specialize in forensic and clinical psychiatry with expertise in violence risk assessment... I thrive in interdisciplinary collaboration\" (p.2) - these are stated qualities without supporting evidence of actual collaborative innovations or measurable outcomes.\n\nThe strongest concrete evidence appears in his Disruptive Behavior Committee work, where he \"instituted evidenced-based best practices in the violence risk assessment process and raised the quality of record keeping to national standards\" (LOR from Dr. Keram, p.14). However, the application provides no metrics on impact - no reduction in incidents, no efficiency gains, no scalability measures. The AI testimony simulation platform is mentioned twice but remains vague: \"co-developed an IRB-exempt research platform that uses AI to simulate psychiatric testimony\" (p.3) with no details on development process, user outcomes, adoption rates, or validation data. This appears to be early-stage work rather than proven innovation. His ABC News role demonstrates communication ability but is framed passively: \"I worked outside my clinical and forensic expertise to analyze and translate complex medical research\" (p.3) - no specific examples of impact or audience reach provided.\n\nThe letters of recommendation contain concerning amounts of generic praise. Dr. Keram calls him \"an exceptional leader, clinician, educator, and innovator\" (p.14) but the only specific innovation cited is the AI platform with no outcome data. Dr. Appel's letter is heavily weighted toward personal qualities (\"delightful human being—easygoing, affable and charming,\" p.17) rather than concrete achievements. The strongest specific praise is for a single publication on sexual exploitation regulation that \"proved transformative\" and was \"chosen as one of the core articles for the nationwide recertification examination\" (p.16) - this is genuine impact, but represents one paper among many. The application shows a competent academic psychiatrist seeking to transition into innovation work, not someone with a demonstrated track record of driving transformative change.",
+  "score_justification": "Dr. MacIntyre receives a score of 5.5, placing him in the moderate range with significant reservations. This score reflects a candidate with strong traditional academic credentials but limited demonstrated innovation implementation experience. Positive factors include: (1) established scholarly productivity with at least one nationally influential publication selected for certification exams, (2) consistent teaching excellence with objective evidence (top-ranked presenter for 3 consecutive years), (3) systems-level problem identification through Disruptive Behavior Committee and conservatorship initiative work, and (4) genuine commitment to underserved populations in a high-need environment (VA forensic psychiatry). However, substantial concerns prevent a higher score: (1) The primary innovation example (AI testimony platform) is described with passive language ('co-developed') and lacks any validation data, adoption metrics, or specifics on his individual contribution - this appears to be early-stage work presented as achievement. (2) Process improvements in the Disruptive Behavior Committee are described without any outcome metrics - no data on incident reduction, efficiency gains, or measurable impact. (3) The application contains significant generic self-description ('I thrive in interdisciplinary collaboration,' 'I specialize in...') that per evaluation guidelines should score 1-3, indicating reliance on stated rather than demonstrated qualities. (4) He explicitly positions himself as seeking to develop innovation skills ('eager to learn how to identify unmet medical needs... I'm applying to Catalyst to grow') rather than demonstrating existing track record. (5) His research portfolio is heavily weighted toward theoretical/analytical work (legal commentaries, ethical frameworks) rather than empirical implementation studies with measured outcomes. (6) No evidence of prior entrepreneurial activity, product development, or scaling solutions beyond single institution. The score of 5.5 reflects a candidate who shows potential for growth in innovation but lacks the demonstrated track record of translating ideas into measurable impact that stronger candidates would show. He appears to be at the beginning of an innovation journey rather than bringing proven innovation capabilities to the program.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "co-developed an IRB-exempt research platform that uses AI to simulate psychiatric testimony, helping train residents and fellows in courtroom skills commonly requested of psychiatrists. The project required integrating ethical frameworks, technical design, and user feedback to build a scalable, practical teaching tool.",
+        "source": "tmptedmumpb.pdf, page 3",
+        "context": "This is the primary innovation example, but lacks specifics on his role, development process, validation data, or adoption metrics. The passive 'co-developed' construction obscures individual contribution."
+      },
+      {
+        "quote": "instituted evidenced-based best practices in the violence risk assessment process and raised the quality of record keeping to national standards",
+        "source": "LOR from Dr. Keram, tmptedmumpb.pdf page 14",
+        "context": "Shows ability to improve systems, but no outcome metrics provided (e.g., reduction in incidents, efficiency gains). Process improvement without demonstrated impact."
+      },
+      {
+        "quote": "This paper proved transformative in the area of boundary ethics and was later chosen as one of the core articles for the nationwide recertification examination in forensic psychiatry.",
+        "source": "LOR from Dr. Appel, tmptedmumpb.pdf page 16",
+        "context": "Demonstrates capacity for influential scholarship with measurable adoption (selected for national exam). However, this is academic writing impact, not innovation implementation."
+      },
+      {
+        "quote": "I'm applying to Catalyst to grow. I seek the structure, mentorship, and community to guide the next phase of my work.",
+        "source": "tmptedmumpb.pdf, page 2",
+        "context": "Explicitly states he is seeking to develop innovation capabilities rather than demonstrating existing innovation track record. Positions himself as learner, not proven innovator."
+      }
+    ],
+    "reasoning": "Dr. MacIntyre shows emerging interest in innovation but limited evidence of actual innovation leadership or transformative outcomes. The AI testimony simulation platform represents his most concrete innovation attempt, described as \"co-developed an IRB-exempt research platform that uses AI to simulate psychiatric testimony, helping train residents and fellows in courtroom skills\" (tmptedmumpb.pdf, p.3). However, critical details are absent: Who were the co-developers? What was his specific role? What were the development challenges? What are the adoption metrics? The passive construction \"co-developed\" obscures his actual contribution level. The application states the project \"required integrating ethical frameworks, technical design, and user feedback\" (p.3) but provides no specifics on how these were integrated or what problems were solved.\n\nHis Disruptive Behavior Committee leadership shows systems-thinking capability. Dr. Keram notes he \"instituted evidenced-based best practices in the violence risk assessment process and raised the quality of record keeping to national standards\" (p.14). This demonstrates ability to improve existing systems, but the application provides no data on outcomes - no reduction in workplace violence incidents, no improvement in case resolution times, no cost savings. Without metrics, it's impossible to assess the scale or impact of these improvements. The application also mentions \"led strategic planning of a new initiative... developing a system for the assessment and management of Veterans requiring LPS or probate conservatorship\" (CV, p.9) but this is described in future tense (\"developing\") with no evidence of implementation or results.\n\nThe conservatorship initiative and AI platform suggest he can identify problems and propose solutions, but there's no evidence of taking innovations from concept through implementation to measurable impact. His publication record shows traditional academic productivity (20+ peer-reviewed papers) but these are primarily legal/ethical analyses and case commentaries rather than empirical studies demonstrating novel interventions or solutions. The one exception is the sexual exploitation paper that Dr. Appel describes as \"ground-breaking\" and selected for national certification exams (LOR, p.16) - this shows capacity for influential scholarship. However, writing influential papers is different from building and scaling solutions. His stated motivation \"I'm applying to Catalyst to grow. I seek the structure, mentorship, and community to guide the next phase of my work\" (p.2) explicitly positions him as someone seeking to develop innovation skills rather than demonstrating them.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "The application uses passive 'co-developed' language without specifying individual contribution. Need to understand if he led technical development, was primarily a subject matter expert, or had limited involvement. Also need concrete outcome data that's missing from application.",
+      "category": "Probe claimed innovation",
+      "question": "You mentioned co-developing an AI platform to simulate psychiatric testimony. Walk me through your specific role in this project - what technical challenges did you personally solve, how did you validate the platform's effectiveness, and what are the current adoption metrics?"
+    },
+    {
+      "purpose": "Application describes process improvements but provides zero outcome data. Need to determine if he actually measured impact or if improvements were process-focused without outcome tracking. This tests whether he thinks in terms of measurable impact.",
+      "category": "Verify impact claims",
+      "question": "As Co-Chair of the Disruptive Behavior Committee, you implemented evidence-based practices and improved record-keeping. What specific metrics did you track before and after these changes? What was the measurable impact on workplace violence incidents, case resolution times, or other outcomes?"
+    },
+    {
+      "purpose": "Application contains stated quality ('I thrive in interdisciplinary collaboration') without supporting evidence. Need concrete example to assess actual interdisciplinary work vs. working with other psychiatrists or communicating to non-experts.",
+      "category": "Assess interdisciplinary capability",
+      "question": "You state you 'thrive in interdisciplinary collaboration.' Describe a specific project where you had to integrate expertise from fields outside psychiatry - what were the different disciplines involved, what conflicts or challenges arose from different perspectives, and how did you navigate them?"
+    },
+    {
+      "purpose": "Application explicitly positions him as seeking to develop innovation skills. Need to understand if he has any prior innovation implementation experience or if this would be his first attempt at building/scaling solutions.",
+      "category": "Probe innovation readiness",
+      "question": "Your application states you're 'eager to learn how to identify unmet medical needs, partner across disciplines, and build thoughtful, scalable solutions.' What specific innovation or product development experience do you have outside of academic research and clinical work? Have you ever taken an idea from concept through implementation to measurable adoption?"
+    },
+    {
+      "purpose": "Application describes this as 'developing' without timeline or status. Need to understand if this is early planning, active implementation, or stalled. Also tests whether he's thinking about implementation barriers and outcome measurement.",
+      "category": "Test systems thinking",
+      "question": "You're developing a conservatorship assessment system for 11 VA locations across 5 counties. What's the current status of this initiative? What barriers have you encountered in multi-site implementation, and how are you measuring whether the system actually improves outcomes for Veterans?"
+    },
+    {
+      "purpose": "Application shows primarily successes and traditional academic achievements. Need to assess comfort with failure, learning orientation, and ability to iterate based on feedback - critical for innovation work.",
+      "category": "Assess learning orientation",
+      "question": "Tell me about a time when you built something that failed or didn't achieve the impact you expected. What did you learn, and how did that change your approach to subsequent projects?"
+    },
+    {
+      "purpose": "There's a disconnect between his traditional academic trajectory (analytical scholarship) and the program's implementation focus. Need to understand if this represents genuine evolution in interests or if he's applying without full understanding of what innovation implementation requires.",
+      "category": "Explore motivation alignment",
+      "question": "The Catalyst program focuses on translating needs into practical, scalable solutions. Looking at your publication record, most of your work is theoretical analysis and ethical frameworks rather than empirical implementation studies. Why the shift in focus now, and what specific skills or experiences make you confident you can succeed in implementation-focused innovation work?"
+    },
+    {
+      "purpose": "Application lists AI as expertise but only one vague example provided. Need to distinguish between writing about AI ethics (which his publications suggest) vs. actually building AI systems or working deeply with technical teams.",
+      "category": "Verify claimed expertise",
+      "question": "You list 'responsible use of artificial intelligence in psychiatry' as a core competency. Beyond the testimony simulation platform, what hands-on experience do you have with AI development, machine learning, or working with technical teams to build AI-enabled products?"
+    }
+  ],
+  "interview_decision_reasoning": "Recommend interview despite moderate score and significant concerns. The decision to interview is based on three factors: (1) He operates in a genuinely high-need environment (VA forensic psychiatry, workplace violence, conservatorship gaps) where innovation could have substantial impact on vulnerable populations. (2) His ethical grounding (HEC-C certification) and systems-level problem awareness suggest he could develop into an effective innovator with proper mentorship and structure - which is what Catalyst provides. (3) The interview is necessary to resolve critical ambiguities in the application: What was his actual role in the AI platform development? Does he have any outcome data from the Disruptive Behavior Committee improvements? Has he ever taken a project from concept through implementation to measurable adoption? Does he understand the difference between writing about innovation and actually implementing solutions? The interview should focus heavily on probing the gap between stated qualities and demonstrated evidence, testing whether his interdisciplinary collaboration claims hold up under scrutiny, and assessing whether he has the learning orientation and resilience needed for innovation work. If the interview reveals concrete examples of implementation experience and measurable impact that weren't captured in the application, he could be a strong candidate. If it confirms that his experience is primarily traditional academic work with limited innovation implementation, he would not be recommended for the program. The interview is warranted because the application shows enough potential signals (problem awareness, ethical rigor, teaching excellence, genuine motivation) that deeper exploration is justified, but the bar for acceptance should be high given the evidence gaps."
+}

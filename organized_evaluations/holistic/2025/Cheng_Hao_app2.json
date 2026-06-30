@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T21:27:25.886764",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 126.39374375343323,
+    "materials_character_count": 19361
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmptyhb6ub_.pdf"
+    ],
+    "candidate_id": "_Cheng_Hao_app2",
+    "evaluation_date": "2026-03-16 21:27:25.886610"
+  },
+  "red_flags": [
+    {
+      "flag": "Minimal research productivity despite 6+ years post-training",
+      "evidence": "CV shows only 5 publications total, with just 2 first-author papers since 2018. For someone claiming AI expertise and innovation interests, the absence of any AI-related publications or conference presentations is highly concerning. The CV lists 'AI projects in sleep medicine 12/2017-present' but zero outputs from this work.",
+      "severity": "high"
+    },
+    {
+      "flag": "Heavy reliance on stated capabilities without demonstrated outcomes",
+      "evidence": "Application states 'I have familiarly with current transformer and large language models and have trained neural networks' but provides no evidence of what was built, what accuracy was achieved, or any practical application. Lim letter says 'he has been working on code to train AI to write clinical notes' (passive voice, unclear progress) with no evidence of completion or testing.",
+      "severity": "high"
+    },
+    {
+      "flag": "Generic praise from supervisors without specific examples",
+      "evidence": "Lim writes 'I continue to be surprised by Dr. Cheng's out of the box thinking about problems as comes up with innovative solutions' but fails to name even one specific innovative solution. Labrada writes 'he really enjoys solving problems using a team approach' - generic statement that could apply to anyone.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Only innovation attempt described ended in failure with no follow-through",
+      "evidence": "CPAP mask project: 'Unfortunately, another group did beat us to the patent by about 1 year.' No evidence of pivoting to a different approach, publishing the methodology, or applying learnings to a new project. The lesson learned was procedural ('file provisional patients early') rather than technical or innovative.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Supervisor explicitly states candidate lacks independent research capability",
+      "evidence": "Lim letter states: 'he has not yet had the benefit of mentorship to fully execute his own research.' This is a fundamental gap for an innovation fellowship that expects fellows to drive projects.",
+      "severity": "high"
+    },
+    {
+      "flag": "Vague understanding of program value and fit",
+      "evidence": "Interest statement is generic: 'I learned that this is a great opportunity to collaborate with others with similar interests in developing innovative solutions' - could apply to any collaborative program. No specific articulation of what Catalyst offers or how his unique skills would contribute.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Passive voice and unclear agency in described work",
+      "evidence": "Multiple instances of passive construction suggesting unclear contribution: 'has been working on code' (Lim letter), 'AI projects in sleep medicine' with no specifics (CV), 'Improvements were made' pattern throughout. Active, specific descriptions of personal contributions are largely absent.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "weak",
+    "concerns": [
+      "Minimal research productivity (2 first-author papers in 6+ years) with no innovative methodologies",
+      "No evidence of completed innovative projects or deployed solutions despite 7+ years of claimed AI work",
+      "Heavy reliance on stated intentions and generic praise rather than concrete achievements",
+      "No demonstrated ability to translate technical skills into research impact or practical innovations",
+      "Unclear understanding of program goals - generic interest statement with no specific alignment"
+    ],
+    "evidence": [
+      {
+        "quote": "Dr. Cheng would like to write grants, work on groundbreaking research, and commercialize innovative products.",
+        "source": "tmptyhb6ub_.pdf - Lim letter",
+        "context": "These are future aspirations, not demonstrated accomplishments. The program seeks candidates with evidence of these capabilities, not just interest in developing them."
+      },
+      {
+        "quote": "he has not yet had the benefit of mentorship to fully execute his own research",
+        "source": "tmptyhb6ub_.pdf - Lim letter",
+        "context": "Supervisor explicitly states he lacks the capability to execute independent research. This is a fundamental gap for an innovation fellowship."
+      },
+      {
+        "quote": "I learned that this is a great opportunity to collaborate with others with similar interests in developing innovative solutions",
+        "source": "tmptyhb6ub_.pdf - application",
+        "context": "Generic interest statement that could apply to any collaborative program. Shows no specific understanding of Catalyst's unique value proposition or how his skills would contribute."
+      },
+      {
+        "quote": "he recruited 1 sleep physician, 3 midlevel's and 5 sleep technologists to complete a section that now consists of 5 physicians, 3 midlevel's, 3 fellows and 11 sleep technologists. The sleep medicine department expanded presence to 5 satellite clinics around the Miami VA.",
+        "source": "tmptyhb6ub_.pdf - Labrada letter",
+        "context": "Demonstrates strong administrative and operational skills, but these are not the core competencies the innovation program is seeking."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "The program seeks candidates who can \"drive innovation and creative problem-solving,\" \"translate research into practical impact,\" and \"demonstrate sustained commitment to challenging problems.\" Dr. Cheng's profile shows significant misalignment with these goals. His research productivity is minimal - only 2 first-author publications in 6+ years post-residency, both minor clinical observations rather than innovative research. The CV shows no evidence of translating research into practical impact: his AI projects have produced no publications, no deployed tools, and no measurable patient outcomes.\n\nThe program values \"genuine evidence of these qualities through their actions and achievements, not just stated intentions.\" This application is heavily weighted toward stated intentions rather than demonstrated achievements. His supervisor writes that he \"would like to write grants, work on groundbreaking research, and commercialize innovative products\" (Lim letter, tmptyhb6ub_.pdf) - these are future aspirations, not current accomplishments. The Labrada letter similarly focuses on what he \"will\" do rather than what he has done: \"our expectation of Dr. Cheng is to not only contribute to interesting projects, submit manuscripts and apply for grant funding, but to commercialize products\" (Labrada letter, tmptyhb6ub_.pdf). These are hopes, not evidence.\n\nHis strongest demonstrated competency is in clinical operations and administration. He successfully expanded the sleep clinic, recruited staff, and increased clinical volume to 11,000 encounters per year (Labrada letter, tmptyhb6ub_.pdf). However, the program is not seeking clinical administrators - it's seeking innovators who can create new solutions. The gap between his demonstrated administrative skills and the program's innovation focus is substantial. His statement that he's interested in Catalyst because it's \"a great opportunity to collaborate with others with similar interests\" (application, tmptyhb6ub_.pdf) is generic and could apply to any program - it shows no specific understanding of what Catalyst offers or how his unique skills would contribute.",
+    "strengths_for_program": [
+      "Interdisciplinary background combining electrical engineering and clinical medicine",
+      "Demonstrated ability to lead teams and execute operational improvements in clinical settings",
+      "Access to clinical data and patient populations through VA system"
+    ]
+  },
+  "overall_score": 4,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "Interdisciplinary technical background",
+      "evidence": [
+        {
+          "quote": "Bachelors of Science in Electrical Engineering, Minor in Physics",
+          "source": "tmptyhb6ub_.pdf - CV",
+          "context": "Formal training in engineering from a top program (UIUC, graduated with honors)"
+        },
+        {
+          "quote": "Microsoft, Program Manager in Storage Drivers, Windows Product Group",
+          "source": "tmptyhb6ub_.pdf - CV",
+          "context": "3.5 years of industry experience in software development before medical school"
+        }
+      ],
+      "confidence": "high",
+      "significance": "The combination of engineering training and clinical medicine is relatively rare and could enable unique perspectives on healthcare technology problems. However, the lack of evidence that he has successfully leveraged this combination to create innovative solutions limits the value of this background."
+    },
+    {
+      "quality": "Clinical leadership and operational execution",
+      "evidence": [
+        {
+          "quote": "he recruited 1 sleep physician, 3 midlevel's and 5 sleep technologists... expanded our capacity to complete ~11,000 clinical encounters per year and decreased wait times",
+          "source": "tmptyhb6ub_.pdf - Labrada letter",
+          "context": "Concrete evidence of successful team building and operational improvement"
+        },
+        {
+          "quote": "Under Dr. Cheng's leadership as section Chief of Sleep Medicine for the past 2.5 years, he has expanded the clinic to one where we are not only well staffed at the Miami VA but can also take on the load of our satellite clinics.",
+          "source": "tmptyhb6ub_.pdf - Lim letter",
+          "context": "Demonstrated ability to scale clinical operations across multiple sites"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Shows he can execute and deliver results in a complex healthcare environment. However, operational leadership is different from innovation leadership - the program needs evidence of creating novel solutions, not just scaling existing services."
+    },
+    {
+      "quality": "Persistence in face of setbacks",
+      "evidence": [
+        {
+          "quote": "Unfortunately, another group did beat us to the patent by about 1 year. I learned an important lesson to file provisional patients early.",
+          "source": "tmptyhb6ub_.pdf - application",
+          "context": "Shows ability to extract learning from failure"
+        },
+        {
+          "quote": "I was recently given the role of associate program director for the sleep medicine fellowship, and it has been an learning experience... Developing the skills to understand motivation of the applicant based on the application was something that I worked on during this process and will improve with subsequent application cycles.",
+          "source": "tmptyhb6ub_.pdf - application",
+          "context": "Acknowledges learning curve and commits to improvement"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Growth mindset is valuable, but the evidence is limited to one failed project and one new administrative role. Need more examples of sustained persistence through multiple challenging projects."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Dr. Hao Cheng presents a unique profile combining electrical engineering expertise with clinical medicine, but the application reveals significant weaknesses in demonstrated innovation and research productivity. His background includes a BS in Electrical Engineering from UIUC, 3.5 years at Microsoft as a Program Manager, and subsequent medical training (NYU MD, Buffalo Neurology residency, Michigan Sleep fellowship). He currently serves as Chief of Sleep Medicine at Miami VA and associate program director for the sleep fellowship.\n\nThe application contains substantial fluff and generic claims that lack concrete evidence. For example, he states \"I am proficient in programming, especially with C/C++, and Python\" (application, tmptyhb6ub_.pdf) but provides no specific projects, code repositories, or measurable outcomes from this claimed proficiency. His supervisor writes \"I continue to be surprised by Dr. Cheng's out of the box thinking about problems as comes up with innovative solutions\" (Lim letter, tmptyhb6ub_.pdf) - this is classic generic praise without a single specific example of what innovative solution he created or what problem he solved. The CPAP mask project he describes ended in failure: \"Unfortunately, another group did beat us to the patent by about 1 year\" (application, tmptyhb6ub_.pdf), and there's no evidence the product was ever deployed or helped any patients.\n\nHis research record is concerningly thin for someone 6+ years post-residency. He has only 5 publications listed, with just 2 as first author in the past 6 years - both are minor clinical observations (one is a 2-page letter to the editor about mask pressure requirements). The CV lists \"AI projects in sleep medicine\" starting 12/2017 but provides zero specifics about what was built, what data was used, what results were achieved, or any publications from this work. His supervisor Lim mentions he \"has been working on code to train AI to write clinical notes\" (Lim letter, tmptyhb6ub_.pdf) but again, no evidence of completion, testing, validation, or impact. These are stated intentions, not demonstrated achievements.\n\nThe strongest concrete evidence is his administrative success: he \"recruited 1 sleep physician, 3 midlevel's and 5 sleep technologists\" and \"expanded our capacity to complete ~11,000 clinical encounters per year and decreased wait times\" (Labrada letter, tmptyhb6ub_.pdf). This demonstrates operational competence and leadership in a clinical setting. However, for an innovation fellowship, the lack of completed innovative projects, minimal research output, and heavy reliance on generic claims rather than specific achievements raises serious concerns about his ability to drive innovation.",
+  "score_justification": "Dr. Cheng receives a score of 4.0 (Weak) based on significant gaps between stated capabilities and demonstrated achievements. While he has an interesting interdisciplinary background (EE + MD) and has shown strong clinical leadership (expanding sleep clinic to 11,000 encounters/year, recruiting staff), the evidence for innovation capability is minimal. His only described innovation attempt (CPAP mask) failed with no follow-through. Despite claiming AI expertise since 2017, he has zero AI publications, no deployed tools, and his supervisor explicitly states he 'has not yet had the benefit of mentorship to fully execute his own research' (Lim letter). The application contains substantial fluff - generic praise like 'out of the box thinking' and 'innovative solutions' without a single specific example. His research productivity is concerningly low (2 first-author papers in 6+ years, both minor clinical observations). The program seeks candidates who demonstrate innovation through actions and achievements; this candidate demonstrates primarily stated intentions and administrative competence. The score of 4.0 reflects some positive qualities (interdisciplinary background, operational leadership) but significant deficiencies in the core competencies the program requires (demonstrated innovation, research productivity, ability to execute independent projects).",
+  "innovation_potential": {
+    "level": "low",
+    "evidence": [
+      {
+        "quote": "We created a mostly automated workflow to reach this goal. Unfortunately, another group did beat us to the patent by about 1 year.",
+        "source": "tmptyhb6ub_.pdf - application section",
+        "context": "The only concrete innovation project described ended in failure with no patient impact or deployment. This demonstrates attempt but not successful innovation execution."
+      },
+      {
+        "quote": "AI projects in sleep medicine 12/2017-present",
+        "source": "tmptyhb6ub_.pdf - CV",
+        "context": "Listed on CV but with zero specifics about what was built, methods used, results achieved, or publications produced. After 7 years of claimed AI work, the absence of any concrete outputs is a major red flag."
+      },
+      {
+        "quote": "I have familiarly with current transformer and large language models and have trained neural networks - primarily feed forward networks for the purpose of detecting features on EEG to make a better automated sleep study scoring software.",
+        "source": "tmptyhb6ub_.pdf - application",
+        "context": "This is a stated capability without any evidence of what was built, what accuracy was achieved, whether it was validated, or if it's being used clinically. No publications or presentations on this work exist in the materials."
+      },
+      {
+        "quote": "he has been working on code to train AI to write clinical notes",
+        "source": "tmptyhb6ub_.pdf - Lim letter",
+        "context": "Passive voice ('has been working') indicates unclear progress. No evidence of completion, testing, validation, or deployment. This is an intention, not an achievement."
+      },
+      {
+        "quote": "I continue to be surprised by Dr. Cheng's out of the box thinking about problems as comes up with innovative solutions.",
+        "source": "tmptyhb6ub_.pdf - Lim letter",
+        "context": "Generic praise without a single specific example of what innovative solution was created or what problem was solved. This is worthless as evidence."
+      }
+    ],
+    "reasoning": "The evidence for innovation potential is weak and largely consists of stated intentions rather than demonstrated achievements. The CPAP mask project is the only concrete innovation attempt described, and it failed to reach completion or impact: \"We created a mostly automated workflow to reach this goal. Unfortunately, another group did beat us to the patent by about 1 year\" (application, tmptyhb6ub_.pdf). While he learned to \"file provisional patients early,\" there's no evidence he applied this lesson or launched any subsequent successful innovation.\n\nHis claimed AI work is particularly concerning for lack of specificity. The CV lists \"AI projects in sleep medicine\" from 12/2017-present (CV, tmptyhb6ub_.pdf) with zero details about what was built, what methods were used, what data was analyzed, or what results were achieved. His supervisor mentions he \"has been working on code to train AI to write clinical notes\" (Lim letter, tmptyhb6ub_.pdf), but this is passive voice indicating unclear progress, and there's no evidence of a working prototype, validation study, or deployment. For someone claiming AI expertise since 2017, the absence of any AI publications, conference presentations, or deployed tools is a major red flag.\n\nThe application contains multiple instances of stated qualities without demonstration: \"I have familiarly with current transformer and large language models and have trained neural networks\" (application, tmptyhb6ub_.pdf) - but where are the models? What were they trained on? What accuracy did they achieve? What problem did they solve? Similarly, his supervisor claims he has \"out of the box thinking\" and comes up with \"innovative solutions\" (Lim letter, tmptyhb6ub_.pdf) but fails to name even one specific innovative solution he created. His other supervisor writes \"he really enjoys solving problems using a team approach\" (Labrada letter, tmptyhb6ub_.pdf) - this is generic praise that could apply to anyone.\n\nThe most concrete evidence of technical work is from his residency (2015-2017) where he \"Found strong correlation in heart rate beat to beat variability and time of onset of autonomic dysfunction of seizures\" (CV, tmptyhb6ub_.pdf), but this appears to be data analysis rather than innovation, and it's 7+ years old. His publication record shows no innovative methodologies or novel technologies - just standard clinical observations. For an innovation fellowship, this candidate shows more interest in innovation than actual demonstrated capacity to innovate.",
+    "confidence": "high",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Verify actual depth of AI/ML expertise versus stated familiarity. A candidate with real experience should be able to provide specific technical details about model architecture, training process, and results.",
+      "category": "Probe claimed skill",
+      "question": "You mention training neural networks for EEG feature detection. Can you walk me through the specific architecture you used, the dataset size, the validation methodology, and the accuracy you achieved? What was the biggest technical challenge you encountered?"
+    },
+    {
+      "purpose": "Assess whether 7 years of claimed AI work has produced any concrete outputs, or if this is aspirational rather than actual work. The lack of publications/outputs is a major red flag that needs explanation.",
+      "category": "Verify experience",
+      "question": "Your CV lists 'AI projects in sleep medicine' from 2017 to present. Can you describe the three most significant outputs from this work - whether publications, deployed tools, or validated prototypes? What prevented these from being published or deployed?"
+    },
+    {
+      "purpose": "Look for evidence of complete innovation cycle: problem identification → solution design → implementation → impact measurement. The CPAP mask project failed; need to see if there are other examples of successful innovation.",
+      "category": "Assess innovation capability",
+      "question": "Tell me about a time when you identified a problem in your clinical practice, designed a novel solution, implemented it, and measured its impact. What was the problem, what was your solution, and what were the measurable outcomes?"
+    },
+    {
+      "purpose": "Understand whether the lack of research productivity is due to environmental constraints or capability gaps. This will help assess if the fellowship can address the barriers or if they're more fundamental.",
+      "category": "Explore concern",
+      "question": "Your supervisor mentioned you 'have not yet had the benefit of mentorship to fully execute your own research.' What specific barriers have prevented you from executing independent research projects? What would need to change for you to successfully lead an innovation project?"
+    },
+    {
+      "purpose": "Assess whether candidate has ever completed a full innovation lifecycle. The materials suggest lots of started projects but no completed innovations. This is critical for program fit.",
+      "category": "Test fit",
+      "question": "The Catalyst program expects fellows to drive innovation projects from conception through to deployment or commercialization. Walk me through your experience taking a project from initial idea all the way to real-world implementation. What was your role at each stage?"
+    },
+    {
+      "purpose": "Verify programming proficiency with concrete examples. Stated proficiency without examples of built systems is a red flag.",
+      "category": "Probe claimed skill",
+      "question": "You mention being proficient in Python and C++. What's the most complex software system you've built from scratch? How many lines of code? What problem did it solve? Is it still in use?"
+    },
+    {
+      "purpose": "Assess resilience and learning from failure. The application mentions learning to 'file provisional patients early' but doesn't show what innovative work followed. This will reveal if he persists through setbacks or gives up.",
+      "category": "Assess motivation",
+      "question": "After your CPAP mask project was beaten to patent, what did you do next? Did you publish the methodology? Pivot to a different innovation? What specific actions did you take in response to that setback?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is NO based on fundamental misalignment with program goals and high-severity red flags. The program explicitly seeks candidates with 'genuine evidence of these qualities through their actions and achievements, not just stated intentions.' This application is heavily weighted toward stated intentions with minimal demonstrated innovation achievements. Critical concerns include: (1) Zero completed innovative projects with measurable impact despite 7+ years of claimed AI work, (2) Supervisor explicitly stating he lacks capability to 'fully execute his own research,' (3) Minimal research productivity (2 first-author papers in 6 years), (4) Heavy reliance on generic praise without specific examples, and (5) Only innovation attempt described ended in failure with no follow-through. While his interdisciplinary background is interesting, there's insufficient evidence he can leverage it to drive innovation. The fellowship would essentially be teaching him how to do innovation research from scratch, which is not the program's purpose - it seeks candidates who already demonstrate innovation capability and need support to scale their impact. The gap between his demonstrated competencies (clinical administration) and program requirements (innovation execution) is too large to bridge through the fellowship."
+}

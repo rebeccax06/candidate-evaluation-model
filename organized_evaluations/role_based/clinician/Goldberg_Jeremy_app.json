@@ -1,0 +1,320 @@
+{
+  "candidate": {
+    "candidate_id": "_Goldberg_Jeremy_app",
+    "name": null,
+    "materials": [
+      "_Goldberg_Jeremy_app.pdf"
+    ],
+    "evaluation_date": "2026-06-11 22:43:27.361556"
+  },
+  "overall_assessment": "Jeremy Goldberg presents as a Mental Health Social Work Section Manager at the Orlando VA with significant clinical and supervisory experience, but the application materials reveal a concerning pattern of generic claims with minimal concrete evidence of innovation or systems-level problem-solving. His strongest documented achievement is placing 2nd in the 2024 MIT-VA Hackathon suicide prevention track, though the materials provide no detail about his specific contribution, the problem addressed, or the solution developed. His supervisor Kara Boyer describes him as having \"an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient\" and notes his \"initiatives have not only streamlined our operations but have also enhanced the overall quality of care\" (_Goldberg_Jeremy_app.pdf, page 7), yet no specific initiative, system, or measurable outcome is described anywhere in the materials. This is classic recommendation letter fluff—praise without evidence.\n\nThe application is dominated by stated qualities rather than demonstrated achievements. Goldberg claims \"I continue to seek new ways to improve our care and services and implement these improvements into my own clinical care\" (_Goldberg_Jeremy_app.pdf, page 1), but provides zero examples of what improvements, how implemented, or what resulted. He states he is \"a huge proponent of the use of AI in medical technology\" (page 2) but offers no evidence of having used, studied, or implemented AI in any capacity. His CV lists extensive training credentials (MI/MET, ACT, EMDR) and teaching roles, but these are routine professional development activities, not evidence of innovation. The most concrete professional achievement is his role supervising programs (ICMHR, ARMOR suicide prevention, PRRC), but his individual contribution to these programs versus inherited responsibilities is completely unclear.\n\nThe marching arts teaching experience (2003-present) is the only area where Goldberg provides any specificity about his approach: \"Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted. Success comes from the willingness to try new ideas even if it means they could fail\" (page 2). This suggests openness to iteration and collaborative problem-solving, which aligns with Catalyst values. However, this is a volunteer activity outside his professional domain, and even here, the \"several gold medals\" claim lacks context about his specific role versus the students' performance. The second recommendation letter from Steven Herman, Ph.D., offers more substantive praise, noting Goldberg \"has a unique ability to see problems as opportunities for positive change in a truly out of the box manner\" and \"turns it on its head and makes it work again, much in the nature of a Thomas Kuhn\" (page 5), but again provides zero specific examples of what problems, what solutions, or what outcomes. This is textbook generic praise that could describe anyone.\n\nThe fundamental issue is that this application is approximately 85% stated qualities and generic praise, with only 15% concrete evidence. For a candidate applying to an innovation fellowship, the absence of any described innovation—no specific problem identified, no investigation process detailed, no solution designed, no outcome measured—is a critical gap. The Hackathon placement suggests potential, but without knowing what he actually did on that team, it's impossible to assess whether he drove the innovation or contributed in a supporting role. The materials suggest someone who may be a competent manager and clinician, but who has not yet demonstrated the evidence-based problem-solving and systems innovation that Catalyst requires.",
+  "innovation_potential": {
+    "level": "low",
+    "confidence": "medium",
+    "reasoning": "The evidence for innovation potential is extremely weak. The strongest indicator is the 2nd place finish at the 2024 MIT-VA Hackathon in the suicide prevention track, where Goldberg states \"I enjoyed working collaboratively with my team and seeing the process of our problem and solution change\" and notes he was the presenter (_Goldberg_Jeremy_app.pdf, page 1-2). However, the materials provide zero detail about: (1) what problem the team identified, (2) what solution they developed, (3) what Goldberg's specific role was in problem identification versus solution design versus presentation, or (4) whether any implementation occurred post-Hackathon. Being the presenter does not necessarily mean he drove the innovation—it could simply mean he had good presentation skills. This is a critical evidence gap.\n\nBeyond the Hackathon, there is no documented evidence of innovation. Goldberg's supervisor claims he has \"an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient\" and that \"His initiatives have not only streamlined our operations but have also enhanced the overall quality of care\" (page 7), but provides zero examples. This is generic praise without substance. Goldberg himself claims \"I constantly seek new ways to improve our care and services and implement these improvements into my own clinical care\" (page 1), but again offers no specific improvement, implementation method, or measured outcome. The second supervisor notes Goldberg \"has a unique ability to see problems as opportunities for positive change in a truly out of the box manner\" and \"His plans and projects are carefully thought-out, maintaining the benefits of prior systems, yet rectifying their loopholes and weaknesses\" (page 5), but once again, no actual plan or project is described. These are all stated qualities, not demonstrated achievements.\n\nThe CV shows extensive training in evidence-based therapies (MI/MET, ACT, EMDR) and teaching roles, but these are standard professional development activities, not innovation. Training others in established methods is valuable but does not demonstrate creative problem-solving or systems innovation. His claim to have \"special interests in the use of technologies as they relate to mental health treatment and documentation\" (page 1) and being \"a huge proponent of the use of AI in medical technology\" (page 2) are stated interests with zero evidence of having actually used, piloted, or implemented any technology or AI solution. The marching arts experience shows some collaborative and iterative thinking (\"humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted\"), but this is a volunteer activity and the connection to professional innovation is unclear. Overall, the materials suggest someone who may have innovation potential but has not yet demonstrated it in documented, measurable ways.",
+    "key_evidence": [],
+    "evidence": [
+      {
+        "quote": "I had an excellent experience at the 2024 VA MIT Hackathon and my team received 2nd place in the Suicide Prevention track. I enjoyed working collaboratively with my team and seeing the process of our problem and solution change.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 1",
+        "context": "This is the only concrete achievement suggesting innovation potential, but lacks critical detail about Goldberg's specific contribution, the problem addressed, the solution developed, or any post-Hackathon implementation. The phrase 'seeing the process of our problem and solution change' suggests exposure to iterative problem-solving but does not demonstrate that he drove this process."
+      },
+      {
+        "quote": "Mr. Goldberg's proficiency in creating and implementing innovative systems has been instrumental in improving our service delivery and clinical outcomes. He has an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient. His initiatives have not only streamlined our operations but have also enhanced the overall quality of care we provide to our clients.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 7 (Boyer recommendation)",
+        "context": "This is generic supervisor praise with zero specific examples. No system is named, no gap is described, no solution is detailed, no outcome is measured. This is classic recommendation letter fluff that provides no actual evidence of innovation."
+      },
+      {
+        "quote": "Mr. Goldberg has shown himself to be extremely creative. He has a unique ability to see problems as opportunities for positive change in a truly out of the box manner. I would not say that he rejects the status quo; rather he turns it on its head and makes it work again, much in the nature of a Thomas Kuhn. His plans and projects are carefully thought-out, maintaining the benefits of prior systems, yet rectifying their loopholes and weaknesses.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 5 (Herman recommendation)",
+        "context": "More generic praise comparing Goldberg to Thomas Kuhn (paradigm shifts in science) but providing zero specific examples of any plan, project, problem, or solution. The phrase 'in the nature of a Thomas Kuhn' is hyperbolic without supporting evidence. This is stated creativity, not demonstrated creativity."
+      },
+      {
+        "quote": "I am a huge proponent of the use of AI in medical technology and I see its place in our future as clear as I can see today.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 2",
+        "context": "This is a stated interest with no evidence of having used, studied, piloted, or implemented any AI technology. Being a 'proponent' is not the same as being an innovator. This claim needs verification through specific examples of AI-related work."
+      }
+    ]
+  },
+  "program_fit": {
+    "level": "weak",
+    "confidence": "medium",
+    "detailed_analysis": "Goldberg's fit with Catalyst is weak based on the available evidence, though the Hackathon participation suggests some alignment with the program's collaborative, iterative approach. The program seeks candidates who can \"drive innovation and creative problem-solving,\" \"translate research into practical impact,\" and \"demonstrate sustained commitment to challenging problems.\" The materials show minimal evidence of any of these qualities. The Hackathon experience is the only documented exposure to needs-driven, interdisciplinary problem-solving, and even there, his specific role and contribution are unclear. His statement that he \"enjoyed working collaboratively with my team and seeing the process of our problem and solution change\" (_Goldberg_Jeremy_app.pdf, page 1) suggests he values iteration, but \"seeing\" a process change is passive—it's unclear if he drove changes or observed them.\n\nThe program values \"genuine evidence of these qualities through their actions and achievements, not just stated intentions.\" Goldberg's application is almost entirely stated intentions. He claims to \"constantly seek new ways to improve our care and services\" (page 1) but provides no examples. He states he has \"special interests in the use of technologies as they relate to mental health treatment\" (page 1) but shows no evidence of having implemented any technology. He says he is \"a huge proponent of the use of AI in medical technology\" (page 2) but demonstrates no AI-related work. These are all stated interests, not demonstrated actions. The recommendation letters compound this problem by offering effusive but vague praise. Boyer claims Goldberg has \"an innate ability to identify gaps in our current processes and develop solutions\" (page 7) but names no gap or solution. Herman says Goldberg \"has a unique ability to see problems as opportunities for positive change in a truly out of the box manner\" (page 5) but provides no example of any problem or change.\n\nThe strongest evidence of program fit comes from the marching arts teaching, where Goldberg describes a collaborative, iterative approach: \"Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted. Success comes from the willingness to try new ideas even if it means they could fail\" (page 2). This demonstrates openness to others' ideas and comfort with experimentation, both Catalyst values. However, this is a volunteer activity outside his professional domain, and it's unclear how this mindset translates to his VA work. His clinical expertise in MI/MET, ACT, and EMDR shows depth in evidence-based practice, which could be valuable for understanding clinical needs, but there's no evidence he has moved beyond delivering these therapies to innovating new approaches or systems. The CV shows he has trained others extensively, which suggests communication skills and knowledge sharing, but training in established methods is not the same as developing new solutions. Overall, the materials suggest someone who may be a good team member and competent clinician, but who has not yet demonstrated the innovation, systems thinking, and evidence-based problem-solving that Catalyst requires.",
+    "strengths_for_program": [
+      "Demonstrated willingness to engage in collaborative, iterative problem-solving through Hackathon participation and marching arts teaching",
+      "Extensive clinical expertise in evidence-based mental health therapies (MI/MET, ACT, EMDR) that could inform needs identification in mental health domain",
+      "Supervisory experience overseeing multiple programs (ICMHR, ARMOR suicide prevention, PRRC) suggests exposure to systems-level challenges",
+      "Stated comfort with public speaking and presentation (presented Hackathon solution, teaches marching arts)",
+      "Expressed interest in technology and AI applications in mental health, though not yet demonstrated"
+    ],
+    "concerns": [
+      "No documented evidence of having identified, investigated, or solved a specific clinical or systems problem independently",
+      "Application dominated by stated qualities and generic supervisor praise rather than concrete achievements with measurable outcomes",
+      "Unclear what specific role Goldberg played in the Hackathon team's 2nd place finish—may have been a supporting member rather than innovation driver",
+      "No evidence of having implemented, piloted, or evaluated any technology or AI solution despite stated interest",
+      "No described experience with interdisciplinary collaboration outside the Hackathon (clinical work appears to be within mental health discipline)",
+      "Materials suggest competent manager and clinician but not yet a demonstrated innovator or systems thinker",
+      "Critical gaps in describing problem identification process, stakeholder engagement, solution development methodology, or outcome measurement"
+    ],
+    "evidence": [
+      {
+        "quote": "Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted. Success comes from the willingness to try new ideas even if it means they could fail.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 2",
+        "context": "This is the strongest evidence of alignment with Catalyst values—openness to others' ideas, comfort with iteration and experimentation, and humility. However, this describes volunteer marching arts teaching, not professional VA work, so transferability is unclear."
+      },
+      {
+        "quote": "I enjoyed working collaboratively with my team and seeing the process of our problem and solution change. I love being a part of a team that can go through a process of creating something out of nothing. I enjoy having a creative outlet where I can provide my expertise while learning from the expertise of others.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 1",
+        "context": "This suggests positive experience with collaborative problem-solving and valuing others' expertise, which aligns with Catalyst's interdisciplinary approach. However, 'seeing the process change' is passive, and 'creative outlet' suggests he may view innovation as a side activity rather than core professional practice."
+      },
+      {
+        "quote": "One of Mr. Goldberg's most commendable qualities is his collaborative spirit. He excels in fostering a team environment where all members feel valued and supported. His ability to work seamlessly with colleagues from various disciplines has been crucial in our multidisciplinary approach to client care.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 7 (Boyer recommendation)",
+        "context": "This suggests strong team collaboration skills, which is valuable for Catalyst. However, 'multidisciplinary approach to client care' likely refers to standard VA mental health teams (psychiatry, psychology, social work, nursing), not the engineering/design/clinical interdisciplinary collaboration Catalyst requires. No specific example of cross-disciplinary work is provided."
+      }
+    ]
+  },
+  "notable_qualities": [
+    {
+      "quality": "Collaborative mindset with openness to others' ideas",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 2",
+          "context": "Demonstrates explicit recognition that the best idea may not be his own and willingness to support others' ideas—critical for interdisciplinary teamwork."
+        },
+        {
+          "quote": "I enjoyed working collaboratively with my team and seeing the process of our problem and solution change. I enjoy having a creative outlet where I can provide my expertise while learning from the expertise of others.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 1",
+          "context": "Expresses value for learning from others' expertise, not just contributing his own, which suggests intellectual humility."
+        },
+        {
+          "quote": "One of Mr. Goldberg's most commendable qualities is his collaborative spirit. He excels in fostering a team environment where all members feel valued and supported.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 7 (Boyer recommendation)",
+          "context": "Supervisor corroboration of collaborative approach, though no specific example provided."
+        }
+      ],
+      "significance": "Catalyst requires fellows to work as equal team members across disciplines, not as domain experts dictating solutions. Goldberg's stated openness to others' ideas and willingness to have his own ideas challenged is essential for this model, though it needs to be verified in professional (not just volunteer) contexts."
+    },
+    {
+      "quality": "Comfort with experimentation and iteration",
+      "confidence": "low",
+      "evidence": [
+        {
+          "quote": "Success comes from the willingness to try new ideas even if it means they could fail.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 2",
+          "context": "Explicitly states comfort with failure as part of experimentation, which aligns with Catalyst's iterative, prototype-driven approach."
+        },
+        {
+          "quote": "I enjoyed working collaboratively with my team and seeing the process of our problem and solution change.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 1",
+          "context": "Suggests positive experience with iterative problem-solving where solutions evolved, though his role in driving iteration versus observing it is unclear."
+        }
+      ],
+      "significance": "Catalyst's needs-driven process requires rapid prototyping, testing, and iteration based on stakeholder feedback. Comfort with experimentation and potential failure is critical. However, Goldberg's evidence comes from marching arts teaching, not professional healthcare innovation, so transferability needs verification."
+    },
+    {
+      "quality": "Deep clinical expertise in evidence-based mental health therapies",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "Mental Health Social Worker with specific specialty in VA Systems, Motivational Interviewing, and the treatment of substance use, depression/anxiety, and trauma related disorders.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 1",
+          "context": "Self-reported specialty areas, corroborated by CV training history."
+        },
+        {
+          "quote": "Trainer and Consultant for Motivational Interviewing & Motivational Enhancement Therapy 2013-2019. Co-Facilitated Training for Social Workers and Psychologists in MI/MET. Co-Facilitator for Health Disease and Prevention Motivational Interviewing Series 2012-2019. Co-Facilitator for Local VA Staff in Acceptance and Commitment Therapy 2016-2018. Presented Seminar on Eye Movement Desensitization and Reprocessing 2012. Supervised Staff to use EMDR in The Department of Veteran Affairs 2011-2013.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 3 (CV)",
+          "context": "Extensive training and teaching in multiple evidence-based therapies over many years, demonstrating depth of clinical knowledge."
+        },
+        {
+          "quote": "In the realm of evidence-based psychotherapy, Mr. Goldberg's knowledge is both deep and broad. He is well-versed in a variety of therapeutic modalities and consistently applies the latest research to his practice.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 7 (Boyer recommendation)",
+          "context": "Supervisor corroboration of clinical expertise, though no specific example of applying latest research is provided."
+        }
+      ],
+      "significance": "Deep clinical knowledge is valuable for identifying unmet clinical needs and understanding the clinical context for solutions. However, clinical expertise alone is not sufficient for Catalyst—it must be paired with systems thinking, innovation capability, and interdisciplinary collaboration, which are not yet demonstrated."
+    },
+    {
+      "quality": "Experience in VA systems and mental health program management",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "Mental Health Social Work Section Manager (GS13 Step 4) June 2021 – Present. Directly supervised Intensive Community Mental Health Recovery (ICMHR) Program and Marriage and Family Therapy program. Program underneath the Mental Health Social Work Section also include Psychosocial Rehabilitation and Recovery Center (PRRC), ARMOR (Suicide Prevention), and Vocational Rehabilitation for Orlando VA HCS.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 3 (CV)",
+          "context": "Current role overseeing multiple mental health programs including suicide prevention, suggesting exposure to systems-level challenges and program coordination."
+        },
+        {
+          "quote": "Mental Health Social Worker with specific specialty in VA Systems",
+          "source": "_Goldberg_Jeremy_app.pdf, page 1",
+          "context": "Self-identified specialty in VA systems, corroborated by 15+ years of VA employment history on CV."
+        }
+      ],
+      "significance": "Understanding VA systems, bureaucracy, and program structures could be valuable for identifying implementation barriers and designing solutions that fit within VA constraints. However, managing existing programs is different from innovating new solutions, and the materials don't show evidence of the latter."
+    },
+    {
+      "quality": "Stated interest in technology and AI applications in mental health",
+      "confidence": "low",
+      "evidence": [
+        {
+          "quote": "I have special interests in the use of technologies as they relate to mental health treatment and documentation.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 1",
+          "context": "Stated interest in technology applications, but no evidence of having used, piloted, or implemented any technology solution."
+        },
+        {
+          "quote": "I am a huge proponent of the use of AI in medical technology and I see its place in our future as clear as I can see today.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 2",
+          "context": "Stated enthusiasm for AI, but no evidence of AI-related work, training, or implementation. This is a claim that needs verification."
+        },
+        {
+          "quote": "Mr. Goldberg's awareness and comprehension of technology is impressive. I sometimes wonder if he is really an excellent Social Worker or an excellent computer programmer? Clearly he is both, with a keen grasp of many different varieties of technology.",
+          "source": "_Goldberg_Jeremy_app.pdf, page 5 (Herman recommendation)",
+          "context": "Supervisor praise suggesting technology competence, but no specific technology, programming language, or implementation is described. This is vague praise without evidence."
+        }
+      ],
+      "significance": "Interest in technology and AI could be valuable for Catalyst's innovation focus, but stated interest without demonstrated application is weak evidence. The materials provide no examples of Goldberg having designed, implemented, or evaluated any technology solution, which is a critical gap for assessing this quality."
+    }
+  ],
+  "red_flags": [
+    {
+      "flag": "Application dominated by generic claims and supervisor praise with minimal concrete evidence of specific achievements, innovations, or measurable outcomes",
+      "severity": "high",
+      "evidence": "Supervisor Boyer states Goldberg has 'an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient' and 'His initiatives have not only streamlined our operations but have also enhanced the overall quality of care' (_Goldberg_Jeremy_app.pdf, page 7), but provides zero specific examples of any gap, solution, or outcome. Supervisor Herman claims Goldberg 'has a unique ability to see problems as opportunities for positive change in a truly out of the box manner' and 'turns it on its head and makes it work again, much in the nature of a Thomas Kuhn' (page 5), but again provides no specific example. Goldberg himself claims 'I constantly seek new ways to improve our care and services and implement these improvements into my own clinical care' (page 1) but offers no example of any improvement or implementation. This pattern of stated qualities without evidence is pervasive throughout the application."
+    },
+    {
+      "flag": "No documented evidence of having independently identified, investigated, and solved a specific clinical or systems problem with measurable outcomes",
+      "severity": "high",
+      "evidence": "No evidence found in any application material. The Hackathon is the only innovation-related activity mentioned, but Goldberg's specific role and contribution are not described. His CV lists program management responsibilities and training activities, but no problem-solving initiatives. The recommendation letters praise his problem-solving ability but provide no examples. This is a critical gap for an innovation fellowship application."
+    },
+    {
+      "flag": "Hackathon achievement lacks critical detail about Goldberg's specific contribution, the problem addressed, the solution developed, or any post-event implementation",
+      "severity": "medium",
+      "evidence": "Goldberg states 'my team received 2nd place in the Suicide Prevention track' and 'I was the presenter for it' (_Goldberg_Jeremy_app.pdf, pages 1-2), but provides no information about: (1) what suicide prevention problem the team identified, (2) what solution they developed, (3) what Goldberg's role was in problem identification versus solution design versus presentation, or (4) whether any implementation occurred. Being the presenter does not necessarily indicate he drove the innovation—it could simply mean he had good presentation skills. This needs clarification in an interview."
+    },
+    {
+      "flag": "Stated interest in technology and AI with zero evidence of having used, implemented, or evaluated any technology or AI solution",
+      "severity": "medium",
+      "evidence": "Goldberg claims 'I have special interests in the use of technologies as they relate to mental health treatment and documentation' (page 1) and 'I am a huge proponent of the use of AI in medical technology' (page 2), but his CV shows no technology-related projects, training, or implementations. Supervisor Herman claims Goldberg has 'a keen grasp of many different varieties of technology' and wonders 'if he is really an excellent Social Worker or an excellent computer programmer' (page 5), but provides no specific technology or programming example. These are stated interests and vague praise without demonstrated application."
+    },
+    {
+      "flag": "No evidence of interdisciplinary collaboration outside the single Hackathon experience",
+      "severity": "medium",
+      "evidence": "Goldberg's CV shows 15+ years of work within mental health/social work discipline. Supervisor Boyer mentions 'multidisciplinary approach to client care' (page 7), but this likely refers to standard VA mental health teams (psychiatry, psychology, social work, nursing), not the engineering/design/clinical interdisciplinary collaboration Catalyst requires. The Hackathon is the only documented exposure to working with non-clinical disciplines, and his specific role is unclear. No evidence of collaboration with engineers, designers, data scientists, or other non-clinical disciplines in his professional work."
+    },
+    {
+      "flag": "Unclear whether Goldberg has moved beyond delivering established therapies to innovating new approaches or systems",
+      "severity": "medium",
+      "evidence": "CV shows extensive training and teaching in established evidence-based therapies (MI/MET, ACT, EMDR), which demonstrates clinical competence but not innovation. No evidence of having developed, adapted, or evaluated a new therapeutic approach, clinical protocol, or care delivery system. Supervisor Boyer claims he 'consistently applies the latest research to his practice' (page 7), but this describes staying current with existing evidence, not generating new evidence or innovations."
+    },
+    {
+      "flag": "Passive language in describing Hackathon experience suggests observer rather than driver role",
+      "severity": "low",
+      "evidence": "Goldberg states 'I enjoyed working collaboratively with my team and seeing the process of our problem and solution change' (_Goldberg_Jeremy_app.pdf, page 1). The phrase 'seeing the process change' is passive—it suggests he observed changes rather than drove them. This needs clarification about his actual role in the team's problem-solving process."
+    },
+    {
+      "flag": "Generic fluff statements throughout application",
+      "severity": "medium",
+      "evidence": "Examples include: 'I love being a part of a team that can go through a process of creating something out of nothing' (page 1) - vague and could apply to anyone; 'This type of program is how change happens and I love being a part of positive change' (page 1) - generic enthusiasm without specifics; 'I get along very well with others and tend to make a lot of jokes' (page 2) - personality description, not evidence of capability; 'My hackathon group received 2nd place and I was the presenter for it' (page 2) - states outcome but not contribution. These statements provide no concrete evidence of skills or achievements."
+    }
+  ],
+  "questions_for_interview": [
+    {
+      "category": "Verify experience and probe claimed skill",
+      "question": "Walk me through your team's process at the 2024 MIT-VA Hackathon from start to finish. What specific suicide prevention problem did your team identify, how did you identify it, and what was your individual role in the problem identification process?",
+      "purpose": "Clarify Goldberg's specific contribution to the Hackathon team versus being a supporting member. Assess whether he can articulate a clear problem identification process and his role in it. Determine if he drove innovation or primarily contributed clinical expertise or presentation skills."
+    },
+    {
+      "category": "Verify experience and assess innovation capability",
+      "question": "Your supervisor mentioned that you have 'an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient.' Can you describe a specific gap you identified in your VA work, how you investigated it, what solution you developed, and what measurable outcome resulted?",
+      "purpose": "Test whether the supervisor's generic praise is backed by concrete examples. Assess Goldberg's ability to identify problems, investigate root causes, develop solutions, and measure impact—all critical for Catalyst. If he cannot provide a specific example, this is a major red flag."
+    },
+    {
+      "category": "Probe claimed skill and assess systems thinking",
+      "question": "You mentioned special interest in using technologies for mental health treatment and documentation, and being a 'huge proponent' of AI in medical technology. Describe a specific instance where you used, piloted, or implemented a technology or AI solution in your clinical or management work. What problem were you trying to solve, how did you approach it, and what happened?",
+      "purpose": "Verify whether stated technology/AI interest is backed by actual experience or is merely aspirational. Assess whether Goldberg has moved from interest to action. If no concrete example exists, determine whether he has the foundation to learn and apply technology in Catalyst."
+    },
+    {
+      "category": "Assess interdisciplinary collaboration capability",
+      "question": "Catalyst requires working as an equal team member with engineers, designers, and other non-clinical disciplines, not as the clinical expert dictating solutions. Outside of the Hackathon, describe a time when you collaborated with someone from a completely different discipline (not another mental health clinician) to solve a problem. What was challenging about that collaboration and how did you navigate it?",
+      "purpose": "Assess whether Goldberg has experience working outside his clinical comfort zone and can collaborate with non-clinical disciplines. Determine if he can function as a team member rather than domain expert. If no example exists, probe his openness to this type of collaboration."
+    },
+    {
+      "category": "Assess need identification and stakeholder engagement",
+      "question": "Describe a time when you identified an unmet need in your clinical work by talking to patients, staff, or other stakeholders. How did you investigate whether this was a real need versus just your perception? What did you learn that surprised you or changed your initial understanding?",
+      "purpose": "Assess whether Goldberg engages in systematic need-finding versus assuming he knows the problem. Determine if he seeks stakeholder input and allows it to change his thinking. This is critical for Catalyst's needs-driven approach. Look for evidence of curiosity, humility, and willingness to be wrong."
+    },
+    {
+      "category": "Explore concern about innovation versus management",
+      "question": "Your CV shows extensive experience managing programs and training others in established therapies. How do you see your role in Catalyst being different from your current management and training work? What specifically attracts you to innovation versus continuing to excel in management and clinical practice?",
+      "purpose": "Determine whether Goldberg understands the difference between managing existing programs and innovating new solutions. Assess whether he is genuinely motivated by innovation or sees Catalyst as a prestigious credential. Probe whether he is willing to step out of his management comfort zone into a learner/contributor role."
+    },
+    {
+      "category": "Test fit and assess learning orientation",
+      "question": "In Catalyst, you might work on a healthcare problem outside your mental health expertise—for example, a surgical workflow issue or a primary care access problem. How would you approach contributing to a team working on a problem where you have no clinical expertise? What value would you bring?",
+      "purpose": "Assess whether Goldberg can work outside his specialty area and contribute beyond clinical expertise. Determine if he has transferable problem-solving skills or is primarily valuable only in mental health domain. Test his comfort with being a learner rather than expert."
+    },
+    {
+      "category": "Probe claimed quality and assess evidence-based thinking",
+      "question": "You mentioned that in your marching arts teaching, 'success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted.' Give me a specific example from your VA work where you advocated for an idea, someone else's idea was chosen instead, and you supported it. What made their idea better and how did you handle that?",
+      "purpose": "Test whether Goldberg's stated humility and openness to others' ideas translates to his professional work or is limited to volunteer activities. Assess his ability to subordinate ego to evidence and team decisions. Look for specific example with details about the competing ideas and his response."
+    }
+  ],
+  "overall_score": 4.5,
+  "score_justification": "Goldberg receives a score of 4.5 (weak, with significant concerns outweighing limited strengths) based on the following assessment: The application is dominated by generic claims and supervisor praise with minimal concrete evidence of innovation, systems thinking, or measurable achievements. The strongest documented accomplishment is 2nd place at the 2024 MIT-VA Hackathon, but critical details about his specific contribution, the problem addressed, and the solution developed are completely absent. Without knowing whether he drove the innovation or contributed in a supporting role, this achievement cannot be weighted heavily. His supervisors provide effusive but vague praise—Boyer claims he has 'an innate ability to identify gaps and develop solutions' and Herman compares him to Thomas Kuhn, but neither provides a single specific example of any gap, solution, or outcome. This is textbook recommendation letter fluff. Goldberg himself claims to 'constantly seek new ways to improve care' and be 'a huge proponent of AI in medical technology,' but offers zero examples of any improvement implemented or any technology used. His CV shows 15+ years of competent clinical work, program management, and training in established therapies, but no documented innovation, no described problem-solving initiative, and no evidence of interdisciplinary collaboration outside the single Hackathon. The marching arts teaching provides the only concrete evidence of collaborative, iterative thinking ('humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted'), but this is a volunteer activity and transferability to professional work is unclear. The materials suggest someone who may be a good manager and clinician, but who has not yet demonstrated the innovation capability, systems thinking, evidence-based problem-solving, or interdisciplinary collaboration that Catalyst requires. The score of 4.5 reflects: (1) significant evidence gaps in all critical areas, (2) pervasive pattern of stated qualities without demonstrated achievements, (3) unclear whether he has moved beyond delivering established therapies to innovating new solutions, and (4) single Hackathon experience is insufficient to overcome the lack of other innovation evidence, especially when his specific role is unclear. An interview could potentially reveal hidden strengths, but based on the materials provided, this is a weak candidate for an innovation fellowship.",
+  "recommendation": "Not recommended without significant additional evidence",
+  "interview_decision": true,
+  "interview_decision_reasoning": "Despite the weak overall score of 4.5 and significant concerns, I recommend interviewing Goldberg for the following reasons: (1) The Hackathon 2nd place finish suggests some innovation potential, and an interview could clarify his specific contribution and whether he drove the innovation or played a supporting role. If he was a key driver, this could significantly change the assessment. (2) The marching arts teaching demonstrates collaborative, iterative thinking and comfort with experimentation, which are core Catalyst values. An interview could determine if this mindset transfers to his professional work. (3) His deep clinical expertise in mental health and VA systems could be valuable for identifying clinical needs, if paired with innovation capability. (4) The gap between the supervisors' effusive praise and the lack of concrete examples is puzzling—an interview could reveal whether there are genuine achievements that simply weren't articulated well in the application, or whether the praise is indeed generic fluff. (5) His stated interest in technology and AI, if backed by any actual experience or strong learning orientation, could be developed in Catalyst. However, the interview threshold is marginal. The interview should focus on: (1) clarifying his Hackathon role and contribution with specific details, (2) probing for concrete examples of innovation, problem-solving, or systems thinking in his VA work, (3) verifying whether technology/AI interest is backed by any experience, (4) assessing his ability to work outside his clinical expertise and collaborate with non-clinical disciplines, and (5) determining whether he understands the difference between managing existing programs and innovating new solutions. If the interview reveals that the application's lack of specificity reflects poor communication rather than lack of achievement, he could be reconsidered. If the interview confirms that he has not yet demonstrated innovation and is primarily a competent manager/clinician, he should not be selected for Catalyst.",
+  "role": "clinician",
+  "role_specific_assessment": {
+    "role": "clinician",
+    "marker": "Engagement with challenging clinical problems and translation to systems innovation",
+    "score": 3.0,
+    "confidence": "low",
+    "reasoning": "Goldberg's materials provide minimal evidence of recognizing, investigating, and acting on challenging clinical or health-system problems in a way that would translate to Catalyst's needs-driven process. The application describes his clinical work in generic terms—he 'provides psychotherapy to Veterans for depression, anxiety, and trauma related issues' and 'oversees programs that provide direct suicide prevention and therapy services' (_Goldberg_Jeremy_app.pdf, page 1)—but offers no specific challenging clinical situation, no description of an unmet need he identified, and no investigation or action he took beyond delivering standard care. His supervisor Boyer claims he 'has an innate ability to identify gaps in our current processes and develop solutions' (page 7), but provides zero specific examples of any gap or solution. The Hackathon suicide prevention project is the only potential evidence of need identification and solution development, but the materials provide no detail about what suicide prevention problem the team identified, how they investigated it, what stakeholders they engaged, or what solution they developed. Without these details, it's impossible to assess whether Goldberg can move beyond witnessing difficult clinical experiences to systematically identifying unmet needs and developing practical solutions. His extensive training in evidence-based therapies (MI/MET, ACT, EMDR) demonstrates clinical competence but not systems thinking or innovation. The materials show no evidence of: (1) investigating why a clinical problem persists beyond individual patient factors, (2) considering workflow, staffing, access, equity, or other systems factors, (3) engaging patients or other stakeholders to understand their perspectives, (4) designing or testing an intervention, or (5) measuring impact. The score of 3 reflects that he has witnessed challenging clinical situations (suicide risk, severe mental illness, substance use disorders) but has not demonstrated moving beyond witnessing to systematic need identification, investigation, and action. An interview could potentially reveal hidden examples, but based on the materials, there is no evidence of the clinical problem-solving and systems thinking Catalyst requires.",
+    "evidence": [
+      {
+        "quote": "I oversee programs that provide direct suicide prevention and therapy services. I continue to provide psychotherapy to Veterans for depression, anxiety, and trauma related issues. As a recent Hackathon participant I was able to use my passion for technology and suicide prevention to develop a system that could assist in identify suicide risk as well as leading providers to respond to these risk appropriately.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 1",
+        "context": "This is the only statement connecting clinical work (suicide prevention) to innovation (Hackathon system). However, it provides no detail about: (1) what specific suicide prevention problem was identified, (2) how the problem was investigated, (3) what stakeholders were engaged, (4) what the system does or how it works, (5) what Goldberg's specific role was in developing it, or (6) whether it has been implemented or tested. The phrase 'I was able to use my passion' suggests personal interest but not systematic need-finding. The phrase 'develop a system' is vague—it could mean anything from a complex AI tool to a simple checklist. This needs significant clarification."
+      },
+      {
+        "quote": "Mr. Goldberg's proficiency in creating and implementing innovative systems has been instrumental in improving our service delivery and clinical outcomes. He has an innate ability to identify gaps in our current processes and develop solutions that are both effective and efficient.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 7 (Boyer recommendation)",
+        "context": "This is generic supervisor praise with no specific example of any system, gap, solution, or outcome. It provides no evidence of clinical need identification, investigation, or action. This is stated quality, not demonstrated achievement."
+      },
+      {
+        "quote": "Many of his projects utilize state-of-the-art technology in their design, yet in a manner that preserves the humanity and personal touch of mental health care.",
+        "source": "_Goldberg_Jeremy_app.pdf, page 5 (Herman recommendation)",
+        "context": "This suggests Goldberg has worked on multiple technology projects, but no project is named or described. The phrase 'preserves the humanity and personal touch' is vague. Without specific examples, this cannot be evaluated as evidence of clinical problem-solving or systems innovation."
+      }
+    ],
+    "evidence_gaps": [
+      "No specific challenging clinical or health-system problem described with details about the situation, who was affected, and why it mattered",
+      "No description of how Goldberg identified an unmet need versus merely witnessing a difficult situation",
+      "No evidence of investigating root causes or distinguishing symptoms from underlying problems",
+      "No description of engaging patients, caregivers, staff, or other stakeholders to understand their perspectives on a problem",
+      "No evidence of considering systems factors (workflow, staffing, access, equity, costs, implementation barriers) beyond individual clinical interactions",
+      "No description of designing, testing, or implementing an intervention with measured outcomes",
+      "No evidence of reframing a problem after learning new information from stakeholders or investigation",
+      "Critical details missing about Hackathon project: What suicide prevention problem? How identified? What stakeholders engaged? What solution developed? What was Goldberg's specific role? Any implementation or testing?",
+      "No examples of 'innovative systems' or 'projects utilizing state-of-the-art technology' mentioned by supervisors—need specific descriptions"
+    ],
+    "research_evidence_level": null,
+    "publication_strength": null,
+    "research_ownership": null,
+    "challenge_complexity": "limited",
+    "need_investigation_stage": "witnessed_only",
+    "systems_thinking": "not_shown",
+    "build_stage": null,
+    "ownership_clarity": null,
+    "user_grounding": null
+  },
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "processing_time_seconds": 230.79168105125427,
+    "materials_character_count": 15477,
+    "timestamp": "2026-06-11T22:43:27.362312",
+    "evaluation_mode": "holistic_enhanced"
+  }
+}

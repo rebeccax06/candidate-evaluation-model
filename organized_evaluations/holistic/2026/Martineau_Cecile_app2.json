@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T22:28:35.205742",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 147.7360339164734,
+    "materials_character_count": 13526
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpt2511hg2.pdf"
+    ],
+    "candidate_id": "Martineau_Cecile_app2",
+    "evaluation_date": "2026-02-25 22:28:35.205611"
+  },
+  "red_flags": [
+    {
+      "flag": "Zero research output or innovation track record despite 10+ years of clinical practice and stated research interests",
+      "evidence": "CV lists 'Research interests: Topics related to emergency psychiatry, emergency medicine, C/L psychiatry, the interface between medicine and behavioral health. Keen interest in statistics and data analysis' but shows zero publications, presentations, grants, patents, or completed projects in the research section. For a competitive innovation fellowship, absence of any tangible innovation output over a decade-long career is a critical gap.",
+      "severity": "high"
+    },
+    {
+      "flag": "Pattern of stated qualities without demonstrated evidence throughout application",
+      "evidence": "Multiple instances of fluff: 'I am curious by nature, independent, rational' (Page 2) - stated without demonstration; 'I often think about improvements in safety and efficiency of care' (Page 2) - thinking is not doing; 'genuine motivation for socially impactful work' implied but not demonstrated through specific actions or outcomes. Application violates core evaluation principle of evidence-only assessment.",
+      "severity": "high"
+    },
+    {
+      "flag": "Passive voice and vague descriptions obscuring actual contributions and agency",
+      "evidence": "'We developed awareness to these changes' (Page 2) - unclear who did what; 'This needed to be acknowledged and addressed' (Page 3) - passive construction obscures whether she drove the solution; 'Improvements were made' pattern throughout suggests limited personal agency in driving change.",
+      "severity": "high"
+    },
+    {
+      "flag": "Leadership experience ended in frustration rather than innovative problem-solving",
+      "evidence": "Union representative role: 'In the end, the experience gave me a feeling of limitation and a strong motivation to develop an independent activity where I would have more agency' (Page 3). When given leadership role with identified problems (withheld Covid payments, NP integration), she did not demonstrate innovative solutions but rather felt limited by the system.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Seeking program to BEGIN innovation journey rather than bringing demonstrated capacity",
+      "evidence": "'I wish to work with a team on longer term creative projects, where I would get more traction' (Page 2) - this reveals she has not yet worked on longer term creative projects successfully. Dr. Gale's letter confirms: 'she has realized that there may be more effective ways to provide the care' - realization is recent, not demonstrated through action.",
+      "severity": "high"
+    },
+    {
+      "flag": "No evidence of translating coursework or learning into practical applications",
+      "evidence": "Despite taking MIT courses in 'machine learning, statistics' and Dr. Chiu noting 'intensive self-training to learn advanced statistical techniques for analyzing large datasets' (Page 10), there is zero evidence of applying these skills to analyze data, generate insights, or solve problems. Learning without application suggests potential execution gap.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Clinical examples show reactive adaptation rather than proactive innovation",
+      "evidence": "Ativan shortage example describes adapting to constraints, not creating solutions. Fall case describes advocating for standard protocol, not innovative problem-solving. These are competent clinical responses but do not demonstrate the creative problem-solving or innovation drive the program requires.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Generic recommender praise without specific innovation examples",
+      "evidence": "Dr. Chiu: 'she has routinely proven to be adept at learning quickly' (Page 10) - emphasizes learning, not creating. Dr. Gale: 'She is interested in collaborating with others to develop data-based systems' (Page 8) - interest, not accomplishment. Both letters lack specific examples of innovations she has developed or projects she has completed.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Motivation appears driven by frustration with current role rather than pull toward innovation",
+      "evidence": "'feeling of limitation and a strong motivation to develop an independent activity where I would have more agency' (Page 3). Motivation framed as escape from constraints rather than attraction to innovation challenges. This suggests potential fit issues with program's collaborative, team-based approach.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "weak",
+    "concerns": [
+      "Zero evidence of completed innovation projects, research publications, or implemented solutions despite 10+ years of practice",
+      "Pattern of stated intentions without execution - claims to think about improvements but shows no improvements developed",
+      "Passive voice and vague descriptions throughout application obscure actual contributions and agency",
+      "Union representative experience ended in frustration rather than innovative problem-solving despite leadership role",
+      "Appears to be seeking program to learn innovation skills rather than bringing innovation capacity to contribute",
+      "No evidence of translating MIT coursework into practical applications or projects",
+      "Clinical examples show reactive adaptation rather than proactive innovation",
+      "Missing evidence of sustained commitment to challenging problems - describes feeling limited and wanting to move on"
+    ],
+    "evidence": [
+      {
+        "quote": "I wish to work with a team on longer term creative projects, where I would get more traction. I have mostly worked in large organizations until now.",
+        "source": "tmpt2511hg2.pdf - Page 2",
+        "context": "This reveals she is seeking the program as an opportunity to BEGIN working on creative projects rather than bringing a track record of creative project execution. This is misaligned with a competitive fellowship expecting demonstrated innovation capacity."
+      },
+      {
+        "quote": "Research interests: Topics related to emergency psychiatry, emergency medicine, C/L psychiatry, the interface between medicine and behavioral health. Keen interest in statistics and data analysis.",
+        "source": "tmpt2511hg2.pdf - Page 7 (CV)",
+        "context": "The CV lists research interests but shows zero publications, presentations, grants, or completed research projects. 'Keen interest' is stated quality without demonstrated output - a major red flag for a research and innovation program."
+      },
+      {
+        "quote": "She has routinely proven to be adept at learning quickly.",
+        "source": "tmpt2511hg2.pdf - Page 10 (Dr. Chiu letter)",
+        "context": "The recommender emphasizes learning ability but provides no examples of her creating, building, or innovating. Being a good student in online courses is not evidence of innovation capacity or ability to drive projects to completion."
+      },
+      {
+        "quote": "I tried to do a fair job in understanding how administration/management operate in our hospital, in advocating for my colleagues. I tried to give my colleagues explanations, feedback and as much clarity as possible.",
+        "source": "tmpt2511hg2.pdf - Page 3",
+        "context": "In a leadership role with identified problems (withheld Covid payments, NP integration issues), she describes trying to understand and communicate but not driving innovative solutions. This suggests limited agency and problem-solving initiative."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "The candidate's fit with the Catalyst program is weak due to fundamental misalignment between program requirements and demonstrated capabilities. The program seeks candidates who can 'drive innovation and creative problem-solving' and 'translate research into practical impact' - yet this candidate has no research publications, no patents, no prototypes, and no evidence of translating ideas into implemented solutions despite 10+ years of clinical practice.\n\nThe program values 'genuine evidence of these qualities through their actions and achievements, not just stated intentions' - but this application is almost entirely stated intentions. She states she is 'curious by nature, independent, rational' without demonstrating these through specific achievements. She states interest in 'longer term creative projects' but her CV shows no completed creative projects. She mentions taking MIT online courses but provides no evidence of applying that learning to solve real problems. The gap between stated aspirations and demonstrated execution is severe.\n\nRegarding interdisciplinary work, while she has dual training in psychiatry and emergency medicine, there is no evidence of her bridging these disciplines innovatively or working across teams to create novel solutions. Her clinical work appears siloed within standard psychiatric practice. The union representative role could have demonstrated cross-functional collaboration, but she describes it as frustrating and limiting rather than as an opportunity where she drove collaborative solutions. Her motivation statement reveals the core issue: 'I wish to work with a team on longer term creative projects, where I would get more traction. I have mostly worked in large organizations until now.' This suggests she is seeking the program to BEGIN developing innovation skills rather than bringing demonstrated innovation capacity to contribute to the cohort.",
+    "strengths_for_program": [
+      "Strong clinical exposure to high-acuity psychiatric and emergency settings providing potential problem identification opportunities",
+      "Quantitative educational background from École Polytechnique could support data-driven approaches if activated",
+      "Multilingual capabilities (French, English, Spanish, intermediate Mandarin) could facilitate diverse collaboration",
+      "Active pursuit of continuing education in machine learning and statistics shows learning orientation"
+    ]
+  },
+  "overall_score": 3.5,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "Clinical breadth across high-acuity settings",
+      "evidence": [
+        {
+          "quote": "Clinical expertise in psychiatry (emergency, C/L, inpatient) and in emergency medicine. I work for OMH, H&H, NYP.",
+          "source": "tmpt2511hg2.pdf - Page 2",
+          "context": "Demonstrates exposure to multiple healthcare systems and clinical contexts"
+        },
+        {
+          "quote": "Attending physician at King's County Hospital CPEP (role of physician in charge)/CL... Attending physician at Kingsboro Psychiatric Center inpatient care/admissions ward",
+          "source": "tmpt2511hg2.pdf - Page 6-7 (CV)",
+          "context": "Multiple concurrent attending positions in challenging public healthcare settings"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Provides exposure to diverse clinical problems and healthcare system challenges that could inform problem identification, though she has not yet demonstrated ability to translate this exposure into innovations."
+    },
+    {
+      "quality": "Strong quantitative educational foundation",
+      "evidence": [
+        {
+          "quote": "Scientific background, graduated from École Polytechnique in France (currently continuing ed in machine learning, statistics with MIT online courses…)",
+          "source": "tmpt2511hg2.pdf - Page 2",
+          "context": "École Polytechnique is a highly selective engineering school, indicating strong quantitative aptitude"
+        },
+        {
+          "quote": "Master Science Ecole Polytechnique",
+          "source": "tmpt2511hg2.pdf - Page 6 (CV)",
+          "context": "Confirms advanced quantitative training prior to medical career"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Provides technical foundation that could support data-driven innovation if she develops capacity to execute projects. However, this foundation has not yet translated into demonstrated innovation output despite 10+ years since completing this degree."
+    },
+    {
+      "quality": "Persistence in challenging environments",
+      "evidence": [
+        {
+          "quote": "She has an insane ability to thrive in difficult circumstances and can work in any environment.",
+          "source": "tmpt2511hg2.pdf - Page 10 (Dr. Chiu letter)",
+          "context": "Recommender's assessment of adaptability, though lacks specific examples"
+        },
+        {
+          "quote": "Dr. Martineau is a psychiatrist working in the New York health system serving mental health patients with the highest needs, both in the emergency room environment, and with acute long term care in-residence psychiatry patients.",
+          "source": "tmpt2511hg2.pdf - Page 10 (Dr. Chiu letter)",
+          "context": "Sustained work in high-stress, high-acuity settings"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Could support sustained effort on challenging innovation projects, though current evidence shows persistence in clinical work rather than in driving projects to completion. The union representative experience ending in frustration raises questions about persistence when facing systemic obstacles."
+    },
+    {
+      "quality": "Active learning orientation",
+      "evidence": [
+        {
+          "quote": "currently continuing ed in machine learning, statistics with MIT online courses…",
+          "source": "tmpt2511hg2.pdf - Page 2",
+          "context": "Self-directed pursuit of technical skills relevant to data-driven innovation"
+        },
+        {
+          "quote": "I have known Dr. Martineau for four years as a friend and participant with her on learning advanced statistical techniques for analyzing large datasets.",
+          "source": "tmpt2511hg2.pdf - Page 10 (Dr. Chiu letter)",
+          "context": "Sustained engagement with technical learning over multiple years"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Shows willingness to develop new skills, which is positive for growth potential. However, the critical gap is translating learning into execution - no evidence of applying these skills to complete projects or generate insights."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Dr. Cecile Martineau presents as a mid-career psychiatrist with dual training in psychiatry and emergency medicine, currently working in high-acuity public healthcare settings in New York. Her application reveals a pattern of stated aspirations toward innovation and data-driven improvement that lacks concrete demonstration of innovative action or creative problem-solving. The application is heavily weighted toward clinical credentials and stated intentions rather than evidence of actual innovation, research output, or transformative contributions.\n\nHer strongest verifiable qualities are clinical breadth (\"Clinical expertise in psychiatry (emergency, C/L, inpatient) and in emergency medicine. I work for OMH, H&H, NYP\") and educational pedigree (École Polytechnique background, \"graduated from École Polytechnique in France\"). However, the application contains substantial fluff and generic statements. For example, she states \"I am curious by nature, independent, rational\" without demonstrating these qualities through specific actions or outcomes. Her described experiences are largely reactive clinical scenarios rather than proactive innovation initiatives.\n\nThe two concrete examples she provides are concerning in their passivity and lack of innovation: (1) adapting to Ativan shortage by \"developed awareness to these changes, and adapted the treatment with the current constraints\" - this describes basic clinical adaptation, not innovation; (2) advocating for cervical collar use after a fall - this is standard medical practice, not creative problem-solving. Her union representative experience similarly shows engagement but ends with \"a feeling of limitation and a strong motivation to develop an independent activity\" rather than demonstrating she actually created solutions. The recommenders provide generic praise (\"She has an insane ability to thrive in difficult circumstances\") without specific examples of innovative contributions or research achievements.\n\nMost critically, despite claiming interest in \"data-based systems\" and taking \"continuing education classes with MIT,\" there is zero evidence of: published research, completed data projects, prototypes developed, patents filed, or any tangible innovation output. The application reads as someone who has recently become interested in innovation but has not yet demonstrated capacity to execute on that interest.",
+  "score_justification": "Dr. Martineau receives a score of 3.5 (Weak) based on significant deficiencies across multiple critical dimensions for an innovation fellowship. While she has strong clinical credentials and quantitative educational background, she demonstrates zero evidence of innovation capacity despite 10+ years of clinical practice. The application is heavily weighted toward stated intentions ('I often think about improvements') rather than demonstrated achievements. Her CV lists research interests but shows no publications, presentations, grants, or completed projects. The clinical examples provided (Ativan shortage adaptation, fall protocol advocacy) describe reactive standard practice rather than proactive innovation. Her union representative experience, which could have demonstrated problem-solving and leadership, instead ended in frustration without innovative solutions. The pattern of passive voice throughout ('we developed awareness', 'this needed to be addressed') obscures individual contributions and suggests limited agency. Recommenders provide generic praise ('adept at learning quickly', 'ability to thrive in difficult circumstances') without citing specific innovations or completed projects. Most critically, her motivation statement reveals she is seeking the program to BEGIN working on creative projects ('I wish to work with a team on longer term creative projects, where I would get more traction') rather than bringing demonstrated innovation capacity to contribute to the cohort. This represents a fundamental misalignment with a competitive fellowship expecting candidates who have already demonstrated innovation ability and want to accelerate their impact. The score of 3.5 reflects that while she has relevant clinical exposure and educational foundation that could theoretically support innovation, she has not yet translated these into any tangible innovative output, making her unsuitable for this program at this stage of her development.",
+  "innovation_potential": {
+    "level": "low",
+    "evidence": [
+      {
+        "quote": "I often think about improvements in safety and efficiency of care, as well as research ideas in general.",
+        "source": "tmpt2511hg2.pdf - Page 2",
+        "context": "This is a stated intention without any concrete examples of improvements actually developed, tested, or implemented. Thinking about improvements is not evidence of innovation capacity."
+      },
+      {
+        "quote": "I can mention the recent shortage of the Ativan intramuscular formulation in some hospitals in NYC, with challenges to diagnose and treat patients with alcohol withdrawal or with catatonia, as they present in a different way (partially treated). We developed awareness to these changes, and adapted the treatment with the current constraints.",
+        "source": "tmpt2511hg2.pdf - Page 2",
+        "context": "This describes reactive clinical adaptation to a supply shortage, not proactive innovation. The passive voice 'we developed awareness' obscures individual contribution. Adapting treatment protocols to drug shortages is standard clinical practice, not innovation."
+      },
+      {
+        "quote": "However, the injuries sustained during the fall ended up being the primary issue in his recovery. A fall inside the hospital was treated differently than if it had occurred outside. This needed to be acknowledged and addressed (use of cervical spine collar).",
+        "source": "tmpt2511hg2.pdf - Page 2-3",
+        "context": "Advocating for cervical spine precautions after a fall is standard emergency medicine protocol, not innovative problem-solving. The passive voice 'this needed to be acknowledged' suggests she identified an issue but doesn't demonstrate she drove a systematic solution or process improvement."
+      },
+      {
+        "quote": "In the end, the experience gave me a feeling of limitation and a strong motivation to develop an independent activity where I would have more agency.",
+        "source": "tmpt2511hg2.pdf - Page 3",
+        "context": "The union representative experience ended in frustration rather than innovative solutions. This shows she encountered systemic problems but did not demonstrate capacity to create workarounds or innovations despite having a leadership role."
+      },
+      {
+        "quote": "She is interested in collaborating with others to develop data-based systems that can improve outcomes in psychiatry and possibly in other clinical settings. To that end, she has been taking courses in data analytics and AI.",
+        "source": "tmpt2511hg2.pdf - Page 8 (Dr. Gale letter)",
+        "context": "This confirms interest and course-taking but provides zero examples of her actually developing any data-based systems or applying her learning to real problems. Interest plus education does not equal demonstrated innovation capacity."
+      }
+    ],
+    "reasoning": "The candidate's innovation potential must be rated low based on the complete absence of demonstrated innovative output despite 10+ years of clinical practice. While she states interest in \"improvements in safety and efficiency of care, as well as research ideas in general\" and mentions taking online courses in \"data science, machine learning,\" there is no evidence of translating these interests into actual innovations, prototypes, publications, or implemented solutions.\n\nThe examples provided reveal reactive rather than proactive thinking. The Ativan shortage response (\"We developed awareness to these changes, and adapted the treatment with the current constraints\") describes standard clinical adaptation to supply chain issues, not innovation. The fall case (\"This needed to be acknowledged and addressed (use of cervical spine collar)\") describes advocating for standard medical protocol, not creative problem-solving. These are competent clinical responses but show no evidence of the \"creative problem-solving\" or \"drive innovation\" qualities the program seeks.\n\nMost concerning is the pattern of stated intentions without execution. She claims to \"often think about improvements\" but provides no examples of improvements actually developed or implemented. The union representative experience explicitly ended in \"a feeling of limitation\" rather than innovative solutions. Dr. Chiu's letter notes she \"has undergone intensive self-training to learn advanced statistical techniques\" but provides zero examples of her applying these techniques to solve problems or generate insights. This pattern suggests someone in the early stages of interest in innovation rather than someone with demonstrated capacity to innovate.",
+    "confidence": "high",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether coursework has translated into practical application and execution capability. Current evidence shows learning but zero application - need to verify if there are unreported projects or if this is truly a learning-without-doing pattern.",
+      "category": "Probe claimed skill",
+      "question": "You mention taking MIT courses in machine learning and statistics. Can you walk me through a specific project where you applied these techniques to analyze data and what insights or outcomes resulted?"
+    },
+    {
+      "purpose": "The current description uses passive voice ('we developed awareness') that obscures individual contribution. Need to understand if she drove this or was a participant, and whether this involved any innovation beyond standard clinical adaptation.",
+      "category": "Verify experience",
+      "question": "In your application, you describe adapting treatment protocols during the Ativan shortage. Can you detail your specific role - did you identify the issue, propose the solution, implement changes, or measure outcomes? Walk me through your individual contributions step by step."
+    },
+    {
+      "purpose": "Direct probe for innovation track record. If she cannot provide a concrete example with measurable outcomes after 10+ years, this confirms the red flag that she lacks demonstrated innovation capacity despite extensive clinical exposure.",
+      "category": "Assess innovation capacity",
+      "question": "You've worked in emergency psychiatry and emergency medicine for over 10 years. What is the most innovative solution or improvement you have personally developed and implemented in your clinical practice? Please describe the problem, your solution, implementation process, and measurable outcomes."
+    },
+    {
+      "purpose": "Assess problem-solving persistence and learning from setbacks. Current evidence suggests she gave up when facing systemic barriers rather than finding creative workarounds - need to understand if she has developed more effective approaches or if this pattern would repeat in innovation work.",
+      "category": "Explore concern",
+      "question": "Your union representative experience ended with feelings of limitation. When you encountered systemic obstacles to solving problems like withheld Covid payments, what specific approaches did you try? What would you do differently now?"
+    },
+    {
+      "purpose": "Directly address the core fit concern - is she seeking the program to learn innovation skills (misfit) or does she have unreported innovation experience (potential fit)? Her answer will reveal whether she understands the program expects demonstrated capacity, not just potential.",
+      "category": "Test fit",
+      "question": "The Catalyst program is designed for people who have already demonstrated innovation capacity and want to accelerate their impact. You mention wanting to work on longer-term creative projects. What creative projects have you initiated or led to completion in the past, and what made them successful or unsuccessful?"
+    },
+    {
+      "purpose": "Her stated motivation (wanting independence and agency) seems misaligned with program's collaborative approach. Need to understand if this is a fundamental values mismatch or if she can effectively work within team structures to drive innovation.",
+      "category": "Probe motivation",
+      "question": "You describe wanting 'more agency' and moving away from large organizations. How do you reconcile this with the Catalyst program's emphasis on collaborative, team-based innovation? Can you give an example of a time you successfully drove innovation within organizational constraints?"
+    },
+    {
+      "purpose": "Directly address the gap between stated research interests and zero research output. Either she has unreported work (which would be concerning that she didn't include it) or she has not actually conducted research despite claiming interest (confirming the stated-vs-demonstrated red flag).",
+      "category": "Verify claimed interest",
+      "question": "Your CV lists research interests in emergency psychiatry and the interface between medicine and behavioral health, but shows no publications or completed research. What research have you conducted in these areas, even if unpublished? What prevented you from publishing or presenting this work?"
+    },
+    {
+      "purpose": "Test whether statistical learning has been applied to real problems or remains theoretical. If she cannot describe specific analyses with concrete results, this confirms the concern about learning without execution.",
+      "category": "Assess learning application",
+      "question": "Dr. Chiu mentions you've been learning advanced statistical techniques for analyzing large datasets. What datasets have you analyzed, what questions were you trying to answer, and what did you discover? Please be specific about the methods you used and the insights generated."
+    }
+  ],
+  "interview_decision_reasoning": "Interview is not recommended based on fundamental misalignment between candidate profile and program requirements, combined with multiple high-severity red flags. The program explicitly seeks candidates who 'show genuine evidence of these qualities through their actions and achievements, not just stated intentions' - yet this application is almost entirely stated intentions without demonstrated innovation output. After 10+ years of clinical practice with exposure to numerous healthcare challenges, the candidate has zero publications, patents, completed projects, or implemented innovations to show. This is not a borderline case requiring interview clarification - it is a clear pattern of learning and thinking about innovation without executing. The high-severity red flags (zero innovation track record, pattern of stated-vs-demonstrated qualities, seeking program to begin rather than accelerate innovation journey) are disqualifying. An interview would not resolve these concerns because they reflect fundamental gaps in demonstrated capacity rather than unclear evidence. The candidate appears to be 2-3 years premature for this program - she would benefit from first completing some innovation projects, publishing research, or implementing improvements in her clinical setting to demonstrate execution capability before applying to a competitive fellowship. Interview slots should be reserved for candidates scoring 6.0+ who show demonstrated innovation capacity with potential for acceleration through the program."
+}

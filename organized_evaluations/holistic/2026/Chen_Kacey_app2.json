@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T21:16:36.349418",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 173.59893941879272,
+    "materials_character_count": 20584
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpo5j0txfi.pdf"
+    ],
+    "candidate_id": "Chen_Kacey_app2",
+    "evaluation_date": "2026-02-25 21:16:36.349297"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on generic stated qualities without specific supporting evidence throughout application",
+      "evidence": "Application contains numerous unsupported claims: \"I have always been committed to improving medical equipment accessibility\" (no evidence of pre-college work in this area), \"interested in an interdisciplinary focus on bridging fields and expanding therapeutic innovation\" (stated interest, not demonstrated achievement), \"adaptability and listening can be as valuable as technical expertise\" (lesson stated but not demonstrated through specific incident). Prof. Rossi's letter similarly contains generic praise: \"demonstrates initiative, adaptability, and insight\", \"problem-solving mindset\", \"approach to challenges with curiosity and creativity\" - all without specific examples of these qualities in action.",
+      "severity": "high"
+    },
+    {
+      "flag": "Passive voice and vague descriptions obscure personal contribution to achievements",
+      "evidence": "Multiple descriptions use passive voice or unclear attribution: \"Organized 10+ transcripts and interviews\" (support task, not innovation), \"Conducted and presented monthly market research\" (standard task), \"Worked with third-party firms to boost engagement\" (unclear personal contribution). Even active descriptions often lack specificity: \"improving marketing and pushing for investments\" (what specific improvements? what results?), \"ensuring that user needs in the market are met\" (how? what specific actions?).",
+      "severity": "medium"
+    },
+    {
+      "flag": "Short duration of most experiences raises questions about depth and sustained commitment",
+      "evidence": "Resume shows: Advanced Optronics (Mar 2024 - Aug 2024, 6 months), Harvard Stowell Lab (May 2024 - Jul 2024, 3 months), No Patients Left Behind (Jun 2024 - Sept 2024, 4 months), Taitung Christian Hospital (Jul 2023 - Sept 2023, 3 months). Only Cai Labs shows ongoing commitment (Sept 2024 - Present, ~10 months at time of application). The program values \"sustained commitment to challenging problems\" but most experiences are brief internships or summer programs.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Lack of concrete outcomes or measurable impact for claimed achievements",
+      "evidence": "Envision MedTech prosthetics program: no mention of how many prosthetics delivered, what specific technical challenges solved, or measurable impact. Harvard Moonshot: claims \"winning 1st\" but no details about what made solution innovative or how it compared to alternatives. Advanced Optronics: mentions \"improving marketing and pushing for investments and FDA grants\" but no results stated (were investments secured? were grants awarded?). EZ-Amp sensor: no mention of whether device was deployed, tested, or achieved intended energy savings.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of learning from feedback or adapting based on criticism",
+      "evidence": "No evidence found in application materials. While Prof. Rossi mentions \"adaptability\" and \"ability to learn quickly and adapt to new environments\", no specific examples are provided of Yuta receiving critical feedback, changing approach based on new evidence, or pivoting strategy when initial attempts failed. The program values candidates who \"learn, grow, and adapt based on feedback\" but this quality is not demonstrated.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear evidence of effective communication to varied audiences",
+      "evidence": "Prof. Rossi states \"good communication skills both in person and in writing, regularly drafting assessments that summarized extensive data clearly\" but this describes technical writing to a specific audience (energy assessment reports). No evidence of communicating complex ideas to non-technical audiences, policymakers, or diverse stakeholders. The application itself contains significant generic language and fluff, raising questions about communication precision.",
+      "severity": "low"
+    },
+    {
+      "flag": "Reference 1 is a construction site manager with no apparent connection to candidate's technical or research work",
+      "evidence": "Application states: \"I have worked alongside David for two summers in a row now as a summer job to pay the bills. Though more unconventional to Biotech or Engineering, I believe my time with him has developed a strong work ethic and has strengthen my morals and compassion.\" While work ethic is valuable, this reference cannot speak to research capability, innovation potential, or technical skills. The note \"He has no email, but he will almost always answer a call\" and \"Strongest Boston Accent\" suggests informal relationship rather than professional mentorship.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Limited evidence of deep innovation or transformative problem-solving beyond competent execution",
+      "Heavy reliance on stated qualities rather than demonstrated achievements throughout application",
+      "Unclear evidence of effective cross-disciplinary collaboration or synthesis of insights across fields",
+      "Short duration of most experiences (3-6 months) raises questions about sustained commitment",
+      "Passive voice and vague descriptions suggest unclear personal contribution to team achievements",
+      "No clear evidence of learning from feedback or adapting approach based on new evidence"
+    ],
+    "evidence": [
+      {
+        "quote": "I have always been committed to improving medical equipment accessibility in underserved communities by developing efficient, low-cost devices. The Catalyst fellowship presents an opportunity for me to learn, expand, and work on my vision in an unrestricted setting, creating a more collaborative environment without limiting conventional processes or ego.",
+        "source": "tmpo5j0txfi.pdf (application)",
+        "context": "Shows alignment with program values around impact and collaboration, though the first sentence is a stated quality rather than demonstrated achievement. The interest in collaborative, ego-free environment aligns with program culture."
+      },
+      {
+        "quote": "While my background is typically in biological sciences and wet labs, I quickly familiarized myself with the necessary field-specific skills. I sought peer advice, took notes on colleagues' troubleshooting, and joined machinery clubs to develop skills like welding, soldering, and electrical work.",
+        "source": "tmpo5j0txfi.pdf (application)",
+        "context": "Demonstrates willingness to learn outside comfort zone and resourcefulness in skill acquisition. However, this describes learning standard skills rather than innovative problem-solving or exceptional adaptation."
+      },
+      {
+        "quote": "Her attention to detail and management of multiple responsibilities simultaneously makes her a valuable part of our team... Her problem-solving mindset, her approach to challenges with curiosity and creativity, and her ability to learn quickly and adapt to new environments reflect her technical aptitude and intellectual curiosity.",
+        "source": "tmpo5j0txfi.pdf (Rossi letter)",
+        "context": "Generic praise without specific examples. These are stated qualities from a supervisor but lack the concrete incidents that would demonstrate these capabilities in action. This type of recommendation provides limited evidence for program fit assessment."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate's fit with the Catalyst program is mixed, with some genuine alignments but significant gaps in demonstrated capabilities. On the positive side, Yuta shows authentic commitment to translating research into practical impact for underserved populations. The personal story (\"I suffered medical muteness from a simple procedure turned surgical accident at an underfunded hospital that lacked pediatric equipment\" - application) provides genuine motivation, and the Envision MedTech work demonstrates follow-through on this commitment. The stated interest in the program is specific: \"creating a more collaborative environment without limiting conventional processes or ego\" and wanting to \"embrace various business, community, and other research perspectives in translating a project into a positive, tangible impact\" (application). This aligns with the program's interdisciplinary focus. The breadth of experience (wet lab, engineering, medical devices, energy systems) suggests potential for cross-disciplinary work.\n\nHowever, several concerns emerge regarding program fit. First, the evidence for effective cross-disciplinary collaboration is weak. While the candidate lists diverse experiences, there's little evidence of synthesizing insights across fields or working effectively with diverse teams to achieve novel outcomes. The Advanced Optronics description mentions \"Collaborating with neurosurgeons\" (application) but only in a support capacity (organizing interviews), not as an equal contributor. Second, the application lacks evidence of learning and adapting based on feedback. Prof. Rossi mentions \"adaptability\" (Rossi letter) but provides no specific examples of how Yuta responded to criticism or changed approach based on new evidence. Third, communication effectiveness is unclear. While Rossi mentions \"good communication skills both in person and in writing, regularly drafting assessments that summarized extensive data clearly\" (Rossi letter), this describes competent technical writing, not the ability to communicate complex ideas to varied audiences (a key program requirement). The application itself contains significant fluff and generic statements, which raises questions about communication precision.\n\nThe program seeks candidates who can \"drive innovation and creative problem-solving\" - the evidence for this is limited to one or two examples. The program values \"sustained commitment to challenging problems\" - Yuta's experiences are relatively short-term (3-6 months each), making it difficult to assess persistence through obstacles. The strongest fit is around social impact motivation and willingness to work across disciplines, but the evidence for exceptional capability in innovation, collaboration, and adaptive learning is insufficient. This candidate might benefit from the program but may not be among the top contributors to the cohort.",
+    "strengths_for_program": [
+      "Authentic personal motivation for medical device accessibility in underserved communities, grounded in lived experience",
+      "Demonstrated initiative in creating new programs (Envision MedTech prosthetics initiative)",
+      "Breadth of technical experience across wet lab research, engineering, and medical devices",
+      "Willingness to work outside comfort zone (energy engineering despite biological sciences background)"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Self-directed initiative and program creation",
+      "evidence": [
+        {
+          "quote": "While I hadn't heard much from her in the early weeks, I soon discovered she had independently begun building partnerships and conceptualizing a new prosthetics initiative. This area had not yet been part of our core focus on congenital heart disease; however, this is now one of three projects Envision MedTech encapsulates.",
+          "source": "tmpo5j0txfi.pdf (Envision recommendation)",
+          "context": "Clear evidence of taking initiative without being asked, identifying an opportunity, and creating a new program area that became a core organizational focus."
+        },
+        {
+          "quote": "Since then, Yuta has led the development of our 3D-printed pediatric prosthetics program, working closely with clinicians in the Honduran public health system.",
+          "source": "tmpo5j0txfi.pdf (Envision recommendation)",
+          "context": "Demonstrates ability to lead program development and establish partnerships with healthcare systems, showing follow-through on initial initiative."
+        }
+      ],
+      "confidence": "high",
+      "significance": "This quality is highly relevant for a fellowship focused on innovation and impact. The ability to identify opportunities, take initiative without direction, and build new programs is valuable for translating research into practice. However, the lack of concrete outcomes (number of prosthetics delivered, specific technical challenges solved) limits full assessment of impact."
+    },
+    {
+      "quality": "Hands-on technical execution across multiple domains",
+      "evidence": [
+        {
+          "quote": "Conducting single-cell RNA sequencing, cell counting, staining, and taking photos of 50+ stained cell microscopic images to analyze the effects of infection and damage on spinal cord injury and the impact of Gsx-1 gene therapy treatment",
+          "source": "tmpo5j0txfi.pdf (resume)",
+          "context": "Demonstrates competency in molecular biology techniques and quantitative analysis. The specificity (50+ images, specific gene therapy) provides concrete evidence of hands-on lab work."
+        },
+        {
+          "quote": "Created a vibration-based magnetic On/Off IoT sensor for 'EZAmp', a voltage level detection device for industrial machinery, using Arduino, MPU accelerometers, and Heltec Boards",
+          "source": "tmpo5j0txfi.pdf (resume)",
+          "context": "Shows ability to work with hardware, sensors, and embedded systems. The technical specificity (specific components named) suggests genuine hands-on work rather than superficial involvement."
+        },
+        {
+          "quote": "Created wild-type 1 galectin with OD levels 20% above average for transfusion protein testing in Dr. Stowell's lab",
+          "source": "tmpo5j0txfi.pdf (resume)",
+          "context": "Demonstrates protein production skills and achievement of above-average results, suggesting technical competency in biochemistry."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Technical breadth is valuable for interdisciplinary work, and hands-on execution ability is essential for translating ideas into reality. However, execution competency is different from innovation - these examples show ability to perform technical tasks but not necessarily to conceive novel approaches or solve unprecedented problems."
+    },
+    {
+      "quality": "Authentic motivation grounded in lived experience",
+      "evidence": [
+        {
+          "quote": "I suffered medical muteness from a simple procedure turned surgical accident at an underfunded hospital that lacked pediatric equipment. From the frustration, I started working towards helping underserved patients like myself.",
+          "source": "tmpo5j0txfi.pdf (application)",
+          "context": "Provides clear origin story for the candidate's focus on medical device accessibility. This is not just stated passion but motivation grounded in personal experience."
+        },
+        {
+          "quote": "Born in Taiwan, Yuta endured a series of medical hardships due to inadequate pediatric equipment, experiences that left a lasting impression and instilled in her a lifelong commitment to equitable healthcare innovation. Yuta's 'why' is evident in everything she does.",
+          "source": "tmpo5j0txfi.pdf (Envision recommendation)",
+          "context": "External validation of the authenticity of this motivation from someone who has worked closely with the candidate and heard the full story."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Authentic motivation is crucial for sustained commitment to challenging problems. Candidates driven by genuine personal experience often show greater persistence and deeper understanding of user needs. However, motivation alone doesn't guarantee innovation capability or program success - it must be paired with demonstrated skills and achievements."
+    },
+    {
+      "quality": "Willingness to learn outside comfort zone",
+      "evidence": [
+        {
+          "quote": "While my background is typically in biological sciences and wet labs, I quickly familiarized myself with the necessary field-specific skills. I sought peer advice, took notes on colleagues' troubleshooting, and joined machinery clubs to develop skills like welding, soldering, and electrical work.",
+          "source": "tmpo5j0txfi.pdf (application)",
+          "context": "Shows proactive approach to skill acquisition and willingness to engage with unfamiliar technical domains. However, the description is somewhat generic and lacks specific examples of challenges overcome."
+        },
+        {
+          "quote": "Participated in a Department of Energy initiative, Industrial Training and Assessment Centers (ITAC), a coalition of universities, to increase energy efficiency by sourcing manufacturers and providing assessments to reduce daily energy usage",
+          "source": "tmpo5j0txfi.pdf (resume)",
+          "context": "Demonstrates willingness to work in energy engineering despite biological sciences background, showing comfort with interdisciplinary work."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Adaptability and willingness to learn are essential for interdisciplinary innovation programs. However, the evidence here describes learning standard skills (welding, soldering) rather than synthesizing insights across disciplines or developing novel approaches by combining different fields."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Kacey (Yuta) Chen presents a profile with genuine hands-on technical experience but significant concerns about depth, evidence quality, and the prevalence of generic claims. The candidate has accumulated diverse experiences across wet lab research (Cai Labs at Rutgers), medical device industry work (Advanced Optronics), and energy engineering (CAES), demonstrating breadth. However, the application suffers from substantial fluff and lacks concrete evidence of innovation or transformative impact. The strongest concrete evidence comes from the CAES work: \"Created a vibration-based magnetic On/Off IoT sensor for 'EZAmp', a voltage level detection device for industrial machinery, using Arduino, MPU accelerometers, and Heltec Boards\" (resume). This shows hands-on technical execution. The Cai Labs work involves legitimate technical skills (\"Conducting single-cell RNA sequencing, cell counting, staining, and taking photos of 50+ stained cell microscopic images\" - resume), but the description is passive and lacks evidence of independent contribution or novel insights. The Advanced Optronics experience is described almost entirely in passive voice and generic terms: \"Organized 10+ transcripts and interviews\" and \"Conducted and presented monthly market research\" (resume) - these are support tasks, not innovation.\n\nThe personal motivation story is compelling: \"I suffered medical muteness from a simple procedure turned surgical accident at an underfunded hospital that lacked pediatric equipment\" (application). This provides authentic motivation for the medical device accessibility focus. However, the application then relies heavily on stated qualities rather than demonstrated achievements. Phrases like \"I have always been committed to improving medical equipment accessibility\" (application) are claims without supporting evidence of actual impact prior to college. The Envision MedTech work shows initiative: the recommendation letter states \"she had independently begun building partnerships and conceptualizing a new prosthetics initiative\" and \"led the development of our 3D-printed pediatric prosthetics program\" (Envision letter). This demonstrates self-direction and the ability to create new programs, which is valuable. However, concrete outcomes are missing - no mention of how many prosthetics delivered, what specific technical challenges were solved, or measurable impact achieved.\n\nThe recommendation letters reveal concerning patterns. Prof. Rossi's letter is generic: \"She is one of our better students and her work consistently demonstrates initiative, adaptability, and insight\" (Rossi letter) - this could describe many students. The letter provides no specific examples of innovation or exceptional problem-solving. The Envision letter is more enthusiastic but still light on concrete achievements: it describes Yuta's initiative in starting the prosthetics program but doesn't quantify impact. The most concerning aspect is the prevalence of passive voice and vague descriptions throughout the materials. For example: \"Improvements were made to the system efficiency\" would be problematic, but even the active descriptions lack specificity about novel contributions versus executing standard protocols.\n\nThe candidate shows genuine technical competency and commendable initiative in starting new projects, particularly at Envision MedTech. The interdisciplinary breadth (wet lab, engineering, medical devices) is real. However, the application lacks evidence of deep innovation, transformative thinking, or exceptional problem-solving. Most achievements are competent execution of standard tasks rather than creative breakthroughs. The heavy reliance on stated qualities (\"creative\", \"adaptable\", \"passionate\") without concrete demonstrations is a significant weakness. This is a candidate with solid fundamentals and good intentions, but unclear innovation potential based on the evidence provided.",
+  "score_justification": "This score reflects a candidate with genuine technical competency and commendable initiative, but significant gaps in demonstrated innovation and concerning reliance on generic claims. On the positive side: (1) The Envision MedTech work provides clear evidence of self-directed initiative - \"independently began building partnerships and conceptualizing a new prosthetics initiative\" that became a core organizational program (Envision letter). This demonstrates entrepreneurial thinking and follow-through. (2) Technical breadth is real - hands-on work in molecular biology (\"single-cell RNA sequencing\", \"50+ stained cell microscopic images\" - resume), hardware engineering (\"Created a vibration-based magnetic On/Off IoT sensor\" with specific components - resume), and protein production (\"Created wild-type 1 galectin with OD levels 20% above average\" - resume). (3) Authentic motivation grounded in lived experience provides genuine commitment to medical device accessibility. However, significant concerns lower the score: (1) Limited evidence of innovation beyond competent execution - only one clear example of creative problem-solving (crochet-to-circuit design), and even that lacks outcome data. (2) Heavy application fluff - generic claims like \"I have always been committed\" and \"interested in interdisciplinary focus\" without supporting evidence. Prof. Rossi's letter similarly contains generic praise (\"demonstrates initiative, adaptability, and insight\") without specific examples. (3) Passive voice and vague descriptions throughout (\"Organized 10+ transcripts\", \"Conducted monthly market research\") obscure actual contribution. (4) Short duration of most experiences (3-6 months) raises questions about sustained commitment. (5) No concrete outcomes for claimed achievements - Envision prosthetics program has no mention of devices delivered or impact achieved. The candidate shows solid fundamentals and good intentions, but falls short of the \"drive innovation and creative problem-solving\" standard. This is a 5.5 rather than 6+ because the evidence quality is weak - too much stated, too little demonstrated. The score is above 5.0 because the Envision initiative and technical breadth are genuine strengths, but the lack of innovation evidence and prevalence of fluff prevent a higher rating.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "My biggest takeaway ultimately came from reworking the wiring and microcontroller layout for 'EZ-Amp', where I used crochet, translating the compact, layered pattering to optimize size.",
+        "source": "tmpo5j0txfi.pdf (application)",
+        "context": "This demonstrates cross-domain creative thinking by applying textile patterns to electrical engineering design. However, it's a single example and lacks quantifiable outcomes or evidence of significant innovation impact."
+      },
+      {
+        "quote": "she had independently begun building partnerships and conceptualizing a new prosthetics initiative. This area had not yet been part of our core focus on congenital heart disease; however, this is now one of three projects Envision MedTech encapsulates.",
+        "source": "tmpo5j0txfi.pdf (Envision recommendation)",
+        "context": "Shows initiative and ability to create new program areas, demonstrating entrepreneurial thinking. However, this is organizational innovation rather than technical innovation, and the novelty of the approach is unclear."
+      },
+      {
+        "quote": "Built endoscopic discectomy technology to treat herniation, spinal osteochondroma, and vertebral metastatic tumors... Presented to professors and professionals, winning 1st in the program competition",
+        "source": "tmpo5j0txfi.pdf (resume)",
+        "context": "Winning a competition suggests strong work, but the description lacks technical details about what made the solution innovative. Without specifics about the novel approach or how it differed from existing technologies, this is difficult to assess as evidence of innovation."
+      }
+    ],
+    "reasoning": "The candidate demonstrates technical competency and some creative problem-solving, but evidence of genuine innovation is limited. The strongest example of creative thinking comes from the crochet-to-circuit design approach: \"My biggest takeaway ultimately came from reworking the wiring and microcontroller layout for 'EZ-Amp', where I used crochet, translating the compact, layered pattering to optimize size\" (application). This shows cross-domain thinking and creative problem-solving - applying textile patterns to electrical engineering is genuinely novel. However, this is a single example, and the description lacks details about the actual innovation or measurable improvement achieved. The Harvard Moonshot project claims \"winning 1st in the program competition\" (resume) for an endoscopic discectomy technology, but no details are provided about what made the solution innovative or how it differed from existing approaches. The claim of creating \"biocompatible mesh to prevent future herniation and AI to detect vertebral tumors\" (resume) sounds impressive but is presented without any technical details, methodology, or evidence of actual implementation versus conceptual design.\n\nThe Envision MedTech work shows initiative in creating a new program area, but the innovation is organizational rather than technical. The recommendation states she \"independently began building partnerships and conceptualizing a new prosthetics initiative\" (Envision letter), which demonstrates entrepreneurial thinking. However, 3D-printed prosthetics for underserved populations is an established field (e.g., e-NABLE), so it's unclear what novel approach or innovation Yuta brought beyond executing an existing model. The Advanced Optronics work is described entirely in support terms - organizing interviews, conducting market research, improving presentations - with no evidence of technical innovation or novel insights that changed the company's direction. The CAES sensor work shows technical execution ability but not clear innovation - vibration sensors and IoT devices for industrial monitoring are standard applications. What's missing is evidence that Yuta identified a novel problem, developed a unique solution, or achieved results that exceeded expectations in a meaningful way. The materials contain many claims about creativity and innovation (\"developing efficient, low-cost devices\", \"expanding therapeutic innovation\") but these are stated aspirations rather than demonstrated achievements. For a fellowship focused on innovation, the evidence is thin.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "This is the strongest claimed example of creative problem-solving. Need to verify: (1) whether this was genuinely novel or a known technique, (2) what specific problem it solved, (3) whether it was actually implemented and what results were achieved. This will help distinguish between creative thinking and post-hoc storytelling.",
+      "category": "Probe claimed innovation",
+      "question": "You mentioned using crochet patterns to optimize the wiring layout for the EZ-Amp device. Can you walk me through specifically how you made this connection, what the technical challenge was, and what measurable improvement resulted from this approach?"
+    },
+    {
+      "purpose": "The Advanced Optronics description is vague and uses passive voice. Need to understand: (1) what the candidate actually did versus observed, (2) whether contributions were substantive or support-level, (3) ability to articulate specific impact. This will reveal depth of contribution and ability to communicate clearly about work.",
+      "category": "Verify experience and assess depth",
+      "question": "At Advanced Optronics, you mentioned improving marketing and pushing for investments and FDA grants. Can you describe a specific instance where your work directly influenced a decision or outcome? What was the situation, what did you specifically do, and what was the result?"
+    },
+    {
+      "purpose": "No evidence in materials of learning from failure or adapting based on feedback. The program values growth mindset and adaptation. This question will reveal: (1) self-awareness about limitations, (2) response to criticism, (3) ability to pivot strategy, (4) whether candidate can provide specific examples versus generic statements.",
+      "category": "Assess learning and adaptation",
+      "question": "Tell me about a time when you received critical feedback on your work or when an approach you tried didn't work. What was the feedback, how did you respond, and what did you change as a result?"
+    },
+    {
+      "purpose": "The application claims interdisciplinary interest but provides limited evidence of actually synthesizing across fields. Need to assess: (1) depth of understanding in multiple domains, (2) ability to make non-obvious connections, (3) whether 'interdisciplinary' means genuine synthesis or just working in multiple areas sequentially.",
+      "category": "Probe interdisciplinary work",
+      "question": "You've worked across wet lab research, engineering, and medical devices. Can you describe a specific instance where you synthesized insights from two different fields to solve a problem in a novel way? What was the problem, what insights did you combine, and what was unique about your approach?"
+    },
+    {
+      "purpose": "The Envision work shows strongest evidence of initiative, but concrete outcomes are missing. Need to understand: (1) technical depth versus organizational/coordination work, (2) actual impact achieved, (3) specific problems solved, (4) whether this was novel or implementing existing e-NABLE designs. This will distinguish between program management and technical innovation.",
+      "category": "Verify claimed achievement",
+      "question": "For the Envision MedTech prosthetics program, can you describe the specific technical challenges you encountered in developing 3D-printed prosthetics for pediatric patients in Honduras, and how you addressed them? What was the outcome in terms of devices delivered and patient impact?"
+    },
+    {
+      "purpose": "Red flag about short-duration experiences. The program values sustained commitment to challenging problems. Need to assess: (1) ability to persist through obstacles, (2) depth that comes from extended engagement, (3) whether candidate has experience with long-term projects. Only Cai Labs shows extended duration - want to understand depth of that work.",
+      "category": "Assess sustained commitment",
+      "question": "Most of your experiences have been 3-6 months in duration. Can you talk about a problem or project you've worked on for an extended period (a year or more), what obstacles you encountered, and how you maintained momentum through challenges?"
+    },
+    {
+      "purpose": "This phrase is vague and could mean many things. Testing: (1) ability to provide concrete examples when asked, (2) depth of user research and market understanding, (3) whether candidate defaults to generic language or can be specific, (4) actual contribution versus observing others' work.",
+      "category": "Test communication and specificity",
+      "question": "You mentioned that at Advanced Optronics you worked to ensure 'user needs in the market are met.' Can you give me a specific example of a user need you identified, how you identified it, and what specific change resulted from your work?"
+    },
+    {
+      "purpose": "This statement in the application is intriguing but unexplained. Need to understand: (1) what specific frustrations or limitations candidate has experienced, (2) self-awareness about own role in collaboration, (3) realistic expectations about the program, (4) whether this reflects genuine insight or generic language about wanting 'collaborative environment.'",
+      "category": "Explore motivation and program fit",
+      "question": "You mentioned wanting to work in 'an unrestricted setting, creating a more collaborative environment without limiting conventional processes or ego.' What specific experiences have you had with restrictive environments or ego-driven processes, and what would you do differently in the Catalyst program?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES, but with significant reservations and specific areas to probe. The candidate merits an interview based on: (1) genuine self-directed initiative at Envision MedTech that created a new program area, (2) authentic motivation grounded in lived experience that suggests sustained commitment potential, (3) real technical breadth across multiple domains, and (4) early-stage career (undergraduate) where potential matters more than proven track record. However, the interview must focus on distinguishing substance from fluff. Key areas to probe: (1) Depth of the crochet-to-circuit innovation - was this genuinely novel or post-hoc storytelling? (2) Actual contribution at Advanced Optronics versus support role - can candidate provide specific examples of impact? (3) Concrete outcomes from Envision prosthetics work - how many devices, what technical challenges solved? (4) Evidence of learning from feedback and adapting approach - currently absent from materials. (5) Ability to synthesize across disciplines versus just working in multiple areas sequentially. The candidate's score of 5.5 is borderline, but the combination of initiative, motivation, and technical breadth justifies giving them the opportunity to provide the specific evidence that's missing from the written application. If the interview reveals that the generic claims are backed by concrete achievements, the candidate could be a strong fit. If the interview confirms that most achievements are competent execution without innovation, the candidate would not be recommended for the program. The interview is essentially a test of whether the application undersells genuine capability or oversells limited achievement."
+}

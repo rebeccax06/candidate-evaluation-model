@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T22:08:23.890279",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 153.2040150165558,
+    "materials_character_count": 24894
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmp7jiiuuoa.pdf"
+    ],
+    "candidate_id": "Kopetz_Nicole_app2",
+    "evaluation_date": "2026-02-25 22:08:23.890092"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on generic, unsubstantiated claims throughout application materials",
+      "evidence": "Multiple examples: \"I am passionate about understanding complex biological systems\" (CV), \"eager to expand my expertise through interdisciplinary collaboration\" (CV), \"committed to applying this combined knowledge to advance medicine\" (CV), \"genuine motivation for socially impactful work\" (implied throughout). None of these statements are backed by concrete examples of interdisciplinary work, practical healthcare contributions, or specific actions demonstrating passion beyond standard PhD work.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No first-author publications despite being in fifth year of PhD",
+      "evidence": "CV lists one peer-reviewed publication where she is third author (Pepi et al., 2023) and one 'in preparation' manuscript where she is first author. For a fifth-year PhD student, the absence of published first-author work raises questions about research productivity and impact. Hedstrom's letter mentions Nicole is 'currently characterizing inhibitors' and has 'almost completed the kinetic mechanism,' suggesting work is still in progress rather than published.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of true interdisciplinary work beyond closely related fields",
+      "evidence": "Application claims interest in interdisciplinary collaboration, but all documented experience is within chemistry/biochemistry/biology—closely related fields. No evidence of working with clinicians, engineers, social scientists, or other distant disciplines. Schmidt-Rohr notes her research is 'interdisciplinary between chemistry and the life sciences,' but these are adjacent fields, not true boundary-crossing work.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Motivation appears more focused on personal development than driving specific healthcare solutions",
+      "evidence": "Application states: \"I want to gain experience outside my field to grow as a scientist\" and \"Expanding my perspective through collaboration with other fellows of diverse backgrounds and professions will better equip me to contribute meaningfully.\" Language is consistently about what she will gain rather than what she will contribute. No specific healthcare problems or populations mentioned that she's driven to help.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Absence of evidence for translating research to practical impact",
+      "evidence": "No evidence in any materials of: working with healthcare organizations, engaging with patients or communities, pursuing commercialization, developing implementation strategies, or other activities that translate research to practice. All work remains in basic research phase. Program emphasizes 'translate research into practical impact,' but Nicole shows no experience with this.",
+      "severity": "high"
+    },
+    {
+      "flag": "Schmidt-Rohr recommendation letter is notably brief and generic",
+      "evidence": "Letter is only one page and contains generic praise like 'friendly and constructive' and 'conscientious, explains clearly, and relates well with everyone.' Most substantive content is about her teaching and representative role, not research. States she 'has pursued parts of her research quite independently' (emphasis added), suggesting limited independence. For a committee chair who worked with her for two years, the letter lacks specific examples of her capabilities.",
+      "severity": "low"
+    },
+    {
+      "flag": "Vague descriptions of innovation-related achievements",
+      "evidence": "Sprout Innovation grant described only as securing '$10,000 in funding... to perform a DNA-encoded library screen' with no details on what was innovative. iResearch Institute scaling described as 'successfully scaled the previous systems' with no specifics on methods or novel approaches. Application uses passive voice: 'improvements were made,' 'the program was shifted,' making her specific contributions unclear.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of communicating science to non-technical or diverse audiences",
+      "evidence": "All documented communication experience is with undergraduate chemistry students (technical audience in her field) or academic administrators. Program emphasizes 'communicate complex ideas effectively to varied audiences,' but no evidence of public engagement, policy communication, patient education, or other diverse audience communication.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Limited evidence of true interdisciplinary work beyond closely related chemistry/biology fields",
+      "No demonstrated experience translating research to practical healthcare impact or working with non-academic stakeholders",
+      "Motivation appears focused on personal development rather than driving specific healthcare solutions",
+      "Innovation potential appears limited to incremental improvements within existing frameworks",
+      "Application contains significant generic statements without supporting evidence",
+      "No evidence of communicating science to diverse, non-technical audiences beyond undergraduate students"
+    ],
+    "evidence": [
+      {
+        "quote": "I'm excited about this fellowship because it offers a chance to look beyond my specific PhD project and engage with diverse healthcare challenges. Doing a PhD can sometimes lead to a narrow focus, and I want to gain experience outside my field to grow as a scientist.",
+        "source": "application",
+        "context": "Reveals candidate views program as developmental opportunity for herself rather than bringing existing capabilities to contribute. Explicitly acknowledges narrow focus and lack of experience outside her field—gaps the program likely expects candidates to already have addressed."
+      },
+      {
+        "quote": "Nicole's performance as a teaching assistant in our General-Chemistry laboratory courses was repeatedly rated as outstanding by both the instructor and the undergraduate students she taught. She is conscientious, explains clearly, and relates well with everyone.",
+        "source": "recommendation letter (Schmidt-Rohr)",
+        "context": "Demonstrates strong communication skills in academic teaching context, but no evidence of communicating to diverse non-technical audiences as program requires."
+      },
+      {
+        "quote": "Collected feedback from peer graduate students to communicate concerns and suggestions to program administration, resulting in adjustments to departmental requirements and improved student support",
+        "source": "CV",
+        "context": "Shows ability to facilitate institutional change and advocate effectively, relevant to program's emphasis on driving outcomes. However, limited to familiar academic context."
+      },
+      {
+        "quote": "I am passionate about understanding complex biological systems and how subtle molecular changes can lead to significant effects. I am eager to expand my expertise through interdisciplinary collaboration, and I am committed to applying this combined knowledge to advance medicine and contribute to the betterment of human health throughout my career.",
+        "source": "CV",
+        "context": "Generic aspirational statement with no supporting evidence. Claims passion and commitment but provides no concrete examples of interdisciplinary work or practical healthcare contributions. Pure fluff."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Nicole's fit with the Catalyst program is mixed, with some alignment on collaboration and communication but significant gaps in demonstrated innovation, interdisciplinary work, and practical impact. Her stated motivation—\"to look beyond my specific PhD project and engage with diverse healthcare challenges\"—suggests she views Catalyst as professional development rather than bringing existing capabilities to drive program goals. She explicitly acknowledges that \"doing a PhD can sometimes lead to a narrow focus\" and wants to \"gain experience outside my field to grow as a scientist,\" positioning herself as someone who needs the program's benefits rather than someone ready to contribute at a high level.\n\nHer collaboration experience is limited to standard academic settings. She mentions \"cross-departmental lab meetings\" and being a \"resident kinetics and SPR expert\" for her lab, but these represent collaborations within closely related fields (chemistry and biology) rather than true interdisciplinary work across distant domains. The program seeks candidates who can \"work effectively across disciplines and with diverse teams,\" but Nicole's experience appears confined to biochemistry and chemistry contexts. Her administrative work at iResearch Institute involved coordinating a virtual program, which required some cross-functional work, but the application provides no evidence of engaging with diverse perspectives or navigating truly different disciplinary frameworks.\n\nOn the positive side, Nicole demonstrates strong communication skills, particularly in teaching. She \"taught 8 semesters of honors and regular general chemistry lab\" and her teaching was \"repeatedly rated as outstanding by both the instructor and the undergraduate students\" (Schmidt-Rohr letter). Her role as Graduate Department Representative shows she can \"collect feedback from peer graduate students to communicate concerns and suggestions to program administration, resulting in adjustments to departmental requirements\" (CV), demonstrating some ability to facilitate change. However, these are within familiar academic contexts, not the \"varied audiences\" the program emphasizes. There is no evidence of communicating complex science to non-technical stakeholders, policymakers, or patients—critical for translating research to practical impact.\n\nMost concerning is the absence of evidence for translating research to practical impact, a core program goal. Her tuberculosis research is positioned as having potential clinical relevance, but she's still in the characterization phase with no evidence of moving toward implementation, clinical trials, partnerships with healthcare organizations, or other practical applications. The program values candidates who \"translate research into practical impact,\" but Nicole's work remains entirely in the basic research phase. Her motivation statement focuses on personal growth (\"expand my perspective,\" \"better equip me\") rather than specific healthcare problems she's driven to solve, suggesting she may not yet have the practical orientation the program seeks.",
+    "strengths_for_program": [
+      "Strong communication and teaching abilities, demonstrated through 8 semesters of highly-rated teaching and clear scientific writing",
+      "Proven ability to navigate institutional processes and advocate for change, shown through Graduate Representative role",
+      "Technical depth in biochemistry and enzyme kinetics that could contribute to health-related projects",
+      "Adaptability and persistence when facing technical challenges, as evidenced by troubleshooting difficult protein purification"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Technical persistence and troubleshooting ability",
+      "evidence": [
+        {
+          "quote": "She succeeded far beyond all hope, increasing yield by almost 500-fold, with a concomitant increase in purity. This breakthrough enabled our collaborators to solve the x-ray crystal structure of this protein, the first PanG structure.",
+          "source": "recommendation letter (Hedstrom)",
+          "context": "Clear evidence of exceptional problem-solving on a technical challenge where others had failed. Quantifiable impact (500-fold improvement) that enabled downstream research."
+        },
+        {
+          "quote": "Early on, I struggled getting the project off the ground as traditional methods of experimentation and data analysis failed to work with the enzyme under investigation. I turned frustration into drive and adapted previously-used protocols and delved into the principals and mathematics of enzyme kinetics to move the project forward.",
+          "source": "application",
+          "context": "Demonstrates persistence when facing obstacles and willingness to learn new technical approaches (enzyme kinetics mathematics) to overcome challenges."
+        }
+      ],
+      "confidence": "high",
+      "significance": "This quality is valuable for the program as fellows will encounter complex, ambiguous challenges requiring sustained effort. However, this represents technical troubleshooting rather than innovative problem-solving."
+    },
+    {
+      "quality": "Strong teaching and mentoring capabilities",
+      "evidence": [
+        {
+          "quote": "Taught 8 semesters of honors and regular general chemistry lab, serving as the sole instructor in each section... Independently led 4-hour laboratory sessions, delivering pre-lab lectures, supervising experiments, and ensuring lab safety to 2 sections of 18 undergraduate students per semester",
+          "source": "CV",
+          "context": "Extensive teaching experience with responsibility for entire lab sections. Quantifiable: 8 semesters, 250+ students total."
+        },
+        {
+          "quote": "Nicole's performance as a teaching assistant in our General-Chemistry laboratory courses was repeatedly rated as outstanding by both the instructor and the undergraduate students she taught. She is conscientious, explains clearly, and relates well with everyone.",
+          "source": "recommendation letter (Schmidt-Rohr)",
+          "context": "External validation of teaching quality from both faculty and students. Specific praise for clarity of explanation."
+        },
+        {
+          "quote": "Teaching over 250 chemistry students, shaped my ability to explain complex concepts clearly and engagingly.",
+          "source": "application",
+          "context": "Candidate recognizes teaching as developing communication skills, though limited to academic context."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Relevant for program's emphasis on communication, though experience is limited to undergraduate chemistry students rather than diverse audiences. Could contribute to peer learning within cohort."
+    },
+    {
+      "quality": "Institutional navigation and advocacy",
+      "evidence": [
+        {
+          "quote": "Collected feedback from peer graduate students to communicate concerns and suggestions to program administration, resulting in adjustments to departmental requirements and improved student support... Collaborated with fellow graduate representatives to organize a successful campaign advocating for increased PhD stipends, resulting in a university-wide raise for graduate researchers and teaching assistants",
+          "source": "CV",
+          "context": "Demonstrates ability to organize peers, communicate with administration, and achieve concrete policy changes. Two specific outcomes: departmental requirement adjustments and stipend increases."
+        },
+        {
+          "quote": "She was always friendly and constructive in our meetings... Nicole worked to revise requirements and processes, improving the program for both students and faculty. Her term coincided with the negotiation of a new contract between Brandeis and the graduate student union, which demonstrates the respect that her peers have in her judgement.",
+          "source": "recommendation letter (Schmidt-Rohr)",
+          "context": "External validation of her effectiveness in representative role and peer respect. However, letter is notably brief and generic overall."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Relevant for program's emphasis on driving change and working with diverse stakeholders, though experience is limited to academic institutional context. Shows potential for navigating complex organizational dynamics."
+    },
+    {
+      "quality": "Operational adaptability",
+      "evidence": [
+        {
+          "quote": "When the COVID-19 pandemic hit, my role at iResearch Institute shifted from educator to administrator. I worked alongside the company's president to shift the program from a small in-person intensive (~20 local students) to a virtual program that accommodated 100+ students globally.",
+          "source": "application",
+          "context": "Shows ability to pivot quickly in response to external disruption and scale operations significantly (20 to 100+ students). However, this was a common challenge during COVID-19 with no evidence of novel approaches."
+        },
+        {
+          "quote": "I successfully scaled the previous systems to allow for expansion while maintaining the quality of the student's experience, and strengthening my skills in, leadership, collaboration, and adaptability.",
+          "source": "application",
+          "context": "Claims successful scaling and skill development, but provides no specific evidence of how quality was maintained or what leadership/collaboration looked like. Largely generic self-assessment."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Demonstrates ability to handle changing circumstances and operational complexity, relevant for program's dynamic environment. However, limited evidence of innovation in the adaptation process."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Nicole Kopetz presents as a mid-career PhD candidate with solid technical competencies in biochemistry and enzyme kinetics, but with limited evidence of the innovation and creative problem-solving emphasized by the Catalyst program. Her application reveals a pattern of competent execution within established frameworks rather than transformative thinking. The strongest concrete evidence comes from her technical achievements: she \"increased yield by almost 500-fold\" in protein purification (recommendation letter, Hedstrom), demonstrating strong troubleshooting skills when \"traditional methods of experimentation and data analysis failed to work\" (application). She also secured \"$10,000 in funding from the Brandeis University Sprout Innovation program\" (CV) and taught \"over 250 students\" (application, CV). However, these achievements, while respectable, represent incremental improvements and standard academic activities rather than innovative breakthroughs.\n\nThe application is heavily laden with generic statements that lack supporting evidence. She claims to be \"passionate about understanding complex biological systems\" and \"eager to expand my expertise through interdisciplinary collaboration\" (CV), but provides no concrete examples of interdisciplinary work beyond standard lab collaborations. Her stated interest in the fellowship—\"to look beyond my specific PhD project and engage with diverse healthcare challenges\"—reads as aspirational rather than demonstrated. The administrative work at iResearch Institute, while showing adaptability, involved scaling existing systems rather than creating novel approaches: \"I successfully scaled the previous systems to allow for expansion\" (application) without evidence of innovation in the scaling process.\n\nHer letters of recommendation, while positive, contain concerning patterns. Schmidt-Rohr's letter is notably brief and generic, stating she \"has pursued parts of her research quite independently\" (emphasis added—suggesting limited independence) and praising her as \"friendly and constructive\" without specific examples of impact. Hedstrom's letter is stronger, providing the 500-fold yield improvement detail, but even here the framing suggests Nicole succeeded where \"other students had tried and failed\" at a task (optimizing expression and purification) that is standard graduate work, not innovative research. The kinetic mechanism work required her to learn Dynafit \"along the way,\" which is commendable but represents acquiring standard tools rather than developing novel methodologies.\n\nMost concerning is the absence of evidence for several program priorities. There are no publications as first author, no evidence of translating research to practical impact beyond the lab, no demonstrated ability to work across true disciplinary boundaries (chemistry and biology are closely related), and no evidence of communicating to diverse audiences beyond teaching undergraduates. Her motivation appears more focused on career development (\"grow as a scientist,\" \"better equip me to contribute\") than on solving specific healthcare challenges. The application suggests a capable, hardworking graduate student who would benefit from the program, but lacks evidence that she would drive innovation within it.",
+  "score_justification": "Nicole Kopetz receives a score of 5.5, reflecting moderate potential with significant reservations. This score is based on weighing concrete technical achievements against substantial gaps in innovation, practical impact, and true interdisciplinary experience. On the positive side, she demonstrates strong technical troubleshooting (500-fold yield improvement, quantified in Hedstrom's letter), extensive teaching experience (8 semesters, 250+ students, rated 'outstanding'), and proven ability to navigate institutional processes (successful stipend advocacy campaign). These are real, documented achievements that show competence and persistence. However, these strengths are insufficient to offset major concerns. First, innovation potential is limited—her achievements represent optimization within existing frameworks rather than creative breakthroughs. She explicitly states she 'adapted previously-used protocols' rather than developing novel approaches. Second, the application is heavily laden with generic, unsubstantiated claims ('passionate about,' 'eager to,' 'committed to') that would score 1-3 individually per the evaluation rubric. Third, there is zero evidence of translating research to practical impact, a core program goal—all work remains in basic research with no healthcare partnerships, patient engagement, or implementation thinking. Fourth, her motivation appears focused on personal development ('gain experience,' 'grow as a scientist') rather than driving specific healthcare solutions. Fifth, interdisciplinary experience is limited to adjacent fields (chemistry/biology) rather than true boundary-crossing work. The absence of first-author publications in her fifth PhD year raises additional productivity concerns. Schmidt-Rohr's notably brief and generic letter ('friendly and constructive,' 'relates well with everyone') suggests limited deep engagement even from a faculty member who worked with her for two years. The score of 5.5 reflects that Nicole is a capable, hardworking graduate student who could potentially benefit from the program, but lacks strong evidence that she would drive innovation within it. She falls into the 'moderate' tier—notable strengths but significant gaps that require careful consideration.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "She succeeded far beyond all hope, increasing yield by almost 500-fold, with a concomitant increase in purity. This breakthrough enabled our collaborators to solve the x-ray crystal structure of this protein, the first PanG structure.",
+        "source": "recommendation letter (Hedstrom)",
+        "context": "Strongest evidence of problem-solving impact, but represents optimization of standard protein purification methods rather than methodological innovation. The 'breakthrough' enabled downstream work but was technical troubleshooting, not creative innovation."
+      },
+      {
+        "quote": "I turned frustration into drive and adapted previously-used protocols and delved into the principals and mathematics of enzyme kinetics to move the project forward.",
+        "source": "application",
+        "context": "Candidate explicitly states she 'adapted previously-used protocols' rather than developing novel approaches. Shows persistence and learning ability, but not innovation. The passive construction 'delved into' is vague about what was actually accomplished."
+      },
+      {
+        "quote": "Secured $10,000 in funding from the Brandeis University Sprout Innovation program to perform a DNA-encoded library screen in search of an MtbPanG inhibitor",
+        "source": "CV",
+        "context": "Presented as innovation evidence, but DEL screens are standard drug discovery tools. No details provided about what was innovative in the approach. Securing funding demonstrates grant writing skills but not necessarily innovative thinking."
+      },
+      {
+        "quote": "I successfully scaled the previous systems to allow for expansion while maintaining the quality of the student's experience",
+        "source": "application",
+        "context": "Describes scaling existing systems during COVID-19 pivot, a common challenge many programs faced. No evidence of novel approaches or creative solutions—just competent execution of necessary changes."
+      }
+    ],
+    "reasoning": "Nicole demonstrates solid problem-solving abilities within established scientific frameworks, but limited evidence of creative or transformative thinking. Her most impressive technical achievement—the 500-fold improvement in protein yield—shows strong troubleshooting skills but represents optimization of existing methods rather than novel innovation. Hedstrom notes that Nicole \"worked out a method to use the entire progress curve\" when standard initial rate methods failed, which shows adaptability, but this is applying existing mathematical approaches (Dynafit) to a challenging problem rather than developing new methodologies.\n\nThe Sprout Innovation grant application is presented as evidence of innovation, but the application materials provide no details about what was innovative in her proposal. The CV states she \"secured $10,000 in funding\" to \"perform a DNA-encoded library screen in search of an MtbPanG inhibitor,\" but DEL screens are standard drug discovery tools. Without details on what made her approach novel, this appears to be competent grant writing for a conventional experiment rather than innovative thinking. Her application emphasizes she \"turned frustration into drive and adapted previously-used protocols\" (emphasis added), explicitly indicating she modified existing methods rather than creating new ones.\n\nThe administrative work at iResearch Institute shows operational problem-solving but not innovation. She \"shifted the program from a small in-person intensive (~20 local students) to a virtual program that accommodated 100+ students globally\" during COVID-19, but this describes a common pandemic pivot that thousands of programs made. The application provides no evidence of novel approaches to virtual education or unique solutions—just \"successfully scaled the previous systems.\" Her teaching experience, while extensive (250+ students), shows no evidence of pedagogical innovation or novel teaching methods. Overall, Nicole appears to be a capable executor who can optimize and troubleshoot within existing paradigms, but lacks demonstrated capacity for the creative, boundary-pushing innovation the Catalyst program seeks.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether claimed interest in interdisciplinary work is backed by actual experience, or if it's aspirational. The application lacks concrete examples of true cross-disciplinary work.",
+      "category": "Probe claimed skill",
+      "question": "You mention being eager to expand your expertise through interdisciplinary collaboration. Can you describe a specific time when you worked with someone from a field significantly different from chemistry or biology? What was challenging about that collaboration and what did you learn?"
+    },
+    {
+      "purpose": "Determine if healthcare motivation is genuine and specific, or generic. Application focuses on personal growth rather than specific problems to solve. Looking for evidence of patient/community engagement or practical orientation.",
+      "category": "Assess motivation",
+      "question": "You state you want to contribute to solving human health problems. Can you describe a specific healthcare challenge or patient population you're particularly motivated to help, and what concrete steps you've taken to understand their needs or work toward solutions?"
+    },
+    {
+      "purpose": "Verify whether the grant represented genuine innovation or competent execution of standard methods. Application provides no details on what was novel about the approach.",
+      "category": "Verify experience",
+      "question": "Your Sprout Innovation grant application is mentioned as evidence of innovation. Can you walk me through what was innovative about your proposed approach to finding an MtbPanG inhibitor? What made your approach different from standard DEL screening methods?"
+    },
+    {
+      "purpose": "Address concern that candidate views program as developmental opportunity for herself rather than bringing existing capabilities to contribute. Test whether she can articulate value she brings versus value she hopes to receive.",
+      "category": "Explore concern",
+      "question": "Your application emphasizes wanting to 'gain experience outside your field' and 'expand your perspective.' What specific capabilities or experiences do you bring to the Catalyst program that would benefit the other fellows and advance the program's healthcare innovation goals?"
+    },
+    {
+      "purpose": "Determine whether this represented innovative problem-solving or competent execution of a common pandemic pivot. Application description is vague about specific contributions and methods.",
+      "category": "Probe claimed skill",
+      "question": "You describe successfully scaling the iResearch Institute program from 20 to 100+ students during COVID-19. What specific challenges did you encounter in that scaling process, and what novel approaches or solutions did you develop to address them?"
+    },
+    {
+      "purpose": "Assess understanding of research translation and practical orientation. Application shows no evidence of thinking about implementation, clinical application, or other practical impact pathways.",
+      "category": "Test fit",
+      "question": "The Catalyst program emphasizes translating research into practical impact. Your tuberculosis research is in the basic characterization phase. How do you think about the pathway from your current work to actual patient benefit? What steps would need to happen, and what role do you see yourself playing?"
+    },
+    {
+      "purpose": "Verify claimed collaborative contributions and assess ability to apply expertise to others' problems. Looking for specific examples beyond vague claims of being an 'expert' resource.",
+      "category": "Verify experience",
+      "question": "Your letters mention you're the 'resident kinetics and SPR expert' in your lab and have contributed to other projects. Can you describe a specific example where you helped solve a problem outside your own research project? What was the problem, what did you contribute, and what was the outcome?"
+    },
+    {
+      "purpose": "Test whether communication skills extend beyond teaching undergraduates to truly diverse audiences. Program emphasizes this, but application shows no evidence of it.",
+      "category": "Assess fit",
+      "question": "Can you describe a time when you had to communicate complex scientific concepts to an audience with no technical background—not students, but perhaps community members, policymakers, or patients? What was challenging about that, and how did you approach it?"
+    }
+  ],
+  "interview_decision_reasoning": "Recommend interview despite reservations, primarily to probe the substantial gaps between stated qualities and demonstrated evidence. Nicole's score of 5.5 places her at the borderline, and an interview is warranted to determine whether the concerning patterns in her application reflect genuine limitations or simply poor application presentation. Key questions to resolve: (1) Does she have interdisciplinary or practical impact experience that wasn't effectively communicated in her application? (2) Is her motivation genuinely focused on healthcare problem-solving, or primarily on personal career development? (3) Can she articulate specific innovative contributions beyond the technical troubleshooting documented in her letters? (4) Does she understand what research translation entails and have relevant experience? The interview should be approached skeptically—she needs to provide concrete examples that address the red flags, not more generic statements. Her technical competence and teaching strength are real assets, but insufficient alone for a strong recommendation. If the interview reveals that her application accurately reflects her current capabilities (limited innovation, no practical impact experience, narrow disciplinary focus), she should not be selected. However, if she can demonstrate hidden strengths or growth trajectory not evident in the materials, she could be a reasonable candidate. The decision to interview is based on giving her the opportunity to address substantial concerns, not on strong positive evidence in the application."
+}

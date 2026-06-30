@@ -1,0 +1,277 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T21:56:07.611831",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 189.50068521499634,
+    "materials_character_count": 25556
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmp6sof6_24.pdf"
+    ],
+    "candidate_id": "Janis_Abram_app",
+    "evaluation_date": "2026-02-25 21:56:07.611624"
+  },
+  "red_flags": [
+    {
+      "flag": "Application contains generic motivational language without specific learning objectives - 'stretch my thinking, sharpen my process' and 'energized by the chance to connect disciplines' are vague statements that could apply to any program",
+      "evidence": "Application states: \"I'm looking to Catalyst to stretch my thinking, sharpen my process, and build relationships that will help take this work further\" and \"I'm energized by the chance to connect disciplines, support early-stage talent, and advance ideas with potential for clinical impact\" (tmp6sof6_24.pdf) - these are generic phrases without specificity about what capabilities he seeks to develop or what gaps Catalyst would address",
+      "severity": "low"
+    },
+    {
+      "flag": "Limited evidence of how technical innovations translated to actual patient outcomes or clinical adoption - focus is primarily on research outputs (publications, patents, grants) rather than impact metrics",
+      "evidence": "CV lists 14 granted patents and 16 patent applications, 9 peer-reviewed manuscripts, but provides no information about whether any innovations reached patients, were commercialized, or improved clinical outcomes. Application mentions 'potential for clinical impact' but does not cite specific examples of realized impact (tmp6sof6_24.pdf, CV_ADJanis_04Aug2025_5P.pdf)",
+      "severity": "medium"
+    },
+    {
+      "flag": "Stated qualities without demonstration - uses phrases like 'I'm still learning how to integrate these efforts more effectively' which is self-deprecating fluff that adds no information",
+      "evidence": "Application states: \"I'm still learning how to integrate these efforts more effectively, but I'm energized by the chance to connect disciplines\" (tmp6sof6_24.pdf) - this is empty self-reflection without specific examples of integration challenges or learning",
+      "severity": "low"
+    },
+    {
+      "flag": "At senior career stage (20+ years experience, Senior Principal Scientist), unclear what specific capability gaps Catalyst would address that he hasn't already developed through extensive experience",
+      "evidence": "CV shows 20+ years experience across multiple organizations, current Senior Principal Scientist role, teaching positions at UChicago and Rush, extensive mentoring network. Application motivation is generic about 'stretching thinking' without articulating what specific capabilities are missing at this career stage (CV_ADJanis_04Aug2025_5P.pdf, tmp6sof6_24.pdf)",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence provided about outcomes of the Futurism Strategic Foresight Program beyond its existence - unclear if it generated actionable insights or influenced strategy",
+      "evidence": "CV states: \"Founded & managed Hollister's intrapreneurial futurism program with cross-functional team of >35 opt-in associate futurist in support of strategic foresight initiative. Provided annual technology trend reports and opportunity scouting to senior leadership and Board of Directors\" but provides no information about whether recommendations were implemented, what strategic decisions resulted, or measurable impact (CV_ADJanis_04Aug2025_5P.pdf)",
+      "severity": "low"
+    },
+    {
+      "flag": "RapidRona outcome unclear - application mentions helping secure EUA but no information about whether the company succeeded, scaled, or had lasting impact",
+      "evidence": "Application states: \"helping secure our EUA, and supporting pitch efforts as we scaled\" but provides no information about actual scale achieved, patients served, or current status of company. Board Advisor role listed as 2020-21, suggesting involvement ended (tmp6sof6_24.pdf, CV_ADJanis_04Aug2025_5P.pdf)",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "strong",
+    "concerns": [
+      "Stated motivation for Catalyst is somewhat generic - lacks specific articulation of capability gaps or learning objectives beyond general 'stretch my thinking'",
+      "Application contains notable fluff phrases ('energized by the chance to connect disciplines', 'I'm still learning how to integrate') that add little substance",
+      "Limited evidence of how technical innovations translated to actual patient outcomes or clinical adoption - focus is more on research outputs than impact",
+      "At senior career stage (20+ years), may have less to gain from program compared to earlier-career candidates, though could contribute significantly to cohort"
+    ],
+    "evidence": [
+      {
+        "quote": "Leading academic collaborations, undergraduate research & capstone mentorship: University of Chicago: Sr Capstone in The Pritzker School of Molecular Engineering, Metcalf Internship & MyCHOICE Externship programs, Benedictine University: Undergraduate research, Dept of Biology, University of Illinois, Urbana Champaign: Sr Capstone, Dept of Bioengineering, Northwestern University: Sr Design, Biomedical Engineering & MS in Analytics, University of Illinois at Chicago: Sr Capstone, Dept of Biomedical Engineering & School of Business",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Concrete evidence of sustained cross-institutional collaboration and mentoring. This demonstrates ability to work across organizational boundaries and support diverse teams - core Catalyst values."
+      },
+      {
+        "quote": "Biomedical Entrepreneurship. Adapted Stanford Biodesign Identify & Invent processes to a single semester and the Chicago start-up community. As a team, students performed needs finding & screening, concept ideation & screening, and pitch presentation. Students were provided real-world perspectives and guidance from guest speaker founders, clinicians, and subject matter experts.",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Shows formal training in and teaching of innovation methodologies aligned with Catalyst approach. Adaptation of Stanford Biodesign demonstrates ability to translate frameworks to new contexts."
+      },
+      {
+        "quote": "I've spent the last few years helping build an academic–industry ecosystem in Chicago around exactly that kind of thinking: cross-institutional, team-based, clinically grounded, and focused on translation. I'm looking to Catalyst to stretch my thinking, sharpen my process, and build relationships that will help take this work further",
+        "source": "tmp6sof6_24.pdf",
+        "context": "Articulates alignment with Catalyst values (cross-institutional, team-based, translation-focused) but motivation statement is somewhat generic about what specific capabilities he seeks to develop."
+      },
+      {
+        "quote": "Mentor, MATTER, Chicago, IL (Nov 2015 – ) Myomar Molecular (2025), Neuraura (2024), HealthEMe (2023), ViewsML (2022), Luxsonics (2021), CareBand (2020), Cohesys (2020), Optisolve (2019), Cytostrata Biosciences (2018), Salvepeds (2018), MY01 (2018), Nexpil Inc. (2017), IntuiTap Medical (2017), Surgical Innovation Associates (2016), PraxiCut (2015)",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Sustained mentoring commitment over 10 years with 15+ start-ups. Demonstrates ability to support diverse teams and work across different healthcare domains - valuable for cohort learning."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "Janis demonstrates strong alignment with Catalyst's core objectives through concrete evidence of cross-disciplinary work, translation focus, and ecosystem building. His IDEA Incubator explicitly connects academic institutions to industry problems, with partnerships spanning \"University of Chicago: Sr Capstone in The Pritzker School of Molecular Engineering, Metcalf Internship & MyCHOICE Externship programs, Benedictine University: Undergraduate research, University of Illinois, Urbana Champaign: Sr Capstone, Dept of Bioengineering, Northwestern University: Sr Design, Biomedical Engineering & MS in Analytics\" (CV). This is not stated interdisciplinary interest but demonstrated program building across multiple institutions and disciplines.\n\nHis translation focus is evidenced by the research-to-product pipeline: academic collaborations generating competitive grants (€264,033 total), leading to patent applications (16 recent applications), with clear clinical focus on peristomal skin complications - an understudied problem affecting ostomy patients. The teaching experience at UChicago (\"Developed curriculum & co-taught graduate-level course MENG 30500 Responsible and Effective Technology Management. Course teaches ethics and technical challenges through lectures, workshops and case studies\", CV) and Rush University (\"Biomedical Entrepreneurship. Adapted Stanford Biodesign Identify & Invent processes to a single semester and the Chicago start-up community\", CV) shows he can translate complex concepts for diverse audiences and has formal training in innovation methodologies.\n\nHis extensive mentoring network (MATTER start-ups since 2015, mHUB Medtech Accelerator, multiple hackathons, 10+ start-ups mentored) demonstrates sustained commitment to supporting others and working across organizational boundaries. The RapidRona experience shows ability to work in fast-paced, ambiguous environments outside his core expertise. However, his stated motivation for Catalyst is somewhat generic: \"step outside the day-to-day and push forward how we frame and solve clinical problems\" and \"stretch my thinking, sharpen my process\" (Application) lacks specificity about what particular capabilities he seeks to develop. The application would benefit from more concrete articulation of learning goals and how Catalyst specifically addresses gaps in his current capabilities.",
+    "strengths_for_program": [
+      "Demonstrated track record building innovation infrastructure (IDEA Incubator, Futurism Program) that could benefit cohort through shared learning",
+      "Active academic-industry partnerships with measurable outcomes (€264K in competitive grants, multiple patent applications) showing translation capability",
+      "Extensive mentoring experience across multiple ecosystems (MATTER, mHUB, academic institutions) indicating ability to support and learn from diverse Fellows",
+      "Teaching experience in innovation methodologies (Stanford Biodesign adaptation) and responsible technology management showing pedagogical sophistication",
+      "Technical depth in understudied clinical area (ostomy care) could bring unique perspective to cohort discussions"
+    ]
+  },
+  "overall_score": 7.8,
+  "recommendation": "Strong fit with specific areas to probe",
+  "notable_qualities": [
+    {
+      "quality": "Infrastructure Builder - Creates organizational structures that enable sustained innovation",
+      "evidence": [
+        {
+          "quote": "Founded & managed Hollister's intrapreneurial futurism program with cross-functional team of >35 opt-in associate futurist in support of strategic foresight initiative. Provided annual technology trend reports and opportunity scouting to senior leadership and Board of Directors",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Built voluntary cross-functional program with executive engagement - shows ability to create value that attracts participation and leadership attention"
+        },
+        {
+          "quote": "Founder & Program Manager, Industry Discovering & Exploring with Academia (IDEA) Incubator 2019-present • Leading academic collaborations, undergraduate research & capstone mentorship across University of Chicago, Benedictine University, University of Illinois Urbana Champaign, Northwestern University, University of Illinois at Chicago",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Created multi-institutional academic-industry partnership program that has sustained for 6+ years with multiple university partners"
+        },
+        {
+          "quote": "Co-Founder & Program Manager, COVID-19 Innovation Challenge 2020 • Created & managed a company-wide innovation challenge for COVID-19 solutions. Led a team of SMEs in support of local DIY PPE efforts",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Rapidly stood up innovation infrastructure in crisis - shows ability to mobilize resources and create structures under pressure"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This quality is highly valuable for Catalyst as it suggests he can help build collaborative structures within the cohort and potentially contribute to program evolution. Infrastructure builders create multiplier effects beyond their individual contributions."
+    },
+    {
+      "quality": "Translation Executor - Moves research from concept to measurable outcomes",
+      "evidence": [
+        {
+          "quote": "Irish Research Council, 2023 Enterprise Partnership Scheme (Postgraduate) Award; €56,000, 2 years • Enterprise Ireland, 2023 Enterprise Ireland Innovation Partnership Programme Award; €208,033, 2 years",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Academic partnerships generated €264,033 in competitive external funding - concrete translation outcomes, not just stated intentions"
+        },
+        {
+          "quote": "14 granted patents including: Methods of manufacturing bioactive gels from extracellular matrix material, Hemostatic device, Graft materials and methods for staged delivery of bioactive components, Implantable materials and methods for inhibiting tissue adhesion formation",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Substantial IP portfolio with granted patents shows research translated to protectable innovations"
+        },
+        {
+          "quote": "We built a logistical platform that connected existing PCR lab capacity to overwhelmed healthcare systems and individuals via at-home collection kits. I focused on strategy, science, and funding, translating regulatory and clinical requirements into operational plans, helping secure our EUA",
+          "source": "tmp6sof6_24.pdf",
+          "context": "Secured Emergency Use Authorization - concrete regulatory outcome demonstrating ability to navigate translation barriers"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Critical for Catalyst's focus on translating research into practical impact. He has demonstrated ability to move from concept to funded research to regulatory approval to IP protection."
+    },
+    {
+      "quality": "Ecosystem Connector - Builds and maintains networks across organizational boundaries",
+      "evidence": [
+        {
+          "quote": "Mentor, MATTER, Chicago, IL (Nov 2015 – ) with 15 start-ups mentored: Myomar Molecular (2025), Neuraura (2024), HealthEMe (2023), ViewsML (2022), Luxsonics (2021), CareBand (2020), Cohesys (2020), Optisolve (2019), Cytostrata Biosciences (2018), Salvepeds (2018), MY01 (2018), Nexpil Inc. (2017), IntuiTap Medical (2017), Surgical Innovation Associates (2016), PraxiCut (2015)",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "10-year sustained mentoring commitment across diverse healthcare start-ups - not episodic but sustained ecosystem engagement"
+        },
+        {
+          "quote": "Mentor, mHUB Medtech Accelerator (2023 - ), Co-Mentor, Ageless Innovators at Chicago Innovation (2022 - ), Mentor, SmartHealth Activator/Rosalind Franklin School of Science & Medicine (2021), Mentor, Building for Digital Health 2021, MIT Hacking Medicine (2021), Scientific Advisory Board Member, SalvePeds (2020 – 22), Board Advisor - Strategy, Science & Funding, RapidRona (2020 – 21)",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Active across multiple innovation ecosystems simultaneously - shows ability to maintain diverse connections and contribute across contexts"
+        },
+        {
+          "quote": "Industry Mentor/Advisor 2022-present Browne Lab, Tissue Engineering Research Group, Royal College of Surgeons in Ireland",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "International collaboration with Irish research group that generated competitive grants - demonstrates ability to build productive relationships across geographic and institutional boundaries"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Valuable for Catalyst cohort as he brings extensive network and demonstrated ability to facilitate connections. Ecosystem connectors help create value for entire cohort beyond individual contributions."
+    },
+    {
+      "quality": "Adaptive Problem Solver - Applies expertise effectively in unfamiliar contexts",
+      "evidence": [
+        {
+          "quote": "During the early days of the COVID-19 pandemic, I joined the founding team at RapidRona, a start-up launched to bridge a critical testing gap. It was well outside my usual R&D role, but the urgency and clarity of the need made the work deeply meaningful. The experience showed how quickly a small, focused team can move when aligned around a clear mission and how insights from one domain (in my case, medical devices and translational science) can still add value in unfamiliar territory.",
+          "source": "tmp6sof6_24.pdf",
+          "context": "Explicitly acknowledges working outside comfort zone with successful outcome (EUA secured). Shows self-awareness about transferring skills to new contexts."
+        },
+        {
+          "quote": "Adapted Stanford Biodesign Identify & Invent processes to a single semester and the Chicago start-up community",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Took established framework and adapted it to new constraints (time, geography, audience) - shows ability to modify approaches for different contexts"
+        }
+      ],
+      "confidence": "medium-high",
+      "significance": "Important for Catalyst's emphasis on learning and growth. Shows he can operate effectively outside his core expertise and transfer knowledge across domains."
+    },
+    {
+      "quality": "Technical Depth in Understudied Area - Deep expertise in ostomy care and peristomal skin complications",
+      "evidence": [
+        {
+          "quote": "9 peer-reviewed manuscripts including: Understanding the impact of ostomy dejecta constituents on peristomal skin health and models for its characterisation (Int Wound J 2025), Preclinical Investigation of a 2nd Generation DermaPort™ Ported Vascular Access System (J Vasc Endovasc Therapy 2019), DermaPort: A novel ported vascular access system for hemodialysis (ASAIO J 2019)",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Sustained publication record in specific clinical domain with recent 2025 publication showing ongoing active research"
+        },
+        {
+          "quote": "16 recent published patent applications including: pH sensor for stoma dejecta, pH sensing skin adhesive including mesoporous particles, Ostomy output indicator, Devices for the treatment of fistulas, pH sensing hydrogel, Wearable system for measuring pH on peristomal skin, Smart barrier materials for ostomy system, Interleukin-6 (IL-6) biomarker sensing hydrogel, Prebiotic, probiotic, and/or postbiotic treatments for improved peristomal skin health",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Comprehensive patent portfolio focused on single clinical problem from multiple technical angles - shows systematic approach to understudied area"
+        },
+        {
+          "quote": "Discussion Leader, 2025 Gordon Research Conference - Barrier Function of Mammalian Skin: Technologies and Platforms for Understanding, Modeling and Intervening in Skin Barrier Function and Disorders",
+          "source": "CV_ADJanis_04Aug2025_5P.pdf",
+          "context": "Leadership role at premier scientific conference indicates peer recognition of expertise in skin barrier function"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Brings unique clinical perspective to Catalyst cohort. Ostomy care is often overlooked in innovation discussions, so his expertise could expose Fellows to underserved patient population and unmet clinical needs."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Abram Janis presents as a highly experienced translational scientist with 20+ years in regenerative medicine and medical devices, currently serving as Senior Principal Scientist at Hollister Incorporated. His application demonstrates concrete evidence of building innovation infrastructure rather than just stating innovation credentials. Specifically, he \"founded & managed Hollister's intrapreneurial futurism program with cross-functional team of >35 opt-in associate futurist\" (CV) and created the \"Industry Discovering & Exploring with Academia (IDEA) Incubator\" connecting multiple universities to industry problems (CV). These are tangible organizational achievements with measurable scope.\n\nHis technical depth is evidenced by substantial publication record (9 peer-reviewed manuscripts in biomaterials/wound healing), 14 granted patents, and 16 recent patent applications focused on ostomy care innovations. The recent publications show active research leadership: \"Modeling skin barrier disruption from ileostomy dejecta using 2D, 3D, and ex vivo human skin equivalents\" (2025 Gordon Research Conference abstract, CV) demonstrates sophisticated experimental design. His role extends beyond individual contribution to building research capacity - he's \"leading academic collaborations, undergraduate research & capstone mentorship\" across University of Chicago, Northwestern, UIUC, and others (CV), with specific funded outcomes like \"Irish Research Council, 2023 Enterprise Partnership Scheme Award; €56,000, 2 years\" for collaborative research (CV).\n\nThe COVID-19 pivot provides concrete evidence of adaptability under pressure: \"joined the founding team at RapidRona\" where he \"focused on strategy, science, and funding, translating regulatory and clinical requirements into operational plans, helping secure our EUA\" (Application). This demonstrates ability to operate outside comfort zone with measurable outcome (EUA secured). However, the application contains concerning amounts of generic language - phrases like \"I'm energized by the chance to connect disciplines\" and \"I'm still learning how to integrate these efforts more effectively\" (Application) add little substance. His stated motivation for Catalyst - \"step outside the day-to-day and push forward how we frame and solve clinical problems\" - is somewhat vague about specific learning goals.\n\nThe trajectory shows consistent progression from bench scientist to program builder, with recent teaching appointments (Visiting Instructor at UChicago 2024-present, Visiting Assistant Professor at Rush 2021-2024) indicating growing influence in training next generation. His extensive mentoring (MATTER start-ups, mHUB Medtech Accelerator, multiple hackathons) shows sustained commitment to ecosystem building. The application would be stronger with more specific examples of how his innovations translated to patient impact - the technical achievements are clear, but clinical outcomes are less emphasized.",
+  "score_justification": "Janis earns a strong score of 7.8 based on concrete evidence of innovation infrastructure building, translation execution, and ecosystem engagement. The high score is justified by: (1) Measurable organizational achievements - IDEA Incubator generating €264K in competitive grants, Futurism Program with 35+ participants, multiple teaching appointments; (2) Substantial technical output - 14 granted patents, 16 patent applications, 9 peer-reviewed publications showing sustained research productivity; (3) Demonstrated translation capability - securing EUA for RapidRona, generating IP portfolio, building academic-industry partnerships with funded outcomes; (4) Extensive mentoring network maintained over 10 years across multiple ecosystems (MATTER, mHUB, MIT Hacking Medicine, etc.); (5) Evidence of adaptive problem-solving through COVID pivot and teaching role adaptations.\n\nScore is not higher (8.5+) due to: (1) Generic motivation statements lacking specific learning objectives - unclear what capability gaps Catalyst would address at his senior career stage; (2) Limited evidence of clinical impact - focus on research outputs (publications, patents) without demonstrating innovations reached patients or improved outcomes; (3) Some application fluff ('energized by chance to connect disciplines', 'still learning to integrate') that adds no substance; (4) Unclear outcomes for some initiatives (Futurism Program impact, RapidRona scale achieved). The evidence strongly supports high innovation potential and program fit, but the application would be stronger with more specific articulation of learning goals and concrete examples of clinical impact. At 7.8, he is a strong candidate who would likely contribute significantly to the cohort while also benefiting from the program, though interview should probe motivation depth and learning orientation given senior career stage.",
+  "innovation_potential": {
+    "level": "high",
+    "evidence": [
+      {
+        "quote": "Founded & managed Hollister's intrapreneurial futurism program with cross-functional team of >35 opt-in associate futurist in support of strategic foresight initiative. Provided annual technology trend reports and opportunity scouting to senior leadership and Board of Directors to guide corporate innovation strategy",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Demonstrates ability to build innovation infrastructure at organizational scale, not just individual projects. The opt-in nature and senior leadership engagement shows he created value that attracted voluntary participation and executive attention."
+      },
+      {
+        "quote": "Irish Research Council, 2023 Enterprise Partnership Scheme (Postgraduate) Award; €56,000, 2 years Julie Gawenda BSBME The contribution of intestinal bacteria to the pathophysiology of peristomal skin complications (PSC) in models of ileostomy • Enterprise Ireland, 2023 Enterprise Ireland Innovation Partnership Programme Award; €208,033, 2 years",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Concrete evidence of innovation impact - his academic partnerships generated €264,033 in competitive external funding for translational research. These are peer-reviewed grants, not internal company funding, indicating external validation of research quality."
+      },
+      {
+        "quote": "We weren't trying to invent a new diagnostic; instead, we built a logistical platform that connected existing PCR lab capacity to overwhelmed healthcare systems and individuals via at-home collection kits. I focused on strategy, science, and funding, translating regulatory and clinical requirements into operational plans, helping secure our EUA",
+        "source": "tmp6sof6_24.pdf",
+        "context": "Shows systems-level innovation thinking and ability to execute rapidly in crisis. Securing EUA is concrete regulatory outcome. The insight to focus on logistics rather than new technology demonstrates strategic innovation thinking."
+      },
+      {
+        "quote": "Modeling skin barrier disruption from ileostomy dejecta using 2D, 3D, and ex vivo human skin equivalents to study causative agents",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Technical innovation in developing sophisticated experimental models for understudied clinical problem. Presenting at Gordon Research Conference indicates peer recognition of novel approach."
+      },
+      {
+        "quote": "16 recent published patent applications including: pH sensor for stoma dejecta, pH sensing skin adhesive including mesoporous particles, Wearable system for measuring pH on peristomal skin, Smart barrier materials for ostomy system, System and method for dejecta enzyme activity detection",
+        "source": "CV_ADJanis_04Aug2025_5P.pdf",
+        "context": "Sustained technical innovation output with focus on novel sensing and smart materials for unmet clinical need. Multiple patent applications suggest systematic innovation pipeline, not isolated inventions."
+      }
+    ],
+    "reasoning": "Janis demonstrates innovation potential through multiple concrete dimensions. First, he shows ability to create new organizational structures that enable innovation: the IDEA Incubator has generated measurable outputs including \"Irish Research Council, 2023 Enterprise Partnership Scheme (Postgraduate) Award; €56,000, 2 years\" and \"Enterprise Ireland, 2023 Enterprise Ireland Innovation Partnership Programme Award; €208,033, 2 years\" (CV). These are competitive external grants resulting from partnerships he built, not just internal projects. The Futurism Strategic Foresight Program he co-founded involved \"cross-functional team of >35 opt-in associate futurist\" providing \"annual technology trend reports and opportunity scouting to senior leadership and Board of Directors\" (CV) - this is infrastructure for systematic innovation, not one-off projects.\n\nSecond, his technical innovation is evidenced by substantial IP generation: 14 granted patents and 16 recent patent applications (CV), with recent applications showing focus on novel sensing technologies for ostomy care (pH sensors, enzyme detection, biomarker sensing hydrogels). The 2025 Gordon Research Conference presentation on \"Modeling skin barrier disruption from ileostomy dejecta using 2D, 3D, and ex vivo human skin equivalents to study causative agents\" (CV) demonstrates sophisticated model development for understudied clinical problem. Third, he shows ability to pivot and apply expertise in new contexts - the RapidRona experience where he \"wasn't trying to invent a new diagnostic; instead, we built a logistical platform that connected existing PCR lab capacity to overwhelmed healthcare systems\" (Application) shows systems-level thinking and rapid execution under constraints. The combination of organizational innovation, technical innovation, and adaptive innovation across multiple contexts provides strong evidence of high innovation potential.",
+    "confidence": "high",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "The application motivation is generic. Need to understand if he has genuine learning objectives or if this is just polished language. Want to assess self-awareness about capability gaps and whether Catalyst is right fit for his development stage.",
+      "category": "Probe stated motivation",
+      "question": "You mention wanting to 'stretch your thinking' and 'sharpen your process' through Catalyst. Given your 20+ years of experience building innovation programs, what specific capabilities or perspectives do you feel are missing from your current toolkit that Catalyst would help you develop?"
+    },
+    {
+      "purpose": "CV focuses heavily on research outputs but lacks evidence of clinical impact. Need to understand if innovations stayed in research phase or actually translated to patient benefit. This tests whether he can articulate the full translation pathway and has learned from implementation challenges.",
+      "category": "Verify impact",
+      "question": "Your CV shows impressive research outputs - 14 granted patents, 16 patent applications, multiple publications. Can you walk me through one specific example where your innovation actually reached patients and improved clinical outcomes? What was the path from research to adoption, and what did you learn about translation barriers?"
+    },
+    {
+      "purpose": "Catalyst values learning and adaptation based on evidence. Need concrete example of changing course based on feedback, not just stated openness to learning. This tests intellectual humility and evidence-based decision making.",
+      "category": "Assess learning orientation",
+      "question": "Tell me about a time when feedback or new evidence caused you to significantly change your approach to a project or problem. What was the original approach, what evidence changed your mind, and what did you do differently?"
+    },
+    {
+      "purpose": "Need to understand depth of mentoring beyond listing institutions. Want specific example of how he guides teams through ambiguity, handles setbacks, and reflects on collaboration challenges. Tests whether partnerships are substantive or superficial.",
+      "category": "Probe collaboration depth",
+      "question": "The IDEA Incubator involves partnerships with multiple universities. Pick one specific student team or project and describe: What was the clinical problem? How did you help them frame it? What was your role when they hit obstacles? What was the outcome, and what did you learn about academic-industry collaboration from that experience?"
+    },
+    {
+      "purpose": "At senior level, need to assess whether he can genuinely be in learning mode or will default to expert/teacher role. Want to understand if he sees value in peer learning from less experienced Fellows and has realistic expectations about program structure.",
+      "category": "Explore concern about career stage",
+      "question": "Catalyst is designed as a learning program where Fellows develop new capabilities through structured curriculum and peer learning. At your career stage with extensive experience building innovation programs, what do you hope to learn from earlier-career Fellows, and what challenges do you anticipate in being in a learning role rather than a teaching role?"
+    },
+    {
+      "purpose": "Application claims systems-level thinking but provides limited detail. Need to understand his analytical process for identifying leverage points, how he transferred knowledge across domains, and what specific insights he gained about operating under crisis constraints.",
+      "category": "Verify systems thinking",
+      "question": "You describe RapidRona as building a 'logistical platform' rather than a new diagnostic. Walk me through how you identified that the bottleneck was logistics rather than technology, what systems-level insights from your medical device background transferred to this problem, and what you learned about rapid deployment under regulatory constraints."
+    },
+    {
+      "purpose": "Catalyst values communication across diverse audiences. Need concrete example of adapting technical content for different stakeholders, not just stated ability. Tests whether he can articulate communication strategy and has reflected on what makes translation effective.",
+      "category": "Assess communication across audiences",
+      "question": "You've taught courses at UChicago and Rush, mentored start-ups, and presented to Board of Directors. Describe a situation where you had to explain the same complex technical concept to three very different audiences (e.g., students, executives, clinicians). How did you adapt your communication, and what did you learn about effective translation of complex ideas?"
+    },
+    {
+      "purpose": "Application claims interdisciplinary work but needs concrete example of navigating disciplinary boundaries. Want to understand how he manages conflicts between different technical perspectives and whether he has genuine interdisciplinary integration skills or just coordinates separate experts.",
+      "category": "Probe interdisciplinary work",
+      "question": "Your recent patent applications span sensing technologies, biomaterials, and microbiome interventions for ostomy care. Pick one specific project that required integrating multiple disciplines. What was the technical challenge? How did you bridge different disciplinary perspectives? What conflicts or misunderstandings arose, and how did you resolve them?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES based on strong concrete evidence of innovation capability, translation execution, and ecosystem building that align well with Catalyst objectives. The 7.8 score exceeds the 6.0 threshold, and while there are concerns about generic motivation and unclear clinical impact, these are not high-severity red flags that would disqualify him. The concerns are addressable through interview probing. His demonstrated track record of building innovation infrastructure (IDEA Incubator, Futurism Program), generating measurable translation outcomes (€264K in grants, 14 granted patents, EUA secured), and sustained ecosystem engagement (10+ years mentoring, multiple teaching roles) provides strong foundation. The technical depth in understudied area (ostomy care) and extensive cross-institutional partnerships would bring valuable perspective to cohort. Primary interview objectives should be: (1) Understanding specific learning goals beyond generic 'stretch thinking' language; (2) Probing for concrete examples of clinical impact and patient outcomes; (3) Assessing learning orientation and ability to be in student role at senior career stage; (4) Exploring depth of interdisciplinary integration beyond coordination. If interview reveals genuine learning objectives and evidence of clinical impact, he would be strong addition to cohort. If motivation remains vague or he defaults to expert/teacher mode, fit becomes questionable despite strong credentials."
+}

@@ -1,0 +1,246 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-26T00:03:07.187235",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 127.8173770904541,
+    "materials_character_count": 29735
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpwhz3hdpm.pdf"
+    ],
+    "candidate_id": "Tomberg_Spencer_app",
+    "evaluation_date": "2026-02-26 00:03:07.187043"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on passive voice and vague descriptions throughout CV obscures actual contributions and leadership",
+      "evidence": "Examples throughout CV: 'I am leading a process improvement project' (no outcomes), 'I led a group' (no specifics on role), 'We are working to reduce' (ongoing, no results). Most quality improvement projects described with passive constructions like 'was part of,' 'coordinated,' 'led a group' without specific outcomes or metrics.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Innovation appears concentrated in one project (The Fracture App) from 4-8 years ago with limited evidence of sustained innovation momentum since",
+      "evidence": "The Fracture App was started in 2017 and 'took off in 2021' (application, page 2). Since then, the CV lists numerous quality improvement projects but none with documented impact comparable to The Fracture App. Most recent work appears to be incremental process improvements rather than transformative innovation.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Application contains substantial generic language and unsupported claims without specific evidence",
+      "evidence": "Examples: 'I live in a world of puzzles' (page 2), 'my instinct is to create solutions' (page 2), 'puzzle solvers to create scalable solutions' (page 2). These are empty metaphors without specific problems or solutions identified. The 'why interested' response is entirely generic and could apply to any candidate.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Most quality improvement projects lack reported outcomes, metrics, or evidence of completion",
+      "evidence": "CV page 8 lists multiple projects: 'Orthopedic Process Improvements' (no outcomes), 'Emergency Department Nerve Block Protocols' (no adoption metrics), 'Consultant Burden Modeling' (no results of model), 'CT Protocols for Wrist Fractures' (no impact data), 'Standardizing X-Ray Protocols' (no outcomes). Only The Fracture App has documented metrics.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of learning from failures or iterative improvement in innovation approach",
+      "evidence": "The golf shoe venture was abandoned when facing obstacles: 'That imploded my business plan, and I did not pursue further steps' (page 3). No discussion of what was learned or how approach evolved. Application lacks reflection on failures or growth.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Recommendation letters rely heavily on generic praise rather than specific behavioral examples",
+      "evidence": "Dr. Wolf's letter uses phrases like 'uniquely accomplished physician,' 'thoughtful clinician and systems thinker,' 'generous teammate, original thinker' without specific incidents demonstrating these qualities. Dr. Breyer's letter similarly uses generic praise: 'outstanding fit,' 'exemplary candidate,' 'remarkable and unique' without concrete examples beyond The Fracture App.",
+      "severity": "low"
+    },
+    {
+      "flag": "No clear articulation of specific problems to solve or what candidate hopes to gain from program",
+      "evidence": "The 'why interested' response (page 2) uses puzzle metaphor but identifies no specific clinical problems or innovation goals. Does not explain what skills he wants to develop or what he hopes to accomplish through the program beyond generic 'create scalable solutions for optimizing patient care.'",
+      "severity": "medium"
+    },
+    {
+      "flag": "Shared credit for primary innovation makes it difficult to assess individual contribution",
+      "evidence": "For The Fracture App: 'Tom worked on the backbone of the graphical interface, I put together a team of emergency medicine and orthopedic residents to help complete and verify the information' (page 2-3). Tom Fadial did the programming, residents helped with content. Candidate's specific technical or creative contribution is unclear.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Innovation appears concentrated in one project from several years ago with limited evidence of sustained innovation momentum",
+      "Heavy use of passive voice and vague descriptions obscures actual contributions and leadership",
+      "Most quality improvement projects lack reported outcomes or metrics",
+      "Application contains substantial generic language and unsupported claims",
+      "Limited evidence of learning from failures or iterative improvement",
+      "No clear articulation of what specific problems he wants to solve or what he hopes to gain from the program"
+    ],
+    "evidence": [
+      {
+        "quote": "As an emergency medicine and sports medicine physician I live in a world of puzzles. I have tools that help me put pieces together to solve most of these challenges. There are missing pieces that impact our ability to optimize patient care, and my instinct is to create solutions to fill these gaps. The Catalyst Fellowship presents the opportunity to work with other puzzle solvers to create scalable solutions for optimizing patient care.",
+        "source": "application form, page 2",
+        "context": "This is pure fluff - generic metaphor without any specific problems identified or solutions proposed. Does not demonstrate understanding of what the program offers or what he specifically wants to accomplish."
+      },
+      {
+        "quote": "Dr. Tomberg helped create an ecosystem of collaboration between the emergency department, the department of orthopedics and the Winter Park Ski Area Clinic to optimize care for patients with orthopedic injuries within the institution. Furthermore, he developed institutional consultation guidelines for the treatment of all orthopedic extremity injuries seen in all acute care environments of Denver Health",
+        "source": "recommendation letter from Dr. Breyer, page 14-15",
+        "context": "This suggests cross-departmental coordination skills, but 'helped create' is vague about his actual role. The guidelines are mentioned but no outcomes or adoption metrics provided."
+      },
+      {
+        "quote": "His unusual background, a Master's in Water Resource Engineering, work in large-scale site design, a career as a visual artist, and experience in competitive extreme skiing, speaks to the kind of broad, creative problem-solving mindset that Catalyst program is specifically designed to grow.",
+        "source": "recommendation letter from Dr. Wolf, page 12",
+        "context": "The recommender asserts this background indicates creative problem-solving, but provides no specific examples of how these diverse experiences have led to innovative solutions in his medical work."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate demonstrates some alignment with program goals but with significant gaps. For translating research into practical impact, The Fracture App is a strong example of building a tool that achieved real-world adoption. However, this appears to be his only major translational success, and it occurred 4-8 years ago with limited evidence of continued innovation momentum. For cross-disciplinary work, his engineering background and coordination across ED/orthopedics/urgent care settings shows some capacity, but the evidence is thin on actual collaborative innovation versus administrative coordination. His recommendation letters emphasize relationship-building and collaboration (\"ability to relationship-build, listen and think before acting\") but provide no specific examples of cross-disciplinary innovation beyond The Fracture App. For sustained commitment to challenging problems, the evidence is mixed - he persisted with The Fracture App over several years, but abandoned the golf shoe venture when facing obstacles. Most of his quality improvement work lacks evidence of completion or impact. For learning and growth, there is minimal evidence - no discussion of failures learned from, pivots made, or evolution in thinking. The application is notably absent of reflection on what he learned from various projects. For communication skills, he has produced educational content (podcasts, videos) and won teaching awards, suggesting competence, but the application itself contains substantial generic language and fluff, raising questions about his ability to communicate with precision and evidence.",
+    "strengths_for_program": [
+      "Proven ability to build and deploy a clinical tool with significant real-world adoption (The Fracture App)",
+      "Diverse background spanning engineering, clinical medicine, and creative pursuits that could enable cross-disciplinary thinking",
+      "Experience coordinating across multiple departments and care settings",
+      "Educational leadership experience as Director of Didactics for EM residency"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Practical Clinical Innovation with Real-World Impact",
+      "evidence": [
+        {
+          "quote": "With more than 5,000 monthly active users and over two million page views to date, the app has become a vital clinical decision support tool in both urban hospitals and remote wilderness clinics.",
+          "source": "recommendation letter from Dr. Wolf, page 12",
+          "context": "The Fracture App achieved measurable adoption and is being used in actual clinical practice, not just developed and abandoned."
+        },
+        {
+          "quote": "We have had over eight-million page views and have over 13-thousand active monthly users.",
+          "source": "application form, page 3",
+          "context": "Significant scale of adoption demonstrates the tool addresses a real need and has achieved product-market fit."
+        }
+      ],
+      "confidence": "high",
+      "significance": "This demonstrates ability to identify clinical gaps and build solutions that achieve real-world adoption - a core program goal. However, this is his only major innovation with documented impact."
+    },
+    {
+      "quality": "Educational Leadership and Mentorship",
+      "evidence": [
+        {
+          "quote": "Director of Didactics for the Denver Health Emergency Medicine Residency (2020-2023)",
+          "source": "CV, page 7",
+          "context": "Led educational programming for a major residency program for three years."
+        },
+        {
+          "quote": "2019 Denver Health Values Award Recipient for the Value of Learning",
+          "source": "CV, page 7",
+          "context": "Institutional recognition for educational contributions."
+        },
+        {
+          "quote": "Denver Paramedic School Lecturer of the Year 2016, Senior Lecture Presentation of the Year 2017",
+          "source": "CV, page 7",
+          "context": "Multiple teaching awards suggest strong educational skills."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Educational leadership could translate to ability to communicate complex ideas and mentor others in the program. However, teaching awards are common and don't necessarily indicate innovation capacity."
+    },
+    {
+      "quality": "Cross-Departmental Coordination",
+      "evidence": [
+        {
+          "quote": "Dr. Tomberg helped create an ecosystem of collaboration between the emergency department, the department of orthopedics and the Winter Park Ski Area Clinic to optimize care for patients with orthopedic injuries within the institution.",
+          "source": "recommendation letter from Dr. Breyer, page 14-15",
+          "context": "Demonstrates ability to work across organizational silos, though specific contributions are unclear."
+        },
+        {
+          "quote": "Emergency Department Nerve Block Protocols: I was the faculty lead for the development of protocols for placing nerve blocks in the emergency department. This has involved collaboration with ED nursing, orthopedics and ED physician groups.",
+          "source": "CV, page 8",
+          "context": "Another example of cross-departmental work, but no outcomes reported."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Cross-disciplinary collaboration is a program value, but the evidence shows coordination of existing stakeholders rather than innovative cross-disciplinary problem-solving."
+    },
+    {
+      "quality": "Diverse Background Spanning Multiple Domains",
+      "evidence": [
+        {
+          "quote": "Master of Science 2003-2004 Water Resource Engineering",
+          "source": "CV, page 7",
+          "context": "Engineering background before medical career."
+        },
+        {
+          "quote": "Artifex Environmental Design 2007-2009 Project Engineer",
+          "source": "CV, page 7",
+          "context": "Worked as engineer before medical school."
+        },
+        {
+          "quote": "Artist 2006-Present My work can be viewed at www.cargocollective.com/spencertomberg",
+          "source": "CV, page 7",
+          "context": "Maintains artistic practice alongside medical career."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Unusual background could enable creative thinking and cross-disciplinary approaches. However, there is limited evidence of how these diverse experiences have translated into innovative medical solutions beyond The Fracture App."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Spencer Tomberg presents as a dual-boarded emergency medicine and sports medicine physician with a distinctive profile centered on practical clinical innovation. His most significant achievement is co-creating The Fracture App, which has achieved substantial real-world adoption with \"over eight-million page views and have over 13-thousand active monthly users\" (application, page 2-3). This demonstrates genuine ability to identify clinical gaps and build scalable solutions. His background is unusually diverse, including a Master's in Water Resource Engineering and prior work as a project engineer, suggesting cross-disciplinary thinking capacity. However, the application contains significant amounts of generic language and lacks depth in several critical areas. While his letters of recommendation are enthusiastic, they rely heavily on general praise (\"uniquely accomplished physician,\" \"exemplary candidate\") rather than specific behavioral examples. The innovation evidence centers almost entirely on one project (The Fracture App), with other initiatives described in vague terms like \"led a group\" or \"coordinated activities\" without clear outcomes or personal contributions. His trajectory shows steady clinical work and educational leadership, but limited evidence of the transformative, high-impact innovation the program seeks. The application demonstrates competent clinical practice and incremental improvements rather than breakthrough thinking. Most concerning is the passive voice throughout his CV and the lack of specific metrics for most claimed achievements beyond The Fracture App.",
+  "score_justification": "Dr. Tomberg presents a mixed profile that warrants careful consideration. On the positive side, he has demonstrated genuine innovation capacity through The Fracture App, which achieved significant real-world adoption (8 million page views, 13,000 monthly active users) and addresses a real clinical need. This is concrete evidence of ability to identify gaps and build scalable solutions. His diverse background spanning engineering, medicine, and art is genuinely unusual and could enable creative thinking. His educational leadership and cross-departmental coordination experience suggest collaborative capacity. However, significant concerns temper this assessment. The innovation evidence is concentrated in one project from 4-8 years ago, with limited evidence of sustained innovation momentum since. His CV lists numerous quality improvement projects but provides no outcomes or metrics for most of them, relying heavily on passive voice that obscures actual contributions. The application contains substantial generic language ('puzzle solver,' 'create solutions') without specific problems or approaches identified. His recommendation letters, while enthusiastic, rely on general praise rather than specific behavioral examples. The abandoned golf shoe venture raises questions about persistence when facing obstacles. Most critically, there is minimal evidence of learning from failures, iterative improvement, or evolution in innovation approach. The candidate appears to be a competent clinician and educator who had one successful innovation project, but lacks clear evidence of the sustained innovation capacity and growth mindset the program seeks. He scores in the moderate range (5-6) because he has proven he can innovate once, but has not demonstrated a pattern of innovation or clear trajectory toward transformative impact.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "I started to build the database for The Fracture App during my sports medicine fellowship in 2017, and the project took off in 2021 when I was introduced to Tom Fadial, an emergency physician with the technical skills to do the programming. While Tom worked on the backbone of the graphical interface, I put together a team of emergency medicine and orthopedic residents to help complete and verify the information in the database. The result is a robust clinical resource that medical providers use on shift to help guide care for orthopedic injuries. I am proud of what we built, and it has been well utilized. We have had over eight-million page views and have over 13-thousand active monthly users.",
+        "source": "application form, pages 2-3",
+        "context": "This is the strongest evidence of innovation - a concrete project with measurable adoption and impact. However, note the passive construction and shared credit with Tom Fadial who did the programming. The candidate's specific contribution appears to be content development and team coordination."
+      },
+      {
+        "quote": "I attempted to start a golf shoe company that focused on innovative design... I found manufacturers in South Korea and had a number of samples created... the minute I walked into a board room at the shoe plants, the price of the shoes increased 20-40%. That imploded my business plan, and I did not pursue further steps in creating the company.",
+        "source": "application form, page 3",
+        "context": "This demonstrates initiative but also shows abandonment when facing obstacles. The candidate did not pivot or persist - he simply stopped. This raises questions about resilience in innovation."
+      },
+      {
+        "quote": "Orthopedic Process Improvements in the Denver Health Emergency Department: I am leading a process improvement project that is focused on optimizing the time to complete orthopedic consults in the ED. We are working to reduce overall consult time by standardizing orthopedic treatment algorithms, reducing the consult burden for orthopedic residents, streamlining the process for referral to the orthopedic clinic and exploring strategies to increase the efficiency of care in the emergency department.",
+        "source": "CV, page 8",
+        "context": "This is described entirely in passive voice with no outcomes reported. 'We are working' suggests ongoing/incomplete. No metrics provided. Cannot assess actual innovation or impact."
+      }
+    ],
+    "reasoning": "The candidate's innovation potential rests primarily on a single strong example: The Fracture App. This represents genuine innovation with measurable impact - creating a clinical decision support tool that achieved significant adoption (8 million page views, 13,000 monthly active users). The app addresses a real clinical need and demonstrates ability to execute from concept to deployment. However, this appears to be largely a one-time achievement from 2017-2021, with limited evidence of sustained innovation since. His other \"innovation\" activities are described in generic terms: \"led a group,\" \"coordinated,\" \"developed protocols\" - all passive constructions that obscure his actual role and contribution. The CV lists numerous quality improvement projects but provides no outcomes, metrics, or evidence of impact for most of them. For example, \"Orthopedic Process Improvements\" claims to be \"focused on optimizing the time to complete orthopedic consults\" but provides no data on whether this succeeded or what specifically he contributed versus the team. His engineering background and artistic pursuits suggest potential for creative thinking, but the failed golf shoe venture from his 20s (where he \"did not pursue further steps\") shows limited persistence when facing obstacles. The application contains substantial fluff: claiming to be a \"puzzle solver\" who wants to \"create solutions\" without demonstrating this pattern beyond one project. Most quality improvement work appears to be standard clinical process optimization rather than transformative innovation.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether innovation capacity extends beyond one project. Looking for specific evidence of problem identification, solution development, and impact measurement. Will reveal if generic language in application reflects real pattern or is fluff.",
+      "category": "Probe claimed skill",
+      "question": "You describe yourself as someone whose 'instinct is to create solutions.' Beyond The Fracture App, can you walk me through a specific example where you identified a clinical gap and developed a solution? What was your specific role, what obstacles did you face, and what was the measurable outcome?"
+    },
+    {
+      "purpose": "Probe vague CV description to understand actual contribution and outcomes. Will reveal if this represents real innovation or just participation in standard quality improvement. Tests ability to speak with specificity about claimed work.",
+      "category": "Verify experience",
+      "question": "Your CV lists 'Orthopedic Process Improvements' as an ongoing project to optimize consult times. What specific changes have you implemented, what were the baseline and current metrics, and what was your individual contribution versus the team's?"
+    },
+    {
+      "purpose": "Assess ability to learn from failures and iterate. Will reveal whether candidate has reflected on this experience and developed more resilient approaches, or simply moved on without learning.",
+      "category": "Assess learning and growth",
+      "question": "You mentioned abandoning the golf shoe venture when manufacturing costs increased unexpectedly. Looking back, what would you do differently? How has that experience shaped your approach to innovation projects since then?"
+    },
+    {
+      "purpose": "Directly address the concern about one-time innovation versus sustained innovation capacity. Will reveal if there are other projects not mentioned in application or if innovation momentum has stalled.",
+      "category": "Explore concern",
+      "question": "The Fracture App achieved impressive adoption starting in 2021. Since then, what other innovation projects have you pursued? What happened with those projects and what did you learn?"
+    },
+    {
+      "purpose": "Test whether diverse background actually translates to cross-disciplinary innovation or is just biographical fact. Looking for concrete example of applying non-medical frameworks to medical problems.",
+      "category": "Test cross-disciplinary thinking",
+      "question": "You have an unusual background combining engineering, medicine, and art. Can you give me a specific example where you applied engineering or artistic thinking to solve a medical problem in a way that someone with only medical training might not have approached it?"
+    },
+    {
+      "purpose": "Assess whether candidate has clear innovation goals and self-awareness about capability gaps. Will reveal if interest in program is genuine and specific versus generic desire for credential.",
+      "category": "Assess motivation and fit",
+      "question": "What specific problem or challenge do you want to work on during the Catalyst program? What approaches have you already tried, and what capabilities do you need to develop to make progress?"
+    },
+    {
+      "purpose": "Understand actual role in collaboration and ability to navigate disagreement. Will reveal leadership style and whether candidate can articulate specific contributions versus taking credit for team work.",
+      "category": "Probe collaboration style",
+      "question": "In developing The Fracture App, Tom Fadial did the programming and residents helped with content. Walk me through a specific decision point where you and Tom disagreed about the direction of the app. How did you resolve it and what was the outcome?"
+    },
+    {
+      "purpose": "Assess resilience and problem-solving when facing setbacks. Will reveal whether candidate persists through challenges or abandons projects like the golf shoe venture.",
+      "category": "Test persistence and resilience",
+      "question": "You've listed many quality improvement projects on your CV. Pick one that didn't go as planned or faced significant obstacles. What went wrong, how did you respond, and what was the ultimate outcome?"
+    }
+  ],
+  "interview_decision_reasoning": "The candidate merits an interview based on The Fracture App achievement, which demonstrates genuine innovation capacity and real-world impact. His diverse background and cross-departmental experience could enable valuable contributions to the program. However, the interview is critical to address major concerns: (1) whether innovation capacity extends beyond one project, (2) what specific problems he wants to solve, (3) whether he has learned from the failed golf venture and developed more resilient approaches, (4) what his actual contributions were to various claimed projects versus team efforts, and (5) whether he has clear goals for the program versus seeking a credential. The interview should probe deeply on these questions with specific behavioral examples required. If he can demonstrate sustained innovation thinking, learning from failures, and clear program goals, he could be a solid candidate. If responses remain vague or generic, he should not be selected. The score of 5.5 places him in the 'needs more information' category where an interview is warranted but selection would require strong performance addressing the identified concerns."
+}

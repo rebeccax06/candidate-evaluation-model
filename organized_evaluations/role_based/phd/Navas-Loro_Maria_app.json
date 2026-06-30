@@ -1,0 +1,285 @@
+{
+  "candidate": {
+    "candidate_id": "_Navas-Loro_Maria_app",
+    "name": null,
+    "materials": [
+      "_Navas-Loro_Maria_app.pdf"
+    ],
+    "evaluation_date": "2026-06-11 22:50:02.349750"
+  },
+  "overall_assessment": "María Navas-Loro presents as a technically accomplished NLP researcher with a strong interdisciplinary foundation spanning mathematics, computer science, and artificial intelligence. Her CV demonstrates substantial research output with publications in respected venues and participation in multiple EU-funded projects. However, the application materials reveal a critical pattern: they are heavily dominated by stated qualities and generic descriptions rather than concrete evidence of personal agency and transformative contributions.\n\nThe most concerning aspect is the pervasive use of passive voice and vague descriptions throughout her materials. Her application states she is \"good at identifying problems and deriving possible solutions\" and \"excel[s] at outreach activities\" (_Navas-Loro_Maria_app.pdf, page 1), but these are textbook examples of worthless self-assessment without supporting evidence. Her professional experience descriptions consistently use passive constructions: \"I participated in a research project\" and \"I had to learn new libraries\" (_Navas-Loro_Maria_app.pdf, pages 1-2) rather than demonstrating clear ownership of outcomes. Even her publications list, while extensive, provides no context about her specific intellectual contributions to each work.\n\nThe recommendation letters compound this problem. Gutiérrez's letter is extremely brief and generic, stating only that María \"arrived prepared with a stack of highlighted research papers\" and has \"analytical skills, work ethic, and openness to change\" (_Navas-Loro_Maria_app.pdf, page 10) - all stated qualities without a single behavioral example. Rodríguez-Doncel's letter is even worse: a mere three sentences noting \"satisfactory performance, genuine curiosity and excellent academic record\" and \"ability to build and motivate cross-disciplinary teams\" (_Navas-Loro_Maria_app.pdf, page 11) with zero specific incidents. These letters read as perfunctory endorsements that could describe almost anyone.\n\nThe one concrete achievement that stands out is her volunteer work in Argentina: \"I visited different villages where I taught children how to use computers - most of them had never seen one before! Living with them for a while, in places without electricity and water full time\" (_Navas-Loro_Maria_app.pdf, page 1). This demonstrates genuine commitment to impact and adaptability. However, this occurred ten years ago, and there is minimal evidence of sustained healthcare-focused work since then. Her stated shift to medical NLP is recent (\"last year I decided to focus my research line on applying Natural Language Processing to the medical domain\" - _Navas-Loro_Maria_app.pdf, page 2) and lacks demonstrated outcomes or deep engagement with healthcare stakeholders.",
+  "innovation_potential": {
+    "level": "medium",
+    "confidence": "low",
+    "reasoning": "The evidence for innovation potential is surprisingly weak given the candidate's extensive publication record. The application contains numerous claims about creativity and problem-solving but almost no concrete examples of novel approaches or breakthrough thinking. Her description of the AI4LABOUR project states she \"had to learn new libraries and how to process the information from a website\" and produced \"a working code capable of extracting the desired information\" (_Navas-Loro_Maria_app.pdf, page 2). This describes basic technical execution, not innovation. The passive framing (\"I had to learn\") suggests reactive rather than proactive problem-solving.\n\nHer PhD thesis focused on \"identification and normalization of temporal information\" and \"detecting relevant events in legal decisions\" (_Navas-Loro_Maria_app.pdf, page 3), which are established NLP tasks. While she has published tools like \"TimeLex\" and \"Annotador,\" the materials provide no evidence that these represent methodological breakthroughs or have been widely adopted by other researchers. The CV lists being \"awarded as Best reviewer of the Resources Track\" at ISWC 2017 (_Navas-Loro_Maria_app.pdf, page 4), which demonstrates critical evaluation skills but not creative innovation. Her extensive coursework in 2022-2023 (Deep Learning, NLP, Machine Learning specializations - _Navas-Loro_Maria_app.pdf, page 6) suggests she is building foundational knowledge rather than pushing boundaries. Most concerning, her stated interest in medical NLP appears to be a recent pivot without demonstrated depth: \"last year I decided to focus my research line on applying Natural Language Processing to the medical domain\" (_Navas-Loro_Maria_app.pdf, page 2) with no evidence of published medical work, clinical collaborations, or patient engagement.",
+    "key_evidence": [],
+    "evidence": [
+      {
+        "quote": "For one of the projects I worked on (AI4LABOUR), we needed to extract information from different websites and compare it with the information provided by a company. I had never done this before, so I had to learn new libraries and how to process the information from a website in the desired way. In the end, I had a working code capable of extracting the desired information and displaying it as an Excel table.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 2",
+        "context": "This describes learning existing tools to complete a standard data extraction task. The passive framing ('I had to learn') and basic outcome (Excel table) suggest routine technical work rather than innovation. No novel methodology or creative problem-solving is demonstrated."
+      },
+      {
+        "quote": "I am deeply interested in Psychology of Language, and that is one of the reasons why last year I decided to focus my research line on applying Natural Language Processing to the medical domain, instead of staying only in the domains I had already worked for years (such as the legal domain or public procurement).",
+        "source": "_Navas-Loro_Maria_app.pdf, page 2",
+        "context": "This states a recent interest shift but provides no evidence of actual medical domain work, clinical partnerships, or healthcare impact. The timing ('last year') suggests this is aspirational rather than demonstrated."
+      },
+      {
+        "quote": "Currently working as assistant professor and part of the Nebula research group (focused on applying NLP and data science to data related to neurological diseases)",
+        "source": "_Navas-Loro_Maria_app.pdf, page 3",
+        "context": "Group membership is noted but no specific contributions, projects, or outcomes in neurological disease research are described. This is stated affiliation without demonstrated work."
+      }
+    ]
+  },
+  "program_fit": {
+    "level": "weak",
+    "confidence": "medium",
+    "detailed_analysis": "The candidate's fit with Catalyst's needs-driven, interdisciplinary healthcare innovation model is questionable. While she possesses strong technical NLP skills, the evidence suggests she approaches problems from a technology-first rather than need-first perspective. Her application emphasizes technical capabilities (\"Expert in Natural Language Processing and Machine Learning\" - _Navas-Loro_Maria_app.pdf, page 1) but provides minimal evidence of deep engagement with healthcare stakeholders, clinical workflows, or patient needs. The Lynx project description mentions working with \"oil and gas people, lawyers and a company digitising contracts\" (_Navas-Loro_Maria_app.pdf, page 1), but her role in understanding stakeholder needs versus applying predetermined technical solutions is unclear.\n\nMost critically, her stated motivation for healthcare work appears recent and potentially superficial. She mentions interest in \"Psychology of Language\" leading to a shift toward medical NLP \"last year\" (_Navas-Loro_Maria_app.pdf, page 2), but there is no evidence of sustained healthcare engagement, clinical observation, patient interaction, or deep investigation of unmet medical needs. Her volunteer work in Argentina demonstrated genuine commitment to impact ten years ago, but the intervening decade shows primarily academic research in legal and procurement domains. The application's opening statement - \"The Catalyst Program is a great opportunity to apply my knowledge to real problems and help people\" (_Navas-Loro_Maria_app.pdf, page 1) - is exactly the kind of generic motivation statement that should trigger skepticism. It suggests viewing Catalyst as a vehicle for her existing expertise rather than demonstrating readiness to investigate needs rigorously before proposing solutions.",
+    "strengths_for_program": [
+      "Strong technical foundation in NLP and machine learning with demonstrated ability to learn new tools",
+      "Multilingual capabilities (Spanish, English, French, German, Japanese) could enable international collaboration",
+      "Prior experience working on interdisciplinary teams in the Lynx project with diverse stakeholders",
+      "Evidence of commitment to teaching and explaining complex concepts to varied audiences"
+    ],
+    "concerns": [
+      "No demonstrated deep engagement with healthcare providers, patients, or clinical settings",
+      "Recent and potentially superficial pivot to medical domain without concrete outcomes",
+      "Technology-first orientation rather than needs-driven problem investigation",
+      "Lack of evidence for sustained work on challenging healthcare problems",
+      "Generic motivation statements without specific healthcare impact examples",
+      "Minimal evidence of iterative development based on user feedback or failed experiments",
+      "Recommendation letters provide no behavioral examples or specific contributions"
+    ],
+    "evidence": [
+      {
+        "quote": "The Catalyst Program is a great opportunity to apply my knowledge to real problems and help people. Becoming a fellow would allow me to meet people with the same interests and objectives but with different backgrounds and experience, forming a team that can really make a difference.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 1",
+        "context": "This is generic motivation fluff that could apply to any program. It frames Catalyst as a venue to 'apply my knowledge' (technology-first) rather than demonstrating readiness to investigate needs. No specific healthcare problem or population is mentioned."
+      },
+      {
+        "quote": "During my doctoral thesis I participated in a research project called Lynx. The project aimed to help small businesses understand European compliance regulations, and we had different use cases; oil and gas people, lawyers and a company digitising contracts. That was my first big project, where teamwork and understanding the different nuances of each stakeholder was crucial to the result.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 1",
+        "context": "This demonstrates some interdisciplinary experience but uses passive voice ('I participated') and provides no specific examples of how she understood stakeholder needs or what her personal contribution was. The claim that 'understanding nuances was crucial' is stated, not demonstrated."
+      },
+      {
+        "quote": "María's analytical skills, work ethic, and openness to change make her an ideal candidate for the Catalyst program. Her ability to integrate knowledge from various disciplines and work effectively in interdisciplinary environments aligns perfectly with the Catalyst methodology.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 10 (Gutiérrez letter)",
+        "context": "This is pure fluff - generic praise without a single behavioral example. The recommender provides no specific incident demonstrating analytical skills, work ethic, openness to change, or interdisciplinary work. This type of letter should be heavily discounted."
+      }
+    ]
+  },
+  "notable_qualities": [
+    {
+      "quality": "Multilingual capability and international experience",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "Languages: Spanish [Native], French [DELF B2, TFC C1], English [CAE(C1),TOEIC(955 over 990)], German [B1.1], Japanese [JLPT N5 (166 over 180)], Chinese",
+          "source": "_Navas-Loro_Maria_app.pdf, page 3",
+          "context": "Certified proficiency in multiple languages with official test scores demonstrates genuine capability rather than stated skill."
+        },
+        {
+          "quote": "I have completed research stays and academic exchanges at the Institut Sup Galilée at Paris XIII, the IRIT (Informatics Research Institute of Toulouse), the WU Wien (Vienna University of Economics and Business), the NII (National Institute of Informatics in Japan), the Semantic Technology Lab (Italy) and Kadir Has University/Arçelik (Istanbul, Turkey).",
+          "source": "_Navas-Loro_Maria_app.pdf, page 3",
+          "context": "Multiple international research stays across diverse cultural contexts shows adaptability and willingness to work in unfamiliar environments."
+        }
+      ],
+      "significance": "This could enable collaboration with international healthcare systems and diverse patient populations, though the candidate has not yet demonstrated applying this capability to healthcare contexts."
+    },
+    {
+      "quality": "Commitment to teaching and knowledge dissemination",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "I have teaching experience in subjects such as Machine Learning, Python and Ethics",
+          "source": "_Navas-Loro_Maria_app.pdf, page 3",
+          "context": "Teaching technical subjects and ethics suggests ability to communicate complex ideas, though no specific teaching outcomes or innovations are described."
+        },
+        {
+          "quote": "Ten years ago I volunteered during the summer in Argentina. I visited different villages where I taught children how to use computers - most of them had never seen one before! Living with them for a while, in places without electricity and water full time, made me appreciate more the things we take for granted.",
+          "source": "_Navas-Loro_Maria_app.pdf, page 1",
+          "context": "This demonstrates genuine commitment to education and impact in resource-constrained settings, showing adaptability and dedication beyond academic requirements."
+        }
+      ],
+      "significance": "Teaching ability could support knowledge translation in Catalyst teams, though the evidence is primarily from academic contexts rather than healthcare stakeholder education."
+    },
+    {
+      "quality": "Sustained research productivity",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "Publications list includes journal articles in Frontiers in Artificial Intelligence, Information Systems (Elsevier), Journal of Intelligent & Fuzzy Systems, The Knowledge Engineering Review, Language Resources and Evaluation, plus numerous conference and workshop papers from 2016-2023",
+          "source": "_Navas-Loro_Maria_app.pdf, pages 7-8",
+          "context": "Consistent publication record over 7+ years demonstrates ability to complete research projects and communicate findings, though specific contributions to each paper are not described."
+        },
+        {
+          "quote": "Main organizer and proceedings editor of AI4LEGAL2022, Local co-organiser of JURIX2019, PC of COLIEE2020, 2021, 2022",
+          "source": "_Navas-Loro_Maria_app.pdf, page 4",
+          "context": "Leadership roles in organizing academic events shows initiative and community engagement within the legal AI research community."
+        }
+      ],
+      "significance": "Demonstrates ability to sustain research efforts and engage with academic community, though translation to healthcare impact is unproven."
+    },
+    {
+      "quality": "Proactive learning and skill development",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "Completed extensive online coursework in 2022-2023 including Deep Learning Specialization, Natural Language Processing Specialization, Machine Learning Specialization, Deep Reinforcement Learning, Psychology Specialization, Computational Neuroscience, Mathematics for Machine Learning",
+          "source": "_Navas-Loro_Maria_app.pdf, page 6",
+          "context": "Systematic completion of multiple technical and neuroscience courses shows initiative to build knowledge, though this also suggests she is still building foundational expertise in areas relevant to medical applications."
+        },
+        {
+          "quote": "For one of the projects I worked on (AI4LABOUR), we needed to extract information from different websites and compare it with the information provided by a company. I had never done this before, so I had to learn new libraries",
+          "source": "_Navas-Loro_Maria_app.pdf, page 2",
+          "context": "Willingness to learn new technical skills when needed, though the example describes routine technical learning rather than deep conceptual development."
+        }
+      ],
+      "significance": "Shows growth mindset and willingness to acquire new skills, which could support adaptation to healthcare domain requirements, but the recent timing of medical/neuroscience coursework raises questions about depth of expertise."
+    }
+  ],
+  "red_flags": [
+    {
+      "flag": "Pervasive use of passive voice and vague descriptions obscuring personal contribution and agency",
+      "severity": "high",
+      "evidence": "Throughout application: 'I participated in a research project' (page 1), 'I had to learn new libraries' (page 2), 'we needed to extract information' (page 2), 'I have been involved in several NLP projects' (page 3). Publications list provides no description of personal intellectual contribution to any paper. This pattern makes it impossible to assess actual research ownership versus supporting role."
+    },
+    {
+      "flag": "Generic recommendation letters with zero behavioral examples",
+      "severity": "high",
+      "evidence": "Gutiérrez letter: 'analytical skills, work ethic, and openness to change' with no specific incidents (page 10). Rodríguez-Doncel letter: 'satisfactory performance, genuine curiosity and excellent academic record' and 'ability to build and motivate cross-disciplinary teams' with no examples (page 11). These read as perfunctory endorsements that could describe anyone."
+    },
+    {
+      "flag": "Recent and potentially superficial pivot to medical domain without demonstrated outcomes",
+      "severity": "high",
+      "evidence": "'last year I decided to focus my research line on applying Natural Language Processing to the medical domain' (page 2). No medical publications listed. 'Currently working as assistant professor and part of the Nebula research group (focused on applying NLP and data science to data related to neurological diseases)' (page 3) but no specific projects, outcomes, or clinical collaborations described. Extensive neuroscience coursework completed in 2023 (page 6) suggests building basic knowledge rather than established expertise."
+    },
+    {
+      "flag": "Application dominated by stated qualities without supporting evidence",
+      "severity": "high",
+      "evidence": "'Good at identifying problems and deriving possible solutions' (page 1) - no examples provided. 'Excel at outreach activities, used to explain complex concepts' (page 1) - no specific outreach outcomes described. 'Interdisciplinary background' (page 1) - degrees listed but no evidence of integrating disciplines to solve problems. 'The Catalyst Program is a great opportunity to apply my knowledge to real problems and help people' (page 1) - generic motivation statement."
+    },
+    {
+      "flag": "No evidence of deep healthcare stakeholder engagement or needs investigation",
+      "severity": "high",
+      "evidence": "No clinical observations, patient interactions, or healthcare provider collaborations mentioned. Lynx project involved 'oil and gas people, lawyers and a company' (page 1) but no healthcare stakeholders. Argentina volunteer work was teaching computer basics, not healthcare-related (page 1). Recent medical focus appears to be applying existing NLP techniques to medical data rather than investigating clinical needs."
+    },
+    {
+      "flag": "Minimal evidence of iterative development, failed experiments, or learning from setbacks",
+      "severity": "medium",
+      "evidence": "No discussion of research failures, negative results, or major pivots based on evidence. No examples of changing approach when initial hypothesis proved wrong. The AI4LABOUR example describes straightforward technical execution without obstacles or iterations (page 2)."
+    },
+    {
+      "flag": "Technology-first rather than needs-first orientation",
+      "severity": "medium",
+      "evidence": "Application emphasizes technical expertise ('Expert in Natural Language Processing and Machine Learning' - page 1) and desire to 'apply my knowledge' (page 1) rather than investigating problems. No examples of discovering needs before proposing solutions. Medical interest framed as applying NLP to medical domain rather than solving specific healthcare problems."
+    },
+    {
+      "flag": "Unclear research ownership in collaborative projects",
+      "severity": "medium",
+      "evidence": "Publications list 20+ papers but provides no context about authorship position, personal contribution, or intellectual ownership for any of them (pages 7-8). Project descriptions use 'we' without clarifying individual role: 'we had different use cases' (page 1), 'we needed to extract information' (page 2)."
+    }
+  ],
+  "questions_for_interview": [
+    {
+      "category": "Probe research ownership",
+      "question": "Looking at your publication 'WhenTheFact: Extracting Events from European Legal Decisions' in Frontiers in AI, can you walk me through what specific research question you personally formulated, what methodological decisions you made, and how your contribution differed from your co-authors'?",
+      "purpose": "Assess whether candidate can articulate clear personal intellectual contribution versus supporting role. The passive voice throughout application makes ownership unclear. This tests if she can provide specific examples of research agency."
+    },
+    {
+      "category": "Verify healthcare engagement",
+      "question": "You mentioned shifting your research focus to medical NLP last year. Can you describe a specific clinical setting you've observed, a healthcare provider you've shadowed, or a patient population you've engaged with? What unmet need did you identify through that engagement?",
+      "purpose": "Determine if medical interest is based on deep stakeholder engagement or is a superficial pivot. No clinical collaborations or patient interactions are mentioned in materials. This tests whether she has investigated healthcare needs or is simply applying existing NLP techniques to medical data."
+    },
+    {
+      "category": "Assess needs-driven approach",
+      "question": "Tell me about a time when you started a project with a specific technical solution in mind, but after investigating the actual problem, you realized you needed a completely different approach. What was the original solution, what did you learn, and what did you do instead?",
+      "purpose": "Evaluate whether candidate can prioritize problem understanding over technical preferences. Application suggests technology-first orientation ('apply my knowledge'). This tests flexibility and willingness to abandon familiar methods when evidence suggests a different path."
+    },
+    {
+      "category": "Probe claimed interdisciplinary work",
+      "question": "In the Lynx project, you mentioned working with oil and gas people, lawyers, and a digitization company. Pick one specific stakeholder interaction where you initially misunderstood their needs. What did you think they needed, what did they actually need, and how did you discover the gap?",
+      "purpose": "Test whether 'understanding different nuances of each stakeholder' is demonstrated capability or stated quality. The description is vague ('teamwork and understanding...was crucial'). This probes for concrete examples of learning from non-technical stakeholders."
+    },
+    {
+      "category": "Explore research setbacks",
+      "question": "Describe your biggest research failure - an experiment that didn't work, a hypothesis that was wrong, or a project that had to be abandoned. What went wrong, how did you diagnose it, and what did you learn?",
+      "purpose": "Assess resilience, critical thinking, and learning from failure. No setbacks or negative results are mentioned in application. This tests whether candidate can reflect on failures and adapt, which is critical for Catalyst's iterative process."
+    },
+    {
+      "category": "Test communication across disciplines",
+      "question": "Imagine you need to explain to a surgeon with no AI background why your NLP model's 85% accuracy might not be good enough for their clinical decision-making. How would you explain the limitations and what questions would you ask them to understand their actual accuracy requirements?",
+      "purpose": "Evaluate ability to translate technical concepts for clinical audiences and prioritize clinical needs over technical metrics. Application claims ability to 'explain complex concepts to...layman people' but provides no examples. This tests practical communication skills and clinical sensitivity."
+    },
+    {
+      "category": "Assess motivation depth",
+      "question": "You volunteered in Argentina teaching computer skills ten years ago. What specific experience from that work influences how you think about healthcare technology today? Can you connect a specific moment from Argentina to a specific decision you've made in your recent medical NLP work?",
+      "purpose": "Determine if healthcare motivation is genuine and sustained or recent and superficial. The Argentina experience is the only clear evidence of impact-driven work, but it was a decade ago. This tests whether that experience genuinely shaped her trajectory or is being retrofitted to fit Catalyst's mission."
+    },
+    {
+      "category": "Verify claimed qualities",
+      "question": "Your recommender mentioned your 'ability to build and motivate cross-disciplinary teams.' Can you describe a specific team you built (not joined), who was on it, what motivated each person differently, and what outcome you achieved together?",
+      "purpose": "Test whether stated team-building ability is real or generic praise. The recommendation letter provides no behavioral examples. This probes for concrete evidence of leadership and team motivation."
+    }
+  ],
+  "overall_score": 4.5,
+  "score_justification": "This score reflects significant concerns that outweigh the candidate's technical strengths. While María has a solid publication record and strong NLP expertise, the application is dominated by red flags that make it impossible to assess her true research ownership, healthcare commitment, or fit with Catalyst's needs-driven methodology. The pervasive passive voice ('I participated,' 'I had to learn') obscures her personal contributions. The recommendation letters are perfunctory and provide zero behavioral examples - they could describe anyone. Most critically, her stated shift to medical NLP appears recent (last year) and superficial, with no demonstrated clinical engagement, patient interaction, or deep investigation of healthcare needs. The application reads as someone seeking to 'apply my knowledge' (technology-first) rather than investigate problems rigorously (needs-first). Her strongest evidence of impact-driven work is the Argentina volunteer experience from a decade ago. The extensive 2022-2023 coursework in neuroscience and medical topics suggests she is still building foundational knowledge rather than bringing established expertise. Without clear evidence of research ownership, sustained healthcare engagement, or needs-driven problem-solving, the score must remain in the 'weak' tier despite her technical capabilities.",
+  "recommendation": "Not recommended",
+  "interview_decision": false,
+  "interview_decision_reasoning": "The decision not to interview is based on multiple high-severity red flags that cannot be adequately addressed in an interview setting. First, the complete absence of behavioral examples in recommendation letters suggests either weak relationships with recommenders or lack of notable contributions worth describing - either way, this is disqualifying. Second, the pervasive passive voice and vague descriptions throughout the application make it impossible to assess actual research ownership versus supporting roles. Third, the recent and apparently superficial pivot to medical NLP (last year, with no clinical work or healthcare outcomes described) raises serious questions about genuine commitment versus opportunistic application to a healthcare program. Fourth, the application is dominated by stated qualities ('good at identifying problems,' 'excel at outreach') without supporting evidence - exactly the kind of fluff that should trigger rejection. While an interview could potentially clarify some ambiguities, the fundamental pattern suggests a candidate who has not deeply engaged with healthcare needs and approaches problems from a technology-first rather than needs-first perspective. The limited interview slots should be reserved for candidates with clearer evidence of healthcare commitment, research ownership, and alignment with Catalyst's methodology. The candidate would need to demonstrate substantial additional evidence of clinical engagement and needs-driven work to warrant reconsideration.",
+  "role": "phd",
+  "role_specific_assessment": {
+    "role": "phd",
+    "marker": "Research ownership and strength",
+    "score": 4.0,
+    "confidence": "low",
+    "reasoning": "The candidate has a substantial publication record (20+ papers over 7 years) including journals like Information Systems (Elsevier), The Knowledge Engineering Review, and conference venues like ESWC and JURIX. However, the materials provide virtually no information about her specific intellectual contributions to any publication. The CV lists publications but offers no context about authorship position, personal research questions formulated, methodological decisions made, or how her contribution differed from collaborators. Project descriptions consistently use passive voice ('I participated in,' 'I had to learn') that obscures agency. The AI4LABOUR example describes learning existing libraries to complete a standard data extraction task - routine technical work, not research innovation. Her PhD thesis targeted 'identification and normalization of temporal information' and 'detecting relevant events' - established NLP tasks without evidence of novel methodology. The recommendation from her PhD advisor (Rodríguez-Doncel) is remarkably weak: just three sentences noting 'satisfactory performance' and 'ability to build teams' with zero specific research examples. This is highly unusual for an 8-year working relationship and suggests either minimal substantive contribution or a perfunctory endorsement. The extensive 2022-2023 coursework in deep learning, NLP, and neuroscience suggests she is still building foundational knowledge in areas relevant to her stated medical focus. Without clear evidence of research ownership, the publication record alone cannot support a higher score.",
+    "evidence": [
+      {
+        "quote": "During my doctoral thesis I participated in a research project called Lynx. The project aimed to help small businesses understand European compliance regulations, and we had different use cases; oil and gas people, lawyers and a company digitising contracts. That was my first big project, where teamwork and understanding the different nuances of each stakeholder was crucial to the result.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 1",
+        "context": "Passive voice ('I participated') provides no information about personal research contribution. The claim that 'understanding nuances was crucial' is stated, not demonstrated. No specific research question, method, or personal intellectual contribution is described."
+      },
+      {
+        "quote": "For one of the projects I worked on (AI4LABOUR), we needed to extract information from different websites and compare it with the information provided by a company. I had never done this before, so I had to learn new libraries and how to process the information from a website in the desired way. In the end, I had a working code capable of extracting the desired information and displaying it as an Excel table.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 2",
+        "context": "This describes learning existing tools to complete a standard technical task (web scraping and data comparison). The passive framing ('I had to learn,' 'we needed') and basic outcome (Excel table) indicate supporting technical work rather than research ownership or innovation."
+      },
+      {
+        "quote": "During the time I supervised her PhD, I noted her satisfactory performance, genuine curiosity and excellent academic record. María has the ability to build and motivate cross-disciplinary teams, and I am sure she will be a great participant in your program.",
+        "source": "_Navas-Loro_Maria_app.pdf, page 11 (Rodríguez-Doncel letter)",
+        "context": "This is an extremely weak letter from an 8-year PhD advisor relationship. 'Satisfactory performance' is damning with faint praise. No specific research contributions, publications, or behavioral examples are provided. The claim about 'ability to build teams' is stated without evidence. This suggests either minimal substantive contribution or a perfunctory endorsement."
+      },
+      {
+        "quote": "Processing, Identification and Representation of Temporal Expressions and Events in Legal Documents (PhD thesis title)",
+        "source": "_Navas-Loro_Maria_app.pdf, page 3",
+        "context": "The thesis topic addresses established NLP tasks (temporal expression extraction, event detection) in a specific domain. No evidence is provided about novel methodologies developed, significant findings, or how this work advanced the field beyond applying existing techniques to legal texts."
+      }
+    ],
+    "evidence_gaps": [
+      "What specific research questions did you personally formulate for your PhD versus questions assigned by your advisor?",
+      "For your publications, what was your authorship position and what specific intellectual contribution did you make that differed from your co-authors?",
+      "Can you describe a specific methodological decision you made in your research, what alternatives you considered, and why you chose your approach?",
+      "What was your biggest research failure or unexpected result, how did you diagnose what went wrong, and how did it change your approach?",
+      "Have any of your research tools (TimeLex, Annotador) been adopted by other researchers? What evidence exists of external validation or impact?",
+      "Your advisor's letter is unusually brief for an 8-year relationship. Can you explain what specific research contributions he would highlight if asked for details?",
+      "How does your recent medical NLP work differ from applying your existing legal NLP techniques to medical texts? What new research questions have emerged from clinical needs?"
+    ],
+    "research_evidence_level": "limited",
+    "publication_strength": "moderate",
+    "research_ownership": "unclear",
+    "challenge_complexity": null,
+    "need_investigation_stage": null,
+    "systems_thinking": null,
+    "build_stage": null,
+    "ownership_clarity": null,
+    "user_grounding": null
+  },
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "processing_time_seconds": 181.00453186035156,
+    "materials_character_count": 31486,
+    "timestamp": "2026-06-11T22:50:02.350338",
+    "evaluation_mode": "holistic_enhanced"
+  }
+}

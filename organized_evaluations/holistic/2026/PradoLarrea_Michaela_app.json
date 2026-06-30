@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T23:20:42.207088",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 157.29494428634644,
+    "materials_character_count": 24988
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmp5q3jbmob.pdf"
+    ],
+    "candidate_id": "PradoLarrea_Michaela_app",
+    "evaluation_date": "2026-02-25 23:20:42.206917"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on stated qualities without behavioral evidence throughout application",
+      "evidence": "Application states: \"I'm passionate about developing innovative technologies\" (why Catalyst section), \"strong communication skills developed through publications, oral presentations, and cross-institutional collaborations\" (competencies section), \"genuine motivation for socially impactful work\" (Ecuador conference section). These are textbook examples of application fluff—generic claims that could apply to any candidate and provide zero evidence of actual capability. No specific examples of communication challenges overcome, innovations developed, or impact achieved.",
+      "severity": "high"
+    },
+    {
+      "flag": "Recommendation letters use generic praise without specific behavioral examples",
+      "evidence": "Anderson letter: \"exceptional scientist with great potential,\" \"remarkable ability to tackle complex scientific challenges with dedication, creativity, and perseverance,\" \"natural leadership and collaborative impact.\" Dosta letter: \"exceptional initiative, strategic mindset, and natural ability to work across disciplines,\" \"consistently demonstrated the ability to turn complex scientific challenges into actionable research strategies.\" These are stated qualities from recommenders, not specific incidents or behaviors that demonstrate these qualities. High-quality letters provide concrete examples; these read as form letters with superlatives inserted.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear personal contribution in team projects—extensive use of passive voice",
+      "evidence": "Ecuador conference: \"I played a central role in organizing\" (what role specifically?), \"I led the planning\" (what decisions did you make?), \"I coordinated speaker outreach, logistics, and fundraising\" (what were the challenges and how did you overcome them?). Research: \"I helped design a cleavable peptide linker\" (who else was involved and what was your specific contribution?). Passive constructions obscure actual agency and contribution.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of learning from failure or adapting based on feedback",
+      "evidence": "No evidence found in application materials. The entire narrative is one of uninterrupted success with no mention of setbacks, failed experiments, rejected papers, or course corrections. This is unrealistic for research and suggests either lack of self-awareness or strategic omission. Program values candidates who \"learn, grow, and adapt based on feedback and new evidence\"—no evidence provided for this criterion.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Claimed interdisciplinary work not well-supported by specific examples",
+      "evidence": "Application claims \"interdisciplinary collaboration across chemistry, immunology, and engineering\" (competencies) and Ecuador conference claims to have \"led interdisciplinary dialogue\" and \"strengthened my ability to communicate across disciplines.\" However, no specific examples of what made the collaboration interdisciplinary, what challenges arose from different disciplinary perspectives, or how she bridged those gaps. The research described is within the standard nanomedicine domain, not truly cross-disciplinary.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Motivation for healthcare equity stated but not demonstrated through actions",
+      "evidence": "Application states: \"I'm deeply motivated to develop medical technologies that are not only cutting-edge but also accessible and impactful—especially in underserved communities. Seeing my mother, a nurse in Ecuador's public hospitals, care for patients without adequate tools showed me how innovation often fails to reach those who need it most.\" This is a compelling narrative but provides no evidence of actions taken to address health equity. No projects focused on accessibility, no work in underserved settings, no consideration of cost or implementation barriers in research design. Stated motivation without demonstrated commitment.",
+      "severity": "low"
+    },
+    {
+      "flag": "Limited evidence of actual clinical engagement despite stated interest in translation",
+      "evidence": "Application states desire to \"learn directly from clinicians\" and understand \"what truly drives a solution to succeed beyond the lab—clinically, practically, and systemically.\" This frames clinical understanding as a learning goal rather than existing capability. No evidence of shadowing clinicians, conducting user research with healthcare providers, or engaging with clinical workflows. All research appears lab-based without clinical validation or feedback loops.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Limited evidence of actual clinical engagement or healthcare system understanding beyond stated interest",
+      "Cross-disciplinary work claims not well-supported by specific examples of bridging different fields",
+      "No concrete examples of learning from failure or adapting based on feedback",
+      "Communication skills stated but not demonstrated through specific examples of impact",
+      "Heavy reliance on generic motivational statements rather than demonstrated commitment through actions"
+    ],
+    "evidence": [
+      {
+        "quote": "I want to understand what truly drives a solution to succeed beyond the lab—clinically, practically, and systemically. Catalyst offers the opportunity to learn directly from clinicians and interdisciplinary teams",
+        "source": "tmp5q3jbmob.pdf - application",
+        "context": "Shows awareness of translation challenges and interest in clinical perspective, but frames this as learning goal rather than existing capability. Suggests gap in current experience that program could fill."
+      },
+      {
+        "quote": "This experience challenged me to manage a high-profile public event, lead interdisciplinary dialogue, and engage with complex sociopolitical issues. It strengthened my ability to communicate across disciplines",
+        "source": "tmp5q3jbmob.pdf - application, Ecuador conference",
+        "context": "Claims about strengthened communication and interdisciplinary dialogue, but no specific examples of what challenges were overcome, what was learned, or how communication was actually demonstrated. Classic stated quality without evidence."
+      },
+      {
+        "quote": "Her combination of scientific depth, creativity, motivation, and collaborative ethos is rare and ideally suited for this program.",
+        "source": "tmp5q3jbmob.pdf - Anderson letter",
+        "context": "Generic endorsement without specific behavioral examples. Does not provide evidence of what makes her collaborative or how her ethos manifests in practice."
+      },
+      {
+        "quote": "Michaela worked effectively across disciplines and was a reliable contributor to team efforts, often facilitating communication among collaborators and advancing shared goals through thoughtful, well-structured input.",
+        "source": "tmp5q3jbmob.pdf - Dosta letter",
+        "context": "States cross-disciplinary effectiveness but provides no specific examples of what disciplines, what communication challenges, or what impact her facilitation had. Passive voice and vague descriptors reduce credibility."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate shows moderate alignment with program goals, with clear strengths in research translation but significant gaps in demonstrated cross-disciplinary work and evidence-based learning. Her stated motivation aligns well with the program's focus on translating research into practical impact: \"I want to understand what truly drives a solution to succeed beyond the lab—clinically, practically, and systemically\" (application). This suggests awareness of the translation gap, though it's expressed as aspiration rather than demonstrated experience.\n\nHer technical research directly addresses clinical problems, showing some translation orientation. The hydrogel project explicitly targeted \"a critical clinical limitation\" and the work is described as \"clinically motivated projects to address unmet medical needs\" (application, competencies). However, there's limited evidence of actual clinical engagement or understanding of healthcare systems. The application mentions wanting to \"learn directly from clinicians\" (application, why Catalyst), which suggests this is an area for development rather than existing strength. The Ecuador conference work could demonstrate cross-disciplinary capability, but the description is vague about her actual contributions and learning. She \"moderated\" panels and \"coordinated speaker outreach, logistics, and fundraising\" but provides no evidence of how she bridged disciplines, what she learned, or what impact the event had beyond attendance numbers.\n\nMajor concerns include: (1) Limited evidence of working effectively with diverse teams—most work described is within academic research labs with similar technical backgrounds; (2) No concrete examples of adapting based on feedback or changing direction based on new evidence; (3) Communication effectiveness is stated but not demonstrated through specific examples of explaining complex ideas to non-technical audiences or achieving understanding across disciplines; (4) The application relies heavily on generic statements about passion and motivation rather than specific actions that demonstrate sustained commitment to challenging problems.",
+    "strengths_for_program": [
+      "Strong technical foundation in translational research with focus on clinical applications",
+      "Publication record demonstrates ability to execute research projects to completion",
+      "Experience across multiple institutions (MIT, BWH, Harvard) shows adaptability to different research environments",
+      "Patent disclosure suggests work with commercial potential and understanding of technology transfer"
+    ]
+  },
+  "overall_score": 6.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Research Productivity and Technical Execution",
+      "evidence": [
+        {
+          "quote": "She is a co-author on multiple manuscripts, including a recent publication in Nature Nanotechnology",
+          "source": "tmp5q3jbmob.pdf - Anderson letter",
+          "context": "High-impact publication demonstrates ability to execute research to completion and meet rigorous peer review standards"
+        },
+        {
+          "quote": "Her work was reflected in several high-impact publications, including Nature Nanotechnology, Nature Reviews Bioengineering, and ACS Nano",
+          "source": "tmp5q3jbmob.pdf - Dosta letter",
+          "context": "Multiple publications in top-tier journals across different projects shows consistent productivity"
+        },
+        {
+          "quote": "In addition to her thesis research, she currently co-leads two other projects of great impact for vaccine research",
+          "source": "tmp5q3jbmob.pdf - Anderson letter",
+          "context": "Managing multiple concurrent projects demonstrates organizational capability and technical breadth"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Strong research execution is foundational for translational work. The ability to complete projects and publish in high-impact venues suggests she can deliver results, which is critical for innovation programs. However, this quality alone does not demonstrate the broader innovation and cross-disciplinary skills the program seeks."
+    },
+    {
+      "quality": "Problem Identification and Solution Design",
+      "evidence": [
+        {
+          "quote": "I led a strategy to redesign a promising hydrogel cancer therapy to treat metastatic disease—addressing a critical clinical limitation: its dependence on local injection",
+          "source": "tmp5q3jbmob.pdf - application",
+          "context": "Shows ability to identify specific limitations in existing approaches and frame problems clearly"
+        },
+        {
+          "quote": "She has shown an extraordinary ability to identify critical bottlenecks in biomedical research and design novel strategies to overcome them",
+          "source": "tmp5q3jbmob.pdf - Anderson letter",
+          "context": "Advisor's assessment of problem-solving ability, though stated rather than demonstrated with specific examples beyond the hydrogel project"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Problem identification is crucial for innovation, but evidence is limited to one well-described example. Need more instances across different contexts to confirm this as a consistent strength rather than a single successful project."
+    },
+    {
+      "quality": "Mentorship and Knowledge Transfer",
+      "evidence": [
+        {
+          "quote": "Over the past year, she has guided an undergraduate student in becoming a highly independent researcher, helping her apply and prepare for presenting her work at a research symposium",
+          "source": "tmp5q3jbmob.pdf - Anderson letter",
+          "context": "Specific example of mentoring with measurable outcome (student presenting at symposium)"
+        },
+        {
+          "quote": "She recently completed the Research Mentorship Certificate from the Professional Development Program at MIT",
+          "source": "tmp5q3jbmob.pdf - Anderson letter",
+          "context": "Formal training in mentorship shows intentional development of this skill"
+        },
+        {
+          "quote": "Michaela also mentored and trained new team members in the lab, helping to build technical skills and foster a collaborative, productive environment",
+          "source": "tmp5q3jbmob.pdf - Dosta letter",
+          "context": "Additional evidence of mentoring, though vague about specific contributions or outcomes"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Mentorship capability is valuable for collaborative innovation programs. The evidence shows some commitment to developing others, though impact is described in general terms rather than specific transformations or outcomes achieved."
+    },
+    {
+      "quality": "International and Cross-Cultural Experience",
+      "evidence": [
+        {
+          "quote": "Research experience across Mexico (Tecnológico de Monterrey), Canada (University of Windsor), and United States (BWH, MIT)",
+          "source": "tmp5q3jbmob.pdf - CV",
+          "context": "Multiple international research positions demonstrate adaptability to different environments"
+        },
+        {
+          "quote": "As a member of the leadership board of the Harvard Ecuadorian Student Organization, I played a central role in organizing the Ecuador 2025 conference, held at Harvard University on April 26, 2025, with over 150 attendees",
+          "source": "tmp5q3jbmob.pdf - application",
+          "context": "Leadership in cultural organization shows connection to international community"
+        },
+        {
+          "quote": "Spanish (Native), English (TOEFL iBT 114/120), German (B1)",
+          "source": "tmp5q3jbmob.pdf - CV",
+          "context": "Multilingual capability facilitates cross-cultural collaboration"
+        }
+      ],
+      "confidence": "high",
+      "significance": "International experience and cultural competency are valuable for programs focused on global health impact. This is one of the candidate's clearest demonstrated strengths, though its relevance to innovation potential is indirect."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Michaela Prado presents as a technically competent PhD candidate with solid research experience in nanomedicine and mRNA delivery platforms. Her trajectory shows consistent progression from undergraduate research through her current MIT PhD work, with publications in high-impact journals including Nature Nanotechnology. However, the application materials reveal a concerning pattern: they are heavily laden with generic claims and stated qualities that lack specific behavioral evidence. The candidate describes herself as \"passionate about developing innovative technologies\" and claims \"strong communication skills\" (application), but these are textbook examples of application fluff that provide no actual evidence of capability.\n\nThe strongest concrete evidence comes from her publication record and specific technical contributions. For example, she \"led a strategy to redesign a promising hydrogel cancer therapy to treat metastatic disease\" by proposing \"a novel mechanism using tumor-overexpressed matrix metalloproteinases (MMPs) as biological triggers\" and developing \"a cleavable peptide linker that allowed two nanoparticles to assemble into a hydrogel only in the tumor microenvironment\" (application, research experience section). This demonstrates genuine problem-solving with measurable outcomes. Her co-authorship on multiple papers, including being \"co-lead inventor of a technology that has been formally disclosed and is currently under review by MIT's technology licensing office\" (Anderson letter), provides tangible evidence of research productivity.\n\nHowever, critical gaps emerge when examining evidence for claimed interdisciplinary work and leadership. The Ecuador conference organization is described in passive voice with unclear personal contribution: she \"played a central role in organizing\" and \"led the planning\" but provides no specific metrics, challenges overcome, or concrete outcomes beyond attendance numbers (application). The recommendation letters, while positive, rely heavily on generic praise. Anderson states she is \"an exceptional scientist\" with \"remarkable ability\" but provides limited specific behavioral examples beyond her technical work. Dosta's letter similarly uses broad descriptors like \"exceptional initiative\" and \"strategic mindset\" without citing specific incidents that demonstrate these qualities. The letters read more as endorsements of her technical competence than evidence of the broader innovation and leadership qualities the program seeks.\n\nMost concerning is the reliance on stated rather than demonstrated qualities throughout the application. Claims of being \"deeply motivated\" by healthcare accessibility are supported only by a brief anecdote about her mother, not by any concrete actions taken to address health equity (application, \"What else should we know\" section). The assertion of \"strong communication skills developed through publications, oral presentations, and cross-institutional collaborations\" (competencies section) is a classic example of stating a quality rather than demonstrating it through specific examples of communication challenges overcome or impact achieved.",
+  "score_justification": "Michaela Prado demonstrates solid technical competency and research productivity, evidenced by publications in Nature Nanotechnology and other high-impact journals, patent disclosure, and successful completion of multiple research projects across institutions. Her hydrogel redesign project shows genuine problem-solving ability with a specific, well-articulated innovation. These strengths justify a score above the moderate range. However, the application is heavily laden with stated qualities and generic claims that lack behavioral evidence, which is a significant concern. Claims of 'strong communication skills,' 'interdisciplinary collaboration,' and 'passion for innovation' are textbook application fluff without supporting examples. The recommendation letters, while positive, rely on superlatives rather than specific incidents that demonstrate the claimed qualities. Critical gaps include: no evidence of learning from failure, limited demonstration of actual clinical engagement despite stated interest in translation, unclear personal contributions in team settings due to passive voice, and motivation for health equity that is stated but not demonstrated through actions. The Ecuador conference work could show cross-disciplinary capability but is described too vaguely to assess actual contribution or learning. Given the program's emphasis on evidence-based evaluation and rejection of stated qualities, these gaps prevent a higher score. The candidate shows potential but needs to demonstrate—not just claim—the broader innovation, collaboration, and translation skills the program seeks. Score of 6.5 reflects solid technical foundation with meaningful concerns about fit for a program requiring demonstrated cross-disciplinary innovation and clinical translation capability.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "I led a strategy to redesign a promising hydrogel cancer therapy to treat metastatic disease—addressing a critical clinical limitation: its dependence on local injection. To enable systemic delivery with tumor-specific activation, I proposed a novel mechanism using tumor-overexpressed matrix metalloproteinases (MMPs) as biological triggers. I helped design a cleavable peptide linker that allowed two nanoparticles to assemble into a hydrogel only in the tumor microenvironment.",
+        "source": "tmp5q3jbmob.pdf - application",
+        "context": "This is the strongest evidence of innovation: identifying a specific limitation and designing a novel mechanism to address it. Shows problem-solving creativity and technical execution. However, it remains within her core domain of nanomedicine."
+      },
+      {
+        "quote": "She is the co-lead inventor of a technology that has been formally disclosed and is currently under review by MIT's technology licensing office for potential patenting and commercialization.",
+        "source": "tmp5q3jbmob.pdf - Anderson letter",
+        "context": "Indicates the work has novelty sufficient for patent consideration, suggesting genuine innovation. However, no details provided about what makes it innovative or its potential impact."
+      },
+      {
+        "quote": "Michaela's scientific work is characterized by a bold, interdisciplinary approach that integrates principles from immunology, synthetic biology, and nanomedicine.",
+        "source": "tmp5q3jbmob.pdf - Anderson letter",
+        "context": "This is a stated quality from the recommender, not demonstrated evidence. The letter does not provide specific examples of how she integrated these disciplines in novel ways or what made the approach 'bold.' Classic recommendation letter fluff."
+      },
+      {
+        "quote": "Developing a next-generation mRNA vaccine with lower reactogenicity through immunological studies, screening strategies, and lipid formulation optimization",
+        "source": "tmp5q3jbmob.pdf - CV",
+        "context": "Describes optimization work but uses passive voice and lacks specifics about what makes it 'next-generation' or what novel approaches were used. Could be routine optimization rather than innovation."
+      }
+    ],
+    "reasoning": "The candidate demonstrates solid technical innovation within established research paradigms, but evidence for transformative or cross-disciplinary innovation is limited. Her strongest innovation example is the hydrogel redesign project, where she identified a critical limitation (dependence on local injection) and proposed a novel solution (MMP-triggered assembly). This shows problem identification and creative solution design. The technical execution—developing linker chemistry, overseeing in vivo validation, and demonstrating enhanced efficacy—indicates she can move from concept to implementation.\n\nHowever, the innovation appears largely incremental within her established domain of nanomedicine. The projects described follow conventional academic research patterns: identifying a delivery challenge, engineering a nanoparticle solution, and validating in standard models. There is limited evidence of innovation that crosses traditional boundaries or challenges fundamental assumptions. Her current thesis work on \"targeted lipid nanoparticle (LNP)-based platform for a novel in vivo immune cell engineering strategy\" (CV) uses similar approaches to her previous work, suggesting pattern replication rather than paradigm shifts. The Ecuador conference organization could demonstrate innovation in a different domain, but the description lacks specifics about what was novel or how she approached challenges creatively—it reads as competent event execution rather than innovative problem-solving.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether communication skills are real or stated. Looking for specific behavioral examples, awareness of audience differences, and evidence of adaptation. Generic answers like 'I simplified the concepts' would confirm this is fluff.",
+      "category": "Probe claimed skill",
+      "question": "You mention having 'strong communication skills developed through cross-institutional collaborations.' Can you describe a specific situation where you had to explain your research to someone from a completely different discipline who initially didn't understand? What was challenging about it, and how did you adapt your approach?"
+    },
+    {
+      "purpose": "Clarify actual contribution versus team effort. The passive voice 'helped design' is ambiguous. Need to understand if she led the innovation or was a supporting contributor. Looking for specifics about decision-making and problem-solving.",
+      "category": "Verify experience",
+      "question": "In your hydrogel redesign project, you say you 'helped design' the cleavable peptide linker. Walk me through your specific technical contributions versus what collaborators contributed. What decisions did you personally make, and what challenges did you personally overcome?"
+    },
+    {
+      "purpose": "Assess actual clinical engagement and evidence-based adaptation. The application suggests this is aspirational rather than demonstrated. If she cannot provide a specific example, it confirms limited clinical exposure and raises questions about program fit.",
+      "category": "Assess fit",
+      "question": "The Catalyst program emphasizes learning from clinicians and understanding real-world healthcare constraints. Describe a time when clinical feedback or healthcare system realities fundamentally changed your research direction or approach. What did you learn and how did you adapt?"
+    },
+    {
+      "purpose": "Address the red flag of no failure mentioned. All strong researchers have failures. Looking for self-awareness, learning orientation, and ability to extract lessons. Inability to discuss failure suggests lack of reflection or strategic omission.",
+      "category": "Explore concern",
+      "question": "Tell me about a research project that failed or didn't work as expected. What went wrong, what did you learn, and how did that learning influence your subsequent work?"
+    },
+    {
+      "purpose": "Test claimed interdisciplinary facilitation skills. Generic event planning is different from actually bridging disciplinary divides. Looking for awareness of epistemological differences, specific conflict resolution, and learning. Vague answers would confirm this is overstated.",
+      "category": "Probe claimed skill",
+      "question": "You organized panels for the Ecuador conference bringing together people from journalism, governance, and environmental science. Describe a specific moment where disciplinary differences created tension or misunderstanding. How did you navigate that, and what did you learn about facilitating cross-disciplinary dialogue?"
+    },
+    {
+      "purpose": "Distinguish stated motivation from demonstrated commitment. Looking for concrete actions, not just sentiment. If she cannot point to specific design choices, project selections, or activities focused on equity, it confirms this is aspirational rather than driving her work.",
+      "category": "Assess motivation",
+      "question": "You mention being motivated by healthcare accessibility in underserved communities, inspired by your mother's work in Ecuador. What specific actions have you taken in your research or career to address accessibility or health equity? How do you think about cost, implementation barriers, or resource constraints in your current work?"
+    },
+    {
+      "purpose": "Assess ability to integrate diverse perspectives and adapt to constraints beyond technical optimization. Program requires flexibility and stakeholder integration. Looking for evidence of collaborative problem-solving and comfort with ambiguity.",
+      "category": "Test fit",
+      "question": "Catalyst involves working on real clinical challenges with diverse teams including clinicians, engineers, and business people. Describe a time when you had to significantly change your technical approach based on input from non-technical stakeholders. What was hard about that, and how did you balance scientific rigor with practical constraints?"
+    },
+    {
+      "purpose": "Test whether leadership is demonstrated or just stated by recommenders. Looking for evidence of navigating conflict, building consensus, and making tough calls. Generic answers about 'listening to everyone' would suggest limited leadership experience.",
+      "category": "Probe claimed quality",
+      "question": "Your recommenders describe you as having 'natural leadership' and 'collaborative ethos.' Give me a specific example of a time when you had to lead a team through a difficult decision where people disagreed. How did you approach it, and what was the outcome?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview recommended to probe critical gaps and verify claimed capabilities. The candidate's strong technical foundation and research productivity (Nature Nanotechnology publication, patent disclosure, multiple projects) warrant further evaluation. However, the interview must focus on distinguishing stated qualities from demonstrated capabilities. Key areas to probe: (1) Actual clinical engagement and translation experience versus aspirational interest; (2) Specific examples of cross-disciplinary work and communication challenges overcome; (3) Evidence of learning from failure and adapting based on feedback; (4) Concrete actions taken toward health equity versus stated motivation; (5) Personal contributions in team settings where passive voice obscures agency. The candidate could be strong if the generic application language masks genuine capabilities, or could be primarily a competent technical researcher without the broader innovation and collaboration skills the program requires. Interview questions designed to make this distinction. If she provides vague, generic answers or cannot cite specific behavioral examples, that would confirm the application fluff and argue against selection. If she provides concrete examples with self-awareness and learning orientation, she could be a solid fit despite the weak application. The score of 6.5 is at the threshold—interview will determine whether she moves up or down from there."
+}

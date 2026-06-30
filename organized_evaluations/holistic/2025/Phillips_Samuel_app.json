@@ -1,0 +1,263 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T22:27:10.554626",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 156.26511573791504,
+    "materials_character_count": 23522
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmprhnw9dap.pdf"
+    ],
+    "candidate_id": "_Phillips_Samuel_app",
+    "evaluation_date": "2026-03-16 22:27:10.554472"
+  },
+  "red_flags": [
+    {
+      "flag": "Self-focused motivation statement emphasizing personal benefit over contribution or impact",
+      "evidence": "\"I feel I could personally benefit from improving my skills in taking a project from scientifically sound, to persuasive for implementation\" (Application). This focuses on what candidate will gain rather than what he will contribute to the program or field. For a competitive fellowship, motivation should center on impact and contribution.",
+      "severity": "high"
+    },
+    {
+      "flag": "Poor application quality with grammatical errors and unclear writing undermining claimed communication skills",
+      "evidence": "\"from demonstrating the clinical that the intervention to establishing how effectiveness\" (Application) - grammatically incorrect. \"Several previous Fellowes of the program\" (Application) - misspelling. \"reccommended\" (Application) - misspelling. These errors in a competitive fellowship application raise concerns about attention to detail and communication ability.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Generic, evidence-free recommendation letters that fail to substantiate claimed qualities",
+      "evidence": "Dr. Scott's letter: \"He has published and conducted numerous research and innovation studies and projects. His experiences include beginning a company, membership at numerous national committees, doing numerous national presentations and mentoring many students demonstrates his qualifications\" - this is just a list with zero specific examples. Dr. Heckman's letter: \"Dr. Phillips has a keen ability to share his engineering knowledge\" and \"I have been impressed by Dr. Phillips' exceptional ability to be well prepared and ready for problems that arise\" - generic praise without specific incidents. Neither letter provides concrete examples of innovation, collaboration, or impact.",
+      "severity": "high"
+    },
+    {
+      "flag": "Failed startup with no explanation of lessons learned or outcomes",
+      "evidence": "\"Fourier Designs, Co-Founder March 2006 - December 2013\" (CV) - company closed after 7 years with no explanation of why, what was learned, or any outcomes achieved. For an innovation program, understanding how candidates handle failure and what they learn is critical, but this is completely absent.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Extensive use of passive voice and vague descriptions making it difficult to assess actual contributions",
+      "evidence": "\"we started by developing a logical process\" (Application) - who specifically did what? \"we were able to move forward as a team\" (Application) - what was candidate's specific role? \"Application of the logical framework helped to bring all of those stakeholders to a common understanding\" (Application) - passive voice obscures agency. Throughout the application, it's unclear what Phillips personally contributed vs. what the team did.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Stated competencies without demonstration or evidence",
+      "evidence": "\"Data Analysis, Standardized Outcome Measure Assessments, developing and implementing assessments of technology. Amputation care, clinical outcomes, Biomedical Engineering, needs assessments, leading change, leading team, developing and testing research protocols, Logistical Implementation and management. Problem solving\" (Application) - this is a list of claimed skills with zero examples or evidence. Classic application fluff.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear innovation trajectory - incremental improvements vs. transformative innovation",
+      "evidence": "Most described work involves incremental improvements to existing prosthetic devices or assessment protocols. No evidence of breakthrough innovations, paradigm shifts, or transformative approaches. The 40+ publications are described as spanning \"a wide variety of technical and clinical domains\" but no highly-cited or breakthrough work is highlighted.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Bridge playing hobby takes up valuable application space without connecting to professional capabilities",
+      "evidence": "\"I am a nationally competitive player of the card game bridge. In the last two nationals, I finished 16th, and 7th respectively. I enjoy the game so much because of the intellectual challenge of the game. Because it is a partnership based card it requires both tremendous communication as well as analytical skill. I am currently a gold life master, working towards grand life master\" (Application). While interesting, this consumes 25% of the \"What else should we know\" section without demonstrating relevance to innovation or program goals.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Self-focused motivation statement emphasizing personal benefit rather than impact or contribution to field",
+      "Poor application quality with grammatical errors and vague descriptions undermining communication skills",
+      "Generic recommendation letters lacking specific examples of qualities program values (innovation, collaboration, communication)",
+      "Unclear evidence of interdisciplinary collaboration beyond stated competencies",
+      "Failed startup (Fourier Designs) with no explanation of lessons learned or why it closed",
+      "Passive voice and vague descriptions throughout application make it difficult to assess actual contributions vs. team efforts"
+    ],
+    "evidence": [
+      {
+        "quote": "As a biomedical engineer, clinician, and researcher in a hospital setting I often serve as a bridge between understanding technology and clinical application",
+        "source": "Application",
+        "context": "Demonstrates positioning for translational work, though this is a stated role rather than demonstrated through specific examples of successful translation"
+      },
+      {
+        "quote": "I feel I could personally benefit from improving my skills in taking a project from scientifically sound, to persuasive for implementation",
+        "source": "Application",
+        "context": "RED FLAG: Motivation focused on personal development rather than contribution or impact. Does not align with program seeking candidates who will drive innovation forward"
+      },
+      {
+        "quote": "Dr. Phillips has a keen ability to share his engineering knowledge of prosthetic componentry and advanced technology at a level for his colleagues to understand, as well as his ability to share information and education that our Veterans can understand as users of these technologies",
+        "source": "Recommendation Letter - Dr. Heckman",
+        "context": "Generic praise of communication ability without specific examples. This is the strongest communication evidence provided, but it's vague and unsubstantiated"
+      },
+      {
+        "quote": "I am a member of the seating team for the National Adaptive sports clinics. This team supports the disabled veterans through these clinics. Often, the needs are unknown or poorly understood prior to arrival, so solutions are demanded very quickly to the challenges the veterans run into while participating. I have helped design a custom seat for sailing for veterans with SCI injury, designed modifications for adaptive kayaking equipment and helped the scuba team develop better transfer procedures",
+        "source": "Application",
+        "context": "Shows rapid problem-solving and user-centered design, but lacks detail on collaboration process, outcomes, or whether solutions were implemented long-term"
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Phillips shows partial alignment with program goals but significant gaps in evidence. For translating research to impact, he has some concrete examples: the Brasthesis device moved from concept to patent, and VA SmartHome progressed to Amazon partnership. His role as \"bridge between understanding technology and clinical application\" (Application) positions him well for translation work. His dual credentials (engineer + clinician) and embedded researcher role (\"Dr. Phillips is involved with the Amputation Specialty program as an embedded researcher in our clinical care environment\" - Dr. Heckman letter) suggest he understands both technical and user perspectives. However, the evidence for other program priorities is weak or absent. For interdisciplinary work, he claims \"Data Analysis, Standardized Outcome Measure Assessments, developing and implementing assessments of technology. Amputation care, clinical outcomes, Biomedical Engineering\" (Application) but these are stated competencies without demonstration. The adaptive sports clinic work (\"I have helped design a custom seat for sailing for veterans with SCI injury, designed modifications for adaptive kayaking equipment\" - Application) shows rapid problem-solving but lacks depth on collaboration or outcomes. For communication skills, the application itself is poorly written with grammatical errors (\"demonstrating the clinical that the intervention\") and the recommendation letters provide no evidence of communication ability. Dr. Scott's letter is particularly weak: \"He has published and conducted numerous research and innovation studies and projects\" with zero specifics. For sustained commitment, his 14+ years at VA (2009-present) shows longevity, but the closed startup and lack of detail on why Fourier Designs ended raises questions about persistence through challenges. Most concerning is his stated motivation: \"I feel I could personally benefit from improving my skills\" focuses on what he'll gain rather than what he'll contribute. This is a red flag for a competitive fellowship.",
+    "strengths_for_program": [
+      "Dual technical-clinical expertise with concrete patent development (Brasthesis) showing ability to identify clinical needs and create technical solutions",
+      "Embedded researcher role bridging research and clinical practice, with 14+ years VA experience in amputation care",
+      "Demonstrated progression of projects from concept to partnership (VA SmartHome to Amazon collaboration)",
+      "Experience managing complex stakeholder environments (VA employees, contractors, funding agencies)"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Technical-Clinical Integration",
+      "evidence": [
+        {
+          "quote": "ABC Certified Prosthetist March 2002, BOC Certified Orthotist November 2015",
+          "source": "CV",
+          "context": "Holds both clinical certifications in addition to PhD in Biomedical Engineering, demonstrating commitment to understanding both technical and clinical perspectives"
+        },
+        {
+          "quote": "Dr. Phillips is a uniquely talented individual with skills and abilities in creating artificial limbs and directly interacting with Veterans as a prosthetist, as well as skills and abilities in innovation, science and technology of orthotics and prosthetics as an engineer",
+          "source": "Recommendation Letter - Dr. Heckman",
+          "context": "Confirms dual capability in clinical practice and research/innovation, though stated rather than demonstrated with specific examples"
+        },
+        {
+          "quote": "Consult with Amputee Clinic for challenging prosthetic cases, Specialized Clinical Upper Extremity Fitting experience",
+          "source": "CV",
+          "context": "Maintains active clinical practice alongside research role, keeping him connected to real-world user needs"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This dual expertise is valuable for translational innovation - he can identify clinical needs from direct practice and has technical skills to develop solutions. However, the program should probe whether he can move beyond incremental clinical improvements to transformative innovation."
+    },
+    {
+      "quality": "Research Funding Success",
+      "evidence": [
+        {
+          "quote": "Total Funding: as of June 2023 As PI: $2,151,340 Site PI: $7,363,661 As Co-I: $1,337,490 Total: $10,852,491",
+          "source": "CV",
+          "context": "Substantial funding secured, though majority as Site PI rather than originating PI"
+        },
+        {
+          "quote": "DOD OP W81XWH-17-1-0568, Role: Site PI FTE: 12.5% 10/1/2020-9/30/2024",
+          "source": "CV",
+          "context": "Multiple active DOD and VA grants showing sustained funding success"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates ability to secure resources and execute research programs. However, the Site PI role on largest grants suggests he may be better at executing others' visions than originating transformative research questions. Program should assess whether he can generate and lead novel initiatives."
+    },
+    {
+      "quality": "Rapid Problem-Solving in Constrained Environments",
+      "evidence": [
+        {
+          "quote": "I am a member of the seating team for the National Adaptive sports clinics. This team supports the disabled veterans through these clinics. Often, the needs are unknown or poorly understood prior to arrival, so solutions are demanded very quickly to the challenges the veterans run into while participating. I have helped design a custom seat for sailing for veterans with SCI injury, designed modifications for adaptive kayaking equipment and helped the scuba team develop better transfer procedures",
+          "source": "Application",
+          "context": "Shows ability to rapidly assess needs and create solutions under time pressure with limited information"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Valuable for innovation contexts requiring quick iteration and user-centered design. However, lacks evidence of whether these rapid solutions led to lasting impact or were one-off fixes. Program should probe depth of problem-solving approach."
+    },
+    {
+      "quality": "Longevity and Institutional Knowledge",
+      "evidence": [
+        {
+          "quote": "Veterans Administration, Health Scientist July 2015 - Present, January 2014 - July 2015, July 2009 - Present",
+          "source": "CV",
+          "context": "14+ years at VA in various research and clinical roles"
+        },
+        {
+          "quote": "Member of the National VA Field Advisory Group – 11/2012 -Present",
+          "source": "CV",
+          "context": "Long-term involvement in national VA initiatives"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Deep institutional knowledge could help navigate VA systems for implementation. However, long tenure in one organization may also indicate limited exposure to diverse innovation environments or resistance to change. Program should assess adaptability."
+    },
+    {
+      "quality": "Patent Development and IP Protection",
+      "evidence": [
+        {
+          "quote": "US9848822B1 Wernke, Matthew, Lura, Derek, Dubey, Rajiv, Phillips, Samuel, Carey, Stephanie Prosthesis Slip Detection Sensor",
+          "source": "CV",
+          "context": "Granted patent showing ability to move innovation through IP protection process"
+        },
+        {
+          "quote": "Patent Pending, Winkler, Sandra, Phillips, Samuel, Heckman, Jeffery, Brasthesis: A Novel Prosthetic Harness",
+          "source": "CV",
+          "context": "Second patent pending, indicating ongoing innovation activity"
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates understanding of IP protection and commercialization pathway. However, no evidence provided on whether these patents led to actual products or impact. Program should probe commercialization outcomes."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Samuel Phillips presents as a biomedical engineer with dual clinical credentials (ABC Certified Prosthetist, BOC Certified Orthotist) and substantial VA research experience. His profile shows concrete technical accomplishments in prosthetics/orthotics research and clinical practice. The application reveals specific achievements: he has secured over $10.8M in research funding (\"Total Funding: as of June 2023 As PI: $2,151,340 Site PI: $7,363,661 As Co-I: $1,337,490\" - CV), holds a patent (\"US9848822B1 Prosthesis Slip Detection Sensor\" - CV), and co-founded a startup (\"Fourier Designs, Co-Founder March 2006 - December 2013\" - CV). His VA SmartHome project demonstrates practical problem-solving: \"As team leader on a project called VA SmartHome, we started by developing a logical process to assess interventions, from demonstrating the clinical that the intervention to establishing how effectiveness of the intervention would be measured\" (Application). However, the application suffers from significant weaknesses in articulation and evidence quality. The writing contains grammatical errors and vague statements that undermine credibility. His stated motivation is weak: \"I feel I could personally benefit from improving my skills in taking a project from scientifically sound, to persuasive for implementation\" (Application) - this is about personal benefit, not impact. The recommendation letters are disappointingly generic, with Dr. Heckman offering only \"Dr. Phillips has a keen ability to share his engineering knowledge\" without specific examples, and Dr. Scott providing an even weaker endorsement with no concrete incidents. The bridge playing hobby, while interesting, consumes valuable application space without connecting to professional capabilities. Overall, this is a candidate with real technical achievements but poor self-presentation and unclear innovation trajectory.",
+  "score_justification": "Samuel Phillips receives a 5.5 (moderate/borderline) based on weighing concrete technical achievements against significant presentation and evidence gaps. On the positive side: he has secured $10.8M in research funding (though mostly as Site PI rather than originating PI), holds a granted patent and has another pending (demonstrating IP development capability), maintains dual clinical-technical credentials showing commitment to understanding both perspectives, and has 14+ years of sustained VA engagement. The Brasthesis patent for female-specific prosthetic suspension shows he can identify unmet needs and develop solutions. The VA SmartHome progression to Amazon partnership demonstrates some ability to advance projects toward implementation. However, these strengths are significantly undermined by critical weaknesses: (1) Self-focused motivation statement emphasizing personal benefit rather than contribution - a major red flag for a competitive fellowship; (2) Poor application quality with grammatical errors and vague descriptions that contradict claimed communication skills; (3) Exceptionally weak recommendation letters that provide generic praise without a single specific example of innovation, collaboration, or impact; (4) Extensive use of passive voice and stated competencies without demonstration (e.g., 'Problem solving' listed but not shown); (5) Failed startup with zero explanation of lessons learned; (6) Unclear whether his work represents incremental improvements vs. transformative innovation. The evidence suggests a competent researcher and clinician who can execute projects and secure funding, but unclear if he can generate and lead transformative innovations. The poor self-presentation raises questions about whether communication and persuasion skills are adequate for a program focused on translating research to impact. Score of 5.5 reflects real technical capability but significant concerns about fit, motivation, and ability to articulate and drive innovation forward.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "One of these solutions is an innovative solution to improve suspension for female upper extremity prosthesis users, called Brasthesis®",
+        "source": "Recommendation Letter - Dr. Heckman",
+        "context": "Demonstrates identification of specific unmet need (gender-specific prosthetic design) and development of patented solution. This is concrete innovation with IP protection."
+      },
+      {
+        "quote": "As team leader on a project called VA SmartHome, we started by developing a logical process to assess interventions, from demonstrating the clinical that the intervention to establishing how effectiveness of the intervention would be measured. After putting process in place, we were able to move forward as a team, and the framework allowed for a productive discussion around ideas for development. This project included managing needs of VA employees, contractors, stakeholders, and the funding agency. Application of the logical framework helped to bring all of those stakeholders to a common understanding. We are now collaborating with Amazon services to bring this project forward.",
+        "source": "Application",
+        "context": "Shows systematic approach to innovation (creating assessment framework) and ability to advance project to commercial partnership. However, lacks specifics about what the actual innovation is or its impact."
+      },
+      {
+        "quote": "Co-founder of Start-up Company to meet the needs of underserved populations by bringing innovative ideas through product development in the field of rehabilitation engineering",
+        "source": "CV",
+        "context": "Demonstrates entrepreneurial action and willingness to commercialize ideas. However, company closed in 2013 with no outcomes described, raising questions about success."
+      },
+      {
+        "quote": "Total Funding: as of June 2023 As PI: $2,151,340 Site PI: $7,363,661 As Co-I: $1,337,490 Total: $10,852,491",
+        "source": "CV",
+        "context": "Substantial research funding secured, but majority is as Site PI (executing others' research) rather than originating PI. Suggests strong execution but unclear if he generates novel research questions."
+      }
+    ],
+    "reasoning": "Phillips demonstrates some concrete innovation outputs but the evidence is mixed in quality and clarity. The strongest innovation indicator is the Brasthesis patent: Dr. Heckman mentions \"One of these solutions is an innovative solution to improve suspension for female upper extremity prosthesis users, called Brasthesis®\" (Recommendation Letter). The CV lists \"Patent Pending, Winkler, Sandra, Phillips, Samuel, Heckman, Jeffery, Brasthesis: A Novel Prosthetic Harness\" showing he identified a specific unmet need (female-specific prosthetic suspension) and developed a solution. His co-founding of Fourier Designs (\"Co-founder of Start-up Company to meet the needs of underserved populations by bringing innovative ideas through product development in the field of rehabilitation engineering\" - CV) suggests entrepreneurial capability, though the company closed in 2013 with no details on outcomes or impact. The VA SmartHome project shows systematic problem-solving: \"we started by developing a logical process to assess interventions\" and \"we are now collaborating with Amazon services to bring this project forward\" (Application), indicating progression from concept to partnership. However, the innovation evidence is weakened by vague descriptions. The SmartHome description lacks specifics about what the innovation actually is or what problem it solves. The application states he has \"Problem solving\" as a core competency but this is a stated quality without demonstration. His research funding is substantial ($10.8M total) but he's primarily Site PI rather than originating PI on the largest grants, suggesting he executes others' ideas more than generates his own. The 40+ publications span \"a wide variety of technical and clinical domains\" but no breakthrough or highly-cited work is highlighted. His innovation appears incremental and applied rather than transformative.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "The application focuses on personal benefit rather than contribution. This question probes whether candidate has concrete examples of translational success and whether they can articulate impact-focused goals rather than self-focused ones.",
+      "category": "Probe motivation and contribution mindset",
+      "question": "You mentioned wanting to improve your skills in taking projects from scientifically sound to persuasive for implementation. Can you describe a specific project where you successfully did this, and what impact it had on veterans or the field? What would success look like for you in this fellowship?"
+    },
+    {
+      "purpose": "The patent is mentioned but with minimal detail. This probes the candidate's actual contribution (vs. team effort), problem-solving approach, and ability to move innovations toward impact. Also assesses whether this is incremental improvement or transformative innovation.",
+      "category": "Verify innovation capability and assess depth",
+      "question": "Walk me through the development of Brasthesis from initial problem identification to patent filing. What was your specific role? What obstacles did you encounter and how did you overcome them? What's the current status and path to implementation?"
+    },
+    {
+      "purpose": "The failed startup is mentioned but not explained. Understanding how candidates process failure and extract lessons is critical for innovation work. This also assesses self-awareness and growth mindset.",
+      "category": "Explore failure and learning",
+      "question": "You co-founded Fourier Designs which operated from 2006-2013. What led to the company closing? What did you learn from that experience, and how has it shaped your approach to innovation and commercialization since then?"
+    },
+    {
+      "purpose": "The application mentions stakeholder management but uses passive voice and lacks specifics. This probes actual collaboration skills, conflict resolution ability, and whether candidate can move beyond stating 'we worked together' to demonstrating how.",
+      "category": "Assess interdisciplinary collaboration depth",
+      "question": "The VA SmartHome project involved VA employees, contractors, stakeholders, and funding agencies. Describe a specific conflict or disagreement among these groups. What was your role in resolving it? What framework or approach did you use, and what was the outcome?"
+    },
+    {
+      "purpose": "The application has grammatical errors and vague writing, raising concerns about communication. This tests ability to identify high-impact work, understand implementation barriers, and communicate persuasively - all critical for the program.",
+      "category": "Test communication and persuasion skills",
+      "question": "You've published 40+ papers and given national presentations. Pick your most important research finding that hasn't been implemented in practice. Why hasn't it been adopted? If you had 5 minutes with a VA decision-maker who could fund implementation, what would you say to persuade them?"
+    },
+    {
+      "purpose": "The evidence suggests incremental rather than transformative innovation. This probes whether candidate can think beyond optimization to paradigm shifts, and whether they have appetite for high-risk, high-reward innovation that the program likely values.",
+      "category": "Probe innovation approach and assess transformative potential",
+      "question": "Looking at your body of work, most appears to be incremental improvements to existing prosthetic devices and protocols. Describe a time when you challenged fundamental assumptions in your field or proposed a radically different approach. What happened?"
+    },
+    {
+      "purpose": "Long tenure in one organization may indicate deep expertise or limited adaptability. This assesses growth mindset, ability to pivot based on evidence, and whether candidate can thrive in the dynamic, feedback-rich environment the program likely provides.",
+      "category": "Assess adaptability and learning orientation",
+      "question": "You've been at the Tampa VA for 14+ years. What's an example of a time when you had to completely change your approach or abandon a project you were invested in based on new evidence or feedback? How did you handle that?"
+    },
+    {
+      "purpose": "These are stated competencies without evidence. This forces candidate to provide specific examples and reveals whether they can articulate concrete leadership actions vs. generic statements. Also assesses self-awareness about leadership challenges.",
+      "category": "Verify claimed leadership and assess specificity",
+      "question": "Your CV lists 'leading change' and 'leading team' as core competencies. Describe the most challenging team you've led - who was on it, what made it challenging, what specific actions did you take as leader, and what was the outcome?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES, but with significant reservations requiring careful probing. The candidate has concrete technical achievements (patents, funding, dual credentials) that warrant further exploration, but the poor application quality and weak supporting materials create substantial uncertainty about actual capabilities vs. stated ones. An interview is necessary to: (1) Assess whether the self-focused motivation statement reflects poor writing or genuine misalignment with program values; (2) Probe depth of innovation capability - is he capable of transformative innovation or primarily incremental improvement?; (3) Evaluate communication and persuasion skills directly, since the written application raises serious concerns; (4) Understand the failed startup and what was learned; (5) Verify actual contributions vs. team efforts given extensive passive voice; (6) Assess whether 14 years in one organization indicates deep expertise or limited adaptability. The interview should be structured to get past vague statements and force specific examples. If candidate cannot provide concrete evidence of innovation leadership, clear communication, and impact-focused motivation in the interview, he should not advance. The score of 5.5 is borderline - interview performance will determine whether he moves up to 7+ (strong candidate with poor self-presentation) or down to 4 or below (competent executor but not innovation leader). Key interview focus: distinguish between what he can do vs. what his team did, and assess transformative vs. incremental innovation orientation."
+}

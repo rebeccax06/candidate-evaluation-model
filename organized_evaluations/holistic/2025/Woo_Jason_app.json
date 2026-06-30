@@ -1,0 +1,213 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T23:02:26.725685",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 140.87871766090393,
+    "materials_character_count": 51554
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpjfbhkbqx.pdf"
+    ],
+    "candidate_id": "_Woo_Jason_app",
+    "evaluation_date": "2026-03-16 23:02:26.725554"
+  },
+  "red_flags": [
+    {
+      "flag": "Application dominated by generic claims and stated qualities without specific supporting evidence",
+      "evidence": "Throughout application: 'I am a...Data Scientist' (no examples of data science work), 'Leadership - 30+ years leading teams' (no specific outcomes), 'passion and commitment' (reference letter), 'relentless pursuit of innovative ways' (reference letter with zero specific examples). The entire application violates the principle of demonstrating rather than stating qualities.",
+      "severity": "high"
+    },
+    {
+      "flag": "Reference letter from 4-year business partner contains zero specific examples",
+      "evidence": "Eric Jacobs' letter states: 'I have been consistently amazed by his passion and commitment,' 'His relentless pursuit of innovative ways,' 'truly impressive,' 'nothing short of remarkable,' 'refuses to see obstacles as barriers' but never provides a single concrete example of what Dr. Woo created, designed, or achieved. This is extremely concerning—even his closest collaborator cannot or will not cite specific accomplishments.",
+      "severity": "high"
+    },
+    {
+      "flag": "No concrete evidence of innovation outcomes in 4-year business venture",
+      "evidence": "Application mentions 'habit development program' and 'gamified approach' but provides no information about: what problem it solves, what makes it innovative, user adoption rates, validated outcomes, or measurable impact. The only 'evidence' of success is 'That we are a full 4 years into this I think is a testament to my success'—circular reasoning that confuses longevity with impact.",
+      "severity": "high"
+    },
+    {
+      "flag": "Extensive use of passive voice obscuring personal contributions",
+      "evidence": "FDA experience described as: 'my role was crucial for developing' (passive), 'required learning across' (passive), 'it was very formative for me to become much better aware' (describes learning, not doing). This pattern makes it impossible to assess what he personally created or achieved versus what he observed or participated in.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Stated knowledge gaps in core innovation areas",
+      "evidence": "'what do I not know about product development and innovation implementation that would help us' (page 1). After 4 years running an innovation-focused business, expressing fundamental uncertainty about product development and innovation implementation suggests either lack of foundation or lack of self-awareness about skill level.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of translating research into measurable practical impact",
+      "evidence": "Despite claims of being a 'Data Scientist' and extensive research background, there's no evidence of taking research findings and creating validated, scaled solutions with documented outcomes. His NIH role (2010-2013) involved 'clinical trials' oversight but no evidence of translating findings into implemented innovations.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Generic speaking topics without evidence of impact",
+      "evidence": "Speaking engagements listed with titles like 'See the Problem You Don't See: The Art of Helping People Change' and 'Leading a Culture of Safety: A Blueprint for Success' but no evidence of audience size, reception, or resulting changes. These could be well-attended impactful talks or poorly-received generic presentations—impossible to assess.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "weak",
+    "concerns": [
+      "Application relies heavily on stated qualities and generic claims rather than specific, measurable achievements",
+      "No concrete evidence of innovation outcomes in current business venture despite 4 years of operation",
+      "Lack of specificity about what makes his product innovative or what validated impact it has achieved",
+      "Reference letter from business partner contains zero specific examples despite 4-year working relationship",
+      "Unclear whether he's seeking to learn innovation basics or build on existing innovation expertise",
+      "No evidence of translating research into measurable practical impact in current role"
+    ],
+    "evidence": [
+      {
+        "quote": "I am intrigued by the interview process alone! More importantly, what do I not know about product development and innovation implementation that would help us and the VHA to improve our work and theirs as well!",
+        "source": "tmpjfbhkbqx.pdf, page 1",
+        "context": "This suggests he recognizes significant knowledge gaps in product development and innovation implementation—areas that should be foundational for someone 4 years into running an innovation-focused business. This raises questions about program fit if he's still learning basics."
+      },
+      {
+        "quote": "Leadership - 30+ years leading teams, divisions, programs, and teaching change management, individual and organizational leadership frameworks and practices. Data Scientist - 14+ years at FDA and 30+yrs as clinician reviewing and developing data, evaluating integrity, relevance, scientific and economic impact.",
+        "source": "tmpjfbhkbqx.pdf, page 1",
+        "context": "These are self-proclaimed labels without any supporting evidence. What teams did he lead to what outcomes? What data science methodologies did he develop or apply? What frameworks did he create? This is pure fluff—could be written by anyone."
+      },
+      {
+        "quote": "His relentless pursuit of innovative ways to support the VHA with his clinical and scientific expertise while intertwining the powerful human element is truly impressive. Dr. Woo's ability to adapt, design, and learn new skills to advance our leading-edge product has been nothing short of remarkable.",
+        "source": "tmpjfbhkbqx.pdf, page 21 (reference letter)",
+        "context": "This is entirely generic praise that could apply to anyone. 'Relentless pursuit,' 'truly impressive,' 'nothing short of remarkable' are empty superlatives. The letter never describes what 'innovative ways' he pursued, what he 'designed,' or what makes the product 'leading-edge.' This violates the principle of evidence-based evaluation."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "The program seeks candidates who can 'drive innovation and creative problem-solving,' 'translate research into practical impact,' and 'demonstrate sustained commitment to challenging problems.' Dr. Woo's materials show limited alignment with these goals. His application is dominated by stated qualities rather than demonstrated achievements. He claims to have 'core competencies' in 'Leadership - 30+ years leading teams' and 'Data Scientist - 14+ years at FDA and 30+yrs as clinician' (page 1), but these are self-proclaimed labels without supporting evidence of what he led, what data science work he performed, or what outcomes resulted.\n\nThe program values 'genuine evidence of these qualities through their actions and achievements, not just stated intentions.' Dr. Woo's application violates this principle repeatedly. His reference letter from Eric Jacobs contains zero specific examples despite Jacobs' impressive credentials. The letter states Woo has 'passion and commitment to continuously developing and improving our product' and 'relentless pursuit of innovative ways' but never describes what the product actually does, what improvements were made, or what innovative approaches were taken. This is a major red flag—even his business partner cannot or will not provide concrete examples.\n\nRegarding 'work effectively across disciplines,' there is some evidence from his FDA role bridging clinical and legal perspectives, but again, this is described in vague terms. The program seeks candidates who can 'communicate complex ideas effectively to varied audiences'—his CV shows numerous speaking engagements, but the topics listed are generic ('Leading a Culture of Safety,' 'See the Problem You Don't See') without evidence of impact or audience reception. His publications list shows he contributed chapters to medical textbooks and some regulatory papers, but there's no evidence of communicating innovation concepts or translating complex research for diverse stakeholders.",
+    "strengths_for_program": [
+      "Extensive federal healthcare experience spanning clinical practice, regulatory affairs, and public health",
+      "Current engagement with VHA system as contractor and through Catalyst Fellows network",
+      "Cross-sector experience bridging clinical medicine, federal regulation, and entrepreneurship"
+    ]
+  },
+  "overall_score": 3.5,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "Extensive federal healthcare regulatory experience",
+      "evidence": [
+        {
+          "quote": "Supervisory Medical Officer, Associate Director for Medical and Scientific Affairs, Office of Compliance, Center for Drug Evaluation and Research, U.S. Food and Drug Administration, 9/06 – 7/10",
+          "source": "tmpjfbhkbqx.pdf, CV page 4",
+          "context": "Held senior position at FDA during critical period of drug safety and globalization issues"
+        },
+        {
+          "quote": "Directed the Office's strategic problem solving activities to select projects for intervention and evaluated the effectiveness of such interventions in reducing the public health risks associated with drug products marketed in violation of the Food, Drug and Cosmetic Act",
+          "source": "tmpjfbhkbqx.pdf, CV page 4",
+          "context": "Demonstrates experience with regulatory compliance and risk assessment, though specific outcomes are not provided"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This background could be valuable for understanding regulatory barriers to innovation in healthcare, though the materials don't show how he's applying this experience to drive innovation currently."
+    },
+    {
+      "quality": "Veteran status and personal connection to VHA system",
+      "evidence": [
+        {
+          "quote": "Veteran - 100% disabled veteran who receives all my care from the VHA",
+          "source": "tmpjfbhkbqx.pdf, page 1",
+          "context": "Direct personal experience as VHA patient provides insider perspective on system challenges"
+        },
+        {
+          "quote": "I am a retired veteran physician who contracts with the VA and have a new habit development program we are partnering with the VHA",
+          "source": "tmpjfbhkbqx.pdf, page 1",
+          "context": "Triple perspective as veteran, physician, and contractor could provide unique insights"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This lived experience could inform user-centered innovation, though there's no evidence in the materials of how he's leveraged this perspective to create validated solutions."
+    },
+    {
+      "quality": "Persistence in entrepreneurial venture",
+      "evidence": [
+        {
+          "quote": "That we are a full 4 years into this I think is a testament to my success. The key contribution has been in navigating and finding a unique way forward. We invested our own time and resources into this project",
+          "source": "tmpjfbhkbqx.pdf, page 2",
+          "context": "Shows commitment to self-funded venture over 4-year period, though success metrics are not provided"
+        },
+        {
+          "quote": "Recipient of Five Prime Contracting Awards from VHA and NOAA (2021-2024)",
+          "source": "tmpjfbhkbqx.pdf, CV page 3",
+          "context": "Suggests some success in federal contracting, though scope and value are unknown"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Persistence is valuable, but without evidence of validated outcomes or measurable impact, it's unclear whether this represents productive iteration or continued pursuit of an unvalidated concept."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Dr. Jason Woo presents as a retired veteran physician with extensive federal service experience who has transitioned into entrepreneurship, founding Mindset4Results to develop habit change programs for healthcare organizations. His application reveals a career spanning 30+ years in clinical medicine, regulatory affairs at FDA, and public health leadership in USPHS. However, the materials are heavily weighted toward stated qualities rather than demonstrated innovation outcomes. His CV shows impressive breadth—from clinical practice to FDA regulatory roles to NIH contraceptive research—but the application itself relies extensively on generic claims about leadership and data science without concrete examples of innovative problem-solving or measurable impact in his current venture.\n\nThe strongest evidence of relevant experience comes from his FDA tenure (2006-2010) where he held the role of \"Assoc. Dir for Clinical in CDER/FDA's Office of Compliance\" and was described as \"the only physician on the 'legal' side\" whose \"role was crucial for developing the integration of FDA/CDER's integration of legal with clinical and research impacts\" (application, page 1). This suggests cross-disciplinary work during a period of industry change. However, the description uses passive voice and lacks specific outcomes—what exactly did he develop? What were the measurable results? The application states he helped \"develop CDER's approach to handling major drug recalls, international inspection challenges\" but provides no specifics about his personal contributions, methodologies, or outcomes.\n\nHis current business venture, Mindset4Results, is described in vague terms. He mentions \"building a product\" and \"navigating the federal contracting and partnering frameworks\" (page 2), but there are no concrete metrics of success, user adoption rates, validated outcomes, or evidence of actual innovation in the product itself. The claim of being \"a full 4 years into this\" as \"testament to my success\" is circular reasoning—longevity alone doesn't demonstrate impact. The reference letter from Eric Jacobs, his business partner, is entirely generic praise (\"passion and commitment,\" \"relentless pursuit,\" \"refuses to see obstacles\") without a single specific example of what Dr. Woo actually created, designed, or achieved. This is classic application fluff that provides zero evidentiary value.\n\nThe application reveals significant gaps in demonstrating the core competencies the program seeks. There's no evidence of translating research into practical impact with measurable outcomes, no concrete examples of creative problem-solving with documented results, and no demonstration of learning and adapting based on feedback. His stated interest in the program—\"what do I not know about product development and innovation implementation\"—suggests he recognizes gaps in his knowledge, but this also raises questions about whether he has sufficient foundation to benefit from an advanced fellowship program focused on driving innovation rather than learning basics.",
+  "score_justification": "Dr. Woo receives a score of 3.5 out of 10, reflecting significant deficiencies in demonstrated innovation capacity and concerning patterns in his application materials. While he brings extensive federal healthcare experience and veteran perspective, the application is dominated by stated qualities rather than demonstrated achievements—a critical violation of evidence-based evaluation principles. His reference letter from a 4-year business partner contains zero specific examples, which is a major red flag. After 4 years running Mindset4Results, there's no concrete evidence of innovation outcomes, validated impact, or measurable results. His stated interest in learning 'what do I not know about product development and innovation implementation' suggests fundamental knowledge gaps in areas that should be foundational after 4 years of entrepreneurship. The extensive use of passive voice throughout his descriptions makes it impossible to assess his personal contributions versus what he observed. His claimed 'Data Scientist' expertise lacks any supporting evidence of methodological work or technical capability. While his FDA regulatory experience and VHA connections could be valuable, there's no evidence he's successfully translated this background into innovative solutions with demonstrated impact. The application reads as someone still learning innovation basics rather than someone ready to drive innovation at the level this program requires.",
+  "innovation_potential": {
+    "level": "low",
+    "evidence": [
+      {
+        "quote": "I was the second clinician to hold the role of Assoc. Dir for Clinical in CDER/FDA's Office of Compliance. I was the only physician on the 'legal' side and my role was crucial for developing the integration of FDA/CDER's integration of legal with clinical and research impacts.",
+        "source": "tmpjfbhkbqx.pdf, page 1",
+        "context": "This suggests cross-disciplinary work but uses passive voice ('was crucial for developing') without specifying what he personally created or what measurable outcomes resulted. The word 'crucial' is self-assessment without external validation."
+      },
+      {
+        "quote": "Starting my own business! They don't teach this in medical school or in federal service! I was originally hired as a Health consultant when I retired by the Arbinger Institute, but when Covid hit I started my own venture to build on work I thought they were missing with their clients and products.",
+        "source": "tmpjfbhkbqx.pdf, page 2",
+        "context": "This describes starting a business but provides zero evidence of what the innovation is, what gap it fills, or what results it has achieved. The phrase 'work I thought they were missing' is vague and doesn't demonstrate validated need or successful solution."
+      },
+      {
+        "quote": "I have been particularly impressed by Dr. Woo's contributions to learning new programming skills and the engineering and design of our product. His positivity and creativity in addressing programming limitations and adapting to new challenges have been impressive.",
+        "source": "tmpjfbhkbqx.pdf, page 21 (reference letter)",
+        "context": "This is entirely generic praise without a single specific example. 'Learning new programming skills' and 'addressing programming limitations' could mean anything from basic scripting to advanced development—there's no way to assess the actual level or impact. This is classic recommendation letter fluff."
+      }
+    ],
+    "reasoning": "Dr. Woo's materials provide minimal concrete evidence of innovation capacity. While he claims to be developing a \"habit development program\" and \"gamified approach\" through Mindset4Results, there are no specifics about what makes this innovative, what problem it uniquely solves, or what measurable outcomes it has achieved. The application states \"we are partnering with the VHA\" and mentions \"VHA Pathfinder Partnership\" but provides no details about the nature of this partnership, its scope, outcomes, or his specific role in creating value.\n\nThe strongest potential indicator of innovation thinking comes from his FDA experience where he worked on \"globalization of the drug supply\" and \"data integrity of drug development research being moved outside the U.S.\" during 2006-2010. However, even here, the description is entirely passive: \"required learning across international stakeholders\" and \"it was very formative for me to become much better aware\" (page 1). This describes learning, not innovating. There's no evidence he created new frameworks, developed novel solutions, or drove measurable improvements.\n\nHis entrepreneurship experience is described with concerning vagueness. He states: \"Learning how to build a product, as well as navigate the federal contracting and partnering frameworks to create runway and feedback on the product has been a wonderful journey of highs and lows\" (page 2). This reads as someone still learning basics of product development rather than someone who has successfully innovated. The phrase \"we invested our own time and resources\" and \"chosen a path that is unique to our product\" provides no actual information about what makes the approach unique or whether it's working. The claim of \"Five Prime Contracting Awards from VHA and NOAA (2021-2024)\" on his CV suggests some federal contracting success, but without knowing the scope, value, or outcomes of these contracts, this is impossible to evaluate as evidence of innovation.",
+    "confidence": "high",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "To assess whether there's actual innovation with validated outcomes behind the vague descriptions in the application. Looking for evidence of user-centered design, iteration based on feedback, and measurable results.",
+      "category": "Probe claimed innovation",
+      "question": "You mention developing a 'habit development program' and 'gamified approach' through Mindset4Results. Can you walk me through a specific example of how you identified a problem, designed your solution, tested it, and measured its impact? Please include specific metrics."
+    },
+    {
+      "purpose": "To get past passive voice and generic descriptions to understand actual contributions and outcomes. Testing whether he can provide concrete examples when pressed.",
+      "category": "Verify experience and probe passive voice",
+      "question": "Your application describes your FDA role as 'crucial for developing the integration of FDA/CDER's integration of legal with clinical and research impacts.' What specifically did you personally create or implement? What was the measurable outcome of your work?"
+    },
+    {
+      "purpose": "To assess ability to learn from failure and iterate based on evidence—a core program requirement. Also tests whether there's actual user feedback informing development.",
+      "category": "Assess learning and adaptation",
+      "question": "You mentioned 'learning how to build a product' and navigating 'highs and lows' over 4 years. Describe a specific time when user feedback or data showed your initial approach wasn't working. What did you learn, how did you adapt, and what was the result?"
+    },
+    {
+      "purpose": "To verify whether 'Data Scientist' label reflects actual technical capability or is being used loosely to mean 'worked with data.' Looking for evidence of methodological sophistication.",
+      "category": "Probe claimed data science expertise",
+      "question": "You list 'Data Scientist' as a core competency with '14+ years at FDA and 30+yrs as clinician.' Can you describe a specific data science project where you applied statistical methods or machine learning to solve a problem? What tools did you use, what was your methodology, and what insights did you generate?"
+    },
+    {
+      "purpose": "To assess actual cross-disciplinary collaboration skills beyond the stated claim. Looking for evidence of navigating complexity and creating alignment.",
+      "category": "Assess cross-disciplinary work",
+      "question": "The program values working across disciplines. Describe a specific project where you had to bridge two very different fields or stakeholder groups with conflicting priorities. How did you navigate the differences, and what was the outcome?"
+    },
+    {
+      "purpose": "To understand whether 'partnership' means a validated, scaled program or an early-stage pilot. Critical for assessing actual impact and innovation maturity.",
+      "category": "Probe VHA partnership claims",
+      "question": "You mention partnering with VHA through the Pathfinder program. What specifically is the nature of this partnership? What problem are you solving, for whom, at what scale, and what measurable outcomes have you achieved so far?"
+    },
+    {
+      "purpose": "To assess self-awareness and whether he's seeking foundational training versus advanced fellowship. Also tests whether he's done homework on what the program actually offers.",
+      "category": "Test motivation and self-awareness",
+      "question": "You wrote that you want to learn 'what do I not know about product development and innovation implementation.' What specific gaps in your knowledge or skills have you identified, and why do you think this program is the right way to address them?"
+    },
+    {
+      "purpose": "To verify whether these contracts represent significant innovation work or routine consulting. Looking for evidence of measurable impact and innovation outcomes.",
+      "category": "Verify claimed outcomes",
+      "question": "Your CV mentions 'Five Prime Contracting Awards from VHA and NOAA (2021-2024).' Can you describe the scope and outcomes of one of these contracts? What problem were you solving, what did you deliver, and what impact did it have?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview not recommended. The application fails to meet minimum evidence standards for a competitive innovation fellowship. The pervasive reliance on generic claims without specific supporting evidence, combined with a reference letter that provides zero concrete examples despite a 4-year working relationship, raises serious concerns about the candidate's actual innovation capacity. After 4 years running an innovation-focused business, the lack of any measurable outcomes, validated impact, or specific innovation examples is disqualifying. His stated knowledge gaps in 'product development and innovation implementation' suggest he may be seeking foundational training rather than advanced fellowship opportunities. The program seeks candidates who demonstrate innovation through actions and achievements—this candidate demonstrates primarily stated intentions and generic claims. Limited interview slots should be reserved for candidates with clear evidence of innovation outcomes and demonstrated capacity to drive measurable impact. The questions that would need to be asked in an interview are so fundamental (What exactly is your product? What problem does it solve? What are your outcomes?) that they suggest the application materials should have been strengthened before submission rather than using interview time to establish basic qualifications."
+}

@@ -1,0 +1,274 @@
+{
+  "candidate": {
+    "candidate_id": "_Peters_Erica_app",
+    "name": null,
+    "materials": [
+      "_Peters_Erica_app.pdf"
+    ],
+    "evaluation_date": "2026-06-11 22:22:29.401447"
+  },
+  "overall_assessment": "Dr. Erica Peters presents a technically accomplished profile with a PhD in Biomedical Engineering from Duke University, postdoctoral training in nanomedicine at UNC Chapel Hill, and subsequent transition to regulatory consulting. Her academic record demonstrates strong technical execution: she \"constructed a clinically translatable, tissue engineered model of 3D-microvasculature using biofunctionalized poly(ethylene glycol) hydrogels\" (app.pdf) and \"developed injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues\" (app.pdf). These are concrete technical achievements with 17 peer-reviewed publications, 10 as first or co-first author, and a patent listing. However, the application reveals a critical pattern: the candidate's trajectory shows movement AWAY from building and iteration toward regulatory consulting, raising fundamental questions about Catalyst fit.\n\nThe most concerning aspect is the absence of evidence showing user-centered problem discovery or iteration based on stakeholder feedback. While Peters describes technical accomplishments, the materials contain almost no evidence of identifying healthcare needs through direct observation, user interviews, or clinical collaboration during the problem definition phase. Her postdoctoral work on atherosclerosis nanomedicine appears technology-first: she \"extended the lab's technology of self-assembled peptide amphiphiles\" (app.pdf) rather than starting from an observed clinical need. The application states she wants to \"develop cutting-edge healthcare technologies\" (app.pdf) - this is technology-push language, not needs-driven thinking. Her supervisor Truskey notes she \"gained expertise in endothelial progenitor cell isolation and characterization as well as biomaterial synthesis\" (Truskey letter) but provides no evidence of clinical collaboration or user validation during her PhD work.\n\nPeters' recent career shift to regulatory consulting (4 years at three different companies) further distances her from the hands-on building and iteration central to Catalyst. Her current role involves \"transforming complex datasets into actionable insights\" and \"analyzing PK/PD data from clinical trials\" (app.pdf) - analytical work on existing products, not creating new solutions. The Bryn Pharma work she highlights involved \"bioequivalence biostatistics on PK/PD data from nine, type 1 clinical trials\" (app.pdf) - data analysis, not building or testing prototypes. While she claims this demonstrates working \"outside of [her] area of expertise,\" it actually shows movement toward desk-based analysis rather than maker activities. Her stated motivation for Catalyst - to experience \"immersive, team-based projects that I would not otherwise be able to experience\" and overcome \"separate divisions for handling product development, regulatory strategy, and marketing\" (app.pdf) - suggests she lacks recent hands-on product development experience and may be seeking Catalyst to fill this gap rather than bringing demonstrated capability.\n\nThe application contains substantial fluff that must be discounted. Peters claims \"genuine motivation for socially impactful work\" and \"unwavering work ethic\" (generic supervisor praise without specifics), states she has \"core competencies\" and \"expertise\" (stated qualities, not demonstrated through specific problem-solving), and her interest statement is filled with buzzwords like \"paradigm-shifting therapeutics\" and \"maximize creativity and product potential\" (app.pdf). These are empty claims. The strongest evidence of actual building comes from her PhD work, but even there, the focus appears to be on technical execution of a predetermined research plan rather than iterative problem-solving with clinical stakeholders. Her publications list shows she can execute research and write papers, but publications are not evidence of user-centered iteration or willingness to pivot based on stakeholder feedback.",
+  "innovation_potential": {
+    "level": "medium",
+    "confidence": "medium",
+    "reasoning": "Peters demonstrates technical capability to execute complex research projects, evidenced by her development of \"injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues in the diseased microenvironment\" (app.pdf). This shows she can work with sophisticated materials and biological systems. Her postdoctoral work involved \"screening PA formulations utilizing a novel in vitro model to identify candidates that promoted cholesterol efflux from macrophages while causing minimal cytotoxicity\" (app.pdf), indicating systematic experimental design and optimization. The outcome - \"a PA nanofiber that could target plaque within an atherosclerotic mouse model and activate macrophage metabolism of cholesterol with reduced liver toxicity compared to treatment with delivery of LXR alone\" (app.pdf) - demonstrates she achieved measurable improvements over existing approaches.\n\nHowever, the innovation appears to be incremental technical optimization within an established research paradigm rather than transformative problem reframing. She \"extended the lab's technology\" (app.pdf) - building on existing work, not creating fundamentally new approaches. The Bryn Pharma example shows analytical problem-solving: she \"recommended the PK/PD data be presented using the geometric means rather than the arithmetic mean to avoid skewing the data from outlier responses\" (app.pdf). This is clever statistical thinking that helped \"assuage [FDA] concerns with variability\" (app.pdf), but it's optimization of data presentation, not innovation in the therapeutic approach itself. There's no evidence of her questioning whether the nasal spray was the right solution to the anaphylaxis problem, exploring alternative delivery mechanisms, or iterating based on patient feedback. The materials lack examples of her identifying novel problems, challenging assumptions, or pivoting when initial approaches failed. Her 17 publications suggest productivity, but publication count alone doesn't demonstrate innovative thinking - it may indicate incremental research within established frameworks.",
+    "key_evidence": [],
+    "evidence": [
+      {
+        "quote": "I developed injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues in the diseased microenvironment",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Demonstrates technical sophistication in creating stimuli-responsive drug delivery systems, showing capability with complex materials and biological targeting"
+      },
+      {
+        "quote": "The outcome of this research was a PA nanofiber that could target plaque within an atherosclerotic mouse model and activate macrophage metabolism of cholesterol with reduced liver toxicity compared to treatment with delivery of LXR alone",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Shows measurable improvement over existing approach (reduced toxicity), indicating ability to optimize and achieve better outcomes than baseline"
+      },
+      {
+        "quote": "My main contribution was recommending the PK/PD data be presented using the geometric means rather than the arithmetic mean to avoid skewing the data from outlier responses. The data was presented to the FDA at the type C pre-NDA meeting this past April, and helped to assuage their concerns with variability",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Demonstrates analytical problem-solving and understanding of statistical methods to address regulatory concerns, but this is optimization rather than fundamental innovation"
+      },
+      {
+        "quote": "I extended the lab's technology of self-assembled peptide amphiphiles (PA) nanofibers by incorporating protease-degradable peptide linkages",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Shows incremental innovation - building on existing technology rather than creating fundamentally new approaches, suggesting technology-push rather than needs-driven innovation"
+      }
+    ]
+  },
+  "program_fit": {
+    "level": "weak",
+    "confidence": "high",
+    "detailed_analysis": "Peters' fit with Catalyst is fundamentally misaligned in several critical dimensions. First, her career trajectory moves AWAY from the hands-on building and iteration that Catalyst requires. She has spent the past 4 years in regulatory consulting roles focused on data analysis and document preparation, not prototype development or user testing. Her current work involves \"transforming complex datasets into actionable insights\" and \"analyzing PK/PD data from clinical trials\" (app.pdf) - desk-based analytical work on products others have built. She explicitly states Catalyst would help her \"experience\" team-based product development projects she \"would not otherwise be able to experience\" (app.pdf), suggesting she lacks this experience currently. This is backwards - Catalyst seeks candidates who bring demonstrated building capability, not those hoping to acquire it.\n\nSecond, the materials provide no evidence of needs-driven problem discovery. Her research appears technology-first: she \"extended the lab's technology\" (app.pdf) of peptide amphiphiles rather than starting from observed clinical problems. There's no mention of shadowing clinicians, interviewing patients, observing atherosclerosis treatment workflows, or identifying unmet needs through direct stakeholder engagement. Her motivation statement focuses on \"developing cutting-edge healthcare technologies\" and \"paradigm-shifting therapeutics\" (app.pdf) - technology-push language that prioritizes innovation over validated needs. Catalyst explicitly requires candidates who can \"investigate a need before selecting a technology\" and \"let stakeholder evidence influence engineering priorities,\" but Peters' materials show the opposite pattern: selecting sophisticated technologies (peptide amphiphiles, nanofibers) and then finding applications for them.\n\nThird, there's minimal evidence of iteration based on failure or stakeholder feedback. Her research descriptions follow a linear narrative: design → test → publish. She doesn't describe prototypes that failed, assumptions that proved wrong, or designs that changed based on user input. The Bryn Pharma example involves analyzing existing clinical trial data, not iterating on a prototype. Her PhD supervisor Truskey praises her technical skills and publications but provides no examples of her pivoting based on clinical feedback or abandoning approaches that didn't address real needs. The materials suggest she excels at executing predetermined research plans and producing publications, but Catalyst requires comfort with ambiguity, willingness to abandon attractive technical solutions when they don't address validated needs, and ability to iterate rapidly based on stakeholder input - none of which is demonstrated here.",
+    "strengths_for_program": [
+      "Strong technical execution capability in biomaterials and drug delivery systems",
+      "Experience navigating FDA regulatory pathways and understanding clinical trial requirements",
+      "Productive research track record with 17 publications demonstrating ability to complete projects"
+    ],
+    "concerns": [
+      "Career trajectory away from hands-on building toward analytical consulting roles",
+      "No evidence of needs-driven problem discovery or clinical stakeholder engagement during problem definition",
+      "Lack of demonstrated iteration based on user feedback or willingness to abandon technical approaches",
+      "Technology-push mindset evident in motivation statement and research approach",
+      "Seeking Catalyst to gain experience she currently lacks rather than bringing demonstrated capability"
+    ],
+    "evidence": [
+      {
+        "quote": "I am interested in becoming a Catalyst program fellow because I want to develop cutting-edge healthcare technologies that can transform the lives of patients",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Technology-first language ('cutting-edge technologies') rather than needs-first thinking, suggesting she starts with technical solutions rather than validated problems"
+      },
+      {
+        "quote": "The Catalyst program will help accelerate my career goal of leading developmental programs of innovative biomedical devices and products through its immersive, team-based projects that I would not otherwise be able to experience",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Explicitly states she lacks experience with team-based product development projects - Catalyst should select candidates who bring this capability, not those hoping to acquire it"
+      },
+      {
+        "quote": "I extended the lab's technology of self-assembled peptide amphiphiles (PA) nanofibers by incorporating protease-degradable peptide linkages",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Started with existing technology and extended it, rather than identifying a clinical need first and then selecting appropriate technology - backwards from Catalyst's needs-driven approach"
+      },
+      {
+        "quote": "Providing consulting for combination drug products by transforming complex datasets into actionable insights",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Current role is analytical desk work on existing products, not hands-on building or user-centered iteration - shows movement away from maker activities"
+      },
+      {
+        "quote": "Erica has demonstrated her ability to clearly communicate her research through 17 peer-reviewed publications",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Supervisor emphasizes publication output, but publications are not evidence of user-centered iteration or willingness to pivot based on stakeholder needs"
+      }
+    ]
+  },
+  "notable_qualities": [
+    {
+      "quality": "Technical execution and research productivity",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "17 peer-reviewed publications, 10 as first or co-first author",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Demonstrates consistent ability to complete research projects and communicate findings"
+        },
+        {
+          "quote": "To complete her thesis work in developing a clinically translatable 3D model of vasculogenesis, Erica gained expertise in endothelial progenitor cell isolation and characterization as well as biomaterial synthesis and characterization using biofunctionalized poly(ethylene glycol) hydrogels",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Shows she can master complex technical skills and complete challenging research projects"
+        },
+        {
+          "quote": "Erica has demonstrated her ability to clearly communicate her research through 17 peer-reviewed publications, 10 as first or co-first author, and several competitive grants including the National Science Foundation Graduate Fellowship, American Heart Association Postdoctoral Fellowship",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Multiple competitive grants indicate ability to articulate research vision and secure funding"
+        }
+      ],
+      "significance": "While publication productivity alone doesn't demonstrate Catalyst fit, it shows she can complete complex projects and communicate technical work - baseline capabilities needed for any research program"
+    },
+    {
+      "quality": "Understanding of regulatory pathways and clinical trial requirements",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "I recently completed clinical analysis for a novel epinephrine nasal spray developed by Bryn Pharma to treat anaphylaxis. Although this is not my area of expertise, I learned as much as I could about allergic reactions and treatments to adequately address FDA concerns with variability in pharmacokinetics/pharmacodynamics (PK/PD)",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Shows ability to learn new clinical domains and understand FDA requirements"
+        },
+        {
+          "quote": "Her analysis was critical to the success of our type C FDA meeting package and enabled the FDA expert panel to make clear recommendations for our future regulatory program",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "External validation from industry supervisor that her work had meaningful impact on regulatory strategy"
+        }
+      ],
+      "significance": "Regulatory knowledge could be valuable for translating Catalyst projects toward commercialization, but this is a supporting skill, not a core Catalyst capability. More importantly, this work is analytical rather than hands-on building."
+    },
+    {
+      "quality": "Ability to work across technical domains",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "Erica demonstrated proficiency in working with an interdisciplinary group of researchers during her postdoc, which included surgical residents, biochemists, and material scientists. Her contributions to their projects resulted in 7 co-authored publications",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Shows she can collaborate with researchers from different backgrounds"
+        },
+        {
+          "quote": "Erica was able to clearly present the findings of her clinical analysis to our executive team, which consists of individuals from backgrounds in business, healthcare, pharmacy, and engineering",
+          "source": "_Peters_Erica_app.pdf",
+          "context": "Can communicate technical findings to non-technical audiences"
+        }
+      ],
+      "significance": "Cross-disciplinary collaboration is important for Catalyst, but the evidence shows collaboration within academic research teams and corporate settings, not the user-centered, needs-driven collaboration Catalyst requires. No evidence of working directly with patients, clinicians during problem discovery, or iterating based on their feedback."
+    }
+  ],
+  "red_flags": [
+    {
+      "flag": "Career trajectory away from hands-on building toward analytical consulting - has spent 4 years in regulatory/medical writing roles doing data analysis rather than prototype development",
+      "severity": "high",
+      "evidence": "\"Providing consulting for combination drug products by transforming complex datasets into actionable insights\" and \"Analyzing PK/PD data from clinical trials to inform and guide regulatory strategy\" (app.pdf) - current work is desk-based analysis, not building. \"The Catalyst program will help accelerate my career goal of leading developmental programs of innovative biomedical devices and products through its immersive, team-based projects that I would not otherwise be able to experience\" (app.pdf) - explicitly lacks the experience Catalyst requires"
+    },
+    {
+      "flag": "No evidence of needs-driven problem discovery or clinical stakeholder engagement during problem definition phase - research appears technology-first",
+      "severity": "high",
+      "evidence": "\"I extended the lab's technology of self-assembled peptide amphiphiles\" (app.pdf) - started with technology, not need. \"I want to develop cutting-edge healthcare technologies\" (app.pdf) - technology-push language. No mention anywhere in materials of shadowing clinicians, interviewing patients, observing workflows, or identifying needs through direct stakeholder engagement before selecting technical approach"
+    },
+    {
+      "flag": "Minimal evidence of iteration based on failure or user feedback - research narratives are linear (design → test → publish) without pivots or abandoned approaches",
+      "severity": "high",
+      "evidence": "No examples in application of prototypes that failed, assumptions proven wrong, or designs changed based on stakeholder input. Postdoc description follows linear path: \"I developed... I then screened... The outcome of this research was...\" (app.pdf) with no mention of setbacks or iterations. Supervisor letters praise technical skills and publications but provide no examples of pivoting based on feedback"
+    },
+    {
+      "flag": "Application contains substantial fluff and generic claims without specific evidence",
+      "severity": "medium",
+      "evidence": "\"Paradigm-shifting therapeutics\" (app.pdf), \"maximize creativity and product potential\" (app.pdf), \"cutting-edge healthcare technologies that can transform the lives of patients\" (app.pdf) - buzzwords without specifics. Supervisor says she has \"unwavering work ethic\" (Truskey letter) - generic praise. \"Core competencies\" and \"expertise\" stated but not demonstrated through specific problem-solving examples"
+    },
+    {
+      "flag": "Passive voice and unclear individual contribution in some descriptions",
+      "severity": "medium",
+      "evidence": "\"Her contributions to their projects resulted in 7 co-authored publications\" (Truskey letter) - what specifically did she contribute? \"Improvements were made\" pattern appears in some research descriptions without clear attribution of her individual role versus team contributions"
+    },
+    {
+      "flag": "Seeking Catalyst to gain experience rather than bringing demonstrated capability - backwards selection",
+      "severity": "high",
+      "evidence": "\"The Catalyst program will help accelerate my career goal of leading developmental programs of innovative biomedical devices and products through its immersive, team-based projects that I would not otherwise be able to experience. At my current company, there are separate divisions for handling product development, regulatory strategy, and marketing. In the Catalyst program, those silos are removed\" (app.pdf) - explicitly states she lacks integrated product development experience and wants Catalyst to provide it"
+    }
+  ],
+  "questions_for_interview": [
+    {
+      "category": "Probe claimed skill",
+      "question": "You mention extending the lab's peptide amphiphile technology for atherosclerosis treatment. Walk me through how you identified atherosclerosis as the target problem. What clinical observations or stakeholder conversations led you to focus on this disease rather than others?",
+      "purpose": "Determine whether she started with a validated clinical need or with an existing technology looking for an application. Assess needs-driven vs. technology-push thinking."
+    },
+    {
+      "category": "Verify experience",
+      "question": "Describe a specific time when you built a prototype, tested it with intended users or clinicians, and then had to significantly change or abandon your approach based on their feedback. What did you learn?",
+      "purpose": "Assess whether she has experience with user-centered iteration and willingness to pivot based on stakeholder input. Materials lack any examples of this critical Catalyst capability."
+    },
+    {
+      "category": "Explore concern",
+      "question": "Your recent work has been in regulatory consulting and data analysis rather than hands-on prototype development. Why are you interested in returning to building and iteration now? What specific maker activities have you engaged in over the past 4 years?",
+      "purpose": "Understand her motivation for the career shift and whether she has maintained hands-on building skills. Assess if she's seeking Catalyst to fill an experience gap or bringing demonstrated capability."
+    },
+    {
+      "category": "Test fit",
+      "question": "Imagine you've spent 6 months developing a sophisticated nanoparticle delivery system for a healthcare problem, but then clinical observations reveal that a much simpler, lower-tech solution would better address the actual user need. How would you respond? Can you give an example of when you've faced a similar situation?",
+      "purpose": "Assess whether she can prioritize validated needs over technical sophistication and abandon attractive technologies when they don't address real problems. Critical for Catalyst's needs-driven approach."
+    },
+    {
+      "category": "Probe claimed skill",
+      "question": "You state you worked with an interdisciplinary team during your postdoc including surgical residents and biochemists. Describe a specific instance where input from a clinician or surgeon changed your technical approach or caused you to question your initial problem framing.",
+      "purpose": "Verify depth of clinical collaboration and whether it influenced problem definition or just implementation. Materials suggest collaboration happened but don't show it driving iteration."
+    },
+    {
+      "category": "Assess motivation",
+      "question": "In your application, you mention wanting to develop 'cutting-edge healthcare technologies' and 'paradigm-shifting therapeutics.' Can you describe a healthcare problem you've personally observed that you're passionate about solving, and walk through how you'd approach discovering whether your initial solution idea actually addresses the real need?",
+      "purpose": "Distinguish between genuine needs-driven motivation and attraction to technical sophistication. Assess whether she can articulate a specific observed problem and a process for validating solutions."
+    },
+    {
+      "category": "Verify experience",
+      "question": "Tell me about a time when a prototype or experiment you built completely failed. What was your hypothesis, what went wrong, and how did that failure change your thinking about the problem?",
+      "purpose": "Assess comfort with failure and ability to learn from it. Materials show successful outcomes but no discussion of failures or pivots, which is unrealistic for genuine innovation work."
+    },
+    {
+      "category": "Explore concern",
+      "question": "Looking at your CV, you've moved through three different companies in 4 years (FBL ClinWriters, ProPharma Group, Kymanox). What drove these transitions, and what are you looking for in your next role that these positions didn't provide?",
+      "purpose": "Understand career stability and motivation. Frequent job changes could indicate searching for the right fit or difficulty with sustained commitment - important for a 2-year fellowship."
+    }
+  ],
+  "overall_score": 4.5,
+  "score_justification": "Peters receives a score of 4.5 (Weak) due to fundamental misalignment with Catalyst's core requirements despite strong technical credentials. She demonstrates solid research execution capability (17 publications, competitive grants, complex technical projects completed), which prevents a lower score. However, multiple critical deficiencies outweigh these strengths: (1) Her career trajectory for the past 4 years has moved AWAY from hands-on building toward analytical consulting, with current work focused on \"transforming complex datasets into actionable insights\" (app.pdf) rather than prototype development. She explicitly states Catalyst would provide \"immersive, team-based projects that I would not otherwise be able to experience\" (app.pdf), indicating she lacks rather than brings this capability. (2) The materials provide zero evidence of needs-driven problem discovery - her research \"extended the lab's technology\" (app.pdf) of peptide amphiphiles rather than starting from observed clinical needs, and there's no mention of shadowing clinicians, interviewing patients, or identifying problems through direct stakeholder engagement. (3) Her motivation statement uses technology-push language (\"cutting-edge healthcare technologies,\" \"paradigm-shifting therapeutics\") that prioritizes technical sophistication over validated needs. (4) There's no evidence of iteration based on user feedback or willingness to abandon technical approaches - research narratives are linear without described failures or pivots. While she can execute predetermined research plans and produce publications, Catalyst requires comfort with ambiguity, needs-driven thinking, and rapid iteration based on stakeholder input - none of which is demonstrated. The score reflects that she has baseline technical competency but lacks the specific capabilities and mindset Catalyst requires. A candidate seeking to gain experience through the program rather than bringing demonstrated capability is fundamentally backwards for selection.",
+  "recommendation": "Not recommended",
+  "interview_decision": false,
+  "interview_decision_reasoning": "Do not interview. While Peters has strong academic credentials and technical execution capability, she presents multiple high-severity red flags that indicate fundamental misalignment with Catalyst's core requirements. Most critically: (1) She is seeking Catalyst to gain experience she currently lacks (\"immersive, team-based projects that I would not otherwise be able to experience\") rather than bringing demonstrated capability - this is backwards for fellowship selection. (2) Her 4-year career trajectory away from hands-on building toward analytical consulting suggests she may not be committed to or suited for the maker-intensive work Catalyst requires. (3) Zero evidence of needs-driven problem discovery or user-centered iteration - the foundational capabilities for Catalyst's approach. (4) Technology-push mindset evident throughout materials contradicts Catalyst's needs-first philosophy. Given limited interview slots, they should be reserved for candidates who demonstrate rather than aspire to Catalyst's core capabilities. Peters would need to show concrete examples of: identifying problems through clinical observation, building and iterating prototypes based on user feedback, and prioritizing validated needs over technical sophistication. None of this evidence exists in her materials. An interview would likely confirm rather than resolve these fundamental fit issues. Better candidates would bring demonstrated experience with needs-driven innovation and hands-on building rather than seeking Catalyst to provide it.",
+  "role": "engineer",
+  "role_specific_assessment": {
+    "role": "engineer",
+    "marker": "Evidence of building and iteration",
+    "score": 5.0,
+    "confidence": "medium",
+    "reasoning": "Peters demonstrates technical building capability at the 'tested' stage through her PhD and postdoctoral work. She personally \"constructed a clinically translatable, tissue engineered model of 3D-microvasculature using biofunctionalized poly(ethylene glycol) hydrogels\" (app.pdf) and \"developed injectable peptide amphiphile nanofibers\" (app.pdf) that she then evaluated in mouse models. Her postdoc work involved \"screening PA formulations utilizing a novel in vitro model to identify candidates that promoted cholesterol efflux from macrophages while causing minimal cytotoxicity\" (app.pdf), showing systematic testing against defined criteria. The outcome - \"a PA nanofiber that could target plaque within an atherosclerotic mouse model and activate macrophage metabolism of cholesterol with reduced liver toxicity\" (app.pdf) - demonstrates she achieved measurable results. However, there's no evidence these artifacts progressed beyond animal testing to deployment with real users, and her recent 4-year career in regulatory consulting involves analyzing others' products rather than building her own. Ownership clarity is 'substantial_contributor' - she clearly led specific technical components (nanofiber synthesis, in vitro screening) but worked within established lab frameworks and technologies. User grounding is 'limited' - while she worked on clinically relevant problems (atherosclerosis, tissue engineering), there's no evidence of direct clinical observation, patient interviews, or iteration based on stakeholder feedback during problem definition. Her research appears to have started with existing technologies (\"extended the lab's technology\") rather than validated clinical needs. The Bryn Pharma work involved data analysis on completed trials, not building or user testing. Most concerning for Catalyst: no evidence of iteration based on failure or user feedback, and her current work has moved away from hands-on building entirely.",
+    "evidence": [
+      {
+        "quote": "I constructed a clinically translatable, tissue engineered model of 3D-microvasculature using biofunctionalized poly(ethylene glycol) hydrogels and human umbilical cord blood-derived stem cells",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Demonstrates she personally built a complex biological system, showing hands-on technical capability with biomaterials and cell culture"
+      },
+      {
+        "quote": "I then screened PA formulations utilizing a novel in vitro model to identify candidates that promoted cholesterol efflux from macrophages while causing minimal cytotoxicity. The outcome of this research was a PA nanofiber that could target plaque within an atherosclerotic mouse model",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Shows systematic testing methodology and progression from in vitro to animal models, reaching 'tested' stage with measurable outcomes"
+      },
+      {
+        "quote": "I extended the lab's technology of self-assembled peptide amphiphiles (PA) nanofibers by incorporating protease-degradable peptide linkages that release therapeutics upon exposure to the atherosclerotic microenvironment",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Indicates she built on existing technology rather than starting from observed clinical need, suggesting technology-push rather than user-grounded approach"
+      },
+      {
+        "quote": "Providing consulting for combination drug products by transforming complex datasets into actionable insights",
+        "source": "_Peters_Erica_app.pdf",
+        "context": "Current role involves data analysis rather than building, showing 4-year gap in hands-on prototype development work"
+      }
+    ],
+    "evidence_gaps": [
+      "No evidence of direct clinical observation, patient interviews, or shadowing healthcare providers during problem definition phase",
+      "No examples of prototypes that failed or designs that changed based on user feedback - research narratives are linear",
+      "Unclear whether her nanofiber technology was ever tested with actual clinicians or patients, or remained at animal model stage",
+      "No description of her individual technical decisions versus following lab protocols or supervisor direction",
+      "Missing information about whether she could build a prototype from scratch without established lab infrastructure and protocols",
+      "No evidence of recent (past 4 years) hands-on building or maker activities while in consulting roles"
+    ],
+    "research_evidence_level": null,
+    "publication_strength": null,
+    "research_ownership": null,
+    "challenge_complexity": null,
+    "need_investigation_stage": null,
+    "systems_thinking": null,
+    "build_stage": "tested",
+    "ownership_clarity": "substantial_contributor",
+    "user_grounding": "limited"
+  },
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "processing_time_seconds": 156.93580222129822,
+    "materials_character_count": 37036,
+    "timestamp": "2026-06-11T22:22:29.401988",
+    "evaluation_mode": "holistic_enhanced"
+  }
+}

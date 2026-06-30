@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T23:49:08.025831",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 170.8560082912445,
+    "materials_character_count": 80403
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpt02rzfq8.pdf"
+    ],
+    "candidate_id": "Singhal_Divya_app",
+    "evaluation_date": "2026-02-25 23:49:08.025689"
+  },
+  "red_flags": [
+    {
+      "flag": "Application heavily relies on generic statements and stated qualities without specific supporting evidence",
+      "evidence": "The 75-word response about why she wants to be a Fellow contains almost no specific content: \"As a multifaceted Academic and Federal Neurologist and subspecialist, I cherish innovation. Real progress and benefit to humanity can only be achieved by technological innovations... Visionary solutions to healthcare challenges are pivotal for cost efficiency & practical answers for an aging population\" (application page 1). Core competencies list includes vague items like \"Innovation,\" \"Taking initiative,\" \"Compassion,\" \"Empathy\" without supporting examples (page 1-2). This pattern suggests either lack of genuine engagement with the program or inability to communicate concretely.",
+      "severity": "high"
+    },
+    {
+      "flag": "Limited evidence of generating original innovations versus adopting/implementing existing ones",
+      "evidence": "All major 'innovations' described are implementations of existing technologies or programs: VR for rehabilitation (existing technology applied to SCI population), wound vision camera (existing technology implemented at her facility), rehab graduation ceremony (administrative program). No evidence of patents, novel methodologies, or transformative approaches she originated. Research publications are primarily surveys, reviews, and collaborative studies on standard topics - no groundbreaking work evident.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear articulation of what she hopes to learn or specific goals for the fellowship",
+      "evidence": "The 'Additional comments' section states: \"I would welcome an opportunity to be a part of your prestigious MIT Catalyst fellowship program as this aligns well with my entrepreneurial spirit, passion for innovation and eagerness to learn and work on a variety of projects, way out of my domain of expertise as well!\" (application page 6). This is entirely generic - no specific learning goals, no concrete projects of interest, no clear articulation of what gaps she hopes to fill. For a competitive fellowship, this suggests either lack of preparation or unclear motivation.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Professional activities 'outside expertise' are relatively close to core domain",
+      "evidence": "When asked about professional activities outside her area of expertise, she describes: \"leading guided meditation sessions,\" \"train-the-trainer approach project to enhance wellbeing,\" \"Leading weekly meditation sessions,\" and \"Fundraising for ThriveWell Cancer foundation\" (application pages 3-4). However, her CV lists 'Integrative medicine approaches' as a special interest (page 28) and she has background as 'Assistant Yoga Instructor at Himalayan Institute Hospital (2002-2004)' (page 8). These activities are extensions of existing interests rather than truly venturing outside expertise.",
+      "severity": "low"
+    },
+    {
+      "flag": "Missing reference letter from Mark Kadowaki limits ability to triangulate evidence",
+      "evidence": "Application lists Mark Kadowaki as Reference 1 with description: \"He has been my coach for a year long program (2023) outlined below as well as an executive coach thereafter (2025)\" (application page 5). However, only one reference letter is provided (from Susan Kirsh). The missing letter from her direct coach would provide important perspective on her growth, receptiveness to feedback, and development areas.",
+      "severity": "low"
+    },
+    {
+      "flag": "Passive voice and unclear attribution of accomplishments in some descriptions",
+      "evidence": "Some accomplishments use passive voice that obscures her specific role: \"Improvements were made to the system efficiency\" would be concerning, but most of her CV uses active voice. However, some collaborative projects lack clarity about her specific contribution versus team efforts. For example, the VR implementation is described as a center achievement without detailing her specific role in identifying, championing, or implementing the technology.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Limited evidence of generating truly novel solutions or original innovations versus adopting existing ones",
+      "Application materials heavily weighted toward generic statements and stated qualities rather than specific examples",
+      "Professional activities 'outside expertise' are relatively close to core domain (wellness for physicians) rather than truly unfamiliar territory",
+      "Unclear articulation of specific learning goals or what she hopes to gain from the program",
+      "No evidence of sustained engagement with innovation methodologies, design thinking, or entrepreneurial approaches"
+    ],
+    "evidence": [
+      {
+        "quote": "Annual exams improved throughout VA SCI/D System of care from #19 of 25 to #3 of 25 – FY2022",
+        "source": "CV.pdf",
+        "context": "Demonstrates ability to drive measurable improvements in organizational performance - a key program value of translating ideas into practical impact"
+      },
+      {
+        "quote": "With a vision to harness skills and contribute in areas outside of immediate expertise, have been able to help enhance physician wellbeing in the following ways - (a)leading guided meditation sessions at AAN Annual meetings (b)Envisioned a train-the-trainer approach project",
+        "source": "application.pdf",
+        "context": "While valuable, these activities are extensions of existing interests (she lists 'Integrative medicine' as a special interest on CV) rather than truly venturing outside expertise. Doesn't demonstrate the kind of boundary-crossing innovation the program seeks"
+      },
+      {
+        "quote": "As a multifaceted Academic and Federal Neurologist and subspecialist, I cherish innovation. Real progress and benefit to humanity can only be achieved by technological innovations and in the last 20 years, great strides and advances in medicine have benefited mankind ranging from pacemaker to 7Tesla MRI scans, brain stimulators and more. Visionary solutions to healthcare challenges are pivotal for cost efficiency & practical answers for an aging population",
+        "source": "application.pdf",
+        "context": "This response is almost entirely generic platitudes that could be written by any applicant. Lacks specific examples or concrete articulation of what she hopes to learn or contribute. Raises concerns about communication effectiveness and genuine engagement with program goals"
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Dr. Singhal's fit with the Catalyst program is moderate with both significant strengths and notable concerns. Her strongest alignment is with the program's emphasis on translating ideas into practical impact and working across disciplines. She has demonstrated clear ability to navigate complex healthcare systems, build interdisciplinary teams, and implement new programs that improve patient outcomes. Her leadership of the SCI/D service line reorganization, involving \"8 disciplines {Administrative - Program Management Officer (PMO), Program & Management Analyst, HAS clerks; Clinical - Psychologists, Recreational Therapists, Occupational Therapist, Kinesiotherapist, Physical Therapists, Additional physicians, Clinical Pharmacist Specialist PharmD, three new Outpatient nursing support staff}\" (CV page 9) shows she can coordinate diverse stakeholders. The measurable improvements in patient access and length of stay demonstrate her focus on practical outcomes.\n\nHowever, there are significant concerns about fit with the program's innovation and creative problem-solving emphasis. The application materials show limited evidence of original thinking or novel approaches. Her response to the question about professional activities outside her expertise focuses on wellness activities (meditation sessions, fundraising) rather than venturing into truly unfamiliar domains that would require creative problem-solving. The statement \"With a vision to harness skills and contribute in areas outside of immediate expertise, have been able to help enhance physician wellbeing\" (application page 3) is followed by descriptions of leading meditation sessions and serving as faculty for existing programs - these are valuable contributions but don't demonstrate the kind of boundary-crossing innovation the program seeks. The program values candidates who \"drive innovation and creative problem-solving\" but most of Dr. Singhal's achievements are in operational excellence and program implementation rather than innovation generation.\n\nAdditionally, her communication in the application raises concerns. The 75-word response about why she wants to be a Fellow is filled with generic statements that could apply to any applicant: \"Visionary solutions to healthcare challenges are pivotal for cost efficiency & practical answers for an aging population\" (application page 1). This suggests either a lack of genuine understanding of what the program offers or an inability to articulate specific, concrete motivations. For a program that values \"communicating complex ideas effectively to varied audiences,\" this is a notable weakness.",
+    "strengths_for_program": [
+      "Demonstrated ability to lead complex interdisciplinary teams and navigate large healthcare organizations",
+      "Track record of implementing new programs and technologies that improve measurable patient outcomes",
+      "Extensive experience with diverse stakeholders including clinical staff, administrators, academic partners, and DoD collaborators",
+      "Strong commitment to mentoring and developing others, as evidenced by teaching awards and longitudinal mentoring relationships",
+      "Proven capacity to learn from experience and apply lessons across contexts (e.g., Texas Freeze response leading to new EMR templates)"
+    ]
+  },
+  "overall_score": 6.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Operational Excellence and Process Improvement",
+      "evidence": [
+        {
+          "quote": "Annual exams improved throughout VA SCI/D System of care from #19 of 25 to #3 of 25 – FY2022",
+          "source": "CV.pdf",
+          "context": "Demonstrates ability to identify performance gaps and implement improvements that achieve dramatic results"
+        },
+        {
+          "quote": "Initiative for Safety – decrease in average length of stay for inpatient SCI/D unit from 53.19 days in FY22 steadily over 2 years to 34.53 in FY24",
+          "source": "CV.pdf",
+          "context": "Shows sustained focus on efficiency improvements with measurable patient safety and operational benefits"
+        },
+        {
+          "quote": "Quality Improvement project – Resident Roulette, Neurology resident clinics, VA Oklahoma City – for improvement in clinic cancellation rate – with 89.5% reduction in clinic cancellation rate, improved continuity of care and resident satisfaction",
+          "source": "CV.pdf",
+          "context": "Demonstrates ability to identify systemic problems and implement solutions that achieve dramatic improvements"
+        }
+      ],
+      "confidence": "high",
+      "significance": "This quality is highly relevant for a program focused on practical impact. Dr. Singhal has repeatedly demonstrated ability to identify operational problems, implement solutions, and achieve measurable improvements. However, these are process improvements rather than innovations, which is an important distinction for the program's innovation focus."
+    },
+    {
+      "quality": "Interdisciplinary Leadership and Team Building",
+      "evidence": [
+        {
+          "quote": "SCI service care line creation and execution: Successful proposal, approval and completion in FY 22 & FY23 - successful realignment & new FTE Approval as well as hires: including 8 disciplines {Administrative - Program Management Officer (PMO), Program & Management Analyst, HAS clerks; Clinical - Psychologists, Recreational Therapists, Occupational Therapist, Kinesiotherapist, Physical Therapists, Additional physicians, Clinical Pharmacist Specialist PharmD, three new Outpatient nursing support staff}",
+          "source": "CV.pdf",
+          "context": "Shows ability to build and lead complex interdisciplinary teams across multiple professional domains"
+        },
+        {
+          "quote": "Organized VA San Antonio SCI Ukraine Site visit for delegates from Ukraine- SCI/D tour and visit May 10, 2023 - envisioned and spearheaded DoD-VA collaboration for SCI/D portion of this tour: in collaboration with BAMC Neurosurgery and Medicine (ICU/Intensivist) and Medstrac - Army Baylor",
+          "source": "CV.pdf",
+          "context": "Demonstrates ability to coordinate across organizational boundaries (VA, DoD, international partners) for complex initiatives"
+        }
+      ],
+      "confidence": "high",
+      "significance": "The program values candidates who can work effectively across disciplines and with diverse teams. Dr. Singhal has strong evidence of this capability, which would be valuable for collaborative innovation projects."
+    },
+    {
+      "quality": "Commitment to Education and Mentoring",
+      "evidence": [
+        {
+          "quote": "Six teaching awards including A.B. Baker Teacher Recognition Award, AAN",
+          "source": "CV.pdf",
+          "context": "Multiple independent recognitions of teaching excellence from different organizations"
+        },
+        {
+          "quote": "Outstanding Faculty Award 2018-2019 to recognize excellence in teaching and dedication to medical students based on exemplary rating from student evaluations - awarded by University of Oklahoma Medical Education Committee and Clinical Curriculum Subcommittee",
+          "source": "CV.pdf",
+          "context": "Student-driven recognition of teaching quality, suggesting genuine effectiveness rather than just stated commitment"
+        },
+        {
+          "quote": "Development of Novel Mentoring program 'WoMEN' – Women mentoring for excellence in Neurology as Vice Chair of Women's issues in Neurology section in collaboration with Social media group Women Neurologists' Group – 126 mentor-mentee pairs matched in Inaugural class 2019, mentoring webinars organized and metrics being assessed through pre-mentoring and post-mentoring surveys",
+          "source": "CV.pdf",
+          "context": "Shows initiative in creating new programs (not just participating in existing ones) and attention to measuring outcomes"
+        }
+      ],
+      "confidence": "high",
+      "significance": "The program values candidates who can learn, grow, and help others develop. Dr. Singhal's sustained commitment to education and documented effectiveness as a teacher/mentor suggests she would contribute to the learning environment and potentially help other fellows."
+    },
+    {
+      "quality": "Technology Adoption and Implementation",
+      "evidence": [
+        {
+          "quote": "First SCI/D center to introduce Virtual Reality for physical and occupational rehabilitation, a project that gained national news coverage and was included in the Inaugural National SCI/D report submitted to the VHA Undersecretary of Health",
+          "source": "reference_letter.pdf",
+          "context": "Demonstrates willingness to adopt emerging technologies and navigate organizational barriers to implementation"
+        },
+        {
+          "quote": "Innovative Wound Vision Thermal technology camera in collaboration with National Office of Information and Technology, Regional, and local Biomed – first VA to be able to do so in the nation: San Antonio VA highlighted for this accomplishment by VACO SCI/D National Program Director",
+          "source": "CV.pdf",
+          "context": "Shows ability to identify promising technologies and coordinate complex stakeholder groups to enable implementation"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "While this is technology adoption rather than innovation generation, it demonstrates openness to new approaches and ability to overcome organizational inertia - valuable qualities for innovation work. However, confidence is medium because evidence suggests adoption of existing solutions rather than development of novel ones."
+    },
+    {
+      "quality": "Resilience and Crisis Management",
+      "evidence": [
+        {
+          "quote": "During great Texas Freeze (2021) - Challenges included - limited connectivity, lack of awareness of policies and resources as a brand new chief/department chair, personal hardship for team/staff (power outages, limited water supply), vulnerable paralyzed and sick patients stuck at home in the cold, overwhelmed medical systems, lack of transportation to hospitals. Applied previous learnings to accomplish: Cohesive teamwork- kanban style personally and with team to get patients to safety. Townhall outreach through phone calls for triaging. Outcomes: 95% successful outreach",
+          "source": "application.pdf",
+          "context": "Demonstrates ability to function effectively under extreme pressure and coordinate team response to crisis"
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Innovation work often involves navigating uncertainty and setbacks. Dr. Singhal's demonstrated resilience in crisis situations suggests she could handle the challenges of innovation projects. However, confidence is medium because this is a single example and crisis management differs from sustained innovation work."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Divya Singhal presents as a highly accomplished academic neurologist and healthcare administrator with extensive leadership experience in the VA system. Her CV demonstrates a strong track record in clinical care, medical education, and administrative leadership, particularly in spinal cord injury/disorder (SCI/D) care. However, the application materials reveal a critical pattern: they are heavily weighted toward stated qualities and administrative accomplishments rather than concrete evidence of innovation or transformative problem-solving.\n\nThe strongest evidence of her capabilities comes from her operational leadership at South Texas VA SCI/D center. She successfully led a major service line reorganization, hiring across 8 disciplines and achieving measurable improvements in patient access (\"Annual exams improved throughout VA SCI/D System of care from #19 of 25 to #3 of 25 – FY2022\" - CV page 17). She also reduced average length of stay \"from 53.19 days in FY22 steadily over 2 years to 34.53 in FY24\" (CV page 16). These are concrete operational achievements with quantifiable outcomes. Her reference from Dr. Susan Kirsh emphasizes her \"passion for innovation and collaboration\" and notes she was \"First SCI/D center to introduce Virtual Reality for physical and occupational rehabilitation\" (reference letter page 30-31).\n\nHowever, the application suffers from significant weaknesses in demonstrating true innovation capacity. The 75-word response about why she wants to be a Fellow is almost entirely generic: \"Real progress and benefit to humanity can only be achieved by technological innovations\" and \"Visionary solutions to healthcare challenges are pivotal\" (application page 1) - these are empty platitudes without specific examples. Her core competencies list includes vague items like \"Innovation\" and \"Taking initiative\" without supporting evidence (page 1). The professional experiences section describes the Texas Freeze response and SCI/D innovations, but the Texas Freeze example focuses primarily on operational crisis management (\"kanban style personally and with team to get patients to safety\") rather than novel problem-solving. The SCI/D innovations mentioned (VR implementation, wound vision camera, rehab graduation ceremony) appear to be adoptions of existing technologies or administrative programs rather than original innovations she developed.\n\nThe reference letters provide strong endorsements but are notably light on specific examples of innovative thinking. Dr. Kirsh's letter lists accomplishments but doesn't provide detailed incidents demonstrating creative problem-solving or novel approaches. The letter from Mark Kadowaki is not included in the materials provided, which limits our ability to triangulate evidence. Overall, Dr. Singhal appears to be an excellent clinical leader and administrator who has successfully implemented existing innovations within her organization, but the evidence for her capacity to generate truly novel solutions or drive transformative change is limited.",
+  "score_justification": "Dr. Singhal receives a score of 6.5, placing her in the 'moderate' range with potential fit but significant reservations. This score reflects a careful weighing of substantial strengths against notable concerns.\n\nStrengths supporting the score: She has demonstrated exceptional operational leadership with measurable impact (\"Annual exams improved from #19 of 25 to #3 of 25,\" \"89.5% reduction in clinic cancellation rate\"). Her ability to build and lead complex interdisciplinary teams is well-documented through the SCI/D service line reorganization involving 8 disciplines. She has successfully implemented new technologies (VR, wound vision camera) in a complex healthcare environment, showing ability to navigate organizational barriers. Her commitment to education is validated by six teaching awards and sustained mentoring relationships. The reference from Dr. Kirsh provides strong endorsement of her leadership and collaborative abilities.\n\nConcerns limiting the score: The application materials show limited evidence of generating truly novel innovations versus adopting existing ones. All major 'innovations' described are implementations of existing technologies or programs rather than original solutions she developed. The application relies heavily on generic statements (\"I cherish innovation,\" \"Visionary solutions are pivotal\") without specific supporting evidence - exactly the type of fluff that should raise concerns. Her articulation of learning goals is vague and generic, suggesting either lack of preparation or unclear motivation for the program. Professional activities 'outside expertise' are extensions of existing interests rather than truly unfamiliar territory. The research publication record, while respectable, shows no groundbreaking work.\n\nThe score of 6.5 reflects that Dr. Singhal is a strong operational leader and effective implementer who could potentially benefit from and contribute to the program, but she does not present as a natural fit for an innovation-focused fellowship. She would likely excel at translating others' innovations into practice but may struggle with the creative problem-solving and original thinking the program emphasizes. An interview is warranted to probe whether there is deeper innovation capacity not evident in the application materials, or whether her strengths lie primarily in operational excellence rather than innovation generation.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "First SCI/D center to introduce Virtual Reality for physical and occupational rehabilitation, a project that gained national news coverage and was included in the Inaugural National SCI/D report submitted to the VHA Undersecretary of Health",
+        "source": "reference_letter.pdf",
+        "context": "Demonstrates successful technology adoption and implementation, but does not indicate she developed the VR technology or created a novel application - rather, she was first to implement existing technology in VA SCI/D system"
+      },
+      {
+        "quote": "Innovative Wound Vision Thermal technology camera in collaboration with National Office of Information and Technology, Regional, and local Biomed, making San Antonio VA the first in the nation to implement this technology",
+        "source": "reference_letter.pdf",
+        "context": "Again shows successful adoption of existing technology through collaboration, not development of novel solution. Being 'first to implement' is valuable but different from creating new approaches"
+      },
+      {
+        "quote": "As a multifaceted Academic and Federal Neurologist and subspecialist, I cherish innovation. Real progress and benefit to humanity can only be achieved by technological innovations",
+        "source": "application.pdf",
+        "context": "This is a stated quality without supporting evidence - exactly the type of fluff that should be discounted. No specific examples of innovations she has generated are provided in this response"
+      },
+      {
+        "quote": "Cohesive teamwork- kanban style personally and with team to get patients to safety. Townhall outreach through phone calls for triaging",
+        "source": "application.pdf",
+        "context": "The Texas Freeze response shows effective crisis management and operational problem-solving, but these are applications of existing methodologies (kanban, townhalls) rather than novel innovations"
+      }
+    ],
+    "reasoning": "Dr. Singhal's innovation potential assessment is challenging because the evidence is mixed. On one hand, she has successfully introduced new technologies and programs to her SCI/D center, demonstrating willingness to adopt innovations and navigate organizational barriers. The virtual reality implementation is highlighted as a significant achievement: \"First SCI/D center to introduce Virtual Reality for physical and occupational rehabilitation, a project that gained national news coverage and was included in the Inaugural National SCI/D report submitted to the VHA Undersecretary of Health\" (reference letter page 31). This shows she can identify promising technologies and successfully implement them in a complex healthcare environment.\n\nHowever, the critical distinction is between innovation adoption and innovation generation. The evidence suggests Dr. Singhal excels at the former but has limited demonstrated capacity for the latter. The VR implementation, wound vision camera, and other technological advances she describes appear to be applications of existing technologies to her patient population rather than novel solutions she developed. Her research publication record, while respectable for a clinical leader, does not show groundbreaking work - most publications are survey studies, review articles, or collaborative efforts on standard topics. The application materials contain no evidence of patents, novel methodologies, or transformative approaches she has originated.\n\nThe Texas Freeze response, while commendable, illustrates operational problem-solving rather than innovation: \"Cohesive teamwork- kanban style personally and with team to get patients to safety\" and \"Townhall outreach through phone calls for triaging\" (application page 2). These are effective crisis management tactics but not innovative solutions. The stated outcomes (\"95% successful outreach\" and \"lessons learned\") are process improvements, not innovations. Her description of bringing \"innovation to SCI/D\" focuses on technology adoption and program creation (graduation ceremony, open house events) rather than novel problem-solving approaches she designed.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "To distinguish between innovation adoption (which she clearly does well) and innovation generation (which has limited evidence). Looking for concrete example of original problem-solving versus implementing existing solutions.",
+      "category": "Probe claimed innovation capacity",
+      "question": "You mention 'cherishing innovation' and having an 'entrepreneurial spirit.' Can you walk me through a specific example where you identified a problem that existing solutions didn't address, and describe the novel approach you developed to solve it? What made your solution different from what already existed?"
+    },
+    {
+      "purpose": "To understand her actual role (champion, implementer, coordinator?) versus team effort, and assess depth of learning from the experience. Looking for evidence of critical reflection and learning from implementation.",
+      "category": "Verify experience and probe depth",
+      "question": "The virtual reality implementation at your SCI/D center gained national recognition. Can you describe your specific role in this project? How did you identify VR as a solution, what barriers did you encounter in implementation, and what would you do differently if you were to implement it again?"
+    },
+    {
+      "purpose": "To assess whether she has clear, specific learning goals versus generic interest in 'innovation.' The application lacks concrete articulation of what she hopes to gain, which is concerning for a competitive fellowship.",
+      "category": "Assess learning goals and program fit",
+      "question": "What specific skills or knowledge gaps do you hope to address through the Catalyst program? Can you describe a concrete project or problem you'd like to work on during the fellowship, and why you can't address it effectively with your current capabilities?"
+    },
+    {
+      "purpose": "To assess genuine capacity for boundary-crossing work versus staying within familiar domains. Her 'outside expertise' examples (meditation, wellness) are actually extensions of existing interests, so looking for evidence of true unfamiliar territory navigation.",
+      "category": "Explore boundary-crossing and creative problem-solving",
+      "question": "You mentioned wanting to work on projects 'way out of your domain of expertise.' Can you describe a time when you had to solve a problem in an area where you had no prior experience or training? What was your approach, and what did you learn about working outside your comfort zone?"
+    },
+    {
+      "purpose": "The reference letter mentions her 'ability to receive and synthesize constructive criticism' but provides no specific examples. This is critical for a learning-focused program, so need concrete evidence of receptiveness to feedback and willingness to change.",
+      "category": "Test receptiveness to feedback and growth mindset",
+      "question": "Can you describe a time when you received critical feedback that challenged your approach or assumptions? How did you respond, and what changes did you make as a result?"
+    },
+    {
+      "purpose": "To assess whether she has systematic approaches to innovation versus ad hoc problem-solving. Looking for evidence of design thinking, user-centered approaches, rapid prototyping, or other innovation methodologies versus purely operational/administrative approaches.",
+      "category": "Probe innovation methodology understanding",
+      "question": "When you approach a complex problem, what process or framework do you use? Can you walk me through how you would tackle a hypothetical challenge - for example, reducing hospital readmissions for SCI patients - from initial problem definition through solution implementation?"
+    },
+    {
+      "purpose": "The application contains concerning amounts of jargon and generic statements. The program values 'communicating complex ideas effectively to varied audiences,' so need to assess actual communication skills versus stated competency.",
+      "category": "Assess communication and articulation skills",
+      "question": "The Catalyst program brings together fellows from diverse backgrounds. How would you explain the most complex or technical aspect of your work to someone with no medical background? Can you give me an example right now?"
+    },
+    {
+      "purpose": "To understand her approach to interdisciplinary collaboration beyond coordination. Looking for evidence of integrating diverse perspectives versus hierarchical decision-making, and comfort with ambiguity and disagreement.",
+      "category": "Explore collaboration style and interdisciplinary work",
+      "question": "You've led large interdisciplinary teams. Can you describe a situation where team members from different disciplines had fundamentally different perspectives on how to solve a problem? How did you navigate that conflict, and what was the outcome?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES, but with significant reservations that must be addressed during the interview. The score of 6.5 places her above the threshold, and there are no high-severity red flags that would automatically disqualify her. However, this is a borderline case that requires careful probing.\n\nReasons supporting interview: (1) She has demonstrated ability to implement innovations successfully in complex environments, which could translate to innovation generation with proper support and training. (2) Her operational excellence and measurable impact show she can translate ideas into practice - a key program value. (3) Strong interdisciplinary leadership skills would enable collaborative innovation work. (4) The reference from a senior VA leader provides credible endorsement. (5) It's possible that her innovation capacity is greater than evident in application materials, which were poorly executed.\n\nCritical questions for interview: (1) Can she articulate specific, concrete learning goals beyond generic interest in 'innovation'? (2) Does she have any examples of generating truly novel solutions versus implementing existing ones? (3) Can she demonstrate systematic approaches to innovation versus purely operational problem-solving? (4) Is she genuinely interested in creative problem-solving and boundary-crossing work, or primarily in operational leadership? (5) Can she communicate concretely and specifically versus relying on generic statements?\n\nThe interview should focus on distinguishing between two possibilities: (a) She is a strong operational leader who would struggle with the innovation focus of the program, or (b) She has innovation capacity not evident in the application and could develop significantly through the program. If the interview reveals primarily (a), she should not be selected despite her other strengths. If it reveals (b), she could be a solid candidate who would benefit from the program's innovation training."
+}

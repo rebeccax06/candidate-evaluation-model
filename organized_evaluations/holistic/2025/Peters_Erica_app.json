@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T22:24:31.555431",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 174.87588381767273,
+    "materials_character_count": 37030
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpf57oenkb.pdf"
+    ],
+    "candidate_id": "_Peters_Erica_app",
+    "evaluation_date": "2026-03-16 22:24:31.555250"
+  },
+  "red_flags": [
+    {
+      "flag": "Career trajectory contradicts stated motivation - abandoned hands-on innovation for regulatory consulting despite claiming passion for 'developing cutting-edge healthcare technologies'",
+      "evidence": "Application states 'I want to develop cutting-edge healthcare technologies that can transform the lives of patients' (page 1) but CV shows 3+ years in regulatory consulting roles with no development work: Medical Writer (2022-2023), Medical Writer and Consultant (2021-2022), Senior Regulatory Scientist (2023-present). No evidence of seeking development roles, maintaining research, or innovation side projects.",
+      "severity": "high"
+    },
+    {
+      "flag": "Complete absence of innovation activity for 3+ years (2021-2024) - no publications, patents, projects, or prototypes",
+      "evidence": "CV publications list ends in 2021 (page 4-5). No patents filed since 2020. No evidence of research collaborations, side projects, or technical development during entire regulatory consulting period. For someone claiming 'sustained commitment' to innovation, this gap is disqualifying.",
+      "severity": "high"
+    },
+    {
+      "flag": "Extensive use of passive voice obscures actual contributions and leadership",
+      "evidence": "Examples throughout: 'data was presented to the FDA' (page 2), 'Clear recommendations were provided by FDA' (page 2), 'improvements were made' (implied throughout). Unclear what she personally drove versus participated in. Most concerning: 'My main contribution was recommending the PK/PD data be presented using geometric means' - this is a basic statistical decision presented as major achievement.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Application contains substantial fluff and unsupported claims",
+      "evidence": "Claims 'technical expertise...should prove valuable in expediating approval for paradigm-shifting therapeutics' without evidence of ever expediting any approval. States 'core competencies are in tissue engineering and nanomedicine' (page 1) but current role is regulatory affairs with no tissue engineering work since 2020. Generic phrases like 'transforming complex datasets into actionable insights' (page 3) without specific examples of insights or impact.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Motivation appears opportunistic rather than genuine - seeking program to compensate for current role limitations",
+      "evidence": "Application states: 'At my current company, there are separate divisions for handling product development, regulatory strategy, and marketing. In the Catalyst program, those silos are removed and there is an opportunity to work closely with leaders across disciplines' (page 1). This reveals she wants Catalyst to provide experiences her job lacks, not that she has intrinsic drive to innovate. A committed innovator would have sought development roles or created opportunities.",
+      "severity": "high"
+    },
+    {
+      "flag": "Recommendation letters are weak and raise additional concerns",
+      "evidence": "Dr. Truskey's letter is entirely backward-looking, describing only PhD/postdoc work from 2010-2020 with no mention of regulatory career or why she would suit innovation fellowship after leaving research (pages 8-9). Karen Rance's letter is brief with only one concrete example (geometric vs arithmetic means recommendation) and notes 'Erica is continuing to support our program' - suggesting ongoing work, not completed achievements (pages 10-11). Neither letter addresses the career pivot or current innovation capability.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Most recent 'innovation' example is routine data analysis, not creative problem-solving",
+      "evidence": "Epinephrine nasal spray work described as: 'My main contribution was recommending the PK/PD data be presented using the geometric means rather than the arithmetic mean to avoid skewing the data from outlier responses' (page 2). This is standard biostatistics, not innovation. Suggests misunderstanding of what constitutes innovation or inability to identify stronger examples.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of entrepreneurial thinking, initiative, or independent project leadership",
+      "evidence": "No evidence found in application of: starting projects independently, identifying opportunities, building teams, or driving initiatives outside assigned work. All examples are of executing within existing structures (academic labs, consulting projects). For innovation fellowship seeking candidates who 'drive innovation,' absence of self-initiated projects is concerning.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "weak",
+    "concerns": [
+      "Career trajectory moving away from innovation toward regulatory support contradicts stated program goals",
+      "No evidence of innovation activity for 3+ years (2021-2024) - no publications, patents, or projects",
+      "Motivation appears opportunistic rather than genuine - seeking program to compensate for current role limitations",
+      "Recent work examples (epinephrine nasal spray) show routine analysis, not creative problem-solving",
+      "Passive voice throughout application obscures actual contributions and leadership",
+      "No evidence of entrepreneurial thinking or initiative to drive projects independently"
+    ],
+    "evidence": [
+      {
+        "quote": "I am interested in becoming a Catalyst program fellow because I want to develop cutting-edge healthcare technologies that can transform the lives of patients.",
+        "source": "tmpf57oenkb.pdf - Application, page 1",
+        "context": "Stated motivation contradicts actions. If she wanted to develop technologies, why spend 3+ years in regulatory consulting roles with no development work? This is empty rhetoric not backed by behavior."
+      },
+      {
+        "quote": "The Catalyst program will help accelerate my career goal of leading developmental programs of innovative biomedical devices and products through its immersive, team-based projects that I would not otherwise be able to experience. At my current company, there are separate divisions for handling product development, regulatory strategy, and marketing.",
+        "source": "tmpf57oenkb.pdf - Application, page 1",
+        "context": "Reveals she wants Catalyst to provide experiences her current role lacks, rather than demonstrating intrinsic drive. A committed innovator would have sought development roles or created opportunities, not waited for a fellowship to provide them."
+      },
+      {
+        "quote": "Providing consulting for combination drug products by transforming complex datasets into actionable insights. Leading clinical regulatory strategy for complex documents. Analyzing PK/PD data from clinical trials to inform and guide regulatory strategy.",
+        "source": "tmpf57oenkb.pdf - CV, page 3",
+        "context": "Current role (June 2023-present) is entirely regulatory support, not innovation or development. No evidence of creating new technologies, leading R&D projects, or driving innovation - contradicts program fit."
+      },
+      {
+        "quote": "Worked with a cross-functional team to produce high volumes of patient narratives in therapeutic areas of oncology, immune-oncology, and vaccines that were on-time and on-budget.",
+        "source": "tmpf57oenkb.pdf - CV, page 3",
+        "context": "Medical writing role (March 2022-May 2023) involved document production, not innovation. 'High volumes' and 'on-time and on-budget' describe operational execution, not creative problem-solving or research translation."
+      },
+      {
+        "quote": "No publications, patents, or research projects listed for 2021-2024 period",
+        "source": "tmpf57oenkb.pdf - CV, pages 3-5",
+        "context": "Complete absence of innovation output for 3+ years. For a program seeking 'sustained commitment to challenging problems,' this gap is disqualifying. No evidence of maintaining research engagement, side projects, or continued technical development."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "Peters' fit with the Catalyst program is weak due to fundamental misalignment between her recent career trajectory and the program's innovation-focused mission. The program seeks candidates who \"drive innovation and creative problem-solving,\" \"translate research into practical impact,\" and \"demonstrate sustained commitment to challenging problems.\" Her application reveals the opposite pattern: abandonment of hands-on research for regulatory support roles, no evidence of recent innovation activity, and stated motivations that contradict her actions. She claims \"I want to develop cutting-edge healthcare technologies\" yet spent 3+ years moving away from development into consulting. She states the program will \"accelerate my career goal of leading developmental programs\" yet provides no evidence of ever leading development - her regulatory role involves \"providing consulting\" and \"analyzing PK/PD data,\" not leading programs.\n\nThe application's justification for Catalyst is particularly weak: \"At my current company, there are separate divisions for handling product development, regulatory strategy, and marketing. In the Catalyst program, those silos are removed.\" This suggests she wants Catalyst to compensate for limitations in her current role rather than demonstrating intrinsic drive to innovate. A truly innovation-driven candidate would have sought development roles, started side projects, or maintained research collaborations - none of which she has done. Her claim that regulatory expertise will help \"expediating approval for paradigm-shifting therapeutics developed through the Catalyst program\" misunderstands the program focus: Catalyst fellows develop the innovations themselves, not just navigate regulatory pathways. The program values \"candidates who show genuine evidence of these qualities through their actions and achievements, not just stated intentions\" - Peters' actions (career pivot away from R&D) directly contradict her stated intentions (develop cutting-edge technologies).",
+    "strengths_for_program": [
+      "Strong technical foundation in biomedical engineering with PhD from Duke and postdoc at UNC",
+      "Publication record demonstrates ability to execute research and communicate findings (17 peer-reviewed papers)",
+      "Understanding of FDA regulatory pathways could be valuable for translational projects",
+      "Experience working across disciplines (engineering, surgery, biochemistry) during postdoc"
+    ]
+  },
+  "overall_score": 4.5,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "Strong academic research execution and productivity",
+      "evidence": [
+        {
+          "quote": "Published findings in six peer-reviewed journals, presented work at three national conferences. Obtained over $114,000 in funding for research through competitive grant proposal, filed patent on technology.",
+          "source": "tmpf57oenkb.pdf - CV, page 3",
+          "context": "Demonstrates ability to execute research projects, secure funding, and disseminate findings during postdoc (2017-2020). Shows productivity and competence in academic research environment."
+        },
+        {
+          "quote": "17 peer-reviewed publications, 10 as first or co-first author, in highly respected journals including ACS Nano, Biomaterials, Tissue Engineering, and Advanced Healthcare Materials",
+          "source": "tmpf57oenkb.pdf - Recommendation letter from Karen Rance, page 10",
+          "context": "Publication record in high-impact journals demonstrates research quality and ability to communicate complex science. However, all publications are from 2012-2021 period, none recent."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates she can execute research when in academic environment, though raises question of why she left if passionate about innovation. Productivity ended when she left academia, suggesting environment-dependent rather than intrinsic drive."
+    },
+    {
+      "quality": "Technical depth in specific domain (nanomedicine for atherosclerosis)",
+      "evidence": [
+        {
+          "quote": "I developed injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues in the diseased microenvironment. I then screened PA formulations utilizing a novel in vitro model to identify candidates that promoted cholesterol efflux from macrophages while causing minimal cytotoxicity.",
+          "source": "tmpf57oenkb.pdf - Application, page 2",
+          "context": "Shows deep technical expertise in stimulus-responsive drug delivery and in vitro screening. Demonstrates mastery of specific technical domain, though narrow focus raises questions about adaptability to new areas."
+        },
+        {
+          "quote": "Erica greatly expanded her research skills in peptide amphiphile nanotechnology and animal models of atherosclerosis.",
+          "source": "tmpf57oenkb.pdf - Recommendation letter from Dr. Truskey, page 8",
+          "context": "Supervisor confirms technical skill development during postdoc. However, letter is entirely retrospective with no mention of how these skills are being applied currently."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Deep technical expertise could be valuable for specific projects, but narrow specialization and lack of recent application (3+ years) raises concerns about current capabilities and breadth needed for innovation fellowship."
+    },
+    {
+      "quality": "Ability to work across disciplines (stated but weakly demonstrated)",
+      "evidence": [
+        {
+          "quote": "Erica demonstrated proficiency in working with an interdisciplinary group of researchers during her postdoc, which included surgical residents, biochemists, and material scientists. Her contributions to their projects resulted in 7 co-authored publications.",
+          "source": "tmpf57oenkb.pdf - Recommendation letter from Dr. Truskey, page 8",
+          "context": "Supervisor attests to interdisciplinary collaboration during postdoc. However, being part of interdisciplinary team is different from leading across disciplines. Co-authorship could indicate supporting role rather than driving integration."
+        },
+        {
+          "quote": "Erica was able to clearly present the findings of her clinical analysis to our executive team, which consists of individuals from backgrounds in business, healthcare, pharmacy, and engineering.",
+          "source": "tmpf57oenkb.pdf - Recommendation letter from Karen Rance, page 11",
+          "context": "Shows ability to communicate technical findings to diverse audience. However, this is presentation skill, not evidence of driving interdisciplinary innovation or integrating different perspectives into solutions."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Some evidence of working with diverse teams, but examples show communication and collaboration rather than leading interdisciplinary innovation. Program seeks candidates who can 'work effectively across disciplines' - evidence is mixed and mostly from academic setting 4+ years ago."
+    },
+    {
+      "quality": "Competitive grant writing success (historical)",
+      "evidence": [
+        {
+          "quote": "National Science Foundation Graduate Research Fellowship ($90,000) 2011-2014. American Heart Association Postdoctoral Research Fellowship ($104,060) 2018-2020. North Carolina Translational Research & Clinical Sciences Institute Pilot Grant ($2,000), PI 2019-2020. Burroughs Wellcome Fund Collaborative Research Travel Grant ($8,000), PI 2019-2020.",
+          "source": "tmpf57oenkb.pdf - CV, pages 1 and 7",
+          "context": "Demonstrates ability to articulate research vision and secure competitive funding during graduate and postdoc training. Total of ~$204,000 in research funding shows reviewers found her proposals compelling."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Grant success indicates ability to communicate research value and plan projects, which could be valuable for Catalyst. However, all grants are from academic research period (2011-2020), none since career pivot. Unclear if this skill transfers to innovation/commercialization context."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Erica Peters presents a candidate with strong technical credentials in biomedical engineering and nanomedicine, but whose application reveals significant concerns about career direction, motivation clarity, and evidence quality. Her academic trajectory is solid: PhD from Duke University in tissue engineering, postdoctoral work at UNC Chapel Hill in nanomedicine for atherosclerosis, resulting in 17 peer-reviewed publications (10 as first/co-first author) and competitive funding including NSF Graduate Fellowship ($90,000) and AHA Postdoctoral Fellowship ($104,060). The supervisor letter from Dr. Truskey confirms \"several publications and presentations\" and notes she \"greatly expanded her research skills in peptide amphiphile nanotechnology and animal models of atherosclerosis.\" However, the application suffers from a critical disconnect: after investing 10+ years building deep expertise in academic research (2010-2020), she abruptly pivoted to regulatory consulting in 2021 and has spent the past 3+ years in roles increasingly distant from hands-on innovation (medical writing, clinical data analysis, regulatory strategy). Her stated interest in Catalyst - \"develop cutting-edge healthcare technologies\" and \"lead developmental programs of innovative biomedical devices\" - contradicts her recent career choices moving away from R&D toward regulatory support functions.\n\nThe application contains substantial fluff that undermines credibility. She claims \"technical expertise...should prove valuable in expediating approval for paradigm-shifting therapeutics\" without demonstrating she has ever expediated approval for anything - her regulatory experience is only 1.5 years at senior level (June 2023-present) after 2+ years in junior medical writing roles. The statement \"My core competencies are in tissue engineering and nanomedicine\" is contradicted by her current role focused entirely on regulatory affairs for combination drug products, not tissue engineering. Most concerning is the passive voice throughout: \"improvements were made,\" \"data was presented,\" \"clear recommendations were provided\" - none of which clarify her specific contributions versus team efforts. The epinephrine nasal spray example states \"My main contribution was recommending the PK/PD data be presented using geometric means rather than arithmetic mean\" - this is a basic statistical decision, not evidence of regulatory leadership or innovation.\n\nThe recommendation letters reveal additional concerns. Dr. Truskey's letter is entirely backward-looking, describing her PhD/postdoc work from 2010-2020 with no mention of her regulatory career or why she would be suited for an innovation fellowship after leaving research. Karen Rance's letter from Bryn Pharma is brief and generic, stating Erica \"showed exceptional scientific leadership\" but providing only one concrete example: analyzing PK/PD data and recommending geometric vs arithmetic means. The letter notes \"Erica is continuing to support our program by conducting a Pharmacokinetic Investigation Analysis\" - suggesting ongoing consulting work, not completed achievements. Neither letter addresses the fundamental question: why is someone who left academic research 4 years ago now seeking a research innovation fellowship? The application lacks evidence of sustained commitment to innovation - her actions (moving to regulatory consulting) contradict her stated passion for \"developing cutting-edge healthcare technologies.\"",
+  "score_justification": "Erica Peters receives a score of 4.5, reflecting significant concerns that outweigh her historical academic strengths. While she demonstrates solid research execution capability during her PhD and postdoc (2010-2020) - evidenced by 17 publications, competitive grants totaling $204K, and a patent filing - her application reveals fundamental misalignment with an innovation fellowship. The score breakdown: (+2 points) for strong academic research productivity and technical depth in nanomedicine; (+1.5 points) for demonstrated ability to execute complex research projects and secure funding; (+1 point) for understanding of regulatory pathways that could support translation. However, major deductions include: (-2 points) for career trajectory directly contradicting stated motivation - abandoning hands-on innovation for regulatory consulting despite claiming passion for 'developing cutting-edge technologies'; (-2 points) for complete absence of innovation activity for 3+ years (no publications, patents, or projects since 2021); (-1.5 points) for weak and opportunistic motivation - seeking Catalyst to compensate for current role limitations rather than demonstrating intrinsic drive; (-1 point) for application containing substantial fluff and passive voice that obscures actual contributions; (-0.5 points) for most recent 'innovation' example being routine statistical analysis rather than creative problem-solving. The recommendation letters, while positive about her past work, are entirely backward-looking and raise additional concerns by not addressing her career pivot or current capabilities. A candidate genuinely committed to innovation would have maintained research engagement, sought development roles, or pursued side projects - Peters has done none of these. Her actions speak louder than her stated intentions, and those actions indicate someone who left innovation work and has not demonstrated sustained commitment to returning to it. The score of 4.5 reflects 'weak' fit with significant concerns that make success in an innovation-focused fellowship unlikely without major evidence of renewed commitment and capability.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "I developed injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues in the diseased microenvironment.",
+        "source": "tmpf57oenkb.pdf - Application, page 1",
+        "context": "Demonstrates genuine technical innovation in stimulus-responsive drug delivery, showing ability to design novel therapeutic approaches. However, this work ended in 2020."
+      },
+      {
+        "quote": "I extended the lab's technology of self-assembled peptide amphiphiles (PA) nanofibers by incorporating protease-degradable peptide linkages that release therapeutics (liver-X-agonists/LXR) upon exposure to the atherosclerotic microenvironment, which contains elevated levels of proteases.",
+        "source": "tmpf57oenkb.pdf - Application, page 2",
+        "context": "Shows incremental innovation - taking existing technology and adding responsive elements. Demonstrates problem-solving but builds on mentor's platform rather than creating entirely new approach."
+      },
+      {
+        "quote": "My main contribution was recommending the PK/PD data be presented using the geometric means rather than the arithmetic mean to avoid skewing the data from outlier responses.",
+        "source": "tmpf57oenkb.pdf - Application, page 2",
+        "context": "Most recent 'innovation' example (2024) is merely a standard statistical recommendation, not creative problem-solving. This is routine data analysis, not innovation. Raises concerns about understanding of what constitutes innovation."
+      },
+      {
+        "quote": "Kibbe M.R., Stupp S.I., Albaghdadi M.S., Mansukhani N.M., Peters E.B., Karver M.R. (2020) Drug Delivery Vehicles for Atherosclerosis Nanomedicine. US/PCT/16/792,474.",
+        "source": "tmpf57oenkb.pdf - CV, page 4",
+        "context": "Patent filing provides external validation of innovation novelty. However, she is listed 5th of 6 inventors, suggesting supporting rather than lead role. Also, this is from 2020 - no innovation output since."
+      },
+      {
+        "quote": "Since 2021, her roles have been purely supportive: medical writing, clinical data analysis, and regulatory strategy",
+        "source": "tmpf57oenkb.pdf - CV, pages 3-4",
+        "context": "No evidence found of any innovation activity (publications, patents, projects, prototypes) during 2021-2024. For someone claiming passion for developing technologies, the 3+ year gap in innovation output is a major red flag."
+      }
+    ],
+    "reasoning": "Peters demonstrates historical innovation capability through her academic research, but current evidence of innovation drive is weak and contradictory. Her strongest innovation evidence comes from 2015-2020: she developed \"injectable peptide amphiphile nanofibers that could target atherosclerotic plaque and release therapeutics in response to biochemical cues\" and created \"a PA nanofiber that could target plaque within an atherosclerotic mouse model and activate macrophage metabolism of cholesterol with reduced liver toxicity.\" This represents genuine technical innovation - designing stimulus-responsive drug delivery systems. She also \"incorporated protease-degradable peptide linkages\" and \"screened PA formulations utilizing a novel in vitro model,\" showing iterative problem-solving. The patent filing (US/PCT/16/792,474 for \"Drug Delivery Vehicles for Atherosclerosis Nanomedicine\") provides external validation of novelty.\n\nHowever, innovation potential is significantly undermined by her career trajectory away from innovation. Since 2021, her roles have been purely supportive: medical writing (\"produced high volumes of patient narratives\"), clinical data analysis (\"analyzing PK/PD data from clinical trials\"), and regulatory strategy (\"transforming complex datasets into actionable insights\"). None of these roles involve creating new technologies or solving novel technical problems. The epinephrine nasal spray work - her only recent example - involved analyzing existing clinical trial data and recommending standard statistical approaches, not developing new solutions. Most damaging is the absence of any innovation activity during 2021-2024: no publications, no patents, no side projects, no evidence of continued technical development. For someone claiming \"I want to develop cutting-edge healthcare technologies,\" the complete absence of any development activity for 3+ years raises serious questions about genuine motivation versus opportunistic application.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Assess whether career pivot was strategic or represents uncertainty about career direction. Understand if current interest in innovation is genuine or opportunistic. Look for evidence of sustained commitment versus reactive decision-making.",
+      "category": "Probe motivation and career trajectory",
+      "question": "You spent 10+ years building deep expertise in academic research on nanomedicine, then pivoted to regulatory consulting in 2021. Walk me through that decision - what drove you to leave hands-on research, and what has changed that now makes you want to return to innovation work?"
+    },
+    {
+      "purpose": "Test whether stated passion is backed by action. A genuinely motivated innovator would have side projects, collaborations, or continued learning. Absence of any activity would confirm motivation is stated but not demonstrated.",
+      "category": "Verify claimed motivation",
+      "question": "You state you 'want to develop cutting-edge healthcare technologies.' What specific steps have you taken in the past 3 years to develop technologies or maintain your innovation skills while in regulatory consulting roles?"
+    },
+    {
+      "purpose": "Clarify actual contribution versus team effort. Passive voice in application obscures her role. Need to understand if she led analysis or executed under direction, and whether she can articulate impact beyond routine statistical decisions.",
+      "category": "Probe specific contribution and leadership",
+      "question": "For the epinephrine nasal spray project, you mention recommending geometric versus arithmetic means for presenting PK/PD data. Walk me through the full scope of your role on this project - what analyses did you personally conduct, what decisions did you drive, and what was the measurable impact of your work beyond this statistical recommendation?"
+    },
+    {
+      "purpose": "Test current innovation capability and initiative. All strong innovation examples in application are from 2015-2020. Need evidence of recent creative problem-solving and self-directed action. If she cannot provide recent example, confirms innovation capability has atrophied.",
+      "category": "Assess innovation capability and problem-solving",
+      "question": "Describe a time in the past 2 years when you identified a novel problem or opportunity that others had missed, and took initiative to develop a creative solution. What was the problem, what was your approach, and what was the outcome?"
+    },
+    {
+      "purpose": "Understand whether she sees Catalyst as unique opportunity or convenient solution to current role dissatisfaction. Assess if she has explored other paths to her stated goals. Look for evidence of strategic thinking versus opportunistic application.",
+      "category": "Probe program fit and expectations",
+      "question": "You mention that Catalyst will provide 'immersive, team-based projects that I would not otherwise be able to experience' because your current company has separate divisions. What prevents you from seeking a role in product development at your current company or elsewhere? What specifically about Catalyst is essential versus what you could access through a different role?"
+    },
+    {
+      "purpose": "Assess adaptability and current technical capabilities. Her expertise is narrow and 4+ years old. Need to understand if she can quickly learn new domains and contribute beyond her specialty. Recent example outside expertise (epinephrine nasal spray) was routine analysis, not deep technical contribution.",
+      "category": "Test technical currency and adaptability",
+      "question": "Your deep expertise is in peptide amphiphile nanofibers for atherosclerosis. If assigned to a Catalyst project in a completely different domain - say, digital health or medical devices - how would you approach getting up to speed and contributing meaningfully? Give me a specific example of how you've successfully worked outside your core expertise in the past 3 years."
+    },
+    {
+      "purpose": "Distinguish between being part of interdisciplinary team versus leading interdisciplinary innovation. Application provides evidence of collaboration but not leadership in integrating disciplines. Need specific example of driving integration, not just participating.",
+      "category": "Verify collaboration and leadership claims",
+      "question": "You mention working with interdisciplinary teams during your postdoc. Describe a specific instance where you had to integrate perspectives from different disciplines to solve a problem, where you personally drove that integration rather than just participating in a team. What was challenging about it and how did you navigate those challenges?"
+    },
+    {
+      "purpose": "Directly address the concerning gap in innovation activity. Give her opportunity to explain if there are unpublished projects or valid reasons for gap. If no satisfactory explanation, confirms that innovation drive ended when she left academia.",
+      "category": "Explore red flag - gap in innovation output",
+      "question": "Looking at your publication record, your last research publication was in 2021. For someone passionate about developing cutting-edge technologies, what explains the 3+ year gap in research output? Have you been working on any innovations, prototypes, or research that hasn't yet been published?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview is not recommended despite Peters' strong academic credentials. The decision is based on three disqualifying factors: (1) Fundamental misalignment between stated goals and demonstrated actions - she claims passion for 'developing cutting-edge healthcare technologies' but spent 3+ years moving away from development into regulatory support roles with zero innovation output (no publications, patents, or projects since 2021). This pattern suggests stated motivation is not genuine. (2) Career trajectory raises serious questions about commitment - after investing 10+ years building research expertise, she abandoned hands-on innovation for consulting, and now seeks a fellowship to provide experiences 'I would not otherwise be able to experience' at her current company. This appears opportunistic rather than evidence of sustained commitment to innovation. (3) Quality of evidence is poor - application relies heavily on work from 4+ years ago, uses passive voice to obscure contributions, and presents routine data analysis (geometric vs arithmetic means) as innovation. The most recent concrete example of problem-solving is a basic statistical recommendation, not creative innovation. While her academic track record shows she can execute research when in that environment, there is no evidence she can drive innovation independently or has maintained capabilities during 3+ years away from research. The program seeks candidates who 'show genuine evidence of these qualities through their actions and achievements, not just stated intentions' - Peters' actions directly contradict her intentions. An interview would be unlikely to resolve these fundamental concerns about motivation, current capability, and program fit. Resources are better spent on candidates who demonstrate active, sustained commitment to innovation through their recent actions, not just historical academic productivity."
+}

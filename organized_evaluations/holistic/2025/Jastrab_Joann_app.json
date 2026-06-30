@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T21:51:44.309542",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 127.28089308738708,
+    "materials_character_count": 9502
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpxaxs_t_d.pdf"
+    ],
+    "candidate_id": "_Jastrab_Joann_app",
+    "evaluation_date": "2026-03-16 21:51:44.309359"
+  },
+  "red_flags": [
+    {
+      "flag": "Conditional commitment to program based on immediate travel funding - states funding is a 'deal breaker' and would decline if not provided in Q1 FY25",
+      "evidence": "\"The lack of real travel funding and reimbursement would be a deal breaker for my participation in the Catalyst program. Due to the tremendous budget deficits, there is no way the facility will cover all this travel and I would have to decline participation if funding was not provided immediately in FY25 Quarter 1 to my facility.\" (tmpxaxs_t_d.pdf, page 2)",
+      "severity": "high"
+    },
+    {
+      "flag": "Heavy use of innovation buzzwords without concrete examples - uses terms like 'innovate, test, fail, scale wins' but provides no specific examples of what was tested or failed",
+      "evidence": "\"When faced with difficult challenges of any scale, I learned to break the systems/processes into tiny steps/phases, innovate, test, fail, scale wins and keep proceeding to the most ideal outcome.\" (tmpxaxs_t_d.pdf, page 2) - No specific examples of what was innovated, tested, or scaled are provided.",
+      "severity": "high"
+    },
+    {
+      "flag": "Extensive use of passive voice that obscures personal contribution and agency",
+      "evidence": "\"It is now a very successful program\" (tmpxaxs_t_d.pdf, page 2) - unclear what the candidate's specific role was in making it successful. \"Improvements were made\" type language throughout suggests unclear ownership of outcomes.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of research experience, publications, or systematic knowledge creation despite program's focus on research translation",
+      "evidence": "CV lists no publications, patents, or research projects. The \"Zero-dollar appointment as an Honorary Fellow in the Department of Neurology\" (tmpxaxs_t_d.pdf, page 4) is mentioned without any description of research conducted or outcomes.",
+      "severity": "high"
+    },
+    {
+      "flag": "Stated qualities without demonstration - claims to be creative, analytical, detail-oriented, passionate about learning without specific examples",
+      "evidence": "\"I am a philomath. I love learning.\" (tmpxaxs_t_d.pdf, page 2) - stated quality without examples of what has been learned or how learning has been applied. \"My ability to brainstorm and strategize especially under pressure\" (tmpxaxs_t_d.pdf, page 1) - claimed ability without specific examples of strategies developed.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Proposed project is conceptual without evidence of user research, prototyping, or feasibility analysis",
+      "evidence": "Mobile Co-Lab concept described in vision terms (\"inspire, engage, train and then actually prototype/develop\") but no evidence of having conducted user interviews, built prototypes, or analyzed feasibility. (tmpxaxs_t_d.pdf, page 1)",
+      "severity": "medium"
+    },
+    {
+      "flag": "Generic supervisor praise expected but no letters of recommendation provided in materials for evaluation",
+      "evidence": "Application states \"# of letters of recommendation submitted: 2\" (tmpxaxs_t_d.pdf, page 2) but these letters are not included in the evaluation materials, preventing assessment of external validation of claimed qualities.",
+      "severity": "low"
+    },
+    {
+      "flag": "Philosophical fluff that adds no substantive information to application",
+      "evidence": "\"The MIT Catalyst fellowship program has the ability gestalt the cohort into transformational beginnings. 'The term gestalt means something such as a structure or experience that, when considered as a whole, has qualities that are more than the total of all its parts.' {Cambridge Dictionary}\" (tmpxaxs_t_d.pdf, page 1) - This adds no information about the candidate's qualifications or fit.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "weak",
+    "concerns": [
+      "No demonstrated track record of creating, testing, and scaling innovations - examples provided are administrative improvements using innovation buzzwords",
+      "Conditional commitment to the program based on immediate travel funding, suggesting transactional rather than developmental motivation",
+      "No evidence of research experience, publications, or systematic approach to knowledge creation despite program's research translation focus",
+      "Heavy reliance on stated qualities ('I am creative,' 'I love learning') without concrete demonstrations of these qualities in action",
+      "Proposed project (mobile Co-Lab) is conceptual without evidence of user research, prototyping, or feasibility analysis",
+      "Passive voice descriptions of achievements obscure actual personal contributions and agency"
+    ],
+    "evidence": [
+      {
+        "quote": "My only concerns is reimbursement for travel to the required to future in person events... The lack of real travel funding and reimbursement would be a deal breaker for my participation in the Catalyst program... I would have to decline participation if funding was not provided immediately in FY25 Quarter 1 to my facility.",
+        "source": "tmpxaxs_t_d.pdf, page 2",
+        "context": "Demonstrates conditional commitment to the program. A candidate focused on learning and development would typically find ways to participate despite logistical challenges, but this candidate frames funding as a 'deal breaker,' suggesting the primary motivation may be securing travel budget rather than program participation."
+      },
+      {
+        "quote": "I don't enjoy the company of so-called 'know-it-alls,' people with little curiosity and no desire to explore new ideas.",
+        "source": "tmpxaxs_t_d.pdf, page 2",
+        "context": "While framed as loving learning, this statement focuses on what she doesn't like in others rather than demonstrating her own learning behaviors. No examples provided of recent skills acquired, courses taken, or knowledge domains explored."
+      },
+      {
+        "quote": "Leading change (Navigates bureaucracy, stakeholder and network builder, team building and leading.) communicating/storytelling) 2. Leading people (Acts as a guide and mentor for staff with innovation projects and helps diffuse innovations to other VA sites.)",
+        "source": "tmpxaxs_t_d.pdf, page 1",
+        "context": "Lists competencies as stated qualities without specific examples. Claims to 'help diffuse innovations to other VA sites' but provides no examples of what innovations were diffused, to which sites, or with what outcomes."
+      }
+    ],
+    "confidence": "high",
+    "detailed_analysis": "The candidate's fit with the program's core goals is problematic across multiple dimensions. The program seeks candidates who can \"drive innovation and creative problem-solving\" with demonstrated evidence, but Jastrab's application is dominated by stated qualities rather than concrete achievements. Her claim to have \"created innovative opportunities to problem solve challenging issues\" (tmpxaxs_t_d.pdf, page 1) is generic and unsupported by specific examples of innovations she has created, tested, and scaled.\n\nRegarding translating research into practical impact, there is no evidence of research activity. Her CV shows no publications, no research projects, and the honorary fellowship in Neurology is mentioned without any description of research conducted or outcomes achieved. The program values working \"across disciplines and with diverse teams,\" but her examples focus on administrative coordination rather than true interdisciplinary collaboration. The recruitment event and billing project describe team management, not collaborative innovation across different knowledge domains. Most concerning for program fit is the conditional nature of her commitment. She explicitly states that \"lack of real travel funding and reimbursement would be a deal breaker for my participation\" and that she \"would have to decline participation if funding was not provided immediately in FY25 Quarter 1\" (tmpxaxs_t_d.pdf, page 2). This suggests her primary concern is securing travel funding rather than the learning and development opportunities the program offers. A strong candidate would demonstrate commitment to the program's goals regardless of logistical challenges.",
+    "strengths_for_program": [
+      "Experience navigating VA bureaucracy and building stakeholder networks, which could be valuable for implementing innovations within the VA system",
+      "Stated interest in making \"innovation easy, accessible and exciting for all VHA employees\" shows alignment with democratizing innovation, though this is aspirational rather than demonstrated",
+      "Self-described as a philomath who loves learning, which could indicate openness to the program's educational components, though no evidence of recent learning or skill acquisition is provided"
+    ]
+  },
+  "overall_score": 3.5,
+  "recommendation": "Not recommended",
+  "notable_qualities": [
+    {
+      "quality": "VA System Navigation Experience",
+      "evidence": [
+        {
+          "quote": "During my VA career, I have been detailed to several executive level leadership positions, such as acting Associate and Assistant Director.",
+          "source": "tmpxaxs_t_d.pdf, page 1",
+          "context": "Demonstrates experience in senior VA administrative roles, which could be valuable for understanding organizational context."
+        },
+        {
+          "quote": "Leading change (Navigates bureaucracy, stakeholder and network builder, team building and leading.)",
+          "source": "tmpxaxs_t_d.pdf, page 1",
+          "context": "Claims bureaucracy navigation as a core competency, supported by her progression through various VA roles over 20+ years."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Understanding VA bureaucracy could be valuable for implementing innovations within the system, though this is primarily administrative experience rather than innovation experience."
+    },
+    {
+      "quality": "Conceptual Thinking About Accessibility",
+      "evidence": [
+        {
+          "quote": "develop a mobile Innovation Co-Lab/colaboratory Unit (aka RV) that travels to VHA sites locally, regionally and nationally... We should be making innovation easy, accessible and exciting for all VHA employees!",
+          "source": "tmpxaxs_t_d.pdf, page 1",
+          "context": "Shows thinking about how to bring innovation resources to people rather than requiring them to come to a central location. The concept addresses a real barrier (accessibility) though execution capability is undemonstrated."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Thinking about accessibility and democratization of innovation aligns with program values, but this remains conceptual without evidence of prototyping or validation."
+    },
+    {
+      "quality": "Project Management and Team Coordination",
+      "evidence": [
+        {
+          "quote": "I put together a highly committed and collaborative team of employees that I coached through the establishment of new reporting and payment systems.",
+          "source": "tmpxaxs_t_d.pdf, page 2",
+          "context": "Demonstrates ability to assemble and coordinate teams for complex administrative projects."
+        },
+        {
+          "quote": "designing and implementing a large scale, cutting edge inter-disciplinary recruitment event that brought in a record 75+ applicants during one (1) day",
+          "source": "tmpxaxs_t_d.pdf, page 1",
+          "context": "Shows capability to organize and execute large-scale events, though the innovation aspect is unclear."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Project management skills are valuable but are not the same as innovation capability. The program seeks people who can create novel solutions, not just manage projects effectively."
+    }
+  ],
+  "interview_decision": false,
+  "overall_assessment": "Joann Jastrab presents as a mid-career VA professional with extensive administrative experience but limited concrete evidence of innovation capability. Her application is heavily weighted toward stated qualities rather than demonstrated achievements. She describes herself as someone who \"brainstorm[s] and strategize[s] especially under pressure\" and claims to have \"created innovative opportunities to problem solve challenging issues\" (tmpxaxs_t_d.pdf, page 1), but the specific examples provided are administrative accomplishments rather than innovations. The recruitment event she cites - \"designing and implementing a large scale, cutting edge inter-disciplinary recruitment event that brought in a record 75+ applicants during one (1) day\" (tmpxaxs_t_d.pdf, page 1) - is described in passive voice and lacks detail about what made it \"cutting edge\" or what her specific role was beyond organizing it.\n\nHer proposed project - a \"mobile Innovation Co-Lab/colaboratory Unit (aka RV) that travels to VHA sites\" (tmpxaxs_t_d.pdf, page 1) - shows creative thinking about accessibility, but the description is conceptual without evidence of prototyping, user research, or feasibility analysis. The application contains significant fluff, including philosophical statements like \"The MIT Catalyst fellowship program has the ability gestalt the cohort into transformational beginnings\" (tmpxaxs_t_d.pdf, page 1) that add no substantive information. Her self-description as a \"philomath\" who loves learning (tmpxaxs_t_d.pdf, page 2) is a stated quality without supporting evidence of what she has learned or how she has applied new knowledge.\n\nThe most concerning aspect is the medical residency billing example, where she states \"I had no experience with medical residency programs\" but then describes breaking \"systems/processes into tiny steps/phases, innovate, test, fail, scale wins\" (tmpxaxs_t_d.pdf, page 2). This uses innovation buzzwords but provides no specific details about what was tested, what failed, or what was scaled. The passive voice construction \"It is now a very successful program\" (tmpxaxs_t_d.pdf, page 2) obscures her actual contribution. Her CV shows a pattern of administrative roles with training certifications but no publications, patents, or documented innovations. The application ends with a significant red flag: her participation is contingent on immediate travel funding, stating \"lack of real travel funding and reimbursement would be a deal breaker\" (tmpxaxs_t_d.pdf, page 2), which suggests conditional commitment to the program.",
+  "score_justification": "This score reflects significant concerns about the candidate's innovation capability and program fit, supported by multiple pieces of evidence. The application is dominated by stated qualities rather than demonstrated achievements - she claims to 'brainstorm and strategize' and 'create innovative opportunities' but provides no concrete examples of innovations she has created, tested, and scaled. The two main examples (recruitment event and billing project) are described in vague terms with passive voice that obscures her actual contributions. The recruitment event is called 'cutting edge' without explaining what made it innovative, and the billing project uses innovation buzzwords ('innovate, test, fail, scale wins') without providing specific examples of what was tested or failed. Her proposed mobile Co-Lab concept shows creative thinking but no evidence of user research, prototyping, or feasibility analysis - it remains an untested idea. Most critically, her conditional commitment to the program ('lack of real travel funding and reimbursement would be a deal breaker') suggests she is primarily motivated by securing travel budget rather than the learning opportunities. The program seeks candidates who demonstrate innovation through action, not those who use innovation language to describe administrative work. Her CV shows 20+ years of VA administrative experience with numerous training certifications but no publications, patents, or documented innovations. The score of 3.5 reflects that while she has relevant organizational experience that could be valuable, she lacks demonstrated innovation capability and shows concerning red flags about motivation and commitment.",
+  "innovation_potential": {
+    "level": "low",
+    "evidence": [
+      {
+        "quote": "designing and implementing a large scale, cutting edge inter-disciplinary recruitment event that brought in a record 75+ applicants during one (1) day to the Madison VA Medical Center",
+        "source": "tmpxaxs_t_d.pdf, page 1",
+        "context": "This is presented as her primary innovation example, but it lacks specificity about what made it 'cutting edge' or what novel methods were used. The outcome (75+ applicants) is a metric of success but doesn't demonstrate innovation in approach."
+      },
+      {
+        "quote": "I put together a highly committed and collaborative team of employees that I coached through the establishment of new reporting and payment systems. When faced with difficult challenges of any scale, I learned to break the systems/processes into tiny steps/phases, innovate, test, fail, scale wins and keep proceeding to the most ideal outcome.",
+        "source": "tmpxaxs_t_d.pdf, page 2",
+        "context": "Uses innovation buzzwords ('innovate, test, fail, scale') but provides no specific examples of what was tested, what failed, or what innovations were implemented. This is process management language without evidence of actual innovation."
+      },
+      {
+        "quote": "I am interested in working with the MIT Catalyst program to develop a mobile Innovation Co-Lab/colaboratory Unit (aka RV) that travels to VHA sites locally, regionally and nationally",
+        "source": "tmpxaxs_t_d.pdf, page 1",
+        "context": "Shows creative thinking about accessibility and reach, but there's no evidence of prototyping, user research, feasibility analysis, or any steps taken to validate or develop this concept. It remains an idea without demonstrated execution capability."
+      },
+      {
+        "quote": "Zero-dollar appointment as an Honorary Fellow in the Department of Neurology at the University of Wisconsin School of Medicine and Public Health",
+        "source": "tmpxaxs_t_d.pdf, page 4",
+        "context": "Listed under job-related training but with no context about what this fellowship involved, what research or projects were conducted, or what outcomes resulted. Without details, this cannot be evaluated as evidence of innovation."
+      }
+    ],
+    "reasoning": "The evidence for innovation potential is weak across multiple dimensions. First, the candidate's described accomplishments are primarily administrative improvements rather than innovations. The recruitment event, while potentially effective, is described only as \"large scale, cutting edge\" without explaining what made it innovative - was it the format, the technology used, the outreach strategy? The lack of specificity suggests this may have been a well-executed traditional event rather than a novel approach.\n\nSecond, the medical residency billing project uses innovation language (\"innovate, test, fail, scale wins\") but provides no concrete examples of what was actually innovated. She states \"I put together a highly committed and collaborative team of employees that I coached through the establishment of new reporting and payment systems\" (tmpxaxs_t_d.pdf, page 2), but this describes project management, not innovation. What was new about these systems? What problem did they solve that existing systems didn't? The passive voice \"It is now a very successful program\" tells us nothing about her specific innovative contributions. Third, her proposed mobile Co-Lab concept, while creative, shows no evidence of having been prototyped, tested with users, or analyzed for feasibility. There's no indication she has built anything, conducted user research, or validated the concept. The description focuses on the vision (\"inspire, engage, train and then actually prototype/develop\") rather than demonstrating she has the skills to execute it. Her CV lists numerous training programs and certifications but no patents, publications, prototypes, or documented innovations that have been implemented and scaled.",
+    "confidence": "high",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Determine whether this was actually an innovation or simply a well-executed traditional event. Looking for specific novel methods, not just successful outcomes.",
+      "category": "Verify experience",
+      "question": "You mentioned designing a 'cutting edge inter-disciplinary recruitment event' that brought in 75+ applicants. Can you walk me through specifically what made this event cutting edge? What novel methods or approaches did you use that differed from traditional recruitment events?"
+    },
+    {
+      "purpose": "Verify whether the candidate actually uses iterative testing methodology or is just using innovation buzzwords. Real practitioners can cite specific failures and learnings.",
+      "category": "Probe claimed skill",
+      "question": "In your medical residency billing project, you mentioned you 'innovate, test, fail, scale wins.' Can you give me three specific examples: one thing you tested that failed, one thing you tested that succeeded, and how you scaled the successful approach?"
+    },
+    {
+      "purpose": "Assess whether the candidate is primarily motivated by travel funding or by genuine interest in the program's learning and development opportunities. Strong candidates should articulate value beyond logistics.",
+      "category": "Assess motivation",
+      "question": "You stated that lack of travel funding would be a 'deal breaker' for your participation. Help me understand - what is it about the Catalyst program specifically that interests you beyond the travel opportunities? What would you hope to learn or accomplish even if all sessions were virtual?"
+    },
+    {
+      "purpose": "Verify stated love of learning with concrete examples. Strong learners can cite specific recent learning and application. This tests whether it's a real quality or just stated fluff.",
+      "category": "Probe claimed skill",
+      "question": "You describe yourself as a philomath who loves learning. What's the most recent new skill or knowledge domain you've acquired in the past year, and how have you applied it in your work?"
+    },
+    {
+      "purpose": "Determine whether the candidate has taken any steps to validate and develop this concept beyond the initial idea. Real innovators conduct user research and iterate based on feedback.",
+      "category": "Verify experience",
+      "question": "Your mobile Co-Lab concept is interesting. Have you done any user research with potential users - VA employees at different sites - to understand their needs and validate this concept? What have you learned about what would make this successful?"
+    },
+    {
+      "purpose": "Directly address the gap in demonstrated innovation track record. Looking for concrete examples of creating and scaling innovations, not just managing projects.",
+      "category": "Explore concern",
+      "question": "Looking at your CV, I don't see publications or documented innovations that have been implemented and scaled. Can you tell me about an innovation you've created that has been adopted beyond your immediate team or site? What was the innovation, how did you develop it, and how was it scaled?"
+    },
+    {
+      "purpose": "Assess true interdisciplinary collaboration experience versus administrative coordination. Program requires ability to work across knowledge domains, not just coordinate different departments.",
+      "category": "Test fit",
+      "question": "The Catalyst program involves working with people from very different disciplines - engineers, designers, clinicians, researchers. Tell me about a time you collaborated with someone from a completely different field to create something new. What was challenging about that collaboration and what did you learn?"
+    },
+    {
+      "purpose": "Assess openness to learning from others and ability to work in a diverse cohort. The comment about 'know-it-alls' could indicate difficulty receiving feedback or working with experts.",
+      "category": "Assess motivation",
+      "question": "You mentioned you don't enjoy 'know-it-alls' with little curiosity. In a cohort-based program, you'll encounter people with strong expertise and opinions. How do you distinguish between someone who is a subject matter expert with deep knowledge versus someone who is closed-minded? Can you give an example of a time you learned something important from someone you initially disagreed with?"
+    }
+  ],
+  "interview_decision_reasoning": "The interview decision is 'no' based on multiple high-severity concerns that are unlikely to be resolved in an interview. First, the candidate's application shows a pattern of using innovation language without demonstrating innovation capability - the examples provided are administrative accomplishments described with buzzwords rather than actual innovations. Second, her conditional commitment to the program based on immediate travel funding is a fundamental misalignment with program goals; strong candidates should be motivated by learning and development, not logistics. Third, there is no evidence of research experience, publications, or systematic knowledge creation, which is core to the program's focus on translating research into impact. Fourth, the heavy reliance on stated qualities ('I am creative,' 'I love learning') without concrete demonstrations suggests the candidate may not understand what constitutes evidence of innovation capability. While she has valuable VA system experience, the program seeks candidates who can drive innovation, not those who can navigate bureaucracy. The gap between her stated qualities and demonstrated achievements is too large, and the red flags about motivation are too significant to warrant using limited interview slots on this candidate. Resources would be better spent on candidates who show concrete evidence of creating, testing, and scaling innovations."
+}

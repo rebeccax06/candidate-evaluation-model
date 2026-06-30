@@ -1,0 +1,267 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T22:47:28.266197",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 163.72518181800842,
+    "materials_character_count": 49354
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmp0jz73be7.pdf"
+    ],
+    "candidate_id": "_Sharma_Alok_app",
+    "evaluation_date": "2026-03-16 22:47:28.265987"
+  },
+  "red_flags": [
+    {
+      "flag": "Application contains substantial generic fluff and stated qualities without supporting evidence",
+      "evidence": "Core competencies section includes: 'Critical thinking: Demonstrated daily while performing high-risk, challenging or emergent heart procedures' and 'Innovation: Published and presented innovative procedures' - these are generic claims that could apply to any interventional cardiologist and provide no specific examples (tmp0jz73be7.pdf). The teamwork description 'I work closely with our multidisciplinary heart-team and facilitate weekly heart-team meetings' describes standard clinical practice, not exceptional collaboration.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Explicitly acknowledges lacking entrepreneurial skills that are core to program",
+      "evidence": "States: 'Through this program I am also interested in improving my entrepreneurial thinking, and learning entrepreneurial skills' (tmp0jz73be7.pdf). This admission of needing to learn these skills raises questions about readiness for an innovation fellowship versus need for more foundational business training first.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of prior entrepreneurial activity, business development, or commercialization experience",
+      "evidence": "No evidence found in CV or application of: startup involvement, patents filed, licensing agreements, business plan development, pitch competitions, entrepreneurship courses, or other activities demonstrating business acumen. The extensive advisory board and consulting roles listed (Abiomed, Abbott Vascular, Boston Scientific, etc.) appear to be clinical consulting, not business development roles.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Vague motivation and unclear specific goals for the program",
+      "evidence": "Motivation statement is entirely generic: 'I am interested in the catalyst program to better understand and experience the process that is required to generate and execute innovative ideas, to create better solutions to healthcare needs' - this could apply to any applicant and provides no specific vision, concrete goals, or particular problems he wants to solve (tmp0jz73be7.pdf).",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of leading innovation initiatives versus participating in established programs",
+      "evidence": "All 27 clinical trials listed show him as 'Sub Investigator' or site PI in industry-sponsored trials, not as someone designing novel trial methodologies or leading investigator-initiated research. Leadership titles (Co-Director of programs) are listed but no specific accomplishments or innovations from these leadership roles are described.",
+      "severity": "low"
+    },
+    {
+      "flag": "Passive voice and unclear personal contribution in several key descriptions",
+      "evidence": "Live case description uses passive voice: 'It also involves tips and tricks and trouble-shooting' without clarifying Dr. Sharma's specific contributions versus standard procedural teaching (tmp0jz73be7.pdf). The lithotripsy innovation uses 'we' throughout without clarifying his specific role versus collaborators.",
+      "severity": "low"
+    },
+    {
+      "flag": "No letters of recommendation provided for evaluation",
+      "evidence": "Application notes '# of letters of recommendation submitted: 2' but the actual letters are not included in the materials provided for evaluation. Reference information lists Dr. Y.S. Chandrashekhar (supervisor) and Dr. Selcuk Adabag (collaborator) but their actual assessments cannot be evaluated.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Explicitly states need to 'learn entrepreneurial skills' rather than demonstrating existing entrepreneurial capabilities",
+      "Limited evidence of genuine cross-disciplinary collaboration beyond standard clinical team coordination",
+      "Application contains substantial generic fluff and stated qualities without specific supporting examples",
+      "No evidence of business development, commercialization, or innovation ecosystem engagement",
+      "Unclear what specific innovative vision or goals he would pursue in the program"
+    ],
+    "evidence": [
+      {
+        "quote": "Through this program I am also interested in improving my entrepreneurial thinking, and learning entrepreneurial skills.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "This explicitly acknowledges lack of entrepreneurial skills, which is a core program focus. While honesty about gaps is positive, it raises questions about current readiness for an innovation fellowship versus need for more foundational business training first."
+      },
+      {
+        "quote": "I have been fortunate to perform LIVE CASE demonstrations at national and international conferences where we teach procedural techniques, decision-making algorithms or use of newer devices, to other cardiologists...There is live audience engagement with unfiltered reality and participation in real-time decision-making including the real-life, unexpected procedural or technical hiccups.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "Demonstrates strong communication skills and ability to teach complex concepts under pressure. However, this is clinical teaching, not the kind of cross-sector communication (to business leaders, policymakers, etc.) the program likely emphasizes."
+      },
+      {
+        "quote": "Teamwork/collaboration: I work closely with our multidisciplinary heart-team and facilitate weekly heart-team meetings. Also collaborate nationally for research.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "This is generic clinical collaboration language without specific examples of outcomes or innovative approaches to teamwork. Weekly heart-team meetings are standard practice in cardiology, not evidence of exceptional collaborative ability."
+      },
+      {
+        "quote": "The program can provide a platform to expand my horizons and collaborate, engage and learn from likeminded innovators in various other disciplines, as well as industry and business leaders.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "While this shows openness to learning, it's entirely aspirational and provides no evidence of prior cross-disciplinary or industry engagement. The passive framing ('provide a platform') suggests waiting for opportunities rather than actively creating them."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Dr. Sharma's fit with the program is mixed. On the positive side, he has demonstrated one clear instance of translating research into practical impact (the valve lithotripsy work), which aligns with a core program goal. His extensive teaching experience through live case demonstrations shows ability to \"communicate complex ideas effectively to varied audiences\" - he has presented to \"live audience engagement with unfiltered reality and participation in real-time decision-making\" at major conferences (tmp0jz73be7.pdf). His leadership roles as \"Co-Director: Structural Heart & Valve Program\" and \"Director, Interventional and Structural Heart Research\" demonstrate capacity to lead initiatives, though the application provides no specific examples of what he has accomplished in these roles beyond listing the titles.\n\nHowever, significant gaps exist in demonstrating other program priorities. The application provides minimal concrete evidence of \"working effectively across disciplines\" - the multidisciplinary heart-team collaboration mentioned is standard clinical practice, not evidence of innovative cross-disciplinary work. The claim \"I work closely with our multidisciplinary heart-team and facilitate weekly heart-team meetings\" describes routine clinical coordination, not the kind of boundary-crossing collaboration the program likely seeks (tmp0jz73be7.pdf). Most concerning is the lack of evidence for entrepreneurial thinking or business acumen. The motivation statement says \"I am also interested in improving my entrepreneurial thinking, and learning entrepreneurial skills\" - this explicitly states he lacks these skills rather than demonstrating them (tmp0jz73be7.pdf). There's no evidence of startup involvement, commercialization experience, or business development activities. His extensive clinical trial involvement shows he can work within established research structures, but all 27 trials listed show him as \"Sub Investigator\" or \"Principal Investigator\" in standard clinical trials, not as someone designing innovative trial methodologies or leading novel research programs.",
+    "strengths_for_program": [
+      "Demonstrated ability to translate research to clinical practice with measurable impact (valve lithotripsy adoption)",
+      "Extensive experience communicating complex medical procedures to diverse audiences through live case demonstrations",
+      "Active pursuit of formal research training shows commitment to continuous learning and growth",
+      "Leadership experience in clinical programs, though specific accomplishments unclear"
+    ]
+  },
+  "overall_score": 6.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Translational Innovation Capability",
+      "evidence": [
+        {
+          "quote": "Lithotripsy technique breaks calcium using sound waves and is approved for breaking kidney stones and open blockages in leg arteries...Our logical thinking was that since lithotripsy breaks calcium without damaging normal tissue, it may also be used to modify calcium within heart valves. This had not been performed before. We successfully performed bench testing followed by First-in-Human cases in Mitral and Aortic valves.",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Clear evidence of ability to identify analogous problems across medical domains and successfully adapt technology to new applications with proper validation methodology."
+        },
+        {
+          "quote": "Sharma A, Kelly R, Mbai M, Chandrashekhar Y, Bertog S. Transcatheter Mitral Valve Lithotripsy as a Pretreatment to Percutaneous Balloon Mitral Valvuloplasty for Heavily Calcified Rheumatic Mitral Stenosis. Circ Cardiovasc Interv. 2020 Jul;13(7): e009357.",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Publication in Circulation Cardiovascular Interventions (high-impact journal) demonstrates peer validation of the innovation and ability to disseminate novel findings."
+        }
+      ],
+      "confidence": "high",
+      "significance": "This quality directly aligns with the program's goal of translating research into practical impact. The ability to see connections across domains and successfully implement novel applications is core to innovation."
+    },
+    {
+      "quality": "Technical Excellence and Procedural Mastery",
+      "evidence": [
+        {
+          "quote": "Live Case Primary Operator at 29+ conferences including: Transcatheter Cardiovascular Therapeutics (TCT), Society for Cardiovascular Angiography and Interventions (SCAI), CSI Congress, Scottsdale Interventional Forum",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Being selected as primary operator for live cases at major international conferences is highly selective and demonstrates exceptional technical skill and composure under pressure."
+        },
+        {
+          "quote": "Director, Interventional Cardiology Research, Co-Director of Interventional Cardiology and Structural Heart Program at Minneapolis VA Health Care System",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Leadership of major clinical programs indicates trust from institution and peers in his clinical judgment and technical capabilities."
+        },
+        {
+          "quote": "Fellow of Society for Cardiovascular Angiography and Interventions (FSCAI), Fellow of American College of Cardiology (FACC)",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Fellowship status in major professional societies indicates peer recognition of expertise and contributions to the field."
+        }
+      ],
+      "confidence": "high",
+      "significance": "While technical excellence alone doesn't guarantee innovation success, it provides credibility and deep domain knowledge necessary for identifying meaningful clinical problems to solve. However, the program should assess whether he can translate this clinical expertise into broader innovation thinking."
+    },
+    {
+      "quality": "Commitment to Continuous Learning",
+      "evidence": [
+        {
+          "quote": "I am constantly trying to acquire new skills. This year I completed a post baccalaureate certificate program in clinical research at University of Minnesota School of Public Health. Currently, I am also finishing MSc in Clinical Trials at University of Oxford, UK.",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Pursuing two advanced degrees while maintaining full clinical and leadership responsibilities demonstrates exceptional drive and recognition of knowledge gaps."
+        },
+        {
+          "quote": "2022-Present: MSc in Clinical Trials, University of Oxford, UK and 2022-2024: Post baccalaureate Certificate Program in Clinical Research, UMN School of Public Health",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Formal research methodology training from top institutions shows systematic approach to building capabilities rather than relying solely on clinical experience."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Growth mindset and willingness to invest in formal training suggests he would actively engage with the program's learning opportunities. However, it also indicates he's still building foundational research skills that other candidates may already possess."
+    },
+    {
+      "quality": "Teaching and Knowledge Dissemination",
+      "evidence": [
+        {
+          "quote": "The goal of these demonstrations is to discuss and show common procedural challenges faced in the cardiac catheterization laboratory and teach effective solutions or skills that can be easily replicated, for better outcomes. There is live audience engagement with unfiltered reality and participation in real-time decision-making.",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Demonstrates ability to break down complex procedures into teachable components and communicate under high-pressure, real-time conditions."
+        },
+        {
+          "quote": "Site Program Director: Interventional Fellowship, University of Minnesota Medical School and Site Program Director: Structural Fellowship, University of Minnesota Medical School",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Leadership of fellowship training programs indicates ability to develop curriculum and mentor junior physicians."
+        },
+        {
+          "quote": "Invited Faculty at 16+ national/international conferences including TCT, TVT, ACC, CSI Congress, PCR London Valves",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Repeated invitations to teach at major conferences demonstrates recognized expertise in knowledge transfer."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Strong communication and teaching abilities align with program goal of communicating complex ideas to varied audiences. However, evidence is primarily clinical teaching to medical professionals, not the broader stakeholder communication the program likely emphasizes."
+    },
+    {
+      "quality": "Research Productivity",
+      "evidence": [
+        {
+          "quote": "27 peer-reviewed publications including publications in: European Heart Journal, Circulation Cardiovascular Interventions, JACC Cardiovascular Imaging, JACC Cardiovascular Interventions",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Publications in top-tier cardiology journals demonstrate ability to conduct research meeting high standards and contribute to medical literature."
+        },
+        {
+          "quote": "Ad hoc reviewer for 12+ journals including: JACC Cardiovascular Interventions, Nature Scientific Reports, Eurointervention, Journal of Society of Cardiovascular Angiography and Interventions",
+          "source": "tmp0jz73be7.pdf",
+          "context": "Peer review responsibilities indicate recognition by journal editors as expert in the field."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Research productivity demonstrates ability to complete projects and disseminate findings. However, many publications show him as collaborator rather than lead author, and most are clinical outcomes studies rather than methodological innovations. This suggests solid but not exceptional research innovation capability."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Alok Sharma presents as a highly accomplished interventional and structural cardiologist with extensive clinical expertise and a strong track record in procedural innovation. His CV demonstrates significant technical proficiency, evidenced by his role as \"Director, Interventional Cardiology Research, Co-Director of Interventional Cardiology and Structural Heart Program\" at Minneapolis VA and his selection as a live case operator at 29+ national/international conferences (tmp0jz73be7.pdf). His most compelling innovation is the first-in-human application of lithotripsy technology to heart valves: \"We successfully performed bench testing followed by First-in-Human cases in Mitral and Aortic valves...This was successfully performed, published and is currently widely adopted\" (tmp0jz73be7.pdf). This represents genuine translational innovation - taking an existing technology (lithotripsy for kidney stones/arteries) and applying it to a new domain (cardiac valves) with measurable clinical impact.\n\nHowever, the application contains substantial fluff that undermines confidence in other claimed qualities. The core competencies section is particularly problematic: \"Critical thinking: Demonstrated daily while performing high-risk, challenging or emergent heart procedures\" and \"Innovation: Published and presented innovative procedures\" are generic statements without specific examples (tmp0jz73be7.pdf). The motivation statement is similarly vague: \"I am interested in the catalyst program to better understand and experience the process that is required to generate and execute innovative ideas\" - this could apply to any applicant and provides no specific vision or concrete goals (tmp0jz73be7.pdf). The live case demonstrations, while impressive in volume, are described in passive voice: \"It also involves tips and tricks and trouble-shooting\" without clarifying Dr. Sharma's specific contributions versus standard procedural teaching (tmp0jz73be7.pdf).\n\nDr. Sharma's recent pursuit of formal research training (\"Post baccalaureate Certificate Program in Clinical Research\" at UMN and \"MSc in Clinical Trials\" at Oxford, tmp0jz73be7.pdf) suggests recognition of gaps in his methodological foundation and genuine commitment to growth. His publication record shows 27 peer-reviewed papers, though many appear as collaborator rather than lead author. The strongest evidence of sustained innovation comes from the valve lithotripsy work, which demonstrates the key qualities the program seeks: creative problem-solving across disciplines, translation of research to practice, and measurable clinical impact. However, the application lacks evidence of entrepreneurial thinking beyond stating interest in \"learning entrepreneurial skills\" (tmp0jz73be7.pdf), and provides minimal concrete examples of how he has \"worked effectively across disciplines\" beyond standard clinical collaboration.",
+  "score_justification": "Dr. Sharma receives a score of 6.5, placing him in the moderate-to-solid range with reservations. The score reflects one clear strength - demonstrated translational innovation with the cardiac valve lithotripsy work - balanced against significant gaps in entrepreneurial experience and evidence quality concerns. The lithotripsy innovation is genuine and impactful: he identified an analogous problem across medical domains, successfully adapted existing technology, conducted proper validation, and achieved clinical adoption. This demonstrates core innovation capability the program seeks. His technical excellence is unquestionable, evidenced by 29+ live case demonstrations at major conferences and leadership of clinical programs. His pursuit of formal research training (Clinical Research Certificate, MSc in Clinical Trials) shows genuine commitment to growth and self-awareness about gaps. However, several factors prevent a higher score: (1) He explicitly states needing to 'learn entrepreneurial skills' rather than demonstrating existing business acumen, with no evidence of commercialization, startup involvement, or business development activities. (2) The application contains substantial fluff - generic claims about 'critical thinking' and 'innovation' without supporting examples, passive voice descriptions that obscure personal contribution, and vague motivation statements. (3) Evidence of cross-disciplinary collaboration is limited to standard clinical team coordination, not the boundary-crossing work the program likely emphasizes. (4) Beyond the lithotripsy work, there's limited evidence of a pattern of innovation - most publications are clinical outcomes studies, and all trial involvement is as sub-investigator in industry-sponsored research. (5) No specific vision or concrete goals for what he would pursue in the program. The score of 6.5 reflects solid clinical innovation potential that needs significant development in entrepreneurial thinking and cross-sector collaboration to fully align with program goals. He appears to be at an earlier stage of innovation career development than ideal, but his growth trajectory and one strong innovation example warrant serious consideration with appropriate support.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "Lithotripsy technique breaks calcium using sound waves and is approved for breaking kidney stones and open blockages in leg arteries...Our logical thinking was that since lithotripsy breaks calcium without damaging normal tissue, it may also be used to modify calcium within heart valves. This had not been performed before. We successfully performed bench testing followed by First-in-Human cases in Mitral and Aortic valves...This was successfully performed, published and is currently widely adopted.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "This demonstrates genuine translational innovation - identifying an analogous problem, adapting existing technology to a new application, conducting systematic validation (bench testing then human trials), and achieving clinical adoption. This is the strongest evidence of innovation potential in the application."
+      },
+      {
+        "quote": "Sharma A, Bertog S, Mbai M. Transcatheter aortic valve lithotripsy in severely calcified bicuspid aortic stenosis prior to transcatheter aortic valve implantation. Eur Heart J. 2021 Jan 21;42(4):358.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "Publication in a top-tier cardiology journal (European Heart Journal) validates the clinical significance of the lithotripsy innovation and demonstrates ability to disseminate novel work to the medical community."
+      },
+      {
+        "quote": "Currently, I am also finishing MSc in Clinical Trials at University of Oxford, UK...This year I completed a post baccalaureate certificate program in clinical research at University of Minnesota School of Public Health.",
+        "source": "tmp0jz73be7.pdf",
+        "context": "Pursuit of formal research methodology training suggests recognition of gaps in systematic innovation capabilities and commitment to developing these skills. However, this also indicates he's still building foundational research competencies rather than having established innovation expertise."
+      },
+      {
+        "quote": "Live Case Primary Operator at 29+ national/international conferences including TCT, SCAI, CSI Congress, Scottsdale Interventional Forum",
+        "source": "tmp0jz73be7.pdf",
+        "context": "While this demonstrates technical mastery and teaching ability, live case demonstrations typically showcase established techniques rather than novel innovations. This is evidence of clinical excellence but not necessarily innovation potential."
+      }
+    ],
+    "reasoning": "Dr. Sharma demonstrates one clear instance of genuine innovation - the cardiac valve lithotripsy application - which shows creative translational thinking. The evidence is specific: \"Lithotripsy technique breaks calcium using sound waves and is approved for breaking kidney stones and open blockages in leg arteries...Our logical thinking was that since lithotripsy breaks calcium without damaging normal tissue, it may also be used to modify calcium within heart valves. This had not been performed before\" (tmp0jz73be7.pdf). This represents true innovation: identifying an analogous problem in a different domain and successfully adapting an existing technology. The fact that it was \"successfully performed, published and is currently widely adopted\" demonstrates real-world impact and validation by the medical community.\n\nHowever, this appears to be an isolated example rather than a pattern of innovation. The rest of the application relies heavily on stated qualities rather than demonstrated innovation. The claim \"Innovation: Published and presented innovative procedures\" in the core competencies section provides no specifics (tmp0jz73be7.pdf). The extensive list of live case demonstrations (29+ conferences) shows technical mastery and teaching ability, but live cases typically demonstrate established techniques rather than novel innovations. The publication list shows 27 papers, but reviewing the titles reveals mostly clinical outcomes studies and case reports rather than methodological innovations or novel technologies. Many publications list Dr. Sharma as a collaborator (e.g., \"listed as SURTAVI investigator\" or \"listed as DIVA investigator\") rather than primary innovator. The lack of patents, startup involvement, or other entrepreneurial activities further suggests innovation potential is moderate rather than high. His pursuit of research training (Clinical Research Certificate, MSc in Clinical Trials) indicates awareness of methodological gaps, which is positive for growth but also confirms he's still developing research innovation capabilities.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Clarify his specific contribution versus collaborators. Assess whether he was the primary innovator or a skilled implementer of others' ideas. Look for concrete details about problem-solving and decision-making.",
+      "category": "Probe claimed innovation",
+      "question": "You describe the cardiac valve lithotripsy work using 'we' throughout. Can you walk me through specifically what YOUR role was in conceiving this idea, designing the approach, conducting the bench testing, and performing the first-in-human cases? What obstacles did you personally overcome?"
+    },
+    {
+      "purpose": "Determine baseline entrepreneurial experience and mindset. Assess whether he has foundational understanding of business concepts or needs significant development. Evaluate self-awareness about gaps.",
+      "category": "Assess entrepreneurial readiness",
+      "question": "You mention wanting to learn entrepreneurial skills through this program. What specific entrepreneurial activities have you engaged in so far, even informally? Have you ever tried to commercialize a medical device, start a company, or develop a business model for a healthcare innovation?"
+    },
+    {
+      "purpose": "Assess actual cross-disciplinary collaboration experience beyond standard clinical team coordination. Look for evidence of ability to bridge different professional cultures and communicate across domains.",
+      "category": "Probe cross-disciplinary collaboration",
+      "question": "Can you describe a specific project where you worked with people outside of cardiology or medicine - perhaps engineers, data scientists, business people, or policymakers - to solve a problem? What was challenging about that collaboration and what did you learn?"
+    },
+    {
+      "purpose": "Move beyond title-listing to understand actual leadership accomplishments. Assess whether he drives change or maintains status quo. Look for evidence of strategic thinking and implementation capability.",
+      "category": "Verify leadership impact",
+      "question": "As Co-Director of the Structural Heart Program and Director of Interventional Research at Minneapolis VA, what specific changes or innovations have you implemented in these leadership roles? What measurable improvements resulted from your leadership?"
+    },
+    {
+      "purpose": "Assess depth of thinking about innovation opportunities. Evaluate whether he has identified specific unmet needs or is generally interested in 'innovation.' Look for evidence of systems thinking and understanding of barriers beyond clinical/technical challenges.",
+      "category": "Explore motivation and vision",
+      "question": "If you had unlimited resources and support from this program, what specific healthcare problem would you tackle and why? Walk me through your vision for how you would approach solving it."
+    },
+    {
+      "purpose": "Understand self-awareness about development needs and ability to translate learning into action. Assess whether formal training is leading to new capabilities or just credential collection.",
+      "category": "Test learning orientation",
+      "question": "You're pursuing both a Clinical Research Certificate and an MSc in Clinical Trials while working full-time. What specific gaps in your knowledge or skills are you trying to address? How do you plan to apply what you're learning?"
+    },
+    {
+      "purpose": "Evaluate ability to learn from setbacks and adapt. Assess whether he has experience with the iterative nature of innovation or has primarily experienced clinical success. Look for growth mindset evidence.",
+      "category": "Assess resilience and learning from failure",
+      "question": "Tell me about an innovation or research project that didn't work out as you hoped. What went wrong, what did you learn, and how did that experience change your approach to subsequent projects?"
+    },
+    {
+      "purpose": "Assess ability to communicate beyond medical peers. Evaluate whether teaching skills transfer to broader stakeholder communication. Look for awareness of different audience needs.",
+      "category": "Probe communication across audiences",
+      "question": "Your live case demonstrations are to other cardiologists. Have you ever had to explain your work to non-medical audiences - investors, hospital administrators, patients, or the general public? How did you adapt your communication approach?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES, but with specific focus areas for the interview. Dr. Sharma merits an interview based on: (1) One clear, validated translational innovation (cardiac valve lithotripsy) that demonstrates core capability to identify problems and create novel solutions with real-world impact. (2) Exceptional technical credentials and peer recognition that provide deep domain expertise. (3) Active pursuit of formal research training showing growth mindset and self-awareness. (4) Strong teaching and communication abilities, though primarily demonstrated with medical audiences. However, the interview must probe critical gaps: his actual role in the lithotripsy innovation versus collaborators, any entrepreneurial activities beyond what's stated, specific examples of cross-disciplinary work, concrete vision for what he would pursue in the program, and evidence of learning from failures. The interview should assess whether his entrepreneurial gap is bridgeable through the program or represents fundamental misalignment. His score of 6.5 is above the threshold, he has no high-severity red flags, and his growth trajectory suggests potential for development. However, he would likely need more structured support in entrepreneurship and business thinking than candidates with prior commercialization experience. The interview will be critical in determining whether he has the foundational mindset and learning agility to rapidly develop these skills, or whether he would be better served by a more clinically-focused research program first."
+}

@@ -1,0 +1,274 @@
+{
+  "candidate": {
+    "candidate_id": "McBride_Sarah_app",
+    "name": null,
+    "materials": [
+      "McBride_Sarah_app.pdf"
+    ],
+    "evaluation_date": "2026-06-11 22:39:36.562776"
+  },
+  "overall_assessment": "Dr. Sarah McBride presents as a highly experienced pediatric hospitalist with 20+ years of clinical practice and a strong track record in quality improvement and clinical guideline development. Her most significant concrete achievement is the creation and validation of the Hospital Asthma Severity Score (HASS), which she describes as \"used in pediatric emergency departments and inpatient settings nationwide\" (McBride_Sarah_app.pdf, CV). This represents genuine systems-level impact with measurable adoption. She also led development of a hospital-wide asthma clinical practice guideline that \"standardized asthma management across the emergency department, ICU, step-down unit, and general pediatric wards\" (Landrigan letter). However, the application contains substantial amounts of generic language and stated qualities without corresponding specific evidence. For example, she claims \"expertise in pathway development, quality improvement, decision support and implementation science\" but provides limited concrete examples of what this expertise produced beyond the asthma work. Her description of the IR Hospitalist Program uses passive voice extensively (\"I coordinated daily hospitalist coverage, scheduling a member of our team\") without clear metrics of impact or specific problems solved. The bronchiolitis adverse events study from 2002-2005 shows early research capability, but the 20-year gap with limited subsequent peer-reviewed publications (only 13 total, with several as co-investigator) raises questions about sustained research productivity. Her letters of recommendation are supportive but contain concerning generic praise: Landrigan describes her as having \"clinical expertise, research excellence, and visionary leadership\" without providing specific examples of the \"visionary\" aspect, and Gaffin calls her \"the epitome of a team-player\" - classic fluff language that could describe anyone.",
+  "innovation_potential": {
+    "level": "medium",
+    "confidence": "medium",
+    "reasoning": "Dr. McBride demonstrates one clear innovation: the Hospital Asthma Severity Score (HASS). The evidence shows she \"conceived and oversaw the development\" of this tool, which was \"systematically validated in collaboration with pediatric pulmonologists and intensivists\" and is now used nationally (Landrigan letter). This represents genuine creative problem-solving that addressed a real clinical need and achieved adoption beyond her institution. The validation work included multiple stakeholder groups and resulted in peer-reviewed publications. However, this appears to be her primary innovation over a 20-year career. Her other work is described in implementation terms (\"led the creation,\" \"assembled and led a committee\") rather than innovation terms. The IR Hospitalist Program description focuses on coordination and scheduling rather than novel approaches to care delivery. Her current research on \"single maintenance and reliever therapy (SMART) at hospital discharge\" is testing an existing approach rather than developing something new. The application contains concerning amounts of stated innovation without evidence: she claims the Catalyst program will help her \"translate clinical insights into high impact technologies\" but provides no examples of technologies she has conceived or developed. Her core competencies list includes \"decision support\" but the only concrete decision support tool mentioned is HASS. The lack of patents, prototypes, or descriptions of failed innovation attempts suggests limited experience with true innovation cycles beyond quality improvement.",
+    "key_evidence": [],
+    "evidence": [
+      {
+        "quote": "Motivated by her frontline observations of fragmented asthma care, Dr. McBride spearheaded the development of a comprehensive, hospital-wide clinical practice guideline that standardized asthma management across the emergency department, ICU, step-down unit, and general pediatric wards at Boston Children's Hospital. As part of this initiative, she conceived and oversaw the development of the Hospital Asthma Severity Score (HASS), a novel tool systematically validated in collaboration with pediatric pulmonologists and intensivists. Today, HASS is used in pediatric emergency departments and inpatient settings nationwide.",
+        "source": "McBride_Sarah_app.pdf (Landrigan letter)",
+        "context": "This demonstrates genuine innovation with measurable impact - she identified a problem (fragmented care), created a novel solution (HASS), validated it rigorously, and achieved national adoption. This is the strongest evidence of innovation capability."
+      },
+      {
+        "quote": "McBride SC, McCarty K, Wong J, Baskin M, Currier D, Chiang V. A pediatric hospital-wide asthma severity score: Reliability and effectiveness. Pediatr Pulmonol. 2022 05; 57(5):1223-1228.",
+        "source": "McBride_Sarah_app.pdf (CV)",
+        "context": "Peer-reviewed publication demonstrating the HASS work resulted in validated, publishable research, not just internal quality improvement."
+      },
+      {
+        "quote": "she collaborated with another group of intensivists, nurses, quality improvement leaders, and pulmonologists to publish a second HASS-lung function validation paper, demonstrating a willingness and aptitude to continually reassess assumptions even in validated instruments.",
+        "source": "McBride_Sarah_app.pdf (Gaffin letter)",
+        "context": "Shows iterative improvement and willingness to test assumptions, which is important for innovation, though this is refinement rather than new innovation."
+      }
+    ]
+  },
+  "program_fit": {
+    "level": "moderate",
+    "confidence": "medium",
+    "detailed_analysis": "Dr. McBride's fit for Catalyst is mixed. On the positive side, she has demonstrated ability to identify clinical needs and develop practical solutions that achieve adoption - the HASS score is clear evidence of this. Her 20 years of clinical experience provide deep domain knowledge of pediatric hospital medicine, and her role as Fellowship Director shows she can lead and teach. She explicitly states interest in \"identifying unmet needs, fostering cross disciplinary teamwork, and promoting rigorous innovation design\" (application), which aligns with Catalyst's mission. However, several concerns emerge. First, her application contains substantial generic language without specific backing: she claims \"expertise in pathway development, quality improvement, decision support and implementation science\" but beyond HASS, the specific pathways, decision support tools, or implementation science methods are not described. Second, her research productivity is limited - 13 peer-reviewed papers over 20+ years, with several as co-investigator rather than lead. Third, her description of moving \"beyond traditional pediatric hospital medicine into procedural and peri-procedural care\" with the IR program uses passive voice and focuses on coordination rather than problem-solving: \"I coordinated daily hospitalist coverage, scheduling a member of our team to round each morning\" - this describes administrative work, not innovation. Fourth, the bronchiolitis adverse events study shows an important quality - willingness to present difficult findings - but the description focuses more on managing resistance than on what was learned or what changed as a result. The statement \"Focusing open, nonjudgmental discussions on collaborative systems improvement rather than individual fault allowed me to present these results thoughtfully\" is somewhat vague about actual outcomes.",
+    "strengths_for_program": [
+      "Demonstrated ability to develop and validate a clinical tool (HASS) that achieved national adoption",
+      "20+ years of frontline clinical experience providing deep understanding of pediatric hospital medicine challenges",
+      "Experience leading multidisciplinary committees and initiatives across multiple hospital units",
+      "Explicit interest in translating clinical insights into technologies and scalable solutions",
+      "Track record of working with diverse stakeholders (physicians, nurses, respiratory therapists, administrators)"
+    ],
+    "concerns": [
+      "Limited research productivity (13 papers over 20+ years) raises questions about ability to execute research projects",
+      "Application contains substantial generic language and stated qualities without specific evidence",
+      "Most work described is quality improvement and guideline implementation rather than true innovation or technology development",
+      "No evidence of experience with engineering, prototyping, or technology development beyond clinical tools",
+      "Unclear whether she can function effectively outside clinical expert role - descriptions often position her as leader/coordinator rather than collaborative team member",
+      "Limited evidence of failed attempts, pivots, or learning from setbacks - mostly describes successes"
+    ],
+    "evidence": [
+      {
+        "quote": "I am seeking further training to better translate clinical insights into high impact technologies for improving pediatric outcomes. My leadership in clinical pathways, EMR innovations, research aimed at optimizing safe and effective discharge for children with medical complexity, algins with Catalyst's focus on identifying unmet needs, fostering cross disciplinary teamwork, and promoting rigorous innovation design.",
+        "source": "McBride_Sarah_app.pdf (application)",
+        "context": "Shows explicit interest in Catalyst's approach, but note the claim of 'EMR innovations' is not substantiated anywhere else in the materials - this is stated expertise without evidence."
+      },
+      {
+        "quote": "I led the creation of the Interventional Radiology (IR) Hospitalist Program at Boston Children's Hospital, stepping beyond traditional pediatric hospital medicine into procedural and peri-procedural care. I coordinated daily hospitalist coverage, scheduling a member of our team to round each morning with the IR service.",
+        "source": "McBride_Sarah_app.pdf (application)",
+        "context": "Demonstrates initiative to expand scope, but the description focuses on coordination and scheduling rather than problem-solving or innovation. Uses passive voice and lacks specific outcomes or metrics."
+      },
+      {
+        "quote": "Her research centers on clinical effectiveness and pragmatic, systems-based approaches to patient safety and quality, particularly for high-risk pediatric inpatients.",
+        "source": "McBride_Sarah_app.pdf (Landrigan letter)",
+        "context": "Aligns with Catalyst's focus on practical impact, but 'systems-based approaches' is vague without specific examples of what systems thinking produced."
+      }
+    ]
+  },
+  "notable_qualities": [
+    {
+      "quality": "Ability to achieve adoption and scale of clinical innovations",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "Today, HASS is used in pediatric emergency departments and inpatient settings nationwide.",
+          "source": "McBride_Sarah_app.pdf (Landrigan letter)",
+          "context": "Clear evidence that her work achieved adoption beyond her own institution, which is rare and valuable."
+        },
+        {
+          "quote": "Assembled and led a multi-division (Emergency Department, Intensive Care Unit, Intermediate Care Unit, Hospital Medicine) and multidisciplinary (physician, nursing, respiratory therapy) committee that created an institution-wide, evidenced-based asthma care model at Boston Children's Hospital for use on all inpatient units, Emergency Department and ICUs",
+          "source": "McBride_Sarah_app.pdf (CV)",
+          "context": "Shows ability to implement across multiple units and disciplines, which requires significant coordination and stakeholder management."
+        }
+      ],
+      "significance": "Catalyst seeks candidates who can move innovations from concept to implementation. This quality is directly relevant and well-demonstrated."
+    },
+    {
+      "quality": "Persistence in addressing challenging clinical problems",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "Dr. McBride has overseen multidisciplinary quality and safety initiatives for inpatient asthma at Boston Children's Hospital for over 15 years.",
+          "source": "McBride_Sarah_app.pdf (Gaffin letter)",
+          "context": "15+ years of sustained focus on asthma care shows commitment to a problem area, though it's unclear how much the work evolved over this time."
+        },
+        {
+          "quote": "Sharing these results was difficult as there was initial resistance from ICU staff and leadership, and fear of blame. It challenged me to better understand and navigate the tension between preserving research integrity and maintaining trust among those impacted by a study's findings.",
+          "source": "McBride_Sarah_app.pdf (application)",
+          "context": "Shows willingness to present difficult findings despite resistance, though the description is somewhat vague about ultimate outcomes."
+        }
+      ],
+      "significance": "Important for Catalyst's iterative, needs-driven process, but evidence is somewhat limited and lacks specifics about how persistence led to breakthroughs."
+    },
+    {
+      "quality": "Collaborative approach with multiple stakeholder types",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "quote": "she effectively communicated high-level asthma management issues to harness the collective input of multiple stakeholders, including patients and families, colleagues in the inpatient and outpatient medical community, and payors (insurers and industry consultants), as well as synthesizing input from expert and lay materials to coordinate formation of the research question",
+          "source": "McBride_Sarah_app.pdf (Gaffin letter)",
+          "context": "Shows engagement with diverse stakeholders including patients, though this is from a current grant application so represents planned rather than completed work."
+        },
+        {
+          "quote": "I collaborated with IR physicians, nurses, and care coordinators to establish standardized workflows that reduced delays and improved patient safety.",
+          "source": "McBride_Sarah_app.pdf (application)",
+          "context": "Demonstrates cross-functional collaboration, but lacks specific metrics or examples of what 'reduced delays' means quantitatively."
+        }
+      ],
+      "significance": "Relevant to Catalyst's interdisciplinary approach, but evidence is somewhat generic and lacks specific examples of how stakeholder input changed her thinking or approach."
+    },
+    {
+      "quality": "Experience with rigorous validation and measurement",
+      "confidence": "high",
+      "evidence": [
+        {
+          "quote": "systematically validated in collaboration with pediatric pulmonologists and intensivists",
+          "source": "McBride_Sarah_app.pdf (Landrigan letter)",
+          "context": "HASS underwent formal validation process with multiple specialties."
+        },
+        {
+          "quote": "Abecassis L, Gaffin J, Forbes P, Schenkel S, McBride S, DeGrazia M. Validation of the Hospital Asthma Severity Score (HASS) in children ages 2-18 years old. (2020). Journal of Asthma.",
+          "source": "McBride_Sarah_app.pdf (CV)",
+          "context": "Published validation study in peer-reviewed journal demonstrates rigorous approach to testing."
+        }
+      ],
+      "significance": "Critical for Catalyst's emphasis on evidence-based innovation and rigorous testing of solutions."
+    }
+  ],
+  "red_flags": [
+    {
+      "flag": "Extensive use of generic, unsubstantiated claims throughout application",
+      "severity": "medium",
+      "evidence": "Application claims 'expertise in pathway development, quality improvement, decision support and implementation science' and 'EMR innovations' but provides no specific examples of pathways developed (beyond asthma), decision support tools created (beyond HASS), or EMR innovations implemented. Landrigan letter describes her as having 'visionary leadership' without any examples of what makes her vision unique or transformative. Gaffin letter calls her 'the epitome of a team-player' - classic fluff language."
+    },
+    {
+      "flag": "Limited research productivity over 20+ year career",
+      "severity": "medium",
+      "evidence": "CV shows only 13 peer-reviewed publications from 2002-2024, with several as co-investigator rather than lead author. For someone with 20+ years in academic medicine at Harvard/Boston Children's, this is below expected productivity. Most recent first-author publication on HASS was 2022, with a 2018 osteomyelitis paper before that - suggesting limited sustained research output."
+    },
+    {
+      "flag": "Passive voice and vague descriptions of contributions in key experiences",
+      "severity": "medium",
+      "evidence": "IR Hospitalist Program description: 'I coordinated daily hospitalist coverage, scheduling a member of our team to round each morning' - focuses on administrative tasks rather than problems solved. 'This integration allowed us to proactively identify clinical issues' - passive voice, unclear what she personally contributed vs. what the system enabled. 'reduced delays and improved patient safety' - no metrics provided. Bronchiolitis study outcome: 'Focusing open, nonjudgmental discussions on collaborative systems improvement rather than individual fault allowed me to present these results thoughtfully' - what actually changed as a result?"
+    },
+    {
+      "flag": "Single major innovation (HASS) over 20-year career raises questions about innovation capacity",
+      "severity": "medium",
+      "evidence": "HASS is clearly a significant achievement, but it's the only concrete innovation described. Other work is described as 'leading committees,' 'assembling guidelines,' 'coordinating programs' - implementation and quality improvement rather than innovation. No mention of other tools developed, technologies created, or novel approaches tested. For Catalyst, which seeks innovation potential, relying on a single example from years ago is concerning."
+    },
+    {
+      "flag": "Unclear evidence of functioning outside clinical expert role",
+      "severity": "low",
+      "evidence": "Most descriptions position her as leader, coordinator, or director: 'Program Director,' 'Clinical Director,' 'led the creation,' 'assembled and led a committee,' 'oversaw multidisciplinary quality and safety initiatives.' Limited evidence of her working as an equal team member or learning from non-clinical experts. Catalyst requires clinicians to collaborate as one member of interdisciplinary team, not dominate as clinical expert."
+    },
+    {
+      "flag": "Application contains stated motivation without demonstrated action",
+      "severity": "low",
+      "evidence": "States she is 'seeking further training to better translate clinical insights into high impact technologies' but provides no examples of technologies she has attempted to develop or translate. Claims interest in 'scalable solutions that drive improvement in outcomes for vulnerable pediatric populations' but beyond HASS, no evidence of scaled solutions. This is stated passion rather than demonstrated commitment."
+    },
+    {
+      "flag": "Missing evidence of learning from failure or iteration beyond refinement",
+      "severity": "low",
+      "evidence": "Application describes successes (HASS adoption, guideline implementation, navigating resistance) but no examples of failed attempts, major pivots, or learning from setbacks. The HASS validation work shows refinement of a successful tool, but no evidence of trying approaches that didn't work and learning from them. Innovation requires comfort with failure."
+    }
+  ],
+  "questions_for_interview": [
+    {
+      "category": "Probe claimed skill",
+      "question": "You mention expertise in 'EMR innovations' and 'decision support' in your application. Beyond HASS, what other decision support tools or EMR innovations have you developed or implemented? Walk me through a specific example from conception to implementation.",
+      "purpose": "Test whether claimed expertise is real or application fluff. HASS is the only concrete example provided - need to know if there are others or if this is overstated capability."
+    },
+    {
+      "category": "Assess innovation capacity",
+      "question": "Tell me about a clinical innovation or technology you tried to develop that failed or didn't work as expected. What did you learn, and what did you do differently as a result?",
+      "purpose": "Assess comfort with failure and learning from setbacks. Application only describes successes. True innovators have failures and learn from them."
+    },
+    {
+      "category": "Verify experience",
+      "question": "You described leading the IR Hospitalist Program. What specific problem were you trying to solve, and how did you measure whether the program succeeded? What were the quantitative outcomes?",
+      "purpose": "The application description is vague and focuses on coordination rather than problem-solving. Need to understand if this was genuine innovation or just administrative work."
+    },
+    {
+      "category": "Test fit - interdisciplinary collaboration",
+      "question": "Describe a situation where input from a non-clinical team member (engineer, designer, patient, administrator) fundamentally changed your understanding of a problem or your approach to solving it. What did you learn that you wouldn't have discovered from clinical expertise alone?",
+      "purpose": "Assess whether she can truly collaborate as an equal team member vs. dominating as clinical expert. Most descriptions position her as leader/coordinator."
+    },
+    {
+      "category": "Explore concern - research productivity",
+      "question": "Looking at your CV, you have 13 peer-reviewed publications over 20+ years, with the most recent first-author paper in 2022. What has limited your research output, and what would be different about your approach in Catalyst?",
+      "purpose": "Directly address the low research productivity concern. Need to understand if there are legitimate reasons (clinical demands, institutional barriers) or if this reflects limited research capability."
+    },
+    {
+      "category": "Probe claimed skill - systems thinking",
+      "question": "You mention 'systems-based approaches' to patient safety. Walk me through a specific example where you mapped out the full system surrounding a clinical problem - who were the stakeholders, what were the incentives and constraints, and how did understanding the system change your intervention?",
+      "purpose": "Test whether 'systems thinking' is real or buzzword. Need concrete example of analyzing a system beyond the immediate clinical interaction."
+    },
+    {
+      "category": "Assess motivation and self-awareness",
+      "question": "You've been in academic medicine for over 20 years. Why seek innovation training now? What specific gap in your skillset are you trying to fill, and why couldn't you fill it through your current role?",
+      "purpose": "Understand true motivation and self-awareness. Is this genuine recognition of a gap, or is she looking for credentials/prestige?"
+    },
+    {
+      "category": "Verify experience - stakeholder engagement",
+      "question": "You mention engaging patients and families as stakeholders in your current SMART discharge study. Give me a specific example of how patient input changed your research question, study design, or planned intervention. What did they tell you that surprised you?",
+      "purpose": "Test whether patient engagement is real or checkbox activity. The Gaffin letter describes this as planned work for a grant application, not completed work - need to know if she has actual experience."
+    }
+  ],
+  "overall_score": 6.2,
+  "score_justification": "Dr. McBride receives a score of 6.2, placing her in the 'moderate' range with potential fit but significant reservations. The score is anchored by one clear strength: the development and national adoption of HASS demonstrates genuine innovation capability, stakeholder collaboration, rigorous validation, and ability to achieve scale - all critical for Catalyst. This single achievement, supported by peer-reviewed publications and external validation, prevents a lower score. However, multiple factors limit the score: (1) This appears to be her only major innovation over a 20+ year career, raising questions about sustained innovation capacity. (2) Research productivity is low (13 papers over 20+ years), suggesting potential challenges with executing research projects in Catalyst's timeframe. (3) The application contains substantial generic language and stated qualities without evidence ('EMR innovations,' 'visionary leadership,' 'expertise in decision support') that would normally warrant scores of 1-3 for those specific claims. (4) Descriptions of other work use passive voice and lack specific metrics, making it difficult to assess actual contributions vs. coordination. (5) No evidence of learning from failure or iteration beyond refinement of successful tools. The score reflects that she has demonstrated some relevant capabilities (innovation with HASS, implementation across units, stakeholder management) but lacks breadth of evidence across Catalyst's requirements. She is above the threshold for interview (6.0) because the HASS work is substantial and her clinical experience is deep, but the concerns are significant enough that she would need to address them convincingly in an interview to be competitive.",
+  "recommendation": "Potential fit with reservations",
+  "interview_decision": true,
+  "interview_decision_reasoning": "Recommend interview with significant reservations. The decision to interview is based primarily on the strength of the HASS achievement, which demonstrates several Catalyst-relevant capabilities: identifying an unmet need (fragmented asthma care), developing a novel solution, validating it rigorously with multiple stakeholders, and achieving national adoption. This is concrete evidence of innovation impact that goes beyond typical quality improvement work. Her 20+ years of clinical experience also provides deep domain knowledge that could be valuable for needs identification. However, the interview should be viewed as an opportunity to probe significant concerns rather than a strong endorsement. Key questions to resolve: (1) Is HASS a one-time achievement or does she have other examples of innovation that weren't included in the application? (2) Can she provide concrete examples of the claimed 'EMR innovations' and 'decision support' expertise? (3) What explains the limited research productivity, and does she have the capability to execute research in Catalyst's timeframe? (4) Can she function as an equal team member rather than clinical expert/leader? (5) Does she have experience learning from failure and iterating on ideas? If she cannot provide satisfactory answers to these questions, she should not be admitted despite the HASS achievement. The score of 6.2 reflects that she is borderline - strong enough in one area to warrant further investigation, but with enough concerns that she could easily fall below the threshold after interview.",
+  "role": "clinician",
+  "role_specific_assessment": {
+    "role": "clinician",
+    "marker": "Clinical need identification and systems thinking",
+    "score": 6.0,
+    "confidence": "medium",
+    "reasoning": "Dr. McBride demonstrates moderate capability in recognizing clinical needs and developing practical solutions, with her strongest evidence being the HASS work. She identified a genuine systems problem - 'fragmented asthma care' across multiple units - and developed a standardized tool that addressed it. The fact that HASS achieved national adoption suggests she understood the need broadly enough that it resonated beyond her institution. However, the evidence for deep systems thinking is mixed. The HASS work shows she understood the need to coordinate across ED, ICU, step-down, and general wards, and engaged multiple stakeholder types (physicians, nurses, respiratory therapists). But the descriptions lack specifics about what she learned from each stakeholder group or how their input changed her approach. The bronchiolitis adverse events study shows she can identify safety problems and navigate institutional resistance, but the description focuses more on managing relationships than on what systemic factors caused the higher ICU error rates or what interventions resulted. The IR Hospitalist Program description is concerning - it focuses on coordination and scheduling rather than identifying an unmet need or understanding why the previous system failed. Most problematically, her application contains stated systems thinking ('systems-based approaches to patient safety') without concrete examples of mapping stakeholder incentives, constraints, or workflows beyond the immediate clinical interaction. For Catalyst, she would need to demonstrate ability to investigate needs more deeply - understanding not just that a problem exists, but why it persists, what barriers prevent solutions, and how different stakeholders experience it differently.",
+    "evidence": [
+      {
+        "quote": "Motivated by her frontline observations of fragmented asthma care, Dr. McBride spearheaded the development of a comprehensive, hospital-wide clinical practice guideline that standardized asthma management across the emergency department, ICU, step-down unit, and general pediatric wards at Boston Children's Hospital.",
+        "source": "McBride_Sarah_app.pdf (Landrigan letter)",
+        "context": "Shows she recognized a systems problem (fragmentation across units) rather than just a clinical problem. The hospital-wide scope suggests understanding that the issue required coordination across multiple care settings."
+      },
+      {
+        "quote": "This study's results showed significantly higher rates of adverse events and medical errors in ICU patients compared to those on general pediatric units. Sharing these results was difficult as there was initial resistance from ICU staff and leadership, and fear of blame.",
+        "source": "McBride_Sarah_app.pdf (application)",
+        "context": "Demonstrates ability to identify a safety problem through investigation and willingness to present difficult findings. However, the description doesn't explain what caused the higher ICU error rates or what systemic changes resulted from the findings."
+      },
+      {
+        "quote": "I collaborated with IR physicians, nurses, and care coordinators to establish standardized workflows that reduced delays and improved patient safety. Acting as both liaison and operational lead, I helped create a reliable system that enhanced patient flow, strengthened interdisciplinary relationships, and improved the experience for families navigating complex procedures.",
+        "source": "McBride_Sarah_app.pdf (application)",
+        "context": "Shows engagement with multiple stakeholder types and focus on workflow, but lacks specifics about what delays existed, why they occurred, or how the solution addressed root causes. The passive voice ('reduced delays,' 'improved patient safety') makes it unclear what she personally contributed vs. what the system enabled."
+      }
+    ],
+    "evidence_gaps": [
+      "No specific examples of how stakeholder input (patients, nurses, other disciplines) changed her understanding of a problem or her approach to solving it",
+      "Limited evidence of investigating why problems persist - descriptions focus on solutions implemented rather than root cause analysis",
+      "No examples of considering institutional incentives, reimbursement structures, or regulatory constraints in problem-framing",
+      "Unclear whether she has experience working on needs outside her specialty area (asthma, respiratory illness) or if she can only identify needs within her domain expertise",
+      "No evidence of failed interventions or learning from implementation barriers - only describes successes",
+      "Missing details about how she measured impact beyond adoption (patient outcomes, cost, equity, provider experience)"
+    ],
+    "research_evidence_level": null,
+    "publication_strength": null,
+    "research_ownership": null,
+    "challenge_complexity": "moderate",
+    "need_investigation_stage": "tested_or_implemented",
+    "systems_thinking": "moderate",
+    "build_stage": null,
+    "ownership_clarity": null,
+    "user_grounding": null
+  },
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "processing_time_seconds": 164.85347604751587,
+    "materials_character_count": 33246,
+    "timestamp": "2026-06-11T22:39:36.563590",
+    "evaluation_mode": "holistic_enhanced"
+  }
+}

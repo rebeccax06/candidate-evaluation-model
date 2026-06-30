@@ -1,0 +1,263 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T21:43:16.160459",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 155.917733669281,
+    "materials_character_count": 15468
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmph38ehx8b.pdf"
+    ],
+    "candidate_id": "_Goldberg_Jeremy_app",
+    "evaluation_date": "2026-03-16 21:43:16.160350"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on stated qualities without concrete evidence - application contains significant fluff that undermines credibility",
+      "evidence": "Multiple examples: \"I am a huge proponent of the use of AI in medical technology\" with zero demonstrated AI work; \"I constant seek new ways to improve our care and services\" with no specific improvements described; Letters state he is \"extremely creative\" and has \"unique ability to see problems as opportunities\" yet provide zero specific examples of what he created or what problems he solved; \"innovative thinking\" and \"expertise in evidence-based psychotherapy\" claimed but not demonstrated with concrete projects or outcomes.",
+      "severity": "high"
+    },
+    {
+      "flag": "No evidence of research experience, publications, or systematic evaluation - critical gap for research and innovation program",
+      "evidence": "CV contains no publications, research projects, grants, or systematic program evaluations. Application mentions training in therapeutic modalities but no evidence of contributing to the evidence base or conducting original research. For a program focused on innovation and research, this is a fundamental gap.",
+      "severity": "high"
+    },
+    {
+      "flag": "Single innovation example (hackathon) with minimal detail about individual contribution or follow-through",
+      "evidence": "\"my team received 2nd place\" - team achievement, unclear individual contribution; \"I was the presenter for it\" - suggests communication role but not necessarily innovation leadership; No mention of what happened after hackathon, whether solution was implemented, or what he learned that he applied subsequently. One data point is insufficient to establish innovation capability.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Recommendation letters provide generic praise without specific examples - classic pattern of weak letters",
+      "evidence": "Dr. Herman: \"extremely creative\" and \"unique ability to see problems as opportunities for positive change in a truly out of the box manner\" with zero examples of what he created or changed; \"turns it on its head and makes it work again, much in the nature of a Thomas Kuhn\" - extraordinarily high praise (comparing to famous philosopher of scientific revolutions) with no supporting evidence; Dr. Boyer: \"outstanding ability to develop innovative systems\" with no systems named or described; \"deep and broad\" knowledge claimed but no specific contributions to field mentioned.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of cross-disciplinary work - entire career within single domain",
+      "evidence": "CV shows 15+ years exclusively in mental health social work within VA system. No evidence of collaboration with other disciplines (engineering, data science, design, etc.) despite stated interest in technology. Marching arts work is extracurricular and doesn't demonstrate professional interdisciplinary collaboration. For a program emphasizing cross-disciplinary innovation, this is concerning.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Passive voice and vague language throughout application suggests unclear role or limited agency",
+      "evidence": "\"I was able to use my passion\" (passive); \"improvements were made\" (who made them?); \"a system that could assist\" (was it built? implemented?); \"I constant seek new ways\" (what ways? what did you find?); \"implement these improvements into my own clinical care\" (what improvements? what were outcomes?). Pattern of vague, passive construction makes it difficult to assess actual contributions.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of technical skills despite stated interest in AI and technology",
+      "evidence": "Claims to be \"a huge proponent of the use of AI in medical technology\" but CV shows no programming, data analysis, technical training, or technology projects. No evidence of self-directed learning in technical domains. Interest appears aspirational rather than demonstrated through action or skill development.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear learning and adaptation trajectory - limited evidence of growth based on feedback or evidence",
+      "evidence": "Application mentions \"seeing the process of our problem and solution change\" at hackathon but provides no detail about what changed or why. No examples of adapting approach based on data, feedback, or new evidence. Training in established therapeutic modalities shows professional development but not necessarily evidence-based adaptation or innovation.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "No evidence of research experience, publications, or systematic evaluation of interventions - critical gap for a research and innovation program",
+      "Limited evidence of cross-disciplinary collaboration; entire professional career within single domain (mental health social work)",
+      "Minimal concrete examples of innovation beyond single hackathon participation; unclear what happened with hackathon project after the event",
+      "Heavy reliance on stated qualities rather than demonstrated achievements; application contains significant fluff",
+      "No evidence of technical skills development despite stated interest in AI and technology; claims appear aspirational rather than demonstrated",
+      "Unclear learning trajectory - CV shows training in established modalities but no evidence of developing new approaches or adapting based on evidence"
+    ],
+    "evidence": [
+      {
+        "quote": "I enjoyed working collaboratively with my team and seeing the process of our problem and solution change.",
+        "source": "tmph38ehx8b.pdf - Page 1",
+        "context": "Shows appreciation for iterative problem-solving and team collaboration, which aligns with program values. However, this is reflection on a single experience, not a pattern."
+      },
+      {
+        "quote": "Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted.",
+        "source": "tmph38ehx8b.pdf - Page 2",
+        "context": "From marching arts experience. Demonstrates collaborative mindset and willingness to defer to better ideas, which is valuable for team-based innovation. However, this is from extracurricular work, not professional innovation."
+      },
+      {
+        "quote": "Mr. Goldberg is a true collaborator. Is he using his Social Work skills when he chairs or participates in committees? I do not know, but I know that all committees on which I have participated with him are collegial, collaborative, devoid of petty bickering and politics, and respectful to all.",
+        "source": "tmph38ehx8b.pdf - Page 5 (Dr. Herman letter)",
+        "context": "Provides third-party validation of collaborative skills in professional setting. However, this describes process management, not innovation outcomes."
+      },
+      {
+        "quote": "I am a huge proponent of the use of AI in medical technology and I see its place in our future as clear as I can see today.",
+        "source": "tmph38ehx8b.pdf - Page 2",
+        "context": "States interest in emerging technology relevant to program focus. However, this is pure aspiration with no demonstrated work, projects, or even self-directed learning mentioned. Red flag for stated vs. demonstrated."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Goldberg's fit with the program is mixed, with some alignment on collaboration and communication but significant gaps in demonstrated innovation and cross-disciplinary work. On the positive side, he shows genuine enthusiasm for collaborative innovation processes, stating \"I love being a part of a team that can go through a process of creating something out of nothing\" and \"I enjoyed working collaboratively with my team and seeing the process of our problem and solution change\" (hackathon reflection). His marching arts leadership demonstrates ability to work with diverse teams and manage collaborative creative processes. He explicitly states he was \"the presenter\" for his hackathon team, suggesting communication capability. His management role overseeing multiple programs (ICMHR, Marriage and Family Therapy, PRRC, ARMOR, Vocational Rehabilitation) indicates some breadth of experience, though all within mental health. However, critical gaps emerge when examining evidence for core program requirements. For 'translate research into practical impact,' there is no evidence of research activity - his CV shows no publications, research projects, or systematic evaluation of interventions. For 'work across disciplines,' his entire career has been within social work/mental health; the marching arts work is extracurricular but doesn't demonstrate professional interdisciplinary collaboration. For 'sustained commitment to challenging problems,' his 15+ years at the VA shows organizational commitment, but the application provides no evidence of tackling a specific challenging problem over time with measurable progress. The claim that he 'constant seek new ways to improve our care and services and implement these improvements into my own clinical care' is vague and unsupported by examples. For 'learn, grow, and adapt based on feedback,' the only evidence is the hackathon statement about seeing 'the process of our problem and solution change,' which is minimal. His training in established therapeutic modalities (MI, ACT, EMDR) shows professional development but not necessarily innovation or adaptation based on evidence.",
+    "strengths_for_program": [
+      "Demonstrated enthusiasm for collaborative innovation processes, evidenced by hackathon participation and positive reflection on team-based problem-solving",
+      "Management experience overseeing multiple programs suggests organizational capability and ability to coordinate complex initiatives",
+      "Communication skills indicated by presentation role at hackathon and teaching/training experience",
+      "Long-term commitment to VA system and veteran mental health (15+ years) shows sustained focus on mission-driven work"
+    ]
+  },
+  "overall_score": 5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Collaborative Team Leadership",
+      "evidence": [
+        {
+          "quote": "all committees on which I have participated with him are collegial, collaborative, devoid of petty bickering and politics, and respectful to all. Despite many of these committees dealing with some very highly charged topics, I have seen Mr. Goldberg work skillfully to keep tensions managed and all participants feeling comfortable and heard.",
+          "source": "tmph38ehx8b.pdf - Page 5 (Dr. Herman letter)",
+          "context": "Third-party observation of specific behavior pattern in professional committees dealing with difficult topics."
+        },
+        {
+          "quote": "Coordinating these programs is a collaborative and evolutionary process in which success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted.",
+          "source": "tmph38ehx8b.pdf - Page 2",
+          "context": "Demonstrates ego-free approach to collaborative work and willingness to support better ideas regardless of source."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Strong collaborative skills are essential for the program's team-based innovation approach. His ability to manage group dynamics in high-stakes situations would be valuable for cohort-based learning and team projects."
+    },
+    {
+      "quality": "Communication and Presentation Skills",
+      "evidence": [
+        {
+          "quote": "My hackathon group received 2nd place and I was the presenter for it.",
+          "source": "tmph38ehx8b.pdf - Page 2",
+          "context": "Selected by team to present their work in competitive setting, suggesting trust in his communication abilities."
+        },
+        {
+          "quote": "I enjoy getting up in front of a crowd to talk about things that I am passionate for.",
+          "source": "tmph38ehx8b.pdf - Page 2",
+          "context": "Self-reported comfort with public speaking. Combined with presentation role, suggests capability, though no evidence of effectiveness."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "The program values ability to communicate complex ideas to varied audiences. His comfort with presentation and teaching experience could support knowledge sharing within cohort and external stakeholder engagement."
+    },
+    {
+      "quality": "Sustained Organizational Commitment",
+      "evidence": [
+        {
+          "quote": "Licensed Clinical Social Worker in Specialty Mental Health (GS11 Step 5) August 2009 – June 2015... Social Work Supervisor (GS12 Step 6) June 2015 – June 2021... Mental Health Social Work Section Manager (GS13 Step 4) June 2021 – Present",
+          "source": "tmph38ehx8b.pdf - Page 3-4 (CV)",
+          "context": "15+ years at same organization with progressive advancement through three distinct levels, demonstrating sustained commitment and organizational trust."
+        },
+        {
+          "quote": "I have been an instructor and adjudicator in the marching arts since 2003.",
+          "source": "tmph38ehx8b.pdf - Page 2",
+          "context": "21+ years of sustained engagement in extracurricular teaching and leadership role, showing pattern of long-term commitment."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates ability to sustain focus on mission-driven work over extended periods. However, this is a double-edged sword - long tenure in single organization may indicate limited exposure to diverse approaches and innovation cultures."
+    },
+    {
+      "quality": "Enthusiasm for Innovation Processes",
+      "evidence": [
+        {
+          "quote": "I love being a part of a team that can go through a process of creating something out of nothing. I enjoy having a creative outlet where I can provide my expertise while learning from the expertise of others.",
+          "source": "tmph38ehx8b.pdf - Page 1",
+          "context": "Expresses genuine enthusiasm for collaborative creation and learning from others. Tone suggests authentic interest rather than formulaic application language."
+        },
+        {
+          "quote": "This type of program is how change happens and I love being a part of positive change as a manager, provider, teacher, and Social Worker.",
+          "source": "tmph38ehx8b.pdf - Page 1",
+          "context": "Connects innovation to multiple professional identities, suggesting integrated view of change-making across roles."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Genuine enthusiasm for innovation processes is important for program engagement and persistence through challenges. However, enthusiasm alone doesn't predict innovation capability - needs to be paired with demonstrated skills."
+    },
+    {
+      "quality": "Training and Knowledge Transfer Experience",
+      "evidence": [
+        {
+          "quote": "Trainer and Consultant for Motivational Interviewing & Motivational Enhancement Therapy 2013-2019... Co-Facilitator for Health Disease and Prevention Motivational Interviewing Series 2012-2019... Co-Facilitator for Local VA Staff in Acceptance and Commitment Therapy 2016-2018",
+          "source": "tmph38ehx8b.pdf - Page 3 (CV)",
+          "context": "Multiple years of formal training delivery to professional audiences across different therapeutic modalities."
+        },
+        {
+          "quote": "the largest contribution I have made is developing other leaders and educators to continue to provide the knowledge that was shared with me.",
+          "source": "tmph38ehx8b.pdf - Page 2",
+          "context": "Identifies knowledge transfer and leadership development as primary contribution in marching arts work."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Experience training others and transferring knowledge could be valuable for disseminating innovations developed through the program. However, all training appears to be in established methodologies, not novel approaches he developed."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Jeremy Goldberg presents as a mid-career mental health professional with management experience in the VA system. His application reveals a pattern of stated qualities with limited concrete evidence of the specific competencies this program seeks. While he demonstrates genuine enthusiasm for innovation (evidenced by his 2024 MIT VA Hackathon participation where his team \"received 2nd place in the Suicide Prevention track\"), the materials provide minimal detail about his actual contributions to that achievement or other innovative work. His CV shows progression from clinical social worker (2009) to supervisor (2015) to section manager (2021), indicating career advancement within a single organization. However, the application relies heavily on generic descriptors and passive voice. For example, he states he is \"the subject matter expert for social worker in mental health\" and \"train[s] therapist in the most up to date therapies,\" but provides no specific examples of what innovations he has introduced, what outcomes resulted, or what methodologies he employed. His letters of recommendation, while positive, follow a concerning pattern of generic praise. Dr. Herman writes that Goldberg \"has shown himself to be extremely creative\" and has \"a unique ability to see problems as opportunities for positive change in a truly out of the box manner,\" yet provides zero specific examples of what he created or what problems he solved. Dr. Boyer similarly states he has \"an outstanding ability to develop innovative systems\" but offers no concrete instances. The most substantive evidence comes from his marching arts instruction experience (2003-present), where he notes \"several gold medals from groups that I have guided\" and emphasizes collaborative process, though again without specific innovations described. His stated interest in \"AI in medical technology\" appears genuine but undeveloped in the materials. The application contains significant fluff that undermines credibility: claims of being a \"huge proponent of the use of AI\" without demonstrating any actual work with AI, statements about \"passion for technology and suicide prevention\" without concrete projects beyond the single hackathon, and supervisor praise that could describe almost anyone (\"collaborative spirit,\" \"interpersonal skills,\" \"dedication and expertise\").",
+  "score_justification": "This score reflects a candidate with moderate potential but significant gaps in demonstrated innovation capability. The positive elements include: (1) genuine enthusiasm for collaborative innovation processes, evidenced by his hackathon participation and reflective comments about team-based problem-solving; (2) strong collaborative leadership skills validated by third-party observation; (3) sustained organizational commitment and progressive career advancement; (4) communication and training experience that could support knowledge transfer. However, these positives are substantially outweighed by concerns: (1) Heavy reliance on stated qualities rather than demonstrated achievements - the application and letters contain significant fluff with generic praise unsupported by specific examples; (2) Only one concrete innovation example (hackathon) with minimal detail about individual contribution or follow-through; (3) Complete absence of research experience, publications, or systematic evaluation - a critical gap for a research and innovation program; (4) No evidence of cross-disciplinary collaboration despite program emphasis on this; (5) Stated interest in AI and technology without any demonstrated technical work, learning, or application; (6) Passive voice and vague language throughout materials makes it difficult to assess actual contributions vs. participation. The score of 5.0 places him in the 'moderate' range - he shows some relevant qualities (collaboration, enthusiasm, communication) but lacks demonstrated innovation capability and research foundation that would be expected for a competitive fellowship. He appears to be someone who could potentially develop these capabilities but would require significant growth. The single hackathon experience is insufficient to establish innovation track record, and the gap between the extraordinarily high praise in letters (comparing him to Thomas Kuhn) and the absence of concrete supporting examples is a major credibility concern. A score of 5.0 reflects that this is a borderline candidate who merits an interview to probe whether there are genuine capabilities not captured in the materials, but who would need to provide substantial additional evidence to be competitive.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "I had an excellent experience at the 2024 VA MIT Hackathon and my team received 2nd place in the Suicide Prevention track.",
+        "source": "tmph38ehx8b.pdf - Page 1",
+        "context": "This is the only concrete innovation achievement mentioned, though details about his specific contribution are absent. Second place in a competitive track suggests some capability, but team achievement doesn't clarify individual innovation contribution."
+      },
+      {
+        "quote": "As a recent Hackathon participant I was able to use my passion for technology and suicide prevention to develop a system that could assist in identify suicide risk as well as leading providers to respond to these risk appropriately.",
+        "source": "tmph38ehx8b.pdf - Page 1",
+        "context": "Uses passive voice ('was able to') and provides no technical details, implementation specifics, or outcomes. The phrase 'develop a system' is vague - unclear if this was a prototype, concept, or implemented solution."
+      },
+      {
+        "quote": "Success comes from the willingness to try new ideas even if it means they could fail.",
+        "source": "tmph38ehx8b.pdf - Page 2",
+        "context": "From marching arts experience. This is a stated philosophy about innovation, not demonstrated innovation. Shows mindset but not action."
+      },
+      {
+        "quote": "Mr. Goldberg has shown himself to be extremely creative. He has a unique ability to see problems as opportunities for positive change in a truly out of the box manner.",
+        "source": "tmph38ehx8b.pdf - Page 5 (Dr. Herman letter)",
+        "context": "Generic praise with zero specific examples. This is exactly the type of fluff that should be discounted heavily. What problems? What solutions? What was 'out of the box' about them?"
+      }
+    ],
+    "reasoning": "The evidence for innovation potential is thin and largely inferential. The strongest concrete indicator is his hackathon participation: \"I had an excellent experience at the 2024 VA MIT Hackathon and my team received 2nd place in the Suicide Prevention track.\" However, the application provides no detail about what he specifically contributed versus what his teammates did, what the solution actually was, or what happened after the hackathon. He mentions being \"the presenter for it,\" which suggests communication skills but not necessarily innovation leadership. His stated role in developing \"a system that could assist in identify suicide risk as well as leading providers to respond to these risk appropriately\" uses passive construction and lacks specifics about the technical approach, implementation challenges, or outcomes. His claim of being \"a huge proponent of the use of AI in medical technology\" is entirely unsupported by concrete work - this is pure fluff. The marching arts experience shows some creative thinking in a different domain, noting that \"success is created through the humility to know that the best idea is the one that should move forward knowing that it may not be the idea I wanted,\" which demonstrates collaborative innovation mindset, but this is stated philosophy rather than demonstrated innovation. His CV mentions training others in Motivational Interviewing, ACT, and EMDR, but these are established therapeutic modalities - there's no evidence he innovated within these frameworks or developed new approaches. The letters claim he \"turns [the status quo] on its head and makes it work again, much in the nature of a Thomas Kuhn\" (Dr. Herman), which is extraordinarily high praise, yet neither letter provides a single specific example of what he actually turned on its head. This disconnect between stated qualities and demonstrated evidence is a significant concern.",
+    "confidence": "low",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Assess actual technical contribution vs. team member contribution, understand depth of innovation work, and evaluate follow-through. This will reveal whether he led technical development or played a different role (communication, domain expertise, etc.).",
+      "category": "Probe claimed skill",
+      "question": "You mentioned developing a system at the hackathon to assist in identifying suicide risk. Can you walk me through the technical approach you took, what your specific role was in developing it, and what happened with the project after the hackathon ended?"
+    },
+    {
+      "purpose": "Test whether the generic praise in letters is backed by concrete achievements. If he cannot provide specific examples with measurable outcomes, this confirms the letters are fluff. Looking for evidence of actual innovation vs. incremental improvement.",
+      "category": "Verify experience",
+      "question": "Your letter writers describe you as 'extremely creative' with ability to turn the status quo 'on its head.' Can you give me two specific examples of systems or processes you fundamentally redesigned, what the problem was, what you changed, and what the measurable outcomes were?"
+    },
+    {
+      "purpose": "Evaluate cross-disciplinary collaboration experience and capability. His materials show no evidence of this, so this question will reveal whether it's a gap in the application or a gap in experience. Also assesses learning orientation.",
+      "category": "Assess fit",
+      "question": "This program involves significant cross-disciplinary collaboration - working with engineers, data scientists, designers, and others outside your field. Can you describe a time when you worked closely with someone from a completely different discipline to solve a problem? What was challenging about it and what did you learn?"
+    },
+    {
+      "purpose": "Distinguish between aspirational interest and demonstrated engagement. Will reveal whether his AI interest is backed by any self-directed learning, experimentation, or application, or whether it's purely conceptual interest without action.",
+      "category": "Probe claimed skill",
+      "question": "You describe yourself as a 'huge proponent of AI in medical technology.' What specific AI applications or tools have you used, experimented with, or studied? What technical learning have you done in this area?"
+    },
+    {
+      "purpose": "Understand motivation for program and whether he's seeking genuine growth/change or just another credential. Long tenure in one organization can indicate deep commitment or limited exposure to diverse approaches. Will reveal whether he's ready for the discomfort of innovation work.",
+      "category": "Assess motivation",
+      "question": "You've been at the Orlando VA for 15 years, progressing through multiple roles. What has kept you there, and what are you hoping to gain from this program that you couldn't achieve in your current trajectory at the VA?"
+    },
+    {
+      "purpose": "Directly address the research experience gap. Give him opportunity to explain any research work not captured in materials, but also assess whether he understands what research entails and whether he's prepared for this aspect of the program.",
+      "category": "Explore concern",
+      "question": "Looking at your CV, I don't see any publications, research projects, or systematic program evaluations. This program has a significant research component. How do you think about the relationship between research and practice, and what research experience do you have that might not be reflected in your CV?"
+    },
+    {
+      "purpose": "Assess learning from failure, resilience, and whether he has actually attempted innovation beyond the single hackathon. His materials emphasize success (2nd place, gold medals) but innovation requires comfort with failure. Will reveal depth of innovation experience.",
+      "category": "Test fit",
+      "question": "Tell me about a time when you tried to innovate or implement a new approach and it failed. What happened, what did you learn, and what did you do differently next time?"
+    },
+    {
+      "purpose": "Test whether vague claims about continuous improvement are backed by systematic approach to innovation. Looking for evidence of problem identification, hypothesis testing, measurement, and iteration - core innovation skills.",
+      "category": "Verify experience",
+      "question": "You mention constantly seeking new ways to improve care and implementing improvements in your clinical practice. Can you describe the most significant improvement you've implemented in the last two years, how you identified the need, what you changed, and how you measured whether it worked?"
+    }
+  ],
+  "interview_decision_reasoning": "Despite significant concerns about the application quality and evidence gaps, an interview is warranted for three reasons: (1) The hackathon participation demonstrates at least some engagement with innovation processes, and an interview could clarify his actual contribution and what he learned; (2) His collaborative leadership skills and enthusiasm appear genuine and could be valuable in a cohort-based program, even if his innovation track record is limited; (3) The disconnect between the generic praise in letters and lack of specific examples could indicate either weak letters or a candidate who is genuinely strong but poor at self-promotion - an interview would distinguish these. However, the interview should be approached with high skepticism and focused on probing the specific gaps identified: research experience, cross-disciplinary work, technical capabilities, and concrete innovation examples beyond the hackathon. He would need to provide substantial evidence in the interview that his capabilities exceed what's demonstrated in the materials to be competitive. The interview decision is 'yes' but with low confidence that he will ultimately be selected unless he can address the major evidence gaps. This is a 'prove it' interview rather than a 'confirm fit' interview."
+}

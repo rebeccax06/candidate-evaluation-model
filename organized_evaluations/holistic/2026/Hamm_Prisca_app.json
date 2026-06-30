@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-02-25T21:47:55.213487",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 156.720844745636,
+    "materials_character_count": 20463
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmp1a0s7vn0.pdf"
+    ],
+    "candidate_id": "Hamm_Prisca_app",
+    "evaluation_date": "2026-02-25 21:47:55.213360"
+  },
+  "red_flags": [
+    {
+      "flag": "Heavy reliance on generic fluff and stated qualities without specific evidence in self-description",
+      "evidence": "Application contains multiple generic statements: \"I am driven to translate biomedical innovation into solutions that benefit patients\" (page 2), \"innovative problem solving, a collaborative mindset and strong drive to advance healthcare\" (page 2), \"I thrive in collaborative, cross-disciplinary teams\" (page 3), \"I am deeply committed to fostering innovation\" (page 3). These are meaningless self-descriptions that could apply to any candidate and provide zero evidence of actual qualities or achievements. Per evaluation principles, stated qualities without demonstration should score 1-2.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Unclear individual contributions due to extensive passive voice in describing collaborative work",
+      "evidence": "Application uses passive voice extensively: \"we were able to identify and solve\" challenges, \"I was able to overcome one obstacle\" (page 2-3). The specific leadership role and individual contributions in the arthritis bioconjugate project are unclear. Who identified the challenges? Who led the problem-solving? Passive voice often indicates unclear agency or contribution.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Generic stated motivation for program with no specific understanding of Catalyst's unique value",
+      "evidence": "Motivation statement is pure boilerplate: \"The Catalyst Program's interdisciplinary and structured environment provides an ideal opportunity to collaborate with and learn from experts from diverse backgrounds\" (page 2). This could be copied into any fellowship application and shows no research into what makes Catalyst unique or how candidate would specifically contribute. Suggests applying broadly rather than targeted interest.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited evidence of communication to non-specialist audiences",
+      "evidence": "CV lists presentations only at scientific conferences (Nordic Proteomics Meeting, German Pharmaceutical Society meetings, etc., page 8). No evidence of presenting to patient groups, policymakers, industry partners, or other non-specialist audiences. Program requires \"Communicate complex ideas effectively to varied audiences\" but no demonstration of this capability.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Innovation evidence limited to one concrete example (cleavage prediction tool)",
+      "evidence": "Only one specific innovation is described in detail: the enzyme cleavage prediction tool (page 2-3). Patent application mentioned but no details provided about what was novel (page 3). Bioconjugates described as 'innovative' by recommender but no specifics about what made them innovative versus incremental improvements. Claims 'innovative problem solving' as competency (page 2) but lacks multiple concrete examples to support pattern of innovation.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Very early career stage with limited track record of sustained commitment to challenging problems",
+      "evidence": "Completed PhD in 2024, started postdoc in 08/2024 (CV page 7). Only ~1 year into postdoc at time of application. Program seeks \"sustained commitment to challenging problems\" but career is too early to demonstrate long-term persistence. This is not necessarily disqualifying but limits evidence of sustained commitment.",
+      "severity": "low"
+    },
+    {
+      "flag": "No evidence of learning from failure or adapting based on feedback",
+      "evidence": "Application describes overcoming challenges but no specific examples of failures, setbacks, or how candidate adapted approach based on negative results or critical feedback. Program values \"Learn, grow, and adapt based on feedback and new evidence\" but no concrete demonstration of this quality in materials.",
+      "severity": "low"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Heavy reliance on generic language and fluff in self-description, raising questions about ability to articulate specific contributions and insights",
+      "Limited evidence of communication to non-specialist audiences or diverse stakeholders beyond scientific conferences",
+      "Unclear depth of innovation beyond technical execution - may be strong implementer rather than creative problem-solver",
+      "Generic stated motivation for program with no specific understanding of Catalyst's unique offerings",
+      "No clear evidence of sustained commitment to challenging problems over time - career is still early-stage",
+      "Passive voice in describing collaborative work makes it difficult to assess individual leadership and contribution"
+    ],
+    "evidence": [
+      {
+        "quote": "Dr. Hamm's work in my lab has involved close collaboration with colleagues that have varied expertise, including with clinicians, glycobiologists, mass spectrometry experts, and more. Dr. Hamm has an outstanding ability to think creatively and incorporate feedback from this diverse network of collaborators to drive her project forward.",
+        "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+        "context": "Strongest evidence for interdisciplinary collaboration capability, with supervisor specifically noting ability to integrate diverse expertise."
+      },
+      {
+        "quote": "Despite being new to the fields of hematology, transfusion medicine, and glycobiology, she has rapidly learned many of the important concepts and nuances of these fields. She is already fluent with the field-specific terminology.",
+        "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+        "context": "Demonstrates adaptability and learning capacity across disciplines, important for program's cross-disciplinary environment."
+      },
+      {
+        "quote": "I collaborated with physicians across several other universities to develop targeted bioconjugates for the treatment of arthritis, which currently are in pre-clinical trials",
+        "source": "Application form (tmp1a0s7vn0.pdf, page 2)",
+        "context": "Shows experience working across institutions and disciplines toward translational goals, though specific role and contributions unclear due to passive voice."
+      },
+      {
+        "quote": "Business Development Fellowship, Harvard Office of Technology Development\" awarded 08/2025, and patent filing experience: \"filing a patent application related to my work",
+        "source": "CV (tmp1a0s7vn0.pdf, page 7) and Application form (page 3)",
+        "context": "Demonstrates engagement with commercialization and technology transfer pathways, though very recent and impact not yet demonstrated."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "The candidate shows mixed alignment with program goals. For interdisciplinary collaboration, there is concrete evidence: Dr. Hollenhorst states \"Dr. Hamm's work in my lab has involved close collaboration with colleagues that have varied expertise, including with clinicians, glycobiologists, mass spectrometry experts, and more\" (recommendation), and the application describes \"I collaborated with physicians across several other universities to develop targeted bioconjugates\" during PhD work. However, the depth of true interdisciplinary integration versus simply working with people from different fields is unclear. The rapid learning of new fields (\"Despite being new to the fields of hematology, transfusion medicine, and glycobiology, she has rapidly learned many of the important concepts and nuances of these fields\" per Hollenhorst) demonstrates adaptability, which is valuable for the program's cross-disciplinary environment.\n\nFor translating research to practical impact, there is some evidence but it's limited. The bioconjugates \"currently are in pre-clinical trials\" (application) shows movement toward application, and the patent filing experience demonstrates awareness of translation pathways. The Harvard Office of Technology Development fellowship (\"Business Development Fellowship, Harvard Office of Technology Development\" on CV, awarded 08/2025) shows active engagement with commercialization, though this is very recent and impact is unknown. However, the application's stated motivation is pure fluff: \"bridge the gap between scientific discoveries and societal needs\" (application) - this generic phrase provides zero evidence of actual translation experience or understanding of implementation challenges.\n\nFor communication skills, the evidence is weak. The CV lists multiple presentations (oral and poster), but there's no evidence of communicating to non-specialist audiences or diverse stakeholders. Dr. Hollenhorst mentions \"She has successfully presented her data at several internal conferences and at a regional scientific symposium\" (recommendation), but these are specialist scientific venues. The application itself is filled with generic language and lacks clear, specific articulation of her contributions, which raises concerns about her ability to communicate complex ideas effectively to varied audiences - a key program requirement.\n\nThe candidate's stated interest in the program is entirely generic: \"The Catalyst Program's interdisciplinary and structured environment provides an ideal opportunity to collaborate with and learn from experts from diverse backgrounds\" (application) - this could be copied from any fellowship application and shows no specific understanding of what Catalyst offers or how she would contribute. This is a significant red flag for genuine program fit versus simply seeking prestigious opportunities.",
+    "strengths_for_program": [
+      "Demonstrated ability to work across disciplines (clinicians, glycobiologists, mass spectrometry experts) with evidence from supervisor",
+      "Rapid learning and adaptation to new fields (hematology, transfusion medicine, glycobiology within first postdoc year)",
+      "Active engagement with technology transfer and commercialization pathways (patent filing, OTD fellowship)",
+      "Strong technical productivity and execution (multiple papers, grants secured quickly)",
+      "Evidence of mentorship capability (\"strong mentorship skills as she works with some of the more junior members of my lab\" per Hollenhorst)"
+    ]
+  },
+  "overall_score": 6.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Strong Research Productivity and Execution",
+      "evidence": [
+        {
+          "quote": "3 first-authorship publications, 1 patent application",
+          "source": "CV (tmp1a0s7vn0.pdf, page 7)",
+          "context": "Concrete output from PhD work demonstrating consistent productivity."
+        },
+        {
+          "quote": "She has already completed an analysis of ABO(H) binding proteins by glycan microarray and has a first author manuscript describing these findings under review. She has made great progress in carrying out an unbiased proteomic analysis of platelet glycoproteins that are modified with ABO(H) antigens, and I anticipate that she will submit her second first author paper on this work within the next few months.",
+          "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+          "context": "Demonstrates rapid productivity in new postdoc position (manuscript under review within ~10 months), suggesting strong work capacity and efficiency."
+        },
+        {
+          "quote": "Walter-Benjamin Fellowship, German Research Foundation (05/2025) and Brigham Research Institute Microgrant (02/2025)",
+          "source": "CV (tmp1a0s7vn0.pdf, page 7)",
+          "context": "Secured competitive external funding quickly in postdoc, indicating ability to articulate research value and compete successfully."
+        }
+      ],
+      "confidence": "high",
+      "significance": "High productivity and ability to secure funding are critical for driving projects forward in the program. This candidate has demonstrated consistent output and ability to compete for resources."
+    },
+    {
+      "quality": "Rapid Learning and Adaptability Across Fields",
+      "evidence": [
+        {
+          "quote": "Despite being new to the fields of hematology, transfusion medicine, and glycobiology, she has rapidly learned many of the important concepts and nuances of these fields. She is already fluent with the field-specific terminology.",
+          "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+          "context": "Supervisor directly observes rapid mastery of entirely new fields within first year of postdoc."
+        },
+        {
+          "quote": "Transitioned from pharmacy degree to PhD in bioconjugates to postdoc in hematology/glycobiology, with coursework in AI (Artificial Intelligence in Pharma and Biotech, MIT, 04/2025-05/2025) and business development (Bench-to-Business Workshop, Harvard OTD, 05/2025)",
+          "source": "CV (tmp1a0s7vn0.pdf, pages 7-8)",
+          "context": "Career trajectory shows willingness and ability to learn across multiple domains (pharmacy, chemistry, biology, computation, business)."
+        }
+      ],
+      "confidence": "high",
+      "significance": "The program requires working across disciplines and learning from diverse experts. This candidate has proven ability to quickly master new fields and integrate knowledge."
+    },
+    {
+      "quality": "Technical Innovation Capability (Computational Tools)",
+      "evidence": [
+        {
+          "quote": "programming a tool that predicts the cleavage sites for hundreds of enzymes in any amino acid sequence, which is now also used by other researchers",
+          "source": "Application form (tmp1a0s7vn0.pdf, page 2-3)",
+          "context": "Created a tool that achieved adoption beyond immediate work, demonstrating practical innovation with broader impact."
+        },
+        {
+          "quote": "Among her most notable accomplishments is the creation of a bioinformatics tool that predicts protease-specific cleavage sites across hundreds of enzymes—an innovation with broad applications in biotechnology, therapeutic development, and diagnostic design",
+          "source": "Dr. Driessen recommendation letter (tmp1a0s7vn0.pdf, page 11)",
+          "context": "External validation of tool's innovative nature and potential applications across multiple domains."
+        },
+        {
+          "quote": "Programming languages: Python, R; Research/lab: biochemistry, mass spectrometry-based proteomics, cell culture, bioconjugation, peptide synthesis, protein purification, chromatography, flow cytometry",
+          "source": "CV (tmp1a0s7vn0.pdf, page 8)",
+          "context": "Technical skillset combining computational and experimental methods, enabling tool development."
+        }
+      ],
+      "confidence": "medium-high",
+      "significance": "Ability to develop computational tools that solve problems and achieve adoption demonstrates innovation potential and practical problem-solving relevant to program goals."
+    },
+    {
+      "quality": "Collaborative Mindset with Diverse Experts",
+      "evidence": [
+        {
+          "quote": "Dr. Hamm's work in my lab has involved close collaboration with colleagues that have varied expertise, including with clinicians, glycobiologists, mass spectrometry experts, and more. Dr. Hamm has an outstanding ability to think creatively and incorporate feedback from this diverse network of collaborators to drive her project forward.",
+          "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+          "context": "Supervisor specifically notes ability to work with and integrate input from diverse experts."
+        },
+        {
+          "quote": "She is fiercely motivated to move her own projects forward, and a generous contributor to other projects in my lab and collaborator's labs. She takes time to think critically about her own and other projects in the lab, and frequently provides insightful suggests and constructive feedback to others.",
+          "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+          "context": "Demonstrates collaborative generosity and ability to contribute beyond own work, important for team-based program."
+        },
+        {
+          "quote": "I collaborated with physicians across several other universities to develop targeted bioconjugates for the treatment of arthritis",
+          "source": "Application form (tmp1a0s7vn0.pdf, page 2)",
+          "context": "Experience working across institutions and with clinical collaborators, though specific role unclear."
+        }
+      ],
+      "confidence": "medium-high",
+      "significance": "Program emphasizes working across disciplines and with diverse teams. Supervisor validation of collaborative ability and generosity is strong positive indicator."
+    },
+    {
+      "quality": "Engagement with Translation and Commercialization",
+      "evidence": [
+        {
+          "quote": "filing a patent application related to my work. This required me to expand my skillset beyond my area of expertise. I identified the intellectual property, collaborated closely with patent attorneys, and worked on translating my experimental findings into a patent format.",
+          "source": "Application form (tmp1a0s7vn0.pdf, page 3)",
+          "context": "Concrete experience with IP protection and translation process, showing awareness of commercialization pathway."
+        },
+        {
+          "quote": "Business Development Fellowship, Harvard Office of Technology Development (08/2025)",
+          "source": "CV (tmp1a0s7vn0.pdf, page 7)",
+          "context": "Active pursuit of business development skills and commercialization knowledge, though very recent."
+        },
+        {
+          "quote": "This experience sparked my curiosity in technology transfer. I recently was awarded a fellowship from the Harvard Office of Technology Development, where I am gaining valuable experience in business development.",
+          "source": "Application form (tmp1a0s7vn0.pdf, page 3)",
+          "context": "Shows progression from patent experience to actively seeking business development training."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Program values translating research to practical impact. Candidate shows awareness of and engagement with commercialization pathways, though experience is still limited."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Prisca Hamm presents as a solid early-career scientist with legitimate technical expertise in biochemistry, proteomics, and bioconjugate design. Her trajectory shows genuine research productivity: she completed a PhD with \"3 first-authorship publications, 1 patent application\" (CV), transitioned to a postdoctoral position at a prestigious institution (Brigham and Women's Hospital/Harvard Medical School), and has already secured competitive funding including a \"Walter-Benjamin Fellowship, German Research Foundation\" and \"Brigham Research Institute Microgrant\" (CV) within her first year. Her supervisor Dr. Hollenhorst provides strong specific praise: \"She has already completed an analysis of ABO(H) binding proteins by glycan microarray and has a first author manuscript describing these findings under review\" and expects \"she will submit her second first author paper on this work within the next few months\" (recommendation letter). This demonstrates real productivity and impact.\n\nHowever, the application contains significant amounts of generic fluff that undermines confidence in her self-assessment. Her stated motivation is entirely generic: \"I am driven to translate biomedical innovation into solutions that benefit patients\" and \"I aim to bring in my own skills and develop transformative solutions for pressing healthcare challenges\" (application) - these could describe literally any biomedical researcher and provide zero evidence of actual commitment. Her core competencies list includes vague claims like \"innovative problem solving, a collaborative mindset and strong drive to advance healthcare\" (application) without specific examples. The \"formative experience\" section describes coordination work but uses passive voice extensively: \"we were able to identify and solve\" and \"I was able to overcome one obstacle\" (application) - the specific contributions and leadership are unclear. The one concrete achievement mentioned is \"programming a tool that predicts the cleavage sites for hundreds of enzymes in any amino acid sequence, which is now also used by other researchers\" (application), which is legitimate evidence of technical innovation with broader impact.\n\nThe strongest evidence comes from external validation rather than self-description. Dr. Hollenhorst's letter provides specific examples: \"She is fiercely motivated to move her own projects forward, and a generous contributor to other projects in my lab and collaborator's labs. She takes time to think critically about her own and other projects in the lab, and frequently provides insightful suggests and constructive feedback to others\" (recommendation). Dr. Driessen notes she \"independently designed, synthesized, and thoroughly characterized a series of innovative bioconjugates\" and created \"a bioinformatics tool that predicts protease-specific cleavage sites across hundreds of enzymes—an innovation with broad applications\" (recommendation). These concrete achievements suggest genuine capability. The concern is whether the candidate can articulate her own contributions clearly, or whether she relies on generic language that obscures her actual impact. Her rapid productivity in the new postdoc (manuscript under review within ~10 months) and ability to learn new fields quickly (\"Despite being new to the fields of hematology, transfusion medicine, and glycobiology, she has rapidly learned many of the important concepts\" per Hollenhorst) are positive indicators of adaptability and work capacity.\n\nOverall, this is a candidate with legitimate technical skills and research productivity, but whose self-presentation is weakened by reliance on generic statements. The external validation is strong enough to warrant serious consideration, but the interview will be critical to determine if she can articulate specific contributions, demonstrate genuine innovation thinking beyond technical execution, and show evidence of the interdisciplinary collaboration skills she claims.",
+  "score_justification": "This score reflects a candidate with legitimate technical capabilities and research productivity, but significant concerns about depth of innovation, communication skills, and self-awareness. Strengths: Strong external validation from supervisors with specific examples (\"She has already completed an analysis... manuscript under review\" - Hollenhorst), concrete technical innovation (enzyme cleavage prediction tool adopted by others), rapid productivity (3 first-author papers in PhD, manuscript under review in <1 year postdoc), competitive funding secured (Walter-Benjamin Fellowship, BRI Microgrant), and demonstrated ability to learn new fields quickly (\"rapidly learned... hematology, transfusion medicine, and glycobiology\" - Hollenhorst). These are real achievements that warrant serious consideration. Weaknesses: Heavy reliance on generic fluff in self-description (\"driven to translate biomedical innovation,\" \"innovative problem solving,\" \"deeply committed to fostering innovation\" - all stated qualities without specific evidence per evaluation principles), unclear individual contributions due to passive voice (\"we were able to identify and solve\"), innovation evidence limited to one concrete example beyond standard research execution, no evidence of communication to non-specialist audiences despite program requirement, and generic program motivation showing no specific understanding of Catalyst. The disconnect between strong external validation and weak self-articulation is concerning - it suggests either lack of self-awareness about her actual contributions or inability to communicate them effectively, both problematic for a program requiring clear communication and reflection. Score of 6.5 reflects solid technical foundation and productivity (would score 7-8 on execution alone) pulled down by concerns about innovation depth, communication capability, and self-awareness (would score 4-5 on these dimensions). This places her in the \"moderate\" range - clear potential but requires interview to determine if concerns are about presentation versus substance.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "programming a tool that predicts the cleavage sites for hundreds of enzymes in any amino acid sequence, which is now also used by other researchers",
+        "source": "Application form (tmp1a0s7vn0.pdf, page 2-3)",
+        "context": "Concrete evidence of technical innovation with demonstrated adoption and impact beyond her immediate work. This is the strongest specific innovation example provided."
+      },
+      {
+        "quote": "Among her most notable accomplishments is the creation of a bioinformatics tool that predicts protease-specific cleavage sites across hundreds of enzymes—an innovation with broad applications in biotechnology, therapeutic development, and diagnostic design",
+        "source": "Dr. Driessen recommendation letter (tmp1a0s7vn0.pdf, page 11)",
+        "context": "External validation of the tool's innovative nature and potential applications, adding credibility and scope to the claimed innovation."
+      },
+      {
+        "quote": "independently designed, synthesized, and thoroughly characterized a series of innovative bioconjugates",
+        "source": "Dr. Driessen recommendation letter (tmp1a0s7vn0.pdf, page 11)",
+        "context": "Suggests independent work and novel bioconjugate designs, though 'innovative' here may refer to novelty within the field rather than transformative innovation. Lacks specific details about what made them innovative."
+      },
+      {
+        "quote": "She has an outstanding ability to think creatively and incorporate feedback from this diverse network of collaborators to drive her project forward",
+        "source": "Dr. Hollenhorst recommendation letter (tmp1a0s7vn0.pdf, page 9)",
+        "context": "Supervisor assessment of creative thinking, but this is stated quality without specific examples of creative solutions or novel approaches she developed."
+      }
+    ],
+    "reasoning": "The candidate demonstrates some concrete evidence of technical innovation, but the evidence is limited in scope and lacks clear demonstration of creative problem-solving or transformative thinking. The strongest innovation evidence is the bioinformatics tool: \"programming a tool that predicts the cleavage sites for hundreds of enzymes in any amino acid sequence, which is now also used by other researchers\" (application). This shows she identified a need, created a solution, and achieved adoption beyond her immediate work - genuine innovation with impact. Dr. Driessen corroborates this as \"a bioinformatics tool that predicts protease-specific cleavage sites across hundreds of enzymes—an innovation with broad applications in biotechnology, therapeutic development, and diagnostic design\" (recommendation), adding context about the tool's potential applications.\n\nHowever, the innovation appears primarily technical/computational rather than conceptual or translational. The patent application mentioned (\"filing a patent application related to my work\" in application) could indicate innovation, but no details are provided about what was novel or what problem it solved - this is stated achievement without demonstrated impact. Her PhD work on \"targeted bioconjugates for the treatment of arthritis, which currently are in pre-clinical trials\" (application) shows translation toward application, but her specific innovative contribution versus executing established methods is unclear from the passive voice used. Dr. Hollenhorst notes she is \"using the tools of chemical glycobiology\" to study ABO blood type questions, but describes this as applying existing tools to a new question rather than developing novel approaches. The rapid productivity (manuscript under review in <1 year) suggests strong execution, but execution speed alone doesn't demonstrate innovation.\n\nThe application contains concerning fluff around innovation: claiming \"innovative problem solving\" as a core competency (application) without specific examples beyond the cleavage tool, and stating \"I am deeply committed to fostering innovation\" (application) which is meaningless self-description. The MIT Sloan AI course (\"AI in Pharma and Biotech\", CV) shows interest in emerging technologies but no evidence yet of applying AI methods innovatively. The lack of specific examples of creative problem-solving, novel experimental designs, or unconventional approaches limits confidence in high innovation potential. She may be a strong technical executor who can implement one innovative solution (the cleavage tool) rather than a consistently creative innovator.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether innovation capability extends beyond the one concrete example provided, or if this is stated quality without broader evidence. Looking for specific problem identification, novel approach, and outcome.",
+      "category": "Probe claimed skill - Innovation",
+      "question": "You mention 'innovative problem solving' as a core competency. Beyond the enzyme cleavage prediction tool, can you walk me through a specific example where you identified a problem that others hadn't recognized and developed a novel solution? What made your approach different from standard methods?"
+    },
+    {
+      "purpose": "Clarify individual contribution and leadership in collaborative work, which was obscured by passive voice in application. Test ability to navigate interdisciplinary conflicts, which is critical for program.",
+      "category": "Verify experience - Collaboration",
+      "question": "In your PhD work on arthritis bioconjugates, you mention collaborating with physicians across universities. Can you describe a specific instance where there was disagreement or conflicting priorities among team members? What was your specific role in resolving it, and what was the outcome?"
+    },
+    {
+      "purpose": "Assess depth of understanding about translation challenges versus surface-level engagement. Looking for specific insights about barriers to implementation and how research needs to change for real-world application.",
+      "category": "Assess fit - Translation focus",
+      "question": "You've filed a patent and are now doing a business development fellowship. Can you describe a specific moment when you realized a piece of your research had commercial or practical application potential? What steps did you take, and what did you learn about the gap between research and implementation?"
+    },
+    {
+      "purpose": "Test communication skills beyond scientific presentations. Application shows no evidence of non-specialist communication, which is critical program requirement. Looking for specific example and reflection on adaptation.",
+      "category": "Probe claimed skill - Communication",
+      "question": "The program requires communicating complex ideas to varied audiences. Can you describe a time when you had to explain your proteomics work to someone with no scientific background - perhaps a patient, a policymaker, or a business partner? What was challenging about it, and how did you adapt your approach?"
+    },
+    {
+      "purpose": "Test whether candidate has genuine understanding of Catalyst's unique model and thoughtful reasons for applying, versus generic fellowship-seeking. Application showed no specific program knowledge.",
+      "category": "Assess motivation - Program specificity",
+      "question": "What specifically about the Catalyst Program attracted you, as opposed to other fellowship or professional development opportunities? What do you hope to contribute to the cohort, and what specific skills or perspectives are you hoping to develop?"
+    },
+    {
+      "purpose": "Assess ability to learn and adapt from setbacks, which is program value but not demonstrated in materials. Looking for specific failure, reflection, and evidence of changed approach.",
+      "category": "Explore concern - Learning from failure",
+      "question": "Can you tell me about a research project or approach that failed or didn't work as expected? What did you learn from it, and how did that change your approach to subsequent work?"
+    },
+    {
+      "purpose": "Clarify individual versus team contributions, which is unclear from passive voice in application. Test ability to articulate specific personal impact versus general team success.",
+      "category": "Verify experience - Individual contribution",
+      "question": "In your current postdoc, you've been very productive with a manuscript under review in less than a year. Walk me through your specific contributions to that work - what did you personally design, execute, analyze, and write? Where did you rely on collaborators or existing methods?"
+    },
+    {
+      "purpose": "Test depth of interdisciplinary integration versus simply working with people from different fields. Looking for specific example of conceptual integration and reflection on challenges of bridging disciplines.",
+      "category": "Test fit - Interdisciplinary depth",
+      "question": "You've worked across pharmacy, chemistry, biology, and now hematology. Can you give me an example of when you had to integrate concepts or methods from two different disciplines to solve a problem? What was challenging about bridging those fields, and what did you learn about interdisciplinary work?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES because the candidate meets the minimum threshold (score 6.5 > 6.0) and has no high-severity red flags, but this is a borderline case requiring careful interview assessment. The strong external validation from supervisors (specific examples of productivity, collaboration, and rapid learning) and concrete achievements (enzyme cleavage tool with adoption, competitive funding, rapid publication output) demonstrate real capability that warrants further evaluation. However, the significant gap between external validation and self-presentation raises critical questions that must be resolved in interview: Can she articulate her specific contributions clearly when asked directly? Does she have innovation capability beyond the one tool example? Can she communicate to non-specialists? Does she understand what makes Catalyst unique and how she would contribute? The interview questions are designed to probe these specific concerns. If she can provide concrete examples and demonstrate self-awareness in interview, she could be a strong candidate. If the generic language and unclear contributions persist in conversation, that would be disqualifying. The decision to interview is based on the principle that strong external validation deserves the opportunity to address presentation concerns, but the bar for moving forward after interview should be high given the red flags identified."
+}

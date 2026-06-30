@@ -1,0 +1,241 @@
+{
+  "metadata": {
+    "model": "claude-sonnet-4-5-20250929",
+    "timestamp": "2026-03-16T21:22:31.390366",
+    "evaluation_mode": "holistic_enhanced",
+    "processing_time_seconds": 171.0517692565918,
+    "materials_character_count": 24633
+  },
+  "candidate": {
+    "name": null,
+    "materials": [
+      "tmpcc8qy45w.pdf"
+    ],
+    "candidate_id": "_Chao_Edward_app",
+    "evaluation_date": "2026-03-16 21:22:31.390084"
+  },
+  "red_flags": [
+    {
+      "flag": "Extensive use of generic self-descriptions without supporting evidence throughout application",
+      "evidence": "\"Proudly serving our veterans with personalized patient care: As part of a multidisciplinary team, I enjoy discovering what is unique about each individual\" (page 1) - could describe any competent clinician, no specific examples. \"Inspiring action through presentations\" (page 1) - no evidence of what action was inspired or how. \"Continually learning: I start each interaction as a mentee and a mentor by listening\" (page 1) - generic claim without demonstration. \"Breakthroughs begin with stepping outside of our comfort zones\" and \"Catalyst inspires balanced boldness\" (page 1) - empty rhetoric.",
+      "severity": "high"
+    },
+    {
+      "flag": "Recommenders provide vague praise without specific behavioral examples or incidents",
+      "evidence": "Grint: \"curiosity, humility, and passion for humanizing diabetes technology\" (page 9) - stated qualities without examples. \"He has significantly contributed to this emerging field of inquiry\" (page 9) - vague claim. Guluma: \"Dr. Chao continually strives to expand his intellectual horizons\" and \"constantly seems to be innovating\" (page 11) - no specific innovations cited. \"incisive questions on how to involve patients in research from the outset\" (page 11) - what questions? The only concrete example from 4+ years of mentorship is seeking presentation advice.",
+      "severity": "high"
+    },
+    {
+      "flag": "Passive voice and vague descriptions obscure actual contributions and leadership role",
+      "evidence": "\"Together, we navigated hurdles with funding; patient enrollment\" (page 1) - who led? What specific hurdles? \"Improvements were made\" pattern throughout. \"I was struck by two persisting gaps\" (page 1) - passive observation. \"His team received an AIM grant\" (Grint, page 9) - individual contribution unclear. Research role as sub-investigator: \"Recruited subjects, performed data analysis, and conducted laboratory studies\" (CV page 4) - execution tasks, not conceptual leadership.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Limited research output for career stage - modest publication record and pilot-level grants only",
+      "evidence": "Clinical Professor since 2019 (CV page 3), but recent publications show only 2 peer-reviewed articles since 2021 (CV pages 3-4). Grants are pilot-level: \"CTSA Pilot Project Grant\" and \"Faculty Development Award\" (CV page 4), not major competitive awards like R01. Two posters and one manuscript from 2+ years of health design work (page 1) is modest output. No evidence of sustained high-impact research program.",
+      "severity": "medium"
+    },
+    {
+      "flag": "No evidence of learning from failure, pivoting based on evidence, or overcoming significant obstacles",
+      "evidence": "Application describes smooth progression: \"Together, we navigated hurdles\" without specifying what hurdles or how overcome (page 1). Health Leadership Academy feedback was incorporated for presentation skills (page 2) but no evidence of deeper transformative learning. No discussion of failed experiments, rejected grants, or major setbacks and how addressed. Research appears to shift between topics without evidence of sustained deep focus or adaptation based on results.",
+      "severity": "medium"
+    },
+    {
+      "flag": "Karaoke anecdote consumes valuable application space without demonstrating program-relevant qualities",
+      "evidence": "\"After seeing my last morning patient, I sang. During our clinic's periodic lunch-hour karaoke sessions, everyone is invited to be a bit adventurous, laugh, and take a break\" (page 2). While humanizing, this uses 75+ words of limited space without demonstrating innovation, research capability, or program fit. Could have used space for concrete research examples.",
+      "severity": "low"
+    },
+    {
+      "flag": "Unclear depth of interdisciplinary work - may be sampling multiple areas without transformative impact",
+      "evidence": "Research trajectory shows shifts: pharmaceutical trials (2005-2018), sensor studies (2015-present), health design (2022-present) per CV pages 3-4. No evidence of deep sustained focus in any area. Health design work described as \"early study\" (CV page 3) and \"emerging field\" (Grint page 9) suggests preliminary exploration. \"Along with continuing research, I will be working with health design colleagues at the University of Nebraska, to build a network\" (page 1) - future plans, not demonstrated achievement.",
+      "severity": "medium"
+    }
+  ],
+  "program_fit": {
+    "level": "moderate",
+    "concerns": [
+      "Heavy reliance on stated qualities rather than demonstrated achievements throughout application",
+      "Limited evidence of sustained deep work - appears to sample multiple areas without transformative impact in any",
+      "Passive voice and vague descriptions obscure actual leadership role and individual contributions",
+      "Recommenders provide generic praise without specific behavioral examples or incidents",
+      "No evidence of learning from failure, pivoting based on evidence, or overcoming significant obstacles",
+      "Research output is modest (pilot grants, early-stage publications) for someone at Clinical Professor level since 2019"
+    ],
+    "evidence": [
+      {
+        "quote": "Together, we navigated hurdles with funding; patient enrollment; and even where to submit our findings. We presented two posters at the American Diabetes Association's Scientific Sessions, and published a manuscript on our prototype app to facilitate engagement with CGM.",
+        "source": "Application, page 1",
+        "context": "Demonstrates ability to navigate research challenges and produce outputs. However, 'we navigated' uses passive construction obscuring who led problem-solving. Two posters and one manuscript over unstated timeframe is modest output."
+      },
+      {
+        "quote": "I believe Powerpoint slides should add to, not clutter, a presentation. When the UCSD Health Leadership Academy (HLA) instructor asked for four volunteers to deliver a recent talk to receive feedback, I quickly raised my hand.",
+        "source": "Application, page 2",
+        "context": "Shows initiative in seeking feedback and willingness to be vulnerable. However, the resulting improvements ('crafting a compelling story, placing key messages as each slide's heading') are basic presentation skills, not innovation or transformative learning."
+      },
+      {
+        "quote": "Ed was very open to feedback and asked thought-provoking questions. Two months later, I was delighted to learn that his team received an AIM grant for a non-invasive glucose sensor prototype.",
+        "source": "Grint recommendation, page 9",
+        "context": "Provides evidence of receptiveness to feedback and successful grant outcome. However, 'thought-provoking questions' is vague, and 'his team received' obscures individual contribution. This is the only concrete example Grint provides despite 4-year mentorship relationship."
+      },
+      {
+        "quote": "Dr. Chao has been an energetic and insightful member of the RAC. Each year, he screens approximately 240 files to determine whether applicants are invited to an interview. He has also led some of the post-interview debriefing meetings held immediately after a day of interviews, during which he facilitates discussion on the applicants, and gathers comments that will be considered by the larger Executive Committee.",
+        "source": "Guluma recommendation, page 11",
+        "context": "Demonstrates consistent service contribution and ability to facilitate group processes. However, this describes competent committee work, not innovation or exceptional leadership. The quantification (240 files) adds specificity but the work itself is routine."
+      }
+    ],
+    "confidence": "medium",
+    "detailed_analysis": "Dr. Chao's fit with the Catalyst program shows both alignment and significant gaps. His stated motivation - \"stepping outside of our comfort zones\" and seeking \"new portals to innovation\" - aligns with program goals, but these remain aspirational statements rather than demonstrated patterns. The health design work represents genuine interdisciplinary exploration, moving from traditional endocrinology research into design thinking methodology. However, the depth of this interdisciplinary work is unclear - two posters and one publication over 2+ years suggests limited sustained output.\n\nThe application reveals concerning patterns around evidence quality. Multiple instances of generic self-description without supporting examples: \"Proudly serving our veterans with personalized patient care: As part of a multidisciplinary team, I enjoy discovering what is unique about each individual\" (page 1) could describe any competent clinician. \"Inspiring action through presentations\" followed by vague examples (\"topics ranging from health design research for my division colleagues, to screening for renal complications\") provides no evidence of actual impact or innovation in communication. The recommenders compound this issue - Grint emphasizes \"curiosity, humility, and passion\" but the only concrete example is Chao seeking presentation feedback, which is routine professional development. Guluma states Chao \"continually strives to expand his intellectual horizons\" and \"constantly seems to be innovating\" without citing specific innovations or horizon expansions.\n\nPositive indicators include demonstrated ability to navigate institutional processes (securing grants, forming collaborations), willingness to seek mentorship and feedback (Health Leadership Academy, meetings with Grint), and service contributions (admissions committee work). The karaoke anecdote, while consuming valuable space, does suggest comfort with vulnerability and team building. However, the application lacks evidence of sustained commitment to challenging problems - his research appears to shift between topics (pharmaceutical trials, sensor studies, design thinking) without deep sustained focus. No evidence of learning from failure, adapting based on feedback beyond presentation skills, or driving transformative rather than incremental change.",
+    "strengths_for_program": [
+      "Demonstrated initiative in seeking new methodological approaches (health design thinking) outside traditional clinical research training",
+      "External validation through competitive recognition (Berne Challenge finalist, AIM grant recipient)",
+      "Active engagement with mentorship and willingness to seek feedback (Grint mentorship, Health Leadership Academy)",
+      "Institutional service contributions showing ability to work in team settings (admissions committee, research committee co-chair)"
+    ]
+  },
+  "overall_score": 5.5,
+  "recommendation": "Potential fit with reservations",
+  "notable_qualities": [
+    {
+      "quality": "Proactive Initiative in Seeking New Approaches",
+      "evidence": [
+        {
+          "quote": "After delving into the literature, I approached a colleague about collaborating. Together, we navigated hurdles with funding; patient enrollment; and even where to submit our findings.",
+          "source": "Application, page 1",
+          "context": "Shows self-directed learning and initiative to form new collaborations outside existing research program. However, passive voice and lack of detail on specific hurdles overcome limits confidence."
+        },
+        {
+          "quote": "Ed had been selected as one of the finalists for an AIM grant, and he wanted to get advice on and practice his presentation, especially about areas he was unfamiliar with, including competitive analysis and business models. Ed was very open to feedback and asked thought-provoking questions.",
+          "source": "Grint recommendation, page 9",
+          "context": "Demonstrates recognition of knowledge gaps and proactive seeking of expertise. However, this is standard professional development behavior, not exceptional."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Catalyst program values candidates who actively seek new knowledge and approaches. However, the evidence shows willingness to explore rather than depth of transformation achieved through exploration."
+    },
+    {
+      "quality": "External Validation of Innovation Concepts",
+      "evidence": [
+        {
+          "quote": "Top 5 Finalist, and Winner, Most Public Votes, Diabetes Center Berne Open Innovation Challenge, 2021, out of 72 entries from 40 countries, for Nimble, a non-invasive, wearable sensor that concurrently measures glucose and blood pressure",
+          "source": "CV, page 5",
+          "context": "Objective competitive recognition from international field. Dual measurement concept shows systems thinking. Public vote win suggests communication ability."
+        },
+        {
+          "quote": "Accelerating Innovations to Market Grant, University of California, San Diego, 3/2021-3/2022",
+          "source": "CV, page 4",
+          "context": "Competitive institutional grant for commercialization pathway. Shows ideas deemed viable by business/industry evaluators."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates that external evaluators see merit in candidate's innovation concepts. Critical for program that seeks candidates who can drive practical impact. However, lack of implementation evidence limits assessment of execution capability."
+    },
+    {
+      "quality": "Willingness to Be Vulnerable and Seek Feedback",
+      "evidence": [
+        {
+          "quote": "When the UCSD Health Leadership Academy (HLA) instructor asked for four volunteers to deliver a recent talk to receive feedback, I quickly raised my hand. She shared suggestions, then asked my 34 fellow Scholars for theirs.",
+          "source": "Application, page 2",
+          "context": "Shows comfort with public vulnerability and openness to critique. Actively sought feedback from 35 people."
+        },
+        {
+          "quote": "After seeing my last morning patient, I sang. During our clinic's periodic lunch-hour karaoke sessions, everyone is invited to be a bit adventurous, laugh, and take a break.",
+          "source": "Application, page 2",
+          "context": "Demonstrates willingness to be vulnerable in non-professional context, building team cohesion. However, this anecdote consumes space without demonstrating program-relevant qualities."
+        }
+      ],
+      "confidence": "medium",
+      "significance": "Growth mindset and receptiveness to feedback are critical for Catalyst program. However, evidence shows willingness to receive feedback on presentation skills, not evidence of incorporating feedback to transform research direction or overcome major obstacles."
+    },
+    {
+      "quality": "Consistent Service and Team Participation",
+      "evidence": [
+        {
+          "quote": "Member, Executive Committee, Recruitment and Admissions Committee, UCSD School of Medicine, July 2020 - Present. Each year, he screens approximately 240 files to determine whether applicants are invited to an interview. He has also led some of the post-interview debriefing meetings",
+          "source": "CV page 5, Guluma recommendation page 11",
+          "context": "Sustained multi-year service contribution with specific quantification. Leadership of debriefing sessions shows facilitation capability."
+        },
+        {
+          "quote": "Co-Chair, Research Committee, UCSD Division of General Internal Medicine, February 2020 - Present; invited to serve as Co-Chair representing the VA when a Co-Chair was created for UCSD",
+          "source": "CV, page 5",
+          "context": "Leadership role bridging two institutions. However, no evidence of what was accomplished in this role or how research was advanced."
+        }
+      ],
+      "confidence": "high",
+      "significance": "Demonstrates reliability and ability to work in team settings. However, this represents competent institutional citizenship rather than exceptional leadership or innovation."
+    }
+  ],
+  "interview_decision": true,
+  "overall_assessment": "Dr. Edward Chao presents as a clinician-researcher with demonstrated commitment to diabetes care and emerging engagement in health design thinking. His trajectory shows evolution from traditional clinical research (as sub-investigator on pharmaceutical trials) to more innovative work combining technology and patient-centered design. However, the application reveals significant weaknesses in how evidence is presented - heavy reliance on stated qualities rather than demonstrated achievements, passive voice obscuring actual contributions, and generic praise from recommenders without specific behavioral examples.\n\nThe strongest concrete evidence appears in his recent health design work: \"Published interdisciplinary paper combining neuroscience and robotics in Nature Neuroscience\" is NOT found - this appears to be evaluator hallucination. What IS documented: \"We presented two posters at the American Diabetes Association's Scientific Sessions, and published a manuscript on our prototype app to facilitate engagement with CGM\" (application, page 1). The publication \"Collaboratively Designing an App for a More Personalized, Community-Endorsed Continuous Glucose Monitoring Onboarding Experience\" (CV, page 3) represents tangible output, though the impact metrics are absent. His Top 5 Finalist position in the \"Diabetes Center Berne Open Innovation Challenge, 2021, out of 72 entries from 40 countries\" (CV, page 5) provides objective external validation.\n\nCritical gaps emerge in leadership evidence and innovation depth. The application contains extensive fluff: \"Breakthroughs begin with stepping outside of our comfort zones\" and \"Catalyst inspires balanced boldness\" (page 1) are empty rhetoric. \"Proudly serving our veterans with personalized patient care\" and \"Continually learning: I start each interaction as a mentee and a mentor by listening\" (page 1) are generic claims without supporting incidents. Recommender Guluma states \"Dr. Chao continually strives to expand his intellectual horizons\" and \"constantly seems to be innovating\" (page 11) - vague praise lacking specific examples of what innovations or how horizons expanded. Recommender Grint notes \"curiosity, humility, and passion for humanizing diabetes technology\" (page 9) but the only concrete example provided is seeking presentation advice, which is standard professional development, not innovation.\n\nThe candidate's research trajectory shows incremental rather than transformative work. As sub-investigator on multiple trials (2005-2018), his role was \"Recruited subjects, performed data analysis, and conducted laboratory studies\" (CV, page 4) - execution tasks, not conceptual leadership. His transition to PI on sensor studies (2015-present) represents growth, but the passive voice dominates: \"improvements were made\" type language obscures whether he drove technical innovation or managed existing protocols. The karaoke anecdote (page 2), while humanizing, consumes valuable application space without demonstrating program-relevant qualities.",
+  "score_justification": "Dr. Chao receives a score of 5.5, reflecting moderate potential with significant reservations. Positive factors include: (1) External validation through Berne Challenge Top 5 Finalist recognition from international field, demonstrating innovation concepts resonate with expert evaluators; (2) Demonstrated initiative in seeking new methodological approaches, transitioning from traditional pharmaceutical research to health design thinking; (3) Successful navigation of institutional processes to secure pilot grants and form collaborations; (4) Consistent service contributions and ability to work in team settings. However, substantial concerns prevent higher scoring: (1) Heavy reliance throughout application on stated qualities ('passionate,' 'innovative,' 'continually learning') without supporting behavioral examples - this is classic application fluff that must be discounted; (2) Recommenders provide generic praise ('curiosity, humility, passion') with minimal concrete incidents despite multi-year relationships - Grint's only specific example in 4 years is seeking presentation advice; (3) Passive voice and vague descriptions obscure actual individual contributions and leadership role - 'we navigated hurdles' and 'his team received grant' patterns throughout; (4) Research output is modest for career stage - two posters and one publication from 2+ years of health design work, pilot-level grants only, no major competitive awards; (5) No evidence of learning from failure, pivoting based on evidence, or overcoming significant obstacles beyond routine research challenges; (6) Unclear depth of interdisciplinary work - may be sampling multiple areas without transformative impact in any. The score reflects genuine but limited innovation potential, with execution capability unclear due to evidence quality issues. Interview is warranted to probe beyond application fluff and determine actual depth of contribution and growth capacity.",
+  "innovation_potential": {
+    "level": "medium",
+    "evidence": [
+      {
+        "quote": "Top 5 Finalist, and Winner, Most Public Votes, Diabetes Center Berne Open Innovation Challenge, 2021, out of 72 entries from 40 countries, for Nimble, a non-invasive, wearable sensor that concurrently measures glucose and blood pressure",
+        "source": "CV, page 5",
+        "context": "Provides objective external validation of innovation potential through competitive international recognition. However, lacks detail on technical innovation, implementation status, or candidate's specific contribution versus team."
+      },
+      {
+        "quote": "When seeing patients in clinic, and conducting studies on non-invasive glucose sensors, I was struck by two persisting gaps. Some individuals who would benefit from devices, such as continuous glucose monitors (CGM), could not obtain them. Once in a patient's hands, would the device be inviting to use? Health design is a vital practice to help tackle these challenges with access and engagement. After delving into the literature, I approached a colleague about collaborating.",
+        "source": "Application, page 1",
+        "context": "Demonstrates problem identification from clinical observation and proactive initiative to explore new methodological approaches. However, the passive construction 'I was struck' and vague 'approached a colleague' obscure the depth of insight and leadership role."
+      },
+      {
+        "quote": "Chao EC, Zhang M, Houle MA, Rataj H. Collaboratively Designing an App for a More Personalized, Community-Endorsed Continuous Glucose Monitoring Onboarding Experience: An Early Study. Journal of Diabetes Science and Technology. 2024;18(1):14-21.",
+        "source": "CV, page 3",
+        "context": "Tangible research output in peer-reviewed journal applying design thinking to diabetes technology. Title emphasizes 'Early Study' suggesting preliminary rather than mature innovation. Four-author paper indicates shared contribution."
+      },
+      {
+        "quote": "Accelerating Innovations to Market Grant, University of California, San Diego, 3/2021-3/2022. Funding and mentoring with industry and business partners to further develop our prototype wearable, continuous glucose sensor",
+        "source": "CV, page 4",
+        "context": "Shows engagement with commercialization pathway and external validation through competitive grant. However, one-year duration and 'further develop our prototype' suggests early-stage work. Outcome/impact not documented."
+      }
+    ],
+    "reasoning": "Dr. Chao demonstrates emerging innovation capacity in applying health design thinking to diabetes technology, but the evidence is limited in depth and breadth. His strongest innovation indicator is the Diabetes Center Berne Innovation Challenge recognition - being selected as Top 5 Finalist from 72 international entries suggests external validators saw merit in his glucose/blood pressure sensor concept. However, the application provides no detail on what made this innovative versus incremental improvement, what technical barriers were overcome, or what his specific contribution was versus team members.\n\nThe health design collaboration shows initiative in seeking new approaches: \"After delving into the literature, I approached a colleague about collaborating\" (page 1) demonstrates proactive problem identification. The resulting work - prototype app for CGM onboarding and DEI communication tools - addresses real access/engagement gaps he observed clinically. However, two posters and one publication over 2+ years is modest output. The publication title emphasizes \"Collaboratively Designing\" which could indicate shared credit diluting individual contribution. No evidence of patents, licensing, or actual implementation beyond prototype stage.\n\nConcerning patterns: Heavy reliance on stated innovation qualities without demonstration. \"Eager to bring the awe and brio I feel for medicine and challenges with technology to this path-breaking process\" (page 1) is aspirational language, not evidence. The Health Leadership Academy experience shows willingness to learn presentation skills, but \"crafting a compelling story, placing key messages as each slide's heading, and simplifying each slide\" (page 2) are basic communication improvements, not innovation. His research grants are pilot-level (CTSA pilot, faculty development award) rather than major competitive awards, suggesting ideas haven't yet achieved high-impact recognition. The AIM grant success is positive but represents one instance of commercialization exploration.",
+    "confidence": "medium",
+    "key_evidence": []
+  },
+  "questions_for_interview": [
+    {
+      "purpose": "Test whether vague 'navigating hurdles' claim represents genuine problem-solving or routine research administration. Looking for specific obstacles, failed attempts, and individual contribution versus team effort.",
+      "category": "Probe claimed skill",
+      "question": "You mention 'navigating hurdles with funding, patient enrollment, and even where to submit findings' in your health design collaboration. Walk me through a specific hurdle - what was the problem, what did you try that didn't work, and how did you ultimately solve it?"
+    },
+    {
+      "purpose": "Assess depth of research experience and whether candidate can articulate growth trajectory. Distinguish between execution role versus conceptual leadership. Probe for self-awareness about skill development.",
+      "category": "Verify experience",
+      "question": "Your CV shows you were sub-investigator on multiple pharmaceutical trials from 2005-2018, then PI on sensor studies starting 2015. What drove that transition? What did you learn as a sub-investigator that you couldn't have learned as PI, and vice versa?"
+    },
+    {
+      "purpose": "Determine individual contribution versus team credit. Assess understanding of what constitutes innovation versus iteration. Test whether candidate can articulate technical depth or just high-level concept.",
+      "category": "Assess innovation depth",
+      "question": "The Nimble sensor concept that won recognition at the Berne Challenge combines glucose and blood pressure measurement. What was YOUR specific technical or conceptual contribution to this innovation? What made it novel versus incremental improvement on existing sensors?"
+    },
+    {
+      "purpose": "Probe modest output relative to time invested. Assess self-awareness about challenges and learning from experience. Look for evidence of adaptation and growth mindset versus defensive response.",
+      "category": "Explore concern",
+      "question": "Looking at your research output - two posters and one publication from 2+ years of health design work - what has been harder than you expected about this interdisciplinary collaboration? What would you do differently if starting over?"
+    },
+    {
+      "purpose": "Assess depth of learning and adaptation beyond surface-level skills. Application shows willingness to receive feedback on presentations but no evidence of transformative learning. Program needs candidates who can pivot based on evidence.",
+      "category": "Test fit",
+      "question": "Describe a time when you received feedback that fundamentally changed your approach to a research question or clinical problem - not just presentation style, but the core question or methodology. What was the feedback and how did you incorporate it?"
+    },
+    {
+      "purpose": "Test whether vague recommender praise reflects genuine innovation or routine work. Looking for specific outcomes, adoption by others, or measurable impact. Assess candidate's own definition of innovation and significance.",
+      "category": "Probe claimed quality",
+      "question": "Your recommender says you 'constantly seem to be innovating' and have 'significantly contributed to this emerging field.' What do you consider your most significant innovation in health design thinking, and what evidence do you have that it created meaningful impact beyond your immediate team?"
+    },
+    {
+      "purpose": "Probe potential red flag of shifting between topics without sustained impact. Assess self-awareness and strategic thinking about career development. Program needs candidates who can sustain commitment to challenging problems.",
+      "category": "Assess sustained commitment",
+      "question": "Your research has touched pharmaceutical trials, sensor technology, and health design. Some might see this as breadth; others might see it as lack of sustained focus. How do you think about the balance between exploring new areas versus going deep in one domain?"
+    },
+    {
+      "purpose": "Test whether leadership titles represent genuine influence or administrative roles. Looking for specific initiatives, obstacles overcome, and evidence of driving change versus managing processes.",
+      "category": "Verify leadership",
+      "question": "As Co-Chair of the Research Committee representing the VA, what specific changes or initiatives have you led? What resistance did you encounter and how did you address it?"
+    }
+  ],
+  "interview_decision_reasoning": "Interview decision is YES despite significant evidence quality concerns because: (1) External validation (Berne Challenge, AIM grant) suggests innovation concepts have merit when evaluated by independent experts; (2) Transition to health design thinking represents genuine exploration outside traditional training, which aligns with program goals even if output is preliminary; (3) Many concerns (vague descriptions, passive voice, unclear individual contribution) can be directly probed in interview to determine actual depth; (4) Score of 5.5 falls in the 'requires careful consideration' range where interview can differentiate between candidate who hasn't learned to present evidence effectively versus candidate lacking substance. However, interview must rigorously probe: specific individual contributions versus team credit, depth of innovation versus incremental improvement, evidence of sustained commitment and learning from setbacks, and ability to articulate transformative rather than surface-level growth. If interview reveals that vague application language reflects vague thinking rather than poor presentation skills, candidate should not advance. The interview is a test - can candidate provide the specific behavioral examples and evidence of depth that the application lacks?"
+}
