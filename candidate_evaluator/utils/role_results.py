@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html as _html
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Union
 
@@ -102,6 +103,26 @@ DIMENSION_GROUPS = [
     ("Research", list(_RESEARCH_DIMS)),
 ]
 
+# Legacy (pre-combined) unprefixed keys, so evaluations already run on the
+# cloud/web version with the old per-role prompts still map onto the heatmap.
+_LEGACY_KEY_FALLBACK = {
+    "clinical_challenge_complexity": "challenge_complexity",
+    "clinical_need_investigation_stage": "need_investigation_stage",
+    "clinical_systems_thinking": "systems_thinking",
+    "engineering_build_stage": "build_stage",
+    "engineering_ownership_clarity": "ownership_clarity",
+    "engineering_user_grounding": "user_grounding",
+    "research_publication_strength": "publication_strength",
+}
+
+
+def dimension_value(data: Dict[str, Any], key: str) -> Optional[Any]:
+    """Read a dimension value, falling back to the legacy unprefixed key."""
+    value = data.get(key)
+    if value is None and key in _LEGACY_KEY_FALLBACK:
+        value = data.get(_LEGACY_KEY_FALLBACK[key])
+    return value
+
 
 def dimension_level_score(dim_key: str, value: Any) -> Optional[float]:
     """Normalize a dimension level to a 0.0 (worst) -> 1.0 (best) score.
@@ -145,43 +166,45 @@ def heatmap_color(score: Optional[float]) -> str:
     return f"#{int(round(r)):02x}{int(round(g)):02x}{int(round(b)):02x}"
 
 
-def build_role_dimension_heatmap(assessment: Any):
-    """Build a pandas Styler heatmap of the 9 role dimensions.
+def build_role_dimension_heatmap_html(assessment: Any) -> str:
+    """Build a 3x3 grid heatmap (HTML) of the 9 role dimensions.
 
-    Each dimension's rating cell is colored red (worst) -> green (best). Dimensions
-    without evidence render as a neutral "Not shown" gray cell.
+    Each row is a role (Clinical, Engineering, Research). Each of the three cells in
+    a row is an equal-size square colored red (worst) -> green (best), labeled with
+    the dimension name. Hovering a square shows a tooltip with the candidate's rating.
+    Dimensions without evidence render as a neutral "Not shown" gray square.
     """
-    import pandas as pd
-
     data = _assessment_as_dict(assessment) or {}
-    records: List[Dict[str, str]] = []
-    colors: List[str] = []
+    rows_html: List[str] = []
     for group, keys in DIMENSION_GROUPS:
+        cells = [
+            '<div style="width:96px;min-width:96px;display:flex;align-items:center;'
+            'font-weight:700;font-size:0.85rem;color:#444;">{}</div>'.format(_html.escape(group))
+        ]
         for key in keys:
-            raw = data.get(key)
+            raw = dimension_value(data, key)
             score = dimension_level_score(key, raw)
+            color = heatmap_color(score)
             rating = str(raw).replace("_", " ").title() if raw else "Not shown"
-            records.append(
-                {
-                    "Category": group,
-                    "Dimension": DIMENSION_SHORT_LABELS.get(key, key),
-                    "Rating": rating,
-                }
+            label = DIMENSION_SHORT_LABELS.get(key, key)
+            tooltip = _html.escape(f"{label}: {rating}", quote=True)
+            cells.append(
+                '<div title="{tooltip}" style="flex:1;aspect-ratio:1 / 1;'
+                "background:{color};border-radius:12px;display:flex;align-items:center;"
+                "justify-content:center;text-align:center;padding:8px;box-sizing:border-box;"
+                "color:#111111;font-size:0.8rem;font-weight:600;line-height:1.2;"
+                'cursor:default;">{label}</div>'.format(
+                    tooltip=tooltip, color=color, label=_html.escape(label)
+                )
             )
-            colors.append(heatmap_color(score))
-
-    df = pd.DataFrame(records, columns=["Category", "Dimension", "Rating"])
-
-    def _style(_df):
-        styled = pd.DataFrame("", index=_df.index, columns=_df.columns)
-        rating_col = styled.columns.get_loc("Rating")
-        for i, color in enumerate(colors):
-            styled.iloc[i, rating_col] = (
-                f"background-color: {color}; color: #111111; font-weight: 600;"
-            )
-        return styled
-
-    return df.style.apply(_style, axis=None)
+        rows_html.append(
+            '<div style="display:flex;gap:10px;align-items:stretch;">' + "".join(cells) + "</div>"
+        )
+    return (
+        '<div style="display:flex;flex-direction:column;gap:10px;max-width:560px;">'
+        + "".join(rows_html)
+        + "</div>"
+    )
 
 
 def _assessment_as_dict(assessment: Any) -> Optional[Dict[str, Any]]:
@@ -238,16 +261,19 @@ def result_object_role_score(result: Any) -> Optional[float]:
 
 
 def role_dimension_summary(assessment: Any, role: Optional[str] = None) -> str:
-    """Compact summary of role-specific dimensions for table display."""
+    """Compact summary of role-specific dimensions for table display.
+
+    Uses the 9 combined dimensions with legacy-key fallback so both new combined
+    evaluations and historical per-role evaluations render.
+    """
     data = _assessment_as_dict(assessment)
     if not data:
         return "-"
-    role = (role or data.get("role") or "").lower()
     parts = []
-    for key in ROLE_DIMENSION_KEYS.get(role, ()):
-        val = data.get(key)
+    for key in COMBINED_DIMENSION_KEYS:
+        val = dimension_value(data, key)
         if val:
-            parts.append(f"{key.replace('_', ' ').title()}: {str(val).replace('_', ' ')}")
+            parts.append(f"{DIMENSION_SHORT_LABELS.get(key, key)}: {str(val).replace('_', ' ')}")
     return "; ".join(parts) if parts else "-"
 
 
@@ -276,22 +302,24 @@ def sort_results_by_role_score(results: List[Any]) -> List[Any]:
 
 
 def group_eval_rows_by_role(rows: List[dict]) -> Dict[str, List[dict]]:
-    """Group DB evaluation rows by role (role-specific evaluations only)."""
+    """Group DB evaluation rows under the single combined bucket.
+
+    Any role-specific evaluation (new combined runs and legacy clinician/engineer/phd
+    runs) is surfaced under "combined".
+    """
     grouped: Dict[str, List[dict]] = defaultdict(list)
     for row in rows:
-        role = eval_row_role(row)
-        if role and role in ROLE_LABELS:
-            grouped[role].append(row)
+        if eval_row_role(row):
+            grouped["combined"].append(row)
     return dict(grouped)
 
 
 def group_results_by_role(results: List[Any]) -> Dict[str, List[Any]]:
-    """Group result objects by role (role-specific evaluations only)."""
+    """Group result objects under the single combined bucket (see group_eval_rows_by_role)."""
     grouped: Dict[str, List[Any]] = defaultdict(list)
     for result in results:
-        role = result_object_role(result)
-        if role and role in ROLE_LABELS:
-            grouped[role].append(result)
+        if result_object_role(result):
+            grouped["combined"].append(result)
     return dict(grouped)
 
 

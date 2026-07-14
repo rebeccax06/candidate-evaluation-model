@@ -163,7 +163,7 @@ unambiguously to its dimension.
 
 "role_specific_assessment": {
   "role": "combined",
-  "marker": "Cross-role capability across clinical, engineering, and research dimensions",
+  "marker": "Cross-role capability",
   "score": 1,
   "confidence": "low",
   "clinical_challenge_complexity": "not_shown|limited|moderate|high|exceptional",

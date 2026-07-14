@@ -47,7 +47,7 @@ from candidate_evaluator.utils.role_results import (
     group_eval_rows_by_role,
     sort_eval_rows_by_role_score,
     build_role_ranking_row_from_eval_row,
-    build_role_dimension_heatmap,
+    build_role_dimension_heatmap_html,
     COMBINED_DIMENSION_KEYS,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
@@ -1887,13 +1887,13 @@ def settings_page(user: dict):
 
 
 def _render_role_dimension_heatmap(assessment) -> None:
-    """Render a red (worst) -> green (best) heatmap across the 9 role dimensions."""
+    """Render a 3x3 red (worst) -> green (best) heatmap across the 9 role dimensions."""
     try:
-        styler = build_role_dimension_heatmap(assessment)
+        heatmap_html = build_role_dimension_heatmap_html(assessment)
     except Exception:
         return
-    st.markdown("**Dimension Heatmap** (red = weaker, green = stronger)")
-    st.dataframe(styler, hide_index=True, use_container_width=True)
+    st.markdown("**Dimension Heatmap** (red = weaker, green = stronger — hover a box for the rating)")
+    st.markdown(heatmap_html, unsafe_allow_html=True)
 
 
 def display_role_specific_assessment(assessment) -> None:
