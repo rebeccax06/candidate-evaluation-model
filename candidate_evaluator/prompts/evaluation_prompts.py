@@ -1576,9 +1576,7 @@ def get_holistic_selection_prompt(
 # ---------------------------------------------------------------------------
 
 from candidate_evaluator.prompts.role_prompts import (
-    CLINICIAN_ROLE_PROMPT,
-    ENGINEER_ROLE_PROMPT,
-    PHD_ROLE_PROMPT,
+    COMBINED_ROLE_PROMPT,
     ROLE_ALIASES,
     ROLE_PROMPTS,
     get_role_addendum,

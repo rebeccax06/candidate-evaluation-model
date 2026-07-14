@@ -5,19 +5,183 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Union
 
-ROLE_ORDER = ["clinician", "engineer", "phd"]
+ROLE_ORDER = ["combined"]
 
 ROLE_LABELS = {
-    "clinician": "Clinician",
-    "engineer": "Engineer / Tech",
-    "phd": "PhD / Research",
+    "combined": "Combined (All Dimensions)",
 }
 
+# Role-prefixed dimension keys for the combined assessment.
+_CLINICAL_DIMS = (
+    "clinical_challenge_complexity",
+    "clinical_need_investigation_stage",
+    "clinical_systems_thinking",
+)
+_ENGINEERING_DIMS = (
+    "engineering_build_stage",
+    "engineering_ownership_clarity",
+    "engineering_user_grounding",
+)
+_RESEARCH_DIMS = (
+    "research_evidence_level",
+    "research_publication_strength",
+    "research_ownership",
+)
+
 ROLE_DIMENSION_KEYS = {
-    "clinician": ("challenge_complexity", "need_investigation_stage", "systems_thinking"),
-    "engineer": ("build_stage", "ownership_clarity", "user_grounding"),
-    "phd": ("research_evidence_level", "publication_strength", "research_ownership"),
+    "combined": _CLINICAL_DIMS + _ENGINEERING_DIMS + _RESEARCH_DIMS,
 }
+
+# All 9 combined dimension keys (clinical, engineering, research).
+COMBINED_DIMENSION_KEYS = _CLINICAL_DIMS + _ENGINEERING_DIMS + _RESEARCH_DIMS
+
+# Ordered worst -> best levels for each of the 9 dimensions. Index position drives
+# the red (worst) -> green (best) heatmap color.
+DIMENSION_LEVELS = {
+    "clinical_challenge_complexity": ["not_shown", "limited", "moderate", "high", "exceptional"],
+    "clinical_need_investigation_stage": [
+        "witnessed_only",
+        "need_identified",
+        "investigated",
+        "intervention_proposed",
+        "tested_or_implemented",
+        "measured",
+        "sustained_impact",
+    ],
+    "clinical_systems_thinking": ["not_shown", "limited", "moderate", "strong"],
+    "engineering_build_stage": [
+        "idea_only",
+        "designed",
+        "prototype_built",
+        "tested",
+        "iterated",
+        "deployed",
+        "used_by_real_users",
+        "scaled_or_sustained",
+    ],
+    "engineering_ownership_clarity": [
+        "unclear",
+        "supporting_contributor",
+        "substantial_contributor",
+        "primary_driver",
+    ],
+    "engineering_user_grounding": ["not_shown", "limited", "moderate", "strong"],
+    "research_evidence_level": ["none", "limited", "moderate", "strong", "exceptional"],
+    "research_publication_strength": [
+        "none_or_not_shown",
+        "limited",
+        "moderate",
+        "strong",
+        "exceptional",
+    ],
+    "research_ownership": [
+        "unclear",
+        "supporting_contributor",
+        "substantial_contributor",
+        "primary_driver",
+    ],
+}
+
+# Short, human-friendly labels shown in the heatmap (role indicated by the group).
+DIMENSION_SHORT_LABELS = {
+    "clinical_challenge_complexity": "Challenge Complexity",
+    "clinical_need_investigation_stage": "Need Investigation Stage",
+    "clinical_systems_thinking": "Systems Thinking",
+    "engineering_build_stage": "Build Stage",
+    "engineering_ownership_clarity": "Ownership Clarity",
+    "engineering_user_grounding": "User Grounding",
+    "research_evidence_level": "Evidence Level",
+    "research_publication_strength": "Publication Strength",
+    "research_ownership": "Research Ownership",
+}
+
+# Dimensions grouped by role for display.
+DIMENSION_GROUPS = [
+    ("Clinical", list(_CLINICAL_DIMS)),
+    ("Engineering", list(_ENGINEERING_DIMS)),
+    ("Research", list(_RESEARCH_DIMS)),
+]
+
+
+def dimension_level_score(dim_key: str, value: Any) -> Optional[float]:
+    """Normalize a dimension level to a 0.0 (worst) -> 1.0 (best) score.
+
+    Returns None when the value is missing or not a recognized level.
+    """
+    levels = DIMENSION_LEVELS.get(dim_key)
+    if not levels or value is None:
+        return None
+    normalized = str(value).strip().lower()
+    if normalized not in levels:
+        return None
+    if len(levels) == 1:
+        return 1.0
+    return levels.index(normalized) / (len(levels) - 1)
+
+
+def _lerp(a: float, b: float, t: float) -> float:
+    return a + (b - a) * t
+
+
+def heatmap_color(score: Optional[float]) -> str:
+    """Map a 0.0 -> 1.0 score to a red (worst) -> yellow -> green (best) hex color.
+
+    Missing/unknown scores return a neutral gray.
+    """
+    if score is None:
+        return "#e8e8e8"
+    score = max(0.0, min(1.0, float(score)))
+    # red #d73027 -> yellow #ffe066 -> green #1a9850
+    if score <= 0.5:
+        t = score / 0.5
+        r = _lerp(215, 255, t)
+        g = _lerp(48, 224, t)
+        b = _lerp(39, 102, t)
+    else:
+        t = (score - 0.5) / 0.5
+        r = _lerp(255, 26, t)
+        g = _lerp(224, 152, t)
+        b = _lerp(102, 80, t)
+    return f"#{int(round(r)):02x}{int(round(g)):02x}{int(round(b)):02x}"
+
+
+def build_role_dimension_heatmap(assessment: Any):
+    """Build a pandas Styler heatmap of the 9 role dimensions.
+
+    Each dimension's rating cell is colored red (worst) -> green (best). Dimensions
+    without evidence render as a neutral "Not shown" gray cell.
+    """
+    import pandas as pd
+
+    data = _assessment_as_dict(assessment) or {}
+    records: List[Dict[str, str]] = []
+    colors: List[str] = []
+    for group, keys in DIMENSION_GROUPS:
+        for key in keys:
+            raw = data.get(key)
+            score = dimension_level_score(key, raw)
+            rating = str(raw).replace("_", " ").title() if raw else "Not shown"
+            records.append(
+                {
+                    "Category": group,
+                    "Dimension": DIMENSION_SHORT_LABELS.get(key, key),
+                    "Rating": rating,
+                }
+            )
+            colors.append(heatmap_color(score))
+
+    df = pd.DataFrame(records, columns=["Category", "Dimension", "Rating"])
+
+    def _style(_df):
+        styled = pd.DataFrame("", index=_df.index, columns=_df.columns)
+        rating_col = styled.columns.get_loc("Rating")
+        for i, color in enumerate(colors):
+            styled.iloc[i, rating_col] = (
+                f"background-color: {color}; color: #111111; font-weight: 600;"
+            )
+        return styled
+
+    return df.style.apply(_style, axis=None)
 
 
 def _assessment_as_dict(assessment: Any) -> Optional[Dict[str, Any]]:

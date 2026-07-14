@@ -29,6 +29,8 @@ from candidate_evaluator.utils.role_results import (
     sort_results_by_role_score,
     build_role_ranking_row_from_result,
     count_role_evaluations_from_results,
+    build_role_dimension_heatmap,
+    COMBINED_DIMENSION_KEYS,
 )
 from candidate_evaluator.utils.config import load_config, get_default_config
 from candidate_evaluator.exporters import (
@@ -565,9 +567,7 @@ def dashboard_page():
 
 
 ROLE_OPTIONS = {
-    "Clinician": "clinician",
-    "Engineer / Tech": "engineer",
-    "PhD": "phd",
+    "Combined (All Dimensions)": "combined",
 }
 
 
@@ -904,22 +904,19 @@ def batch_evaluation_form(role: str | None = None, key_prefix: str = ""):
 
 
 def role_specific_evaluation_form():
-    """Role-specific evaluation form with role and mode selectors."""
+    """Role-specific evaluation form using a single combined all-dimensions prompt."""
     st.markdown("### Role-Specific Evaluation")
     st.caption(
         "Evaluate candidates with role-tailored guidance appended to the system prompt. "
         "Works with both Criteria-Based and Holistic modes."
     )
 
-    selected_role_label = st.radio(
-        "Candidate Role",
-        list(ROLE_OPTIONS.keys()),
-        horizontal=True,
-        key="role_specific_role_selector"
-    )
-    role = ROLE_OPTIONS[selected_role_label]
+    role = "combined"
 
-    st.info(f"Evaluating as **{selected_role_label}** — role-specific calibration will be applied.")
+    st.info(
+        "Every candidate is scored across **all** role dimensions "
+        "(clinical, engineering, and research) using one combined prompt."
+    )
 
     sub_tab1, sub_tab2 = st.tabs(["Single Candidate", "Batch Upload"])
 
@@ -1306,8 +1303,8 @@ def _render_role_specific_rankings_local(results: list) -> None:
         return
 
     st.caption(
-        "Candidates ranked by **role-specific score** within each specialty "
-        "(ties broken by overall Catalyst score). Each specialty has its own tab."
+        "Candidates ranked by **role-specific score** across all role dimensions "
+        "(ties broken by overall Catalyst score)."
     )
     grouped = group_results_by_role(role_results)
 
@@ -1494,6 +1491,16 @@ def display_comparison_summary(criteria_result, holistic_result):
     st.markdown("---")
 
 
+def _render_role_dimension_heatmap(assessment) -> None:
+    """Render a red (worst) -> green (best) heatmap across the 9 role dimensions."""
+    try:
+        styler = build_role_dimension_heatmap(assessment)
+    except Exception:
+        return
+    st.markdown("**Dimension Heatmap** (red = weaker, green = stronger)")
+    st.dataframe(styler, hide_index=True, use_container_width=True)
+
+
 def display_role_specific_assessment(assessment) -> None:
     """Display structured role-specific assessment when present."""
     if not assessment:
@@ -1514,22 +1521,17 @@ def display_role_specific_assessment(assessment) -> None:
     with cols[1]:
         st.metric("Confidence", str(confidence).capitalize())
     with cols[2]:
-        extra_fields = {
-            k: v for k, v in assessment.items()
-            if k not in {
-                "role", "marker", "score", "confidence", "reasoning",
-                "evidence", "evidence_gaps",
-            } and v
-        }
-        if extra_fields:
-            first_key, first_val = next(iter(extra_fields.items()))
-            st.metric(first_key.replace("_", " ").title(), str(first_val).replace("_", " "))
+        rated = sum(1 for k in COMBINED_DIMENSION_KEYS if assessment.get(k))
+        st.metric("Dimensions Rated", f"{rated}/{len(COMBINED_DIMENSION_KEYS)}")
 
     if assessment.get("reasoning"):
         st.markdown(assessment["reasoning"])
 
+    _render_role_dimension_heatmap(assessment)
+
+    _standard = {"role", "marker", "score", "confidence", "reasoning", "evidence", "evidence_gaps"}
     for key, value in assessment.items():
-        if key in {"role", "marker", "score", "confidence", "reasoning", "evidence", "evidence_gaps"}:
+        if key in _standard or key in COMBINED_DIMENSION_KEYS:
             continue
         if value:
             st.caption(f"**{key.replace('_', ' ').title()}:** {str(value).replace('_', ' ')}")
@@ -3495,9 +3497,7 @@ def settings_page():
         "Holistic Template": "holistic",
         "Interview Ranking Template": "ranking",
         "Interview Selection Template": "selection",
-        "Clinician Role Prompt": "clinician",
-        "Engineer / Tech Role Prompt": "engineer",
-        "PhD Role Prompt": "phd",
+        "Combined Role Prompt (All Dimensions)": "combined",
     }
 
     selected_prompt_name = st.selectbox(
@@ -3533,12 +3533,8 @@ def settings_page():
         current_content = prompt_manager.get_ranking_template()
     elif selected_prompt_type == "selection":
         current_content = prompt_manager.get_selection_template()
-    elif selected_prompt_type == "clinician":
-        current_content = prompt_manager.get_clinician_prompt()
-    elif selected_prompt_type == "engineer":
-        current_content = prompt_manager.get_engineer_prompt()
     else:
-        current_content = prompt_manager.get_phd_prompt()
+        current_content = prompt_manager.get_combined_prompt()
 
     # Text area for editing
     edited_content = st.text_area(

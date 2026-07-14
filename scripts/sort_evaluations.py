@@ -29,7 +29,7 @@ from collections import Counter
 from pathlib import Path
 
 # Roles recognized by the candidate evaluator (see candidate_evaluator/utils/role_results.py)
-ROLE_NAMES = {"clinician", "engineer", "phd"}
+ROLE_NAMES = {"clinician", "engineer", "phd", "combined"}
 
 
 def parse_args() -> argparse.Namespace:

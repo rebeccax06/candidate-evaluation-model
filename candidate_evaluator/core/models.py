@@ -102,26 +102,26 @@ class RoleSpecificEvidence(BaseModel):
 
 
 class RoleSpecificAssessment(BaseModel):
-    """Structured role-specific assessment (clinician, engineer, or phd)."""
-    role: str = Field(description="clinician, engineer, or phd")
+    """Structured role-specific assessment (clinician, engineer, phd, or combined)."""
+    role: str = Field(description="clinician, engineer, phd, or combined")
     marker: str = Field(default="", description="Primary role-specific marker label")
     score: float = Field(ge=1, le=10, description="Role-specific score from 1-10")
     confidence: str = Field(default="medium", description="low, medium, or high")
     reasoning: str = Field(default="", description="Evidence-based role assessment")
     evidence: List[RoleSpecificEvidence] = Field(default_factory=list)
     evidence_gaps: List[str] = Field(default_factory=list)
-    # PhD-specific
+    # Clinical dimensions
+    clinical_challenge_complexity: Optional[str] = None
+    clinical_need_investigation_stage: Optional[str] = None
+    clinical_systems_thinking: Optional[str] = None
+    # Engineering dimensions
+    engineering_build_stage: Optional[str] = None
+    engineering_ownership_clarity: Optional[str] = None
+    engineering_user_grounding: Optional[str] = None
+    # Research dimensions
     research_evidence_level: Optional[str] = None
-    publication_strength: Optional[str] = None
+    research_publication_strength: Optional[str] = None
     research_ownership: Optional[str] = None
-    # Clinician-specific
-    challenge_complexity: Optional[str] = None
-    need_investigation_stage: Optional[str] = None
-    systems_thinking: Optional[str] = None
-    # Engineer-specific
-    build_stage: Optional[str] = None
-    ownership_clarity: Optional[str] = None
-    user_grounding: Optional[str] = None
 
     @validator('confidence')
     def validate_confidence(cls, v):
@@ -153,6 +153,12 @@ def parse_role_specific_assessment(data: Any) -> Optional[RoleSpecificAssessment
                 source=ev.get("source", ""),
                 context=ev.get("context", ""),
             ))
+    def _dim(new_key: str, legacy_key: str) -> Optional[str]:
+        # Prefer the role-prefixed key; fall back to the legacy unprefixed key so
+        # historical per-role evaluations still populate.
+        value = data.get(new_key)
+        return value if value is not None else data.get(legacy_key)
+
     return RoleSpecificAssessment(
         role=str(data["role"]).lower(),
         marker=data.get("marker", ""),
@@ -161,15 +167,15 @@ def parse_role_specific_assessment(data: Any) -> Optional[RoleSpecificAssessment
         reasoning=data.get("reasoning", ""),
         evidence=evidence,
         evidence_gaps=data.get("evidence_gaps") or [],
+        clinical_challenge_complexity=_dim("clinical_challenge_complexity", "challenge_complexity"),
+        clinical_need_investigation_stage=_dim("clinical_need_investigation_stage", "need_investigation_stage"),
+        clinical_systems_thinking=_dim("clinical_systems_thinking", "systems_thinking"),
+        engineering_build_stage=_dim("engineering_build_stage", "build_stage"),
+        engineering_ownership_clarity=_dim("engineering_ownership_clarity", "ownership_clarity"),
+        engineering_user_grounding=_dim("engineering_user_grounding", "user_grounding"),
         research_evidence_level=data.get("research_evidence_level"),
-        publication_strength=data.get("publication_strength"),
+        research_publication_strength=_dim("research_publication_strength", "publication_strength"),
         research_ownership=data.get("research_ownership"),
-        challenge_complexity=data.get("challenge_complexity"),
-        need_investigation_stage=data.get("need_investigation_stage"),
-        systems_thinking=data.get("systems_thinking"),
-        build_stage=data.get("build_stage"),
-        ownership_clarity=data.get("ownership_clarity"),
-        user_grounding=data.get("user_grounding"),
     )
 
 
