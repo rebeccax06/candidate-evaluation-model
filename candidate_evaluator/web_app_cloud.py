@@ -589,6 +589,40 @@ def new_evaluation_page(user: dict, api_key: str):
         role_specific_evaluation_form(user, api_key)
 
 
+def _batch_target_selector(user: dict, key_prefix: str = "") -> dict | None:
+    """Optional 'add to existing batch' picker.
+
+    Returns the selected batch job dict, or None to create a standalone evaluation.
+    """
+    try:
+        jobs = get_database().get_user_batch_jobs(user["id"])
+    except Exception:
+        jobs = []
+    if not jobs:
+        return None
+
+    options: dict[str, dict | None] = {"— Don't add to a batch —": None}
+    for j in jobs:
+        created = str(j.get("created_at", ""))[:10]
+        mode = j.get("evaluation_mode", "criteria")
+        done = j.get("completed_candidates", 0)
+        total = j.get("total_candidates", 0)
+        label = f"{j.get('job_name') or '(unnamed)'} · {created} · {mode} · {done}/{total}"
+        options[label] = j
+
+    choice = st.selectbox(
+        "Add to existing batch (optional)",
+        list(options.keys()),
+        key=f"{key_prefix}add_to_batch_selector",
+        help=(
+            "Append these candidate(s) to an existing batch so they appear together "
+            "in Batch Jobs and Rankings. New candidates inherit the batch's evaluation "
+            "mode and role."
+        ),
+    )
+    return options[choice]
+
+
 def single_evaluation_form(user: dict, api_key: str, role: str | None = None, key_prefix: str = ""):
     """Single candidate evaluation form."""
     title = "### Evaluate a Single Candidate"
@@ -597,18 +631,31 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
         title = f"### Evaluate a Single {role_label} Candidate"
     st.markdown(title)
 
-    eval_mode = st.radio(
-        "Evaluation Mode",
-        ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
-        horizontal=True,
-        key=f"{key_prefix}single_eval_mode"
-    )
-    is_holistic = eval_mode == "Holistic (program fit)"
+    target_job = _batch_target_selector(user, key_prefix)
 
-    if role:
-        st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
-    if is_holistic:
-        st.info("Holistic mode evaluates overall program fit and innovation potential.")
+    if target_job:
+        is_holistic = target_job.get("evaluation_mode", "criteria") == "holistic"
+        eff_role = target_job.get("role")
+        mode_label = "Holistic (program fit)" if is_holistic else "Criteria-Based (11 criteria)"
+        st.info(
+            f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
+            f"inherits **{mode_label}**"
+            + (f", role **{eff_role}**" if eff_role else "")
+            + "."
+        )
+    else:
+        eval_mode = st.radio(
+            "Evaluation Mode",
+            ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
+            horizontal=True,
+            key=f"{key_prefix}single_eval_mode"
+        )
+        is_holistic = eval_mode == "Holistic (program fit)"
+        eff_role = role
+        if role:
+            st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
+        if is_holistic:
+            st.info("Holistic mode evaluates overall program fit and innovation potential.")
 
     col1, col2 = st.columns([2, 1])
 
@@ -655,12 +702,13 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
                 evaluator = get_evaluator(api_key)
                 db = get_database()
 
+                target_job_id = target_job["id"] if target_job else None
                 if is_holistic:
                     result = evaluator.evaluate_candidate_holistic(
                         candidate_id=candidate_id,
                         material_paths=material_paths,
                         candidate_name=candidate_name or None,
-                        role=role
+                        role=eff_role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
@@ -670,17 +718,22 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
                         candidate_id=candidate_id,
                         evaluation_type="holistic",
                         result=result_dict,
-                        candidate_name=candidate_name
+                        candidate_name=candidate_name,
+                        job_id=target_job_id,
                     )
 
-                    st.success("Holistic evaluation completed!")
+                    if target_job_id:
+                        db.bump_job_counts(target_job_id, add_total=1, add_completed=1)
+                        st.success(f"Holistic evaluation completed and added to batch '{target_job.get('job_name') or ''}'.")
+                    else:
+                        st.success("Holistic evaluation completed!")
                     display_holistic_evaluation_result(result)
                 else:
                     result = evaluator.evaluate_candidate(
                         candidate_id=candidate_id,
                         material_paths=material_paths,
                         candidate_name=candidate_name or None,
-                        role=role
+                        role=eff_role
                     )
                     result_dict = result.model_dump()
                     result_dict["candidate"]["evaluation_date"] = str(result_dict["candidate"]["evaluation_date"])
@@ -694,10 +747,15 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
                         candidate_id=candidate_id,
                         evaluation_type="criteria",
                         result=result_dict,
-                        candidate_name=candidate_name
+                        candidate_name=candidate_name,
+                        job_id=target_job_id,
                     )
 
-                    st.success("Evaluation completed!")
+                    if target_job_id:
+                        db.bump_job_counts(target_job_id, add_total=1, add_completed=1)
+                        st.success(f"Evaluation completed and added to batch '{target_job.get('job_name') or ''}'.")
+                    else:
+                        st.success("Evaluation completed!")
                     display_evaluation_result(result)
 
             except Exception as e:
@@ -716,20 +774,40 @@ def _run_role_batch_sequential_cloud(
     uploaded_files,
     is_holistic: bool,
     role: str,
+    target_job_id: str | None = None,
 ) -> None:
-    """Run role-specific batch evaluations inline when the background worker is unavailable."""
+    """Run role-specific batch evaluations inline when the background worker is unavailable.
+
+    When target_job_id is set, results are attached to that batch (skipping candidates
+    already in it) and the batch's counters are updated.
+    """
     evaluator = get_evaluator(api_key)
     db = get_database()
     evaluation_mode = "holistic" if is_holistic else "criteria"
+
+    already_done: set[str] = set()
+    if target_job_id:
+        try:
+            already_done = {
+                e.get("candidate_id")
+                for e in db.get_job_evaluations(target_job_id)
+                if e.get("candidate_id")
+            }
+        except Exception:
+            already_done = set()
 
     total = len(uploaded_files)
     progress_bar = st.progress(0)
     status_text = st.empty()
     completed = 0
+    skipped = 0
+    added_total = 0
+    added_completed = 0
+    added_failed = 0
     failed: list[tuple[str, str]] = []
 
     st.info(
-        "Background worker is unavailable. Running evaluations sequentially in your browser. "
+        "Running evaluations sequentially in your browser. "
         "Keep this tab open until finished."
     )
 
@@ -737,8 +815,14 @@ def _run_role_batch_sequential_cloud(
     try:
         for i, uploaded_file in enumerate(uploaded_files):
             candidate_id = Path(uploaded_file.name).stem
-            status_text.text(f"Evaluating {i + 1}/{total}: {candidate_id}")
             progress_bar.progress(i / total if total else 0)
+
+            if target_job_id and candidate_id in already_done:
+                skipped += 1
+                status_text.text(f"Skipping {candidate_id} (already in batch)")
+                continue
+
+            status_text.text(f"Evaluating {i + 1}/{total}: {candidate_id}")
 
             temp_path = os.path.join(temp_dir, uploaded_file.name)
             with open(temp_path, "wb") as f:
@@ -773,15 +857,34 @@ def _run_role_batch_sequential_cloud(
                     candidate_id=candidate_id,
                     evaluation_type=evaluation_mode,
                     result=result_dict,
+                    job_id=target_job_id,
                 )
                 completed += 1
+                if target_job_id:
+                    added_total += 1
+                    added_completed += 1
+                    already_done.add(candidate_id)
             except Exception as e:
                 failed.append((candidate_id, str(e)))
+                if target_job_id:
+                    added_total += 1
+                    added_failed += 1
             finally:
                 try:
                     os.unlink(temp_path)
                 except OSError:
                     pass
+
+        if target_job_id and added_total:
+            try:
+                db.bump_job_counts(
+                    target_job_id,
+                    add_total=added_total,
+                    add_completed=added_completed,
+                    add_failed=added_failed,
+                )
+            except Exception:
+                pass
     finally:
         try:
             os.rmdir(temp_dir)
@@ -792,7 +895,12 @@ def _run_role_batch_sequential_cloud(
     status_text.empty()
 
     if completed:
-        st.success(f"Completed {completed}/{total} evaluations.")
+        msg = f"Completed {completed}/{total} evaluations."
+        if target_job_id:
+            msg += " Added to the selected batch."
+        st.success(msg)
+    if skipped:
+        st.info(f"Skipped {skipped} candidate(s) already in the batch.")
     if failed:
         st.error(f"Failed {len(failed)} candidate(s):")
         for candidate_id, err in failed:
@@ -822,16 +930,29 @@ def batch_evaluation_form(
             "You can close this page and the evaluation will continue."
         )
 
-    eval_mode = st.radio(
-        "Evaluation Mode",
-        ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
-        horizontal=True,
-        key=f"{key_prefix}batch_eval_mode"
-    )
-    is_holistic = eval_mode == "Holistic (program fit)"
+    target_job = _batch_target_selector(user, key_prefix)
 
-    if role:
-        st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
+    if target_job:
+        is_holistic = target_job.get("evaluation_mode", "criteria") == "holistic"
+        eff_role = target_job.get("role")
+        mode_label = "Holistic (program fit)" if is_holistic else "Criteria-Based (11 criteria)"
+        st.info(
+            f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
+            f"new candidates inherit **{mode_label}**"
+            + (f", role **{eff_role}**" if eff_role else "")
+            + ". Files are appended and the background worker evaluates only the new candidates."
+        )
+    else:
+        eval_mode = st.radio(
+            "Evaluation Mode",
+            ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
+            horizontal=True,
+            key=f"{key_prefix}batch_eval_mode"
+        )
+        is_holistic = eval_mode == "Holistic (program fit)"
+        eff_role = role
+        if role:
+            st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
 
     uploaded_files = st.file_uploader(
         "Upload Candidate PDFs",
@@ -848,18 +969,23 @@ def batch_evaluation_form(
             for f in uploaded_files:
                 st.text(f"- {f.name}")
 
-        job_name = st.text_input(
-            "Job Name (optional)",
-            placeholder="e.g., Spring 2026 Applicants",
-            key=f"{key_prefix}batch_job_name"
-        )
+        if target_job:
+            job_name = None
+            add_label = "Add to Batch (Background)"
+        else:
+            job_name = st.text_input(
+                "Job Name (optional)",
+                placeholder="e.g., Spring 2026 Applicants",
+                key=f"{key_prefix}batch_job_name"
+            )
+            add_label = "Start Batch Evaluation (Background)"
 
         run_sequential = False
-        if role and api_key:
+        if api_key:
             col_bg, col_seq = st.columns(2)
             with col_bg:
                 start_clicked = st.button(
-                    "Start Batch Evaluation (Background)",
+                    add_label,
                     use_container_width=True,
                     key=f"{key_prefix}batch_eval_btn",
                 )
@@ -872,14 +998,15 @@ def batch_evaluation_form(
                 )
         else:
             start_clicked = st.button(
-                "Start Batch Evaluation",
+                add_label,
                 use_container_width=True,
                 key=f"{key_prefix}batch_eval_btn",
             )
 
         if run_sequential:
             _run_role_batch_sequential_cloud(
-                user, api_key, uploaded_files, is_holistic, role
+                user, api_key, uploaded_files, is_holistic, eff_role,
+                target_job_id=target_job["id"] if target_job else None,
             )
             return
 
@@ -910,25 +1037,36 @@ def batch_evaluation_form(
                     if i < total_files - 1:
                         time.sleep(0.2)
 
-                status_text.text("Creating job...")
-                default_job_name = f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}"
-                if role:
-                    role_label = next((k for k, v in ROLE_OPTIONS.items() if v == role), role)
-                    default_job_name = f"{role_label} {default_job_name}"
-                job = db.create_job(
-                    user_id=user["id"],
-                    job_name=job_name or default_job_name,
-                    job_type="batch",
-                    total_candidates=len(file_paths),
-                    file_paths=file_paths,
-                    evaluation_mode="holistic" if is_holistic else "criteria",
-                    role=role
-                )
+                if target_job:
+                    status_text.text("Adding to batch...")
+                    db.add_files_to_job(target_job["id"], file_paths)
+                    progress_bar.progress(1.0)
+                    status_text.empty()
+                    st.success(
+                        f"Added {len(file_paths)} candidate(s) to batch "
+                        f"'{target_job.get('job_name') or ''}'."
+                    )
+                    st.info("The background worker will evaluate the newly added candidates.")
+                else:
+                    status_text.text("Creating job...")
+                    default_job_name = f"Batch {datetime.now().strftime('%Y%m%d_%H%M')}"
+                    if eff_role:
+                        role_label = next((k for k, v in ROLE_OPTIONS.items() if v == eff_role), eff_role)
+                        default_job_name = f"{role_label} {default_job_name}"
+                    job = db.create_job(
+                        user_id=user["id"],
+                        job_name=job_name or default_job_name,
+                        job_type="batch",
+                        total_candidates=len(file_paths),
+                        file_paths=file_paths,
+                        evaluation_mode="holistic" if is_holistic else "criteria",
+                        role=eff_role
+                    )
 
-                progress_bar.progress(1.0)
-                status_text.empty()
-                st.success(f"Job created! ID: `{job['id']}`")
-                st.info("The background worker will process your candidates. You can close this page.")
+                    progress_bar.progress(1.0)
+                    status_text.empty()
+                    st.success(f"Job created! ID: `{job['id']}`")
+                    st.info("The background worker will process your candidates. You can close this page.")
 
                 time.sleep(1)
                 st.rerun()

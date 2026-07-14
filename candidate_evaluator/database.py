@@ -105,6 +105,52 @@ class Database:
         ).order("created_at", desc=True).limit(limit).execute()
         return result.data or []
     
+    def get_user_batch_jobs(self, user_id: str, limit: int = 50) -> list[dict]:
+        """Get batch-type jobs for a user (used for the 'add to existing batch' picker)."""
+        result = self.client.table("jobs").select("*").eq(
+            "user_id", user_id
+        ).eq("job_type", "batch").order("created_at", desc=True).limit(limit).execute()
+        return result.data or []
+
+    def add_files_to_job(self, job_id: str, new_file_paths: list[str]) -> dict:
+        """Append candidate files to an existing job and re-queue it for processing.
+
+        The job is reset to 'pending' so the worker re-claims it. The worker skips
+        candidates already evaluated for this job, so only the newly added files run.
+        """
+        job = self.get_job(job_id)
+        if not job:
+            raise ValueError(f"Job {job_id} not found")
+        combined = list(job.get("file_paths") or []) + list(new_file_paths)
+        update_data = {
+            "file_paths": combined,
+            "total_candidates": len(combined),
+            "status": "pending",
+            "completed_at": None,
+            "error": None,
+        }
+        result = self.client.table("jobs").update(update_data).eq("id", job_id).execute()
+        return result.data[0] if result.data else None
+
+    def bump_job_counts(
+        self,
+        job_id: str,
+        add_total: int = 0,
+        add_completed: int = 0,
+        add_failed: int = 0,
+    ) -> Optional[dict]:
+        """Increment a job's candidate counters (used when adding in-browser results to a batch)."""
+        job = self.get_job(job_id)
+        if not job:
+            raise ValueError(f"Job {job_id} not found")
+        update_data = {
+            "total_candidates": (job.get("total_candidates") or 0) + add_total,
+            "completed_candidates": (job.get("completed_candidates") or 0) + add_completed,
+            "failed_candidates": (job.get("failed_candidates") or 0) + add_failed,
+        }
+        result = self.client.table("jobs").update(update_data).eq("id", job_id).execute()
+        return result.data[0] if result.data else None
+
     def get_pending_jobs(self, limit: int = 10) -> list[dict]:
         """Get pending jobs for worker processing."""
         result = self.client.table("jobs").select("*").eq(

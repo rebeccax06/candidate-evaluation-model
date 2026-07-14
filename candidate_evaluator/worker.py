@@ -91,7 +91,14 @@ class Worker:
             self.db.complete_job(job_id, error=f"Failed to initialize evaluator: {e}")
             return
         
-        completed = 0
+        # Candidates already evaluated for this job (so re-queued jobs that had files
+        # appended only process the newly added candidates instead of duplicating).
+        already_done = {
+            e.get("candidate_id")
+            for e in self.db.get_job_evaluations(job_id)
+            if e.get("candidate_id")
+        }
+        completed = len(already_done)
         failed = 0
         
         for i, storage_path in enumerate(file_paths):
@@ -100,6 +107,11 @@ class Worker:
                 break
             
             candidate_id = self._extract_candidate_id(storage_path)
+
+            if candidate_id in already_done:
+                logger.info(f"Skipping already-evaluated candidate: {candidate_id}")
+                continue
+
             logger.info(f"Processing candidate {i+1}/{len(file_paths)}: {candidate_id}")
             
             self.db.update_job_progress(job_id, completed, failed, candidate_id)
@@ -143,6 +155,7 @@ class Worker:
                 )
                 
                 completed += 1
+                already_done.add(candidate_id)
                 logger.info(f"Completed evaluation for {candidate_id}")
                 
             except Exception as e:
