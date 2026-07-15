@@ -12,6 +12,7 @@ Usage:
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 import tempfile
 import os
 import json
@@ -48,6 +49,7 @@ from candidate_evaluator.utils.role_results import (
     sort_eval_rows_by_role_score,
     build_role_ranking_row_from_eval_row,
     build_role_dimension_heatmap_html,
+    ROLE_HEATMAP_HEIGHT,
     COMBINED_DIMENSION_KEYS,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
@@ -2031,7 +2033,7 @@ def _render_role_dimension_heatmap(assessment) -> None:
     except Exception:
         return
     st.markdown("**Dimension Heatmap** (red = weaker, green = stronger — hover a box for the rating)")
-    st.markdown(heatmap_html, unsafe_allow_html=True)
+    components.html(heatmap_html, height=ROLE_HEATMAP_HEIGHT, scrolling=False)
 
 
 def display_role_specific_assessment(assessment) -> None:

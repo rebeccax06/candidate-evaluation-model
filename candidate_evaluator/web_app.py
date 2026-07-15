@@ -1,6 +1,7 @@
 """Modern Streamlit web interface for candidate evaluator with background processing."""
 
 import streamlit as st
+import streamlit.components.v1 as components
 import tempfile
 import os
 import json
@@ -30,6 +31,7 @@ from candidate_evaluator.utils.role_results import (
     build_role_ranking_row_from_result,
     count_role_evaluations_from_results,
     build_role_dimension_heatmap_html,
+    ROLE_HEATMAP_HEIGHT,
     COMBINED_DIMENSION_KEYS,
 )
 from candidate_evaluator.utils.config import load_config, get_default_config
@@ -1498,7 +1500,7 @@ def _render_role_dimension_heatmap(assessment) -> None:
     except Exception:
         return
     st.markdown("**Dimension Heatmap** (red = weaker, green = stronger — hover a box for the rating)")
-    st.markdown(heatmap_html, unsafe_allow_html=True)
+    components.html(heatmap_html, height=ROLE_HEATMAP_HEIGHT, scrolling=False)
 
 
 def display_role_specific_assessment(assessment) -> None:

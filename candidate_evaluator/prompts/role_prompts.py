@@ -60,6 +60,8 @@ constraints, access/equity barriers, and coordination across specialties or sett
 **How far did they go from noticing a problem to doing something about it?**
 Trace the sequence observation -> investigation -> refined need -> action. Reward
 movement from witnessing toward acting, not merely describing a difficult situation.
+
+- `not_shown`: No clinical problem or engagement with one is described.
 - `witnessed_only`: Saw or experienced the problem but took no further step.
 - `need_identified`: Clearly framed an unmet need, distinct from its visible symptoms.
 - `investigated`: Explored root causes and stakeholder perspectives.
@@ -167,7 +169,7 @@ unambiguously to its dimension.
   "score": 1,
   "confidence": "low",
   "clinical_challenge_complexity": "not_shown|limited|moderate|high|exceptional",
-  "clinical_need_investigation_stage": "witnessed_only|need_identified|investigated|intervention_proposed|tested_or_implemented|measured|sustained_impact",
+  "clinical_need_investigation_stage": "not_shown|witnessed_only|need_identified|investigated|intervention_proposed|tested_or_implemented|measured|sustained_impact",
   "clinical_systems_thinking": "not_shown|limited|moderate|strong",
   "engineering_build_stage": "idea_only|designed|prototype_built|tested|iterated|deployed|used_by_real_users|scaled_or_sustained",
   "engineering_ownership_clarity": "unclear|supporting_contributor|substantial_contributor|primary_driver",
@@ -245,7 +247,7 @@ _ROLE_OUTPUT_SCHEMAS = {
   "score": 7,
   "confidence": "low|medium|high",
   "clinical_challenge_complexity": "not_shown|limited|moderate|high|exceptional",
-  "clinical_need_investigation_stage": "witnessed_only|need_identified|investigated|intervention_proposed|tested_or_implemented|measured|sustained_impact",
+  "clinical_need_investigation_stage": "not_shown|witnessed_only|need_identified|investigated|intervention_proposed|tested_or_implemented|measured|sustained_impact",
   "clinical_systems_thinking": "not_shown|limited|moderate|strong",
   "engineering_build_stage": "idea_only|designed|prototype_built|tested|iterated|deployed|used_by_real_users|scaled_or_sustained",
   "engineering_ownership_clarity": "unclear|supporting_contributor|substantial_contributor|primary_driver",

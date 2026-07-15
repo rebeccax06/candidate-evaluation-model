@@ -41,6 +41,7 @@ COMBINED_DIMENSION_KEYS = _CLINICAL_DIMS + _ENGINEERING_DIMS + _RESEARCH_DIMS
 DIMENSION_LEVELS = {
     "clinical_challenge_complexity": ["not_shown", "limited", "moderate", "high", "exceptional"],
     "clinical_need_investigation_stage": [
+        "not_shown",
         "witnessed_only",
         "need_identified",
         "investigated",
@@ -166,20 +167,30 @@ def heatmap_color(score: Optional[float]) -> str:
     return f"#{int(round(r)):02x}{int(round(g)):02x}{int(round(b)):02x}"
 
 
+# Pixel height needed to render the heatmap component (3 rows + header + tooltip
+# headroom). Used by the Streamlit components.html iframe so nothing is clipped.
+ROLE_HEATMAP_HEIGHT = 360
+_CELL_HEIGHT = 92
+
+
 def build_role_dimension_heatmap_html(assessment: Any) -> str:
-    """Build a 3x3 grid heatmap (HTML) of the 9 role dimensions.
+    """Build a self-contained 3x3 grid heatmap (HTML document) of the 9 role dimensions.
 
     Each row is a role (Clinical, Engineering, Research). Each of the three cells in
-    a row is an equal-size square colored red (worst) -> green (best), labeled with
-    the dimension name. Hovering a square shows a tooltip with the candidate's rating.
-    Dimensions without evidence render as a neutral "Not shown" gray square.
+    a row is an equal-size box colored red (worst) -> green (best), labeled with the
+    dimension name. Hovering a box shows a tooltip with the candidate's rating (both a
+    native title and a styled CSS tooltip). Dimensions without evidence render as a
+    neutral "Not shown" gray box.
+
+    Returned as a full HTML document so it can be rendered via
+    ``st.components.v1.html`` (an iframe), which — unlike ``st.markdown`` — does not
+    strip attributes like ``title`` or ``<style>`` hover rules.
     """
     data = _assessment_as_dict(assessment) or {}
     rows_html: List[str] = []
     for group, keys in DIMENSION_GROUPS:
         cells = [
-            '<div style="width:96px;min-width:96px;display:flex;align-items:center;'
-            'font-weight:700;font-size:0.85rem;color:#444;">{}</div>'.format(_html.escape(group))
+            '<div class="dim-rolelabel">{}</div>'.format(_html.escape(group))
         ]
         for key in keys:
             raw = dimension_value(data, key)
@@ -187,23 +198,39 @@ def build_role_dimension_heatmap_html(assessment: Any) -> str:
             color = heatmap_color(score)
             rating = str(raw).replace("_", " ").title() if raw else "Not shown"
             label = DIMENSION_SHORT_LABELS.get(key, key)
-            tooltip = _html.escape(f"{label}: {rating}", quote=True)
+            tip = _html.escape(f"{label}: {rating}", quote=True)
             cells.append(
-                '<div title="{tooltip}" style="flex:1;aspect-ratio:1 / 1;'
-                "background:{color};border-radius:12px;display:flex;align-items:center;"
-                "justify-content:center;text-align:center;padding:8px;box-sizing:border-box;"
-                "color:#111111;font-size:0.8rem;font-weight:600;line-height:1.2;"
-                'cursor:default;">{label}</div>'.format(
-                    tooltip=tooltip, color=color, label=_html.escape(label)
-                )
+                '<div class="dim-cell" title="{tip}" style="background:{color};">'
+                '<span class="dim-label">{label}</span>'
+                '<span class="dim-tip">{tip}</span>'
+                "</div>".format(tip=tip, color=color, label=_html.escape(label))
             )
-        rows_html.append(
-            '<div style="display:flex;gap:10px;align-items:stretch;">' + "".join(cells) + "</div>"
-        )
+        rows_html.append('<div class="dim-row">' + "".join(cells) + "</div>")
+
+    styles = (
+        "<style>"
+        "*{box-sizing:border-box;}"
+        "body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;}"
+        ".dim-grid{display:flex;flex-direction:column;gap:10px;max-width:560px;"
+        "padding-top:30px;}"
+        ".dim-row{display:flex;gap:10px;align-items:stretch;}"
+        ".dim-rolelabel{width:96px;min-width:96px;display:flex;align-items:center;"
+        "font-weight:700;font-size:0.85rem;color:#444;}"
+        f".dim-cell{{position:relative;flex:1;height:{_CELL_HEIGHT}px;border-radius:12px;"
+        "display:flex;align-items:center;justify-content:center;text-align:center;"
+        "padding:8px;color:#111;font-size:0.8rem;font-weight:600;line-height:1.2;"
+        "cursor:default;}"
+        ".dim-tip{visibility:hidden;opacity:0;position:absolute;bottom:105%;left:50%;"
+        "transform:translateX(-50%);background:#111;color:#fff;padding:5px 8px;"
+        "border-radius:6px;font-size:0.72rem;font-weight:500;white-space:nowrap;"
+        "z-index:20;transition:opacity .1s ease;pointer-events:none;}"
+        ".dim-cell:hover .dim-tip{visibility:visible;opacity:1;}"
+        "</style>"
+    )
     return (
-        '<div style="display:flex;flex-direction:column;gap:10px;max-width:560px;">'
-        + "".join(rows_html)
-        + "</div>"
+        "<!DOCTYPE html><html><head>" + styles + "</head><body>"
+        '<div class="dim-grid">' + "".join(rows_html) + "</div>"
+        "</body></html>"
     )
 
 
