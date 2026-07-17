@@ -167,24 +167,24 @@ def heatmap_color(score: Optional[float]) -> str:
     return f"#{int(round(r)):02x}{int(round(g)):02x}{int(round(b)):02x}"
 
 
-# Pixel height needed to render the heatmap component (3 rows + header + tooltip
-# headroom). Used by the Streamlit components.html iframe so nothing is clipped.
-ROLE_HEATMAP_HEIGHT = 360
+# Pixel height needed to render the heatmap component (3 rows + small padding).
+# Used by the Streamlit components.html iframe so nothing is clipped.
+ROLE_HEATMAP_HEIGHT = 320
 _CELL_HEIGHT = 92
 
 
 def build_role_dimension_heatmap_html(assessment: Any) -> str:
     """Build a self-contained 3x3 grid heatmap (HTML document) of the 9 role dimensions.
 
-    Each row is a role (Clinical, Engineering, Research). Each of the three cells in
-    a row is an equal-size box colored red (worst) -> green (best), labeled with the
-    dimension name. Hovering a box shows a tooltip with the candidate's rating (both a
-    native title and a styled CSS tooltip). Dimensions without evidence render as a
-    neutral "Not shown" gray box.
+    Each row is a role (Clinical, Engineering, Research). Each of the three cells in a
+    row is an equal-size box colored red (worst) -> green (best). The dimension name
+    and the candidate's rating are shown directly inside the box (always visible, so
+    it does not depend on fragile hover tooltips inside the component iframe); the
+    rating is also exposed as a native hover title. Dimensions without evidence render
+    as a neutral "Not shown" gray box.
 
-    Returned as a full HTML document so it can be rendered via
-    ``st.components.v1.html`` (an iframe), which — unlike ``st.markdown`` — does not
-    strip attributes like ``title`` or ``<style>`` hover rules.
+    Returned as a full HTML document so it can be rendered via ``st.components.v1.html``
+    (an iframe), which renders arbitrary styles reliably.
     """
     data = _assessment_as_dict(assessment) or {}
     rows_html: List[str] = []
@@ -202,8 +202,13 @@ def build_role_dimension_heatmap_html(assessment: Any) -> str:
             cells.append(
                 '<div class="dim-cell" title="{tip}" style="background:{color};">'
                 '<span class="dim-label">{label}</span>'
-                '<span class="dim-tip">{tip}</span>'
-                "</div>".format(tip=tip, color=color, label=_html.escape(label))
+                '<span class="dim-rating">{rating}</span>'
+                "</div>".format(
+                    tip=tip,
+                    color=color,
+                    label=_html.escape(label),
+                    rating=_html.escape(rating),
+                )
             )
         rows_html.append('<div class="dim-row">' + "".join(cells) + "</div>")
 
@@ -211,20 +216,15 @@ def build_role_dimension_heatmap_html(assessment: Any) -> str:
         "<style>"
         "*{box-sizing:border-box;}"
         "body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;}"
-        ".dim-grid{display:flex;flex-direction:column;gap:10px;max-width:560px;"
-        "padding-top:30px;}"
+        ".dim-grid{display:flex;flex-direction:column;gap:10px;max-width:560px;padding:6px;}"
         ".dim-row{display:flex;gap:10px;align-items:stretch;}"
         ".dim-rolelabel{width:96px;min-width:96px;display:flex;align-items:center;"
         "font-weight:700;font-size:0.85rem;color:#444;}"
-        f".dim-cell{{position:relative;flex:1;height:{_CELL_HEIGHT}px;border-radius:12px;"
-        "display:flex;align-items:center;justify-content:center;text-align:center;"
-        "padding:8px;color:#111;font-size:0.8rem;font-weight:600;line-height:1.2;"
-        "cursor:default;}"
-        ".dim-tip{visibility:hidden;opacity:0;position:absolute;bottom:105%;left:50%;"
-        "transform:translateX(-50%);background:#111;color:#fff;padding:5px 8px;"
-        "border-radius:6px;font-size:0.72rem;font-weight:500;white-space:nowrap;"
-        "z-index:20;transition:opacity .1s ease;pointer-events:none;}"
-        ".dim-cell:hover .dim-tip{visibility:visible;opacity:1;}"
+        f".dim-cell{{flex:1;height:{_CELL_HEIGHT}px;border-radius:12px;display:flex;"
+        "flex-direction:column;align-items:center;justify-content:center;text-align:center;"
+        "gap:4px;padding:8px;color:#111;cursor:default;}"
+        ".dim-label{font-weight:700;font-size:0.8rem;line-height:1.15;}"
+        ".dim-rating{font-weight:500;font-size:0.74rem;line-height:1.15;opacity:0.9;}"
         "</style>"
     )
     return (
