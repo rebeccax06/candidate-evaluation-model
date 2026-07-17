@@ -2032,7 +2032,7 @@ def _render_role_dimension_heatmap(assessment) -> None:
         heatmap_html = build_role_dimension_heatmap_html(assessment)
     except Exception:
         return
-    st.markdown("**Dimension Heatmap** (red = weaker, green = stronger — hover a box for the rating)")
+    st.markdown("**Dimension Heatmap** (red = weaker, green = stronger")
     components.html(heatmap_html, height=ROLE_HEATMAP_HEIGHT, scrolling=False)
 
 
