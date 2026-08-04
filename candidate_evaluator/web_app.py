@@ -44,6 +44,7 @@ from candidate_evaluator.exporters import (
 from candidate_evaluator.job_manager import JobManager
 from candidate_evaluator.background_worker import JobStatus
 from candidate_evaluator.prompt_manager import PromptManager
+from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
 
 # No custom CSS - using Streamlit defaults for reliability
 CUSTOM_CSS = ""
@@ -443,7 +444,7 @@ def main():
         st.markdown("## Candidate Evaluator")
         st.markdown("---")
 
-        page_options = ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Settings"]
+        page_options = ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Guide", "Help", "Settings"]
 
         page = st.radio(
             "Navigation",
@@ -486,8 +487,20 @@ def main():
         admit_pattern_analysis_page()
     elif page == "Research":
         research_page()
+    elif page == "Guide":
+        render_guide_page()
+    elif page == "Help":
+        help_page(config)
     elif page == "Settings":
         settings_page()
+
+
+def help_page(config):
+    """Render the Help chatbot using the evaluator's configured Claude client."""
+    evaluator = st.session_state.get("evaluator")
+    client = getattr(evaluator, "client", None)
+    model = config.api.model if config else "claude-sonnet-4-5-20250929"
+    render_help_chat(client, model)
 
 
 def dashboard_page():

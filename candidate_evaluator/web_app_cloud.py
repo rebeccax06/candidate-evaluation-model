@@ -69,6 +69,7 @@ from candidate_evaluator.auth import (
 )
 from candidate_evaluator.database import Database
 from candidate_evaluator.storage import Storage, cleanup_temp_files
+from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
 
 
 st.set_page_config(
@@ -239,7 +240,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Settings"],
+            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Guide", "Help", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -272,8 +273,21 @@ def main():
         admit_pattern_analysis_page(user, api_key)
     elif page == "Research":
         research_page(user)
+    elif page == "Guide":
+        render_guide_page()
+    elif page == "Help":
+        help_page(user, api_key)
     elif page == "Settings":
         settings_page(user)
+
+
+def help_page(user: dict, api_key: str):
+    """Render the Help chatbot using the user's configured Claude client."""
+    evaluator = get_evaluator(api_key)
+    client = getattr(evaluator, "client", None)
+    model = evaluator.config.api.model if evaluator else "claude-sonnet-4-5-20250929"
+    session_key = f"help_chat_messages_{user['id']}"
+    render_help_chat(client, model, session_key=session_key)
 
 
 _SELECTION_EVAL_TYPE = "interview_selection"
