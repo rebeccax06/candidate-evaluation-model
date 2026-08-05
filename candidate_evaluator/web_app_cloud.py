@@ -596,10 +596,10 @@ def new_evaluation_page(user: dict, api_key: str):
     tab1, tab2, tab3 = st.tabs(["Single Candidate", "Batch Upload", "Role-Specific Evaluation"])
     
     with tab1:
-        single_evaluation_form(user, api_key)
+        single_evaluation_form(user, api_key, key_prefix="new_single_")
     
     with tab2:
-        batch_evaluation_form(user)
+        batch_evaluation_form(user, key_prefix="new_batch_")
 
     with tab3:
         role_specific_evaluation_form(user, api_key)
