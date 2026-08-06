@@ -18,6 +18,7 @@ import os
 import json
 import time
 import hashlib
+import re
 import traceback
 from pathlib import Path
 from datetime import datetime
@@ -240,7 +241,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Interview Selection", "Analysis", "Admit Patterns", "Research", "Guide", "Help", "Settings"],
+            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -265,14 +266,8 @@ def main():
         batch_jobs_page(user)
     elif page == "Results":
         results_page(user)
-    elif page == "Interview Selection":
-        interview_selection_page(user, api_key)
     elif page == "Analysis":
         analysis_page(user)
-    elif page == "Admit Patterns":
-        admit_pattern_analysis_page(user, api_key)
-    elif page == "Research":
-        research_page(user)
     elif page == "Guide":
         render_guide_page()
     elif page == "Help":
@@ -593,7 +588,7 @@ def new_evaluation_page(user: dict, api_key: str):
     """New evaluation page."""
     st.title("New Evaluation")
     
-    tab1, tab2, tab3 = st.tabs(["Single Candidate", "Batch Upload", "Role-Specific Evaluation"])
+    tab1, tab2, tab3 = st.tabs(["Single Candidate", "Batch Upload", "Role Dimensions Evaluation"])
     
     with tab1:
         single_evaluation_form(user, api_key, key_prefix="new_single_")
@@ -614,13 +609,15 @@ def _batch_target_selector(user: dict, key_prefix: str = "") -> dict | None:
         jobs = get_database().get_user_batch_jobs(user["id"])
     except Exception:
         jobs = []
+    # Holistic-only: never attach new candidates to a criteria-based batch.
+    jobs = [j for j in jobs if j.get("evaluation_mode", "holistic") == "holistic"]
     if not jobs:
         return None
 
     options: dict[str, dict | None] = {"— Don't add to a batch —": None}
     for j in jobs:
         created = str(j.get("created_at", ""))[:10]
-        mode = j.get("evaluation_mode", "criteria")
+        mode = j.get("evaluation_mode", "holistic")
         done = j.get("completed_candidates", 0)
         total = j.get("total_candidates", 0)
         label = f"{j.get('job_name') or '(unnamed)'} · {created} · {mode} · {done}/{total}"
@@ -639,6 +636,32 @@ def _batch_target_selector(user: dict, key_prefix: str = "") -> dict | None:
     return options[choice]
 
 
+def _sanitize_candidate_id(name: str) -> str:
+    """Turn a filename into a safe, short candidate ID."""
+    stem = Path(name).stem
+    cleaned = re.sub(r"[^A-Za-z0-9_-]+", "_", stem).strip("_")
+    return (cleaned or "candidate")[:40]
+
+
+def _generate_candidate_id_cloud(user: dict, uploaded_files) -> str:
+    """Auto-generate a unique candidate ID from the uploaded file name.
+
+    Uses the first file's name; if that ID already exists for the user, a
+    timestamp suffix is appended to keep it unique.
+    """
+    base = _sanitize_candidate_id(uploaded_files[0].name) if uploaded_files else "candidate"
+    try:
+        existing = {
+            e.get("candidate_id")
+            for e in get_database().get_user_evaluations(user["id"])
+        }
+    except Exception:
+        existing = set()
+    if base not in existing:
+        return base
+    return f"{base}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+
+
 def single_evaluation_form(user: dict, api_key: str, role: str | None = None, key_prefix: str = ""):
     """Single candidate evaluation form."""
     title = "### Evaluate a Single Candidate"
@@ -649,39 +672,25 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
 
     target_job = _batch_target_selector(user, key_prefix)
 
+    # Holistic-only: evaluation mode is fixed to holistic across the app.
+    is_holistic = True
     if target_job:
-        is_holistic = target_job.get("evaluation_mode", "criteria") == "holistic"
         eff_role = target_job.get("role")
-        mode_label = "Holistic (program fit)" if is_holistic else "Criteria-Based (11 criteria)"
         st.info(
             f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
-            f"inherits **{mode_label}**"
+            f"**Holistic (program fit)**"
             + (f", role **{eff_role}**" if eff_role else "")
             + "."
         )
     else:
-        eval_mode = st.radio(
-            "Evaluation Mode",
-            ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
-            horizontal=True,
-            key=f"{key_prefix}single_eval_mode"
-        )
-        is_holistic = eval_mode == "Holistic (program fit)"
         eff_role = role
         if role:
-            st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
-        if is_holistic:
-            st.info("Holistic mode evaluates overall program fit and innovation potential.")
+            st.caption("Role guidance is appended to the system prompt for this holistic evaluation.")
+        st.info("Holistic mode evaluates overall program fit and innovation potential.")
 
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        candidate_id = st.text_input(
-            "Candidate ID",
-            placeholder="e.g., CAND001",
-            key=f"{key_prefix}single_candidate_id"
-        )
-
         candidate_name = st.text_input(
             "Name (optional)",
             placeholder="e.g., John Doe",
@@ -694,6 +703,9 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
             accept_multiple_files=True,
             key=f"{key_prefix}single_uploader"
         )
+        st.caption("A candidate ID is generated automatically from the uploaded file name.")
+
+    candidate_id = _generate_candidate_id_cloud(user, uploaded_files) if uploaded_files else ""
 
     with col2:
         st.markdown("#### Supported Formats")
@@ -702,7 +714,7 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
         st.markdown("- Include all relevant materials")
         st.markdown("- More context = better evaluation")
 
-    if st.button("Evaluate Candidate", disabled=not (candidate_id and uploaded_files), key=f"{key_prefix}single_eval_btn"):
+    if st.button("Evaluate Candidate", disabled=not uploaded_files, key=f"{key_prefix}single_eval_btn"):
         with st.spinner("Evaluating candidate... This may take a minute."):
             material_paths = []
             try:
@@ -948,27 +960,20 @@ def batch_evaluation_form(
 
     target_job = _batch_target_selector(user, key_prefix)
 
+    # Holistic-only: evaluation mode is fixed to holistic across the app.
+    is_holistic = True
     if target_job:
-        is_holistic = target_job.get("evaluation_mode", "criteria") == "holistic"
         eff_role = target_job.get("role")
-        mode_label = "Holistic (program fit)" if is_holistic else "Criteria-Based (11 criteria)"
         st.info(
             f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
-            f"new candidates inherit **{mode_label}**"
+            f"new candidates are evaluated as **Holistic (program fit)**"
             + (f", role **{eff_role}**" if eff_role else "")
             + ". Files are appended and the background worker evaluates only the new candidates."
         )
     else:
-        eval_mode = st.radio(
-            "Evaluation Mode",
-            ["Criteria-Based (11 criteria)", "Holistic (program fit)"],
-            horizontal=True,
-            key=f"{key_prefix}batch_eval_mode"
-        )
-        is_holistic = eval_mode == "Holistic (program fit)"
         eff_role = role
         if role:
-            st.caption("Role-specific guidance is appended to the system prompt and works with any evaluation mode.")
+            st.caption("Role guidance is appended to the system prompt for these holistic evaluations.")
 
     uploaded_files = st.file_uploader(
         "Upload Candidate PDFs",
@@ -1092,11 +1097,11 @@ def batch_evaluation_form(
 
 
 def role_specific_evaluation_form(user: dict, api_key: str):
-    """Role-specific evaluation form using a single combined all-dimensions prompt."""
-    st.markdown("### Role-Specific Evaluation")
+    """Role dimensions evaluation form using a single combined all-dimensions prompt."""
+    st.markdown("### Role Dimensions Evaluation")
     st.caption(
-        "Evaluate candidates with role-tailored guidance appended to the system prompt. "
-        "Works with both Criteria-Based and Holistic modes."
+        "Evaluate candidates with role-dimension guidance appended to the system prompt. "
+        "Runs as a holistic evaluation."
     )
 
     role = "combined"
@@ -1362,44 +1367,17 @@ def _render_batch_results(
     batch_label: str,
     batch_evals: list,
 ) -> None:
-    """Render Criteria / Holistic / Combined tabs for one batch of evaluations."""
-    criteria_evals, holistic_evals = _split_eval_rows_by_type(batch_evals)
-    criteria_results, holistic_results = _batch_evals_to_parsed_results(batch_evals)
-    criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+    """Render Holistic and Role Rankings tabs for one batch of evaluations."""
+    _criteria_evals, holistic_evals = _split_eval_rows_by_type(batch_evals)
+    _criteria_results, holistic_results = _batch_evals_to_parsed_results(batch_evals)
     holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
-    both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
 
     role_eval_count = sum(1 for e in batch_evals if eval_row_role(e))
-    tab1, tab2, tab3, tab4 = st.tabs([
-        f"Criteria-Based ({len(criteria_evals)})",
+    tab2, tab4 = st.tabs([
         f"Holistic ({len(holistic_evals)})",
-        f"Combined ({len(both_ids)})",
         f"Role Rankings ({role_eval_count})",
     ])
     k = batch_key.replace("-", "_")[:30]
-
-    with tab1:
-        if not criteria_evals:
-            st.info("No criteria-based evaluations in this batch.")
-        else:
-            summary_data = []
-            sorted_evals = sorted(criteria_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
-            for rank, e in enumerate(sorted_evals, 1):
-                summary_data.append({
-                    'Rank': rank,
-                    'Candidate ID': e.get('candidate_id', ''),
-                    'Name': e.get('candidate_name') or '-',
-                    'Score': f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else 'N/A',
-                    'Date': str(e.get('created_at', ''))[:10],
-                    'Recommendation': (e.get('recommendation') or '')[:30]
-                })
-            st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
-            st.subheader("Candidate Details")
-            options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
-            selected = st.selectbox("Select candidate", list(options.keys()), key=f"crit_{k}")
-            if selected:
-                result = result_dict_to_evaluation_result(options[selected]["result"])
-                display_evaluation_result(result)
 
     with tab2:
         if not holistic_evals:
@@ -1430,25 +1408,6 @@ def _render_batch_results(
                 result = result_dict_to_holistic_result(options[selected]["result"])
                 display_holistic_evaluation_result(result)
 
-    with tab3:
-        if not both_ids:
-            st.info("No candidates in this batch have both evaluation types.")
-        else:
-            st.subheader(f"Candidates with Both: {len(both_ids)}")
-            display_disparity_analysis(criteria_by_id, holistic_by_id, both_ids)
-            selected_id = st.selectbox("Select Candidate", both_ids, key=f"comb_{k}")
-            if selected_id:
-                criteria_result = criteria_by_id[selected_id]
-                holistic_result = holistic_by_id[selected_id]
-                display_comparison_summary(criteria_result, holistic_result)
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.markdown("### Criteria-Based")
-                    display_evaluation_result(criteria_result)
-                with col2:
-                    st.markdown("### Holistic")
-                    display_holistic_evaluation_result(holistic_result)
-
     with tab4:
         _render_role_specific_rankings(batch_evals, key_prefix=f"batch_{k}_")
 
@@ -1458,8 +1417,8 @@ def _render_role_specific_rankings(batch_evals: list, key_prefix: str = "") -> N
     role_evals = [e for e in batch_evals if eval_row_role(e)]
     if not role_evals:
         st.info(
-            "No role-specific evaluations in this set. Use **New Evaluation → "
-            "Role-Specific Evaluation** to evaluate by specialty."
+            "No role dimensions evaluations in this set. Use **New Evaluation → "
+            "Role Dimensions Evaluation** to evaluate across role dimensions."
         )
         return
 
@@ -1618,18 +1577,14 @@ def results_page(user: dict):
     )
     st.markdown("---")
     role_eval_count = sum(1 for e in evaluations if eval_row_role(e))
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Batches", job_section_count)
     with col2:
-        st.metric("Criteria-Based", len(criteria_evals))
-    with col3:
         st.metric("Holistic", len(holistic_evals))
+    with col3:
+        st.metric("Role Dimensions", role_eval_count)
     with col4:
-        st.metric("Role-Specific", role_eval_count)
-    with col5:
-        st.metric("Total", len(evaluations))
-    with col6:
         if st.button("Refresh", use_container_width=True):
             st.rerun()
     
@@ -1646,70 +1601,13 @@ def results_page(user: dict):
             ):
                 _render_batch_results(batch_key, batch_label, batch_evals)
     else:
-        criteria_results, holistic_results = _batch_evals_to_parsed_results(evaluations)
-        criteria_by_id = {r.candidate.candidate_id: r for r in criteria_results}
+        _criteria_results, holistic_results = _batch_evals_to_parsed_results(evaluations)
         holistic_by_id = {r.candidate.candidate_id: r for r in holistic_results}
-        both_ids = sorted(set(criteria_by_id.keys()) & set(holistic_by_id.keys()))
         
-        tab1, tab2, tab3, tab4 = st.tabs([
-            f"Criteria-Based ({len(criteria_evals)})",
+        tab2, tab4 = st.tabs([
             f"Holistic ({len(holistic_evals)})",
-            f"Combined View ({len(both_ids)})",
             f"Role Rankings ({role_eval_count})",
         ])
-        
-        with tab1:
-            if not criteria_evals:
-                st.info("No criteria-based evaluations yet.")
-            else:
-                exp_col1, exp_col2 = st.columns(2)
-                with exp_col1:
-                    if st.button("Export Criteria (CSV)", use_container_width=True, key="export_csv"):
-                        if criteria_results:
-                            _tmp = tempfile.mkdtemp()
-                            csv_path = os.path.join(_tmp, "criteria_results.csv")
-                            CSVExporter.export_batch(criteria_results, csv_path)
-                            with open(csv_path, 'rb') as f:
-                                st.download_button(
-                                    "Download CSV",
-                                    data=f,
-                                    file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.csv",
-                                    mime="text/csv",
-                                    key="dl_csv"
-                                )
-                with exp_col2:
-                    if st.button("Export Criteria (JSON)", use_container_width=True, key="export_json"):
-                        if criteria_results:
-                            _tmp = tempfile.mkdtemp()
-                            json_path = os.path.join(_tmp, "criteria_results.json")
-                            JSONExporter.export_batch(criteria_results, json_path)
-                            with open(json_path, 'rb') as f:
-                                st.download_button(
-                                    "Download JSON",
-                                    data=f,
-                                    file_name=f"criteria_evaluations_{datetime.now().strftime('%Y%m%d')}.json",
-                                    mime="application/json",
-                                    key="dl_json"
-                                )
-                summary_data = []
-                sorted_evals = sorted(criteria_evals, key=lambda e: e.get("overall_score", 0) or 0, reverse=True)
-                for rank, e in enumerate(sorted_evals, 1):
-                    summary_data.append({
-                        'Rank': rank,
-                        'Candidate ID': e.get('candidate_id', ''),
-                        'Name': e.get('candidate_name') or '-',
-                        'Score': f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else 'N/A',
-                        'Date': str(e.get('created_at', ''))[:10],
-                        'Recommendation': (e.get('recommendation') or '')[:30]
-                    })
-                st.dataframe(pd.DataFrame(summary_data), hide_index=True, use_container_width=True)
-                st.subheader("Candidate Details")
-                options = {f"{e['candidate_id']} ({e.get('overall_score', 0):.1f})": e for e in sorted_evals}
-                selected = st.selectbox("Select candidate", list(options.keys()), key="criteria_select")
-                if selected:
-                    eval_data = options[selected]
-                    result = result_dict_to_evaluation_result(eval_data["result"])
-                    display_evaluation_result(result)
         
         with tab2:
             if not holistic_evals:
@@ -1740,26 +1638,6 @@ def results_page(user: dict):
                     eval_data = options[selected]
                     result = result_dict_to_holistic_result(eval_data["result"])
                     display_holistic_evaluation_result(result)
-        
-        with tab3:
-            if not both_ids:
-                st.info("No candidates have both evaluation types yet. Run both criteria-based and holistic evaluations on the same candidates to compare.")
-            else:
-                st.subheader(f"Candidates with Both Evaluations: {len(both_ids)}")
-                display_disparity_analysis(criteria_by_id, holistic_by_id, both_ids)
-                st.subheader("Individual Candidate Comparison")
-                selected_id = st.selectbox("Select Candidate", both_ids, key="combined_view_selector")
-                if selected_id:
-                    criteria_result = criteria_by_id[selected_id]
-                    holistic_result = holistic_by_id[selected_id]
-                    display_comparison_summary(criteria_result, holistic_result)
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.markdown("### Criteria-Based Evaluation")
-                        display_evaluation_result(criteria_result)
-                    with col2:
-                        st.markdown("### Holistic Evaluation")
-                        display_holistic_evaluation_result(holistic_result)
 
         with tab4:
             _render_role_specific_rankings(evaluations, key_prefix="all_")
@@ -1890,22 +1768,6 @@ def settings_page(user: dict):
 
     st.markdown("---")
 
-    st.subheader("Criteria Weights")
-    st.caption("Default weights for each evaluation criterion (equal weighting).")
-    weights = CriteriaWeights()
-    criteria_list = [
-        'critical_thinking', 'coachability', 'curiosity', 'creativity',
-        'collaboration', 'follow_through', 'problem_solving_motivation',
-        'evidence_based', 'detail_orientation', 'communication', 'expertise_enabler'
-    ]
-    weight_data = [
-        {'Criterion': c.replace('_', ' ').title(), 'Weight': getattr(weights, c, 10)}
-        for c in criteria_list
-    ]
-    st.dataframe(pd.DataFrame(weight_data), hide_index=True, use_container_width=True)
-
-    st.markdown("---")
-
     st.subheader("Prompt Editor")
     st.caption("View and customize the prompts used for candidate evaluation.")
 
@@ -1916,10 +1778,7 @@ def settings_page(user: dict):
 
     prompt_options = {
         "System Prompt": "system",
-        "Criteria-Based Template": "criteria",
         "Holistic Template": "holistic",
-        "Interview Ranking Template": "ranking",
-        "Interview Selection Template": "selection",
         "Combined Role Prompt (All Dimensions)": "combined",
     }
 
@@ -1939,8 +1798,7 @@ def settings_page(user: dict):
 
     if selected_prompt_type in PromptManager.ROLE_PROMPT_TYPES:
         st.caption(
-            "This role prompt is **appended** to the System Prompt during role-specific evaluations. "
-            "It works with both Criteria-Based and Holistic modes."
+            "This role prompt is **appended** to the System Prompt during role dimensions evaluations."
         )
 
     if selected_prompt_type == "system":
@@ -2062,7 +1920,7 @@ def display_role_specific_assessment(assessment) -> None:
     score = assessment.get("score")
     confidence = assessment.get("confidence", "medium")
 
-    st.markdown(f"#### Role-Specific Assessment ({role_label})")
+    st.markdown(f"#### Role Dimensions Assessment ({role_label})")
     cols = st.columns(3)
     with cols[0]:
         if score is not None:
@@ -2088,7 +1946,7 @@ def display_role_specific_assessment(assessment) -> None:
 
     evidence = assessment.get("evidence") or []
     if evidence:
-        with st.expander("Role-Specific Evidence"):
+        with st.expander("Role Dimensions Evidence"):
             for ev in evidence:
                 if isinstance(ev, dict):
                     _holistic_evidence_dict_block(ev)
@@ -2398,148 +2256,27 @@ def analysis_page(user: dict):
     sections = _parsed_sections_for_scope(split_by_batch, batches_split, evaluations)
     expanded_batches = len(sections) <= 3 if split_by_batch else False
 
-    st.markdown(f"**{n_criteria} criteria-based + {n_holistic} holistic evaluations**")
+    st.markdown(f"**{n_holistic} holistic evaluations**")
 
-    tab1, tab2, tab3 = st.tabs(["Distribution Analysis", "AI vs Expert", "Recommendations"])
-
-    with tab1:
-        sub1, sub2 = st.tabs([f"Criteria-Based ({n_criteria})", f"Holistic ({n_holistic})"])
-        with sub1:
-            if split_by_batch and not sections:
-                st.info(_NO_BATCH_SCOPE_MSG)
-            elif not n_criteria:
-                st.info("No criteria-based evaluations to analyze. Run criteria-based evaluations first.")
-            elif split_by_batch:
-                for batch_key, batch_label, _ev, c_res, _h in sections:
-                    nc = len(c_res)
-                    with st.expander(
-                        f"{batch_label} — {nc} criteria-based",
-                        expanded=expanded_batches,
-                    ):
-                        if c_res:
-                            distribution_analysis(
-                                c_res, key_prefix=_analysis_widget_key(batch_key, "cdist")
-                            )
-                        else:
-                            st.info("No criteria-based evaluations in this batch.")
-            else:
-                _, _, _, c_res, _ = sections[0]
-                distribution_analysis(c_res, key_prefix="analysis_dist_crit_all")
-        with sub2:
-            if split_by_batch and not sections:
-                st.info(_NO_BATCH_SCOPE_MSG)
-            elif not n_holistic:
-                st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
-            elif split_by_batch:
-                for batch_key, batch_label, _ev, _c, h_res in sections:
-                    nh = len(h_res)
-                    with st.expander(
-                        f"{batch_label} — {nh} holistic",
-                        expanded=expanded_batches,
-                    ):
-                        if h_res:
-                            holistic_distribution_analysis(h_res)
-                        else:
-                            st.info("No holistic evaluations in this batch.")
-            else:
-                _, _, _, _c, h_res = sections[0]
-                holistic_distribution_analysis(h_res)
-
-    with tab2:
-        if n_criteria == 0:
-            st.info("Expert comparison requires criteria-based evaluations.")
-        else:
-            st.subheader("AI vs Expert Comparison")
-            st.info(
-                "Upload expert ratings to compare with AI evaluations. "
-                "When using **By batch**, the same file is used for each batch; metrics are per batch."
-            )
-            expert_file = st.file_uploader(
-                "Upload Expert Ratings",
-                type=["xlsx", "xls", "csv"],
-                help="Excel or CSV with expert ratings",
-                key="analysis_expert_ratings_global",
-            )
-            expert_ratings = None
-            if expert_file:
-                try:
-                    _tmp = tempfile.mkdtemp()
-                    _tmp_path = os.path.join(_tmp, expert_file.name)
-                    with open(_tmp_path, "wb") as f:
-                        f.write(expert_file.getbuffer())
-                    with st.spinner("Loading expert ratings..."):
-                        _loader = ExpertComparisonAnalyzer()
-                        expert_ratings = _loader.load_expert_ratings_from_excel(_tmp_path)
-                    st.success(f"Loaded {len(expert_ratings)} expert ratings")
-                except Exception as e:
-                    st.error(f"Error: {e}")
-                    expert_ratings = None
-
-            if expert_ratings is not None:
-                if split_by_batch and not sections:
-                    st.info(_NO_BATCH_SCOPE_MSG_EXPERT)
-                elif split_by_batch:
-                    for batch_key, batch_label, _ev, c_res, _h in sections:
-                        with st.expander(
-                            f"{batch_label} — {len(c_res)} criteria-based",
-                            expanded=expanded_batches,
-                        ):
-                            if c_res:
-                                _render_expert_comparison_inner(
-                                    c_res,
-                                    expert_ratings,
-                                    _analysis_widget_key(batch_key, "expert"),
-                                )
-                            else:
-                                st.info("No criteria-based evaluations in this batch.")
+    st.subheader("Distribution Analysis")
+    if split_by_batch and not sections:
+        st.info(_NO_BATCH_SCOPE_MSG)
+    elif not n_holistic:
+        st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
+    elif split_by_batch:
+        for batch_key, batch_label, _ev, _c, h_res in sections:
+            nh = len(h_res)
+            with st.expander(
+                f"{batch_label} — {nh} holistic",
+                expanded=expanded_batches,
+            ):
+                if h_res:
+                    holistic_distribution_analysis(h_res)
                 else:
-                    _, _, _, c_res, _ = sections[0]
-                    _render_expert_comparison_inner(
-                        c_res, expert_ratings, "analysis_expert_all"
-                    )
-
-    with tab3:
-        sub1, sub2 = st.tabs([f"Criteria-Based ({n_criteria})", f"Holistic ({n_holistic})"])
-        with sub1:
-            if split_by_batch and not sections:
-                st.info(_NO_BATCH_SCOPE_MSG)
-            elif not n_criteria:
-                st.info("Recommendations analysis requires criteria-based evaluations.")
-            elif split_by_batch:
-                for batch_key, batch_label, _ev, c_res, _h in sections:
-                    with st.expander(
-                        f"{batch_label} — {len(c_res)} criteria-based",
-                        expanded=expanded_batches,
-                    ):
-                        if c_res:
-                            recommendation_analysis(
-                                c_res, key_prefix=_analysis_widget_key(batch_key, "rec_c")
-                            )
-                        else:
-                            st.info("No criteria-based evaluations in this batch.")
-            else:
-                _, _, _, c_res, _ = sections[0]
-                recommendation_analysis(c_res, key_prefix="analysis_rec_crit_all")
-        with sub2:
-            if split_by_batch and not sections:
-                st.info(_NO_BATCH_SCOPE_MSG)
-            elif not n_holistic:
-                st.info("No holistic evaluations to analyze. Run holistic evaluations first.")
-            elif split_by_batch:
-                for batch_key, batch_label, _ev, _c, h_res in sections:
-                    with st.expander(
-                        f"{batch_label} — {len(h_res)} holistic",
-                        expanded=expanded_batches,
-                    ):
-                        if h_res:
-                            holistic_recommendation_analysis(
-                                h_res, key_prefix=_analysis_widget_key(batch_key, "rec_h")
-                            )
-                        else:
-                            st.info("No holistic evaluations in this batch.")
-            else:
-                _, _, _, _c, h_res = sections[0]
-                holistic_recommendation_analysis(h_res, key_prefix="analysis_rec_hol_all")
+                    st.info("No holistic evaluations in this batch.")
+    else:
+        _, _, _, _c, h_res = sections[0]
+        holistic_distribution_analysis(h_res)
 
 
 def distribution_analysis(all_results, key_prefix="dist_default"):
