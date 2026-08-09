@@ -46,6 +46,7 @@ from candidate_evaluator.job_manager import JobManager
 from candidate_evaluator.background_worker import JobStatus
 from candidate_evaluator.prompt_manager import PromptManager
 from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
+from candidate_evaluator.branding import apply_branding, LOGO_PATH
 
 # No custom CSS - using Streamlit defaults for reliability
 CUSTOM_CSS = ""
@@ -194,8 +195,8 @@ def load_all_holistic_results_from_disk(results_dir: Path) -> list:
 
 # Page config
 st.set_page_config(
-    page_title="Candidate Evaluator",
-    page_icon=None,
+    page_title="Catalyst Candidate Assessment",
+    page_icon=LOGO_PATH,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -440,9 +441,11 @@ def main():
     """Main application"""
     init_session_state()
 
+    apply_branding()
+
     # Sidebar
     with st.sidebar:
-        st.markdown("## Candidate Evaluator")
+        st.markdown("## Catalyst Candidate Assessment")
         st.markdown("---")
 
         page_options = ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"]

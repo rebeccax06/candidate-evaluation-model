@@ -71,11 +71,12 @@ from candidate_evaluator.auth import (
 from candidate_evaluator.database import Database
 from candidate_evaluator.storage import Storage, cleanup_temp_files
 from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
+from candidate_evaluator.branding import apply_branding, LOGO_PATH
 
 
 st.set_page_config(
-    page_title="Candidate Evaluator",
-    page_icon=None,
+    page_title="Catalyst Candidate Assessment",
+    page_icon=LOGO_PATH,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -224,7 +225,9 @@ def result_dict_to_holistic_result(data: dict) -> HolisticEvaluationResult:
 def main():
     """Main application."""
     init_session_state()
-    
+
+    apply_branding()
+
     if not render_auth_ui():
         return
     
@@ -235,7 +238,7 @@ def main():
         st.stop()
     
     with st.sidebar:
-        st.markdown("## Candidate Evaluator")
+        st.markdown("## Catalyst Candidate Assessment")
         render_user_menu()
         st.markdown("---")
         
