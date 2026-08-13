@@ -21,6 +21,7 @@ from candidate_evaluator.core.models import (
     HolisticEvaluationResult,
     AdmitPatternAnalysisResult,
     InterviewSelectionResult,
+    ScreeningResult,
     parse_role_specific_assessment,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
@@ -187,6 +188,23 @@ def load_all_holistic_results_from_disk(results_dir: Path) -> list:
         try:
             result = load_holistic_result_from_json(json_file)
             results.append(result)
+        except Exception:
+            pass
+
+    return results
+
+
+def load_screening_results_from_disk(results_dir: Path) -> list:
+    """Load all screening results from JSON files in the screening results directory."""
+    results = []
+    if not results_dir.exists():
+        return results
+
+    for json_file in results_dir.glob("*_screening.json"):
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            results.append(ScreeningResult(**data))
         except Exception:
             pass
 
@@ -448,7 +466,7 @@ def main():
         st.markdown("## Catalyst Candidate Assessment")
         st.markdown("---")
 
-        page_options = ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"]
+        page_options = ["Dashboard", "New Evaluation", "Screening", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"]
 
         page = st.radio(
             "Navigation",
@@ -479,6 +497,8 @@ def main():
         dashboard_page()
     elif page == "New Evaluation":
         new_evaluation_page()
+    elif page == "Screening":
+        screening_page()
     elif page == "Batch Jobs":
         batch_jobs_page()
     elif page == "Results":
@@ -582,6 +602,198 @@ def dashboard_page():
 ROLE_OPTIONS = {
     "Combined (All Dimensions)": "combined",
 }
+
+
+DEFAULT_SCREENING_DESCRIPTION = (
+    "Primary capability is AI or Computer Science and does not have any "
+    "experience with healthcare or medical domains."
+)
+
+SCREENING_OUTPUT_DIR = "./results/screening"
+
+
+def screening_page():
+    """Screening page: filter a large candidate pool against a target profile.
+
+    Runs as a background job (like Batch Upload) so the user can navigate away
+    while ~200 candidates are screened.
+    """
+    st.title("Screening")
+    st.markdown(
+        "Upload a batch of candidate PDFs and describe the target profile. Each "
+        "candidate is screened in the background for a yes/no match, so you can "
+        "leave this tab while it runs. Watch progress under **Batch Jobs**."
+    )
+
+    submit_tab, results_tab = st.tabs(["Run Screening", "Results"])
+
+    with submit_tab:
+        _screening_submit_form()
+
+    with results_tab:
+        _screening_results_view()
+
+
+def _screening_submit_form():
+    """Upload + description + background submit for screening."""
+    st.markdown("### Screen Candidates")
+
+    description = st.text_area(
+        "Target profile description",
+        value=DEFAULT_SCREENING_DESCRIPTION,
+        height=120,
+        help=(
+            "Describe the candidate you're looking for. You can include both "
+            "requirements (must have) and exclusions (must not have)."
+        ),
+        key="screening_description",
+    )
+
+    uploaded_files = st.file_uploader(
+        "Upload Candidate PDFs",
+        type=['pdf'],
+        accept_multiple_files=True,
+        help="Upload one PDF per candidate. Filename becomes the candidate ID.",
+        key="screening_uploader",
+    )
+
+    if not uploaded_files:
+        return
+
+    st.markdown(f"**{len(uploaded_files)} files selected**")
+    with st.expander("View files"):
+        for f in uploaded_files:
+            st.text(f"- {f.name}")
+
+    job_name = st.text_input(
+        "Job Name (optional)",
+        placeholder="e.g., AI/CS screen",
+        key="screening_job_name",
+    )
+
+    start_clicked = st.button(
+        "Start Screening (Background)",
+        use_container_width=True,
+        key="screening_start_btn",
+    )
+
+    if not start_clicked:
+        return
+
+    if not description.strip():
+        st.error("Please provide a target profile description.")
+        return
+
+    temp_dir = tempfile.mkdtemp()
+    candidate_files = {}
+    for uploaded_file in uploaded_files:
+        temp_path = Path(temp_dir) / uploaded_file.name
+        with open(temp_path, 'wb') as f:
+            f.write(uploaded_file.getbuffer())
+        candidate_files[temp_path.stem] = str(temp_path)
+
+    config = st.session_state.config
+    job_config = {
+        "api_key": config.api.anthropic_api_key,
+        "max_tokens": config.api.max_tokens,
+        "evaluation_mode": "screen",
+        "description": description.strip(),
+    }
+
+    job_manager = st.session_state.job_manager
+    job_id = job_manager.submit_job(
+        candidate_files=candidate_files,
+        output_dir=SCREENING_OUTPUT_DIR,
+        config=job_config,
+        job_name=(job_name or f"Screening {datetime.now().strftime('%Y%m%d_%H%M')}") + " (Screen)",
+    )
+
+    st.success(f"Screening job submitted! ID: `{job_id}`")
+    st.info(
+        "You can navigate away - screening continues in the background. "
+        "Track progress under **Batch Jobs**, then return to the **Results** tab here."
+    )
+    time.sleep(1)
+    st.rerun()
+
+
+def _screening_results_view():
+    """Display screening results with match filter and CSV export."""
+    st.markdown("### Screening Results")
+
+    if st.button("Refresh", key="screening_refresh_btn"):
+        st.rerun()
+
+    results = load_screening_results_from_disk(Path(SCREENING_OUTPUT_DIR))
+
+    if not results:
+        st.info("No screening results yet. Run a screening job to see results here.")
+        return
+
+    matches = [r for r in results if r.matches]
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Screened", len(results))
+    with col2:
+        st.metric("Matches", len(matches))
+    with col3:
+        pct = (len(matches) / len(results) * 100) if results else 0
+        st.metric("Match Rate", f"{pct:.0f}%")
+
+    col_a, col_b = st.columns(2)
+    with col_a:
+        show_only_matches = st.checkbox("Show only matches", value=True, key="screening_only_matches")
+    with col_b:
+        min_confidence = st.slider(
+            "Minimum confidence", 0.0, 1.0, 0.0, 0.05, key="screening_min_conf"
+        )
+
+    filtered = [
+        r for r in results
+        if (not show_only_matches or r.matches) and r.confidence >= min_confidence
+    ]
+    filtered.sort(key=lambda r: (not r.matches, -r.confidence))
+
+    if not filtered:
+        st.warning("No candidates match the current filters.")
+        return
+
+    rows = []
+    for r in filtered:
+        rows.append({
+            "Candidate": r.candidate.candidate_id,
+            "Match": "Yes" if r.matches else "No",
+            "Confidence": f"{r.confidence:.2f}",
+            "Reasoning": r.reasoning,
+            "Disqualifiers": "; ".join(r.disqualifiers),
+        })
+    df = pd.DataFrame(rows)
+    st.dataframe(df, hide_index=True, use_container_width=True)
+
+    csv = df.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        "Download CSV",
+        data=csv,
+        file_name=f"screening_results_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+        mime="text/csv",
+        key="screening_csv_btn",
+    )
+
+    with st.expander("View evidence details"):
+        for r in filtered:
+            st.markdown(f"**{r.candidate.candidate_id}** - {'Match' if r.matches else 'No match'} ({r.confidence:.2f})")
+            if r.reasoning:
+                st.caption(r.reasoning)
+            if r.supporting_evidence:
+                st.markdown("Supporting evidence:")
+                for ev in r.supporting_evidence:
+                    st.markdown(f"- {ev}")
+            if r.disqualifiers:
+                st.markdown("Disqualifiers:")
+                for d in r.disqualifiers:
+                    st.markdown(f"- {d}")
+            st.markdown("---")
 
 
 def new_evaluation_page():
@@ -1061,11 +1273,18 @@ def render_job_card(job, job_manager, show_actions=True):
                 if results:
                     for r in results:
                         if r.get("status") == "success":
-                            result_data.append({
-                                "Candidate": r.get("candidate_id", ""),
-                                "Score": f"{r.get('overall_score', 0):.1f}/10",
-                                "Recommendation": r.get("recommendation", "") or ""
-                            })
+                            if r.get("evaluation_mode") == "screen":
+                                result_data.append({
+                                    "Candidate": r.get("candidate_id", ""),
+                                    "Match": "Yes" if r.get("matches") else "No",
+                                    "Confidence": f"{r.get('confidence', 0):.2f}",
+                                })
+                            else:
+                                result_data.append({
+                                    "Candidate": r.get("candidate_id", ""),
+                                    "Score": f"{r.get('overall_score', 0):.1f}/10",
+                                    "Recommendation": r.get("recommendation", "") or ""
+                                })
 
                 # If no results in job data, try loading from disk
                 if not result_data:

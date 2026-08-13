@@ -121,7 +121,9 @@ class BackgroundWorker:
             max_tokens = job_config.get("max_tokens", 8192)
             evaluation_mode = job_config.get("evaluation_mode", "criteria")
             is_holistic = evaluation_mode == "holistic"
+            is_screen = evaluation_mode == "screen"
             role = job_config.get("role")
+            description = job_config.get("description", "")
 
             if not api_key:
                 raise ValueError("No API key provided in job config or environment")
@@ -161,7 +163,9 @@ class BackgroundWorker:
 
                 try:
                     # Check if already evaluated (use appropriate filename pattern)
-                    if is_holistic:
+                    if is_screen:
+                        result_path = output_dir / f"{candidate_id}_screening.json"
+                    elif is_holistic:
                         result_path = output_dir / f"{candidate_id}_holistic_evaluation.json"
                     else:
                         result_path = output_dir / f"{candidate_id}_evaluation.json"
@@ -176,7 +180,25 @@ class BackgroundWorker:
                         continue
 
                     # Run evaluation based on mode
-                    if is_holistic:
+                    if is_screen:
+                        result = evaluator.screen_candidate(
+                            candidate_id=candidate_id,
+                            material_paths=[file_path],
+                            description=description,
+                            candidate_name=None
+                        )
+                        with open(result_path, 'w', encoding='utf-8') as f:
+                            json.dump(result.model_dump(), f, indent=2, default=str)
+
+                        completed += 1
+                        results.append({
+                            "candidate_id": candidate_id,
+                            "status": "success",
+                            "matches": result.matches,
+                            "confidence": result.confidence,
+                            "evaluation_mode": "screen"
+                        })
+                    elif is_holistic:
                         result = evaluator.evaluate_candidate_holistic(
                             candidate_id=candidate_id,
                             material_paths=[file_path],

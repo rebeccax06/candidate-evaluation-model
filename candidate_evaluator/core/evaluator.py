@@ -24,6 +24,7 @@ from candidate_evaluator.core.models import (
     RedFlag,
     InterviewQuestion,
     InterviewSelectionResult,
+    ScreeningResult,
     parse_role_specific_assessment,
 )
 from candidate_evaluator.core.research_generator import ResearchReportGenerator
@@ -37,6 +38,7 @@ from candidate_evaluator.prompts.evaluation_prompts import (
     get_holistic_evaluation_prompt,
     get_holistic_ranking_prompt,
     get_holistic_selection_prompt,
+    get_screening_prompt,
 )
 from candidate_evaluator.prompt_manager import PromptManager
 
@@ -610,6 +612,133 @@ Original request:
 
         logger.info(f"Holistic evaluation completed in {processing_time:.2f} seconds")
         logger.info(f"Overall score: {result.overall_score:.2f}, Interview: {result.interview_decision}")
+
+        return result
+
+    def screen_candidate(
+        self,
+        candidate_id: str,
+        material_paths: List[str],
+        description: str,
+        candidate_name: Optional[str] = None
+    ) -> ScreeningResult:
+        """
+        Screen a candidate against a natural-language target profile description.
+
+        Produces a binary match/no-match decision (with confidence and evidence)
+        rather than a full evaluation. Useful for filtering large candidate pools.
+
+        Args:
+            candidate_id: Unique identifier for the candidate
+            material_paths: List of paths to candidate materials
+            description: Natural-language description of the target profile. May
+                include both inclusion requirements (must have) and exclusion
+                requirements (must not have).
+            candidate_name: Optional name of the candidate
+
+        Returns:
+            ScreeningResult object
+
+        Raises:
+            ValueError: If materials cannot be processed or screening fails
+        """
+        logger.info(f"Starting screening for candidate: {candidate_id}")
+        start_time = time.time()
+
+        # Process files
+        processed_files = self.file_processor.process_multiple_files(material_paths)
+        self._last_processed_files = processed_files
+        combined_materials = self.file_processor.combine_materials(processed_files)
+
+        # Generate screening prompt
+        prompt = get_screening_prompt(combined_materials, description)
+
+        # Call Claude API with retry logic for JSON parsing failures
+        max_retries = 2
+        last_error = None
+        screening_data = None
+
+        for attempt in range(max_retries + 1):
+            try:
+                if attempt == 0:
+                    logger.info("Calling Claude API for screening...")
+                    response = self._call_claude_api(prompt)
+                else:
+                    logger.warning(f"Retry attempt {attempt} due to JSON parsing failure")
+                    retry_prompt = f"""Your previous response could not be parsed as valid JSON.
+Error: {last_error}
+
+Please regenerate your ENTIRE response as valid JSON only.
+Start with ```json and end with ```.
+Make sure all quotes inside string values are escaped with backslash: \\"
+Do NOT include any text outside the JSON structure.
+
+Original request:
+{prompt}"""
+                    response = self._call_claude_api(retry_prompt)
+
+                # Reuse the holistic JSON extraction/repair logic (generic JSON parse)
+                screening_data = self._parse_holistic_response(response)
+                break
+
+            except ValueError as e:
+                last_error = str(e)
+                if attempt < max_retries:
+                    logger.warning(f"JSON parsing failed (attempt {attempt + 1}): {e}")
+                else:
+                    logger.error(f"All {max_retries + 1} attempts failed to parse JSON")
+                    raise
+
+        if screening_data is None:
+            raise ValueError("Failed to get valid screening data after retries")
+
+        candidate = CandidateProfile(
+            candidate_id=candidate_id,
+            name=candidate_name,
+            materials=[str(Path(p).name) for p in material_paths],
+            evaluation_date=datetime.now()
+        )
+
+        processing_time = time.time() - start_time
+
+        # Normalize confidence to a 0-1 float (models sometimes emit 0-100 or strings)
+        raw_confidence = screening_data.get('confidence', 0.0)
+        try:
+            confidence = float(raw_confidence)
+        except (TypeError, ValueError):
+            confidence = 0.0
+        if confidence > 1.0:
+            confidence = confidence / 100.0
+        confidence = max(0.0, min(1.0, confidence))
+
+        def _as_str_list(value):
+            if not value:
+                return []
+            if isinstance(value, str):
+                return [value]
+            return [str(v) for v in value]
+
+        result = ScreeningResult(
+            candidate=candidate,
+            description=description,
+            matches=bool(screening_data.get('matches', False)),
+            confidence=confidence,
+            reasoning=screening_data.get('reasoning', ''),
+            supporting_evidence=_as_str_list(screening_data.get('supporting_evidence', [])),
+            disqualifiers=_as_str_list(screening_data.get('disqualifiers', [])),
+            metadata={
+                'model': self.config.api.model,
+                'processing_time_seconds': processing_time,
+                'materials_character_count': len(combined_materials),
+                'timestamp': datetime.now().isoformat(),
+                'evaluation_mode': 'screen'
+            }
+        )
+
+        logger.info(
+            f"Screening completed in {processing_time:.2f}s "
+            f"(matches={result.matches}, confidence={result.confidence:.2f})"
+        )
 
         return result
 

@@ -337,6 +337,41 @@ class HolisticEvaluationResult(BaseModel):
         }
 
 
+class ScreeningResult(BaseModel):
+    """Result of screening a candidate against a natural-language target profile."""
+    candidate: CandidateProfile
+    description: str = Field(description="The target profile description used for screening")
+    matches: bool = Field(description="Whether the candidate matches the full target profile")
+    confidence: float = Field(
+        default=0.0, ge=0.0, le=1.0,
+        description="Confidence in the match decision, from 0.0 to 1.0"
+    )
+    reasoning: str = Field(default="", description="Short explanation of the decision")
+    supporting_evidence: List[str] = Field(
+        default_factory=list,
+        description="Quotes or details from the materials supporting the decision"
+    )
+    disqualifiers: List[str] = Field(
+        default_factory=list,
+        description="Evidence that violates an exclusion or a missing required qualification"
+    )
+    metadata: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Additional metadata (model used, processing time, etc.)"
+    )
+
+    def to_summary_dict(self) -> Dict[str, Any]:
+        """Convert to summary dictionary for quick reference"""
+        return {
+            "candidate_id": self.candidate.candidate_id,
+            "candidate_name": self.candidate.name,
+            "matches": self.matches,
+            "confidence": self.confidence,
+            "reasoning": self.reasoning,
+            "evaluation_date": self.candidate.evaluation_date.isoformat(),
+        }
+
+
 class InterviewSelectionResult(BaseModel):
     """Result of the two-phase, context-window-efficient interview selection process."""
 

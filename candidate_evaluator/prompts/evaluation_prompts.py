@@ -1079,6 +1079,76 @@ The program values candidates who show genuine evidence of these qualities throu
     return formatted
 
 
+# Screening / Filtering Prompt
+SCREENING_PROMPT = """**CRITICAL: YOUR ENTIRE RESPONSE MUST BE VALID JSON WRAPPED IN ```json``` CODE BLOCKS.**
+
+# Candidate Screening Task
+
+You are screening a candidate against a specific target profile. Your job is to decide, based ONLY on evidence in the candidate's materials, whether this candidate matches the target profile.
+
+## Target Profile (the candidate must match ALL parts of this)
+
+{description}
+
+## Screening Rules
+
+- Base your decision ONLY on evidence found in the materials below. Do not assume, infer beyond what is stated, or give benefit of the doubt.
+- The target profile may include BOTH inclusion requirements (things the candidate must have) AND exclusion requirements (things the candidate must NOT have). The candidate matches only if every part is satisfied.
+- If a required qualification is not clearly evidenced, treat it as NOT met.
+- Quote specific text from the materials to justify your decision.
+- List anything that disqualifies the candidate (e.g., evidence of an excluded background) in `disqualifiers`.
+
+## Candidate Materials
+
+{materials}
+
+---
+
+## Output Format
+
+Respond with ONLY valid JSON in this exact structure:
+
+```json
+{{
+  "matches": true,
+  "confidence": 0.0,
+  "reasoning": "1-3 sentence explanation of why the candidate does or does not match the full target profile, grounded in the materials.",
+  "supporting_evidence": [
+    "Direct quote or specific detail from the materials that supports the decision",
+    "Another specific quote or detail"
+  ],
+  "disqualifiers": [
+    "Specific evidence that violates an exclusion requirement or a required qualification that is missing"
+  ]
+}}
+```
+
+Rules for the JSON:
+- `matches`: boolean. true ONLY if every part of the target profile is satisfied.
+- `confidence`: number between 0.0 and 1.0 indicating how confident you are in the `matches` decision.
+- `supporting_evidence`: list of short strings (may be empty).
+- `disqualifiers`: list of short strings; empty list [] when the candidate matches with no concerns.
+- Escape any double quotes inside string values with a backslash.
+- Do NOT include any text outside the JSON code block.
+"""
+
+
+def get_screening_prompt(materials_text: str, description: str) -> str:
+    """
+    Generate a screening/filtering prompt that asks Claude for a binary match
+    decision against a natural-language target profile description.
+
+    Args:
+        materials_text: Combined text of all candidate materials
+        description: Natural-language description of the target candidate profile
+            (may include both inclusion and exclusion requirements)
+
+    Returns:
+        Formatted prompt string
+    """
+    return SCREENING_PROMPT.format(description=description, materials=materials_text)
+
+
 # Admit Pattern Analysis Prompt
 ADMIT_PATTERN_ANALYSIS_PROMPT = """# Admit Pattern Analysis Task
 
