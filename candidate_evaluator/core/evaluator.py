@@ -974,10 +974,11 @@ Original request:
         try:
             system_prompt = self.prompt_manager.build_system_prompt(role)
 
+            # No temperature: Claude Sonnet 5 rejects non-default sampling
+            # parameters (400), and newer SDKs dropped the kwarg entirely.
             message = self.client.messages.create(
                 model=self.config.api.model,
                 max_tokens=self.config.api.max_tokens,
-                temperature=self.config.api.temperature,
                 system=system_prompt,
                 messages=[
                     {

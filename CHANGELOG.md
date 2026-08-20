@@ -37,7 +37,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   File downloads, result saving, and DB writes stay on the main thread; only
   the API calls are parallel
 
+### Fixed
+
+- **All evaluations failed on newer `anthropic` SDK versions** with
+  `Messages.create() got an unexpected keyword argument 'temperature'` —
+  recent SDKs removed the parameter from the method signature. The value is
+  now sent via `extra_body`, which produces an identical API request (same
+  model behavior/output) and works on any SDK version. Affected the Railway
+  worker (fresh installs get the latest SDK) and the Help chatbot.
+
 ### Changed
+
+#### Model upgraded to Claude Sonnet 5
+- Default model is now `claude-sonnet-5` (was `claude-sonnet-4-5-20250929`);
+  the Admit Pattern Analyzer moves off the deprecated Sonnet 4 to the same
+- `temperature` is no longer sent to the API (Sonnet 5 rejects non-default
+  sampling parameters); the config field remains accepted but is deprecated,
+  and the Settings page no longer displays it
+- Note: Sonnet 5 runs adaptive thinking by default and uses a new tokenizer
+  (~30% more tokens for the same text), so per-evaluation cost and latency
+  baselines shift; `max_tokens` (16384) has adequate headroom
 
 #### Shared screening/processing code (was duplicated per stack)
 - New `core/processing.py`: `EvaluationMode` enum plus shared per-candidate

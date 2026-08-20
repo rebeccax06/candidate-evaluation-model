@@ -476,7 +476,7 @@ class AdmitPatternAnalyzer:
     uses Claude to identify distinguishing patterns.
     """
     
-    def __init__(self, api_key: str, model: str = "claude-sonnet-4-20250514", max_tokens: int = 8192):
+    def __init__(self, api_key: str, model: str = "claude-sonnet-5", max_tokens: int = 8192):
         """
         Initialize the admit pattern analyzer.
         

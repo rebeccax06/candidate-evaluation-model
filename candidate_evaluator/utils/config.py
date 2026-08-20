@@ -11,8 +11,11 @@ from pydantic import BaseModel, Field, validator
 class APIConfig(BaseModel):
     """API configuration"""
     anthropic_api_key: str
-    model: str = "claude-sonnet-4-5-20250929"
+    model: str = "claude-sonnet-5"
     max_tokens: int = 16384
+    # DEPRECATED: not sent to the API. Claude Sonnet 5 rejects non-default
+    # sampling parameters (400). Kept only so existing config files that set
+    # `temperature` still parse.
     temperature: float = 0.3
 
     @validator('temperature')

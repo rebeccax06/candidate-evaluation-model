@@ -696,10 +696,10 @@ def _stream_help_response(
     max_tokens: int = 1024,
 ) -> Iterator[str]:
     """Yield text chunks from a streaming Anthropic response for the help chat."""
+    # No temperature: Claude Sonnet 5 rejects non-default sampling params.
     with client.messages.stream(
         model=model,
         max_tokens=max_tokens,
-        temperature=0.3,
         system=HELP_SYSTEM_PROMPT,
         messages=messages,
     ) as stream:

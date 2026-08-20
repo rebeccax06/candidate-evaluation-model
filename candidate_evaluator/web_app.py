@@ -526,7 +526,7 @@ def help_page(config):
     """Render the Help chatbot using the evaluator's configured Claude client."""
     evaluator = st.session_state.get("evaluator")
     client = getattr(evaluator, "client", None)
-    model = config.api.model if config else "claude-sonnet-4-5-20250929"
+    model = config.api.model if config else "claude-sonnet-5"
     render_help_chat(client, model)
 
 
@@ -1055,7 +1055,7 @@ def batch_jobs_page():
         time.sleep(0.1)  # Small delay to prevent too rapid refreshing
 
     # Tabs for job status
-    tab1, tab2, tab3 = st.tabs(["Active", "Completed", "All Jobs"])
+    tab1, tab2, tab3 = st.tabs(["Active", "Finished", "All Jobs"])
 
     with tab1:
         active_jobs = job_manager.get_active_jobs()
@@ -1071,14 +1071,17 @@ def batch_jobs_page():
             st.info("No active jobs. Start a new batch evaluation to see it here.")
 
     with tab2:
+        # Completed, failed, AND cancelled — failed jobs must be visible
+        # somewhere with their error message (the card shows it).
         all_jobs = job_manager.list_jobs(limit=50)
-        completed_jobs = [j for j in all_jobs if j.get("status") == JobStatus.COMPLETED]
+        finished = {JobStatus.COMPLETED, JobStatus.FAILED, JobStatus.CANCELLED}
+        finished_jobs = [j for j in all_jobs if j.get("status") in finished]
 
-        if completed_jobs:
-            for job in completed_jobs[:20]:
+        if finished_jobs:
+            for job in finished_jobs[:20]:
                 render_job_card(job, job_manager, show_actions=False)
         else:
-            st.info("No completed jobs yet.")
+            st.info("No finished jobs yet.")
 
     with tab3:
         all_jobs = job_manager.list_jobs(limit=50)
@@ -1093,7 +1096,8 @@ def batch_jobs_page():
                     "Name": job.get("job_name", "-")[:30],
                     "Status": job.get("status", "unknown"),
                     "Progress": f"{progress.get('completed', 0)}/{progress.get('total', 0)}",
-                    "Created": job.get("created_at", "")[:19]
+                    "Created": job.get("created_at", "")[:19],
+                    "Error": (job.get("error") or "")[:80]
                 })
 
             st.dataframe(pd.DataFrame(job_data), hide_index=True, use_container_width=True)
@@ -1193,6 +1197,10 @@ def render_job_card(job, job_manager, show_actions=True):
 
         # Errors for failed jobs
         if status == JobStatus.FAILED or failed > 0:
+            # Job-level error (e.g. bad API key kills the job before any
+            # candidate runs, leaving the per-candidate errors list empty)
+            if job.get("error"):
+                st.error(f"Error: {job['error']}")
             errors = job.get("errors", [])
             if errors:
                 with st.expander(f"View Errors ({len(errors)}) - Click to retry"):
@@ -3495,10 +3503,9 @@ def settings_page():
 
     with col1:
         st.text_input("Model", value=config.api.model, disabled=True)
-        st.number_input("Max Tokens", value=config.api.max_tokens, disabled=True)
 
     with col2:
-        st.slider("Temperature", 0.0, 1.0, float(config.api.temperature), disabled=True)
+        st.number_input("Max Tokens", value=config.api.max_tokens, disabled=True)
 
     st.info("Edit config.yaml to modify settings, then restart the application.")
 

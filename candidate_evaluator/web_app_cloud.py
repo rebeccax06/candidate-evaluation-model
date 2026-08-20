@@ -296,7 +296,7 @@ def help_page(user: dict, api_key: str):
     """Render the Help chatbot using the user's configured Claude client."""
     evaluator = get_evaluator(api_key)
     client = getattr(evaluator, "client", None)
-    model = evaluator.config.api.model if evaluator else "claude-sonnet-4-5-20250929"
+    model = evaluator.config.api.model if evaluator else "claude-sonnet-5"
     session_key = f"help_chat_messages_{user['id']}"
     render_help_chat(client, model, session_key=session_key)
 
@@ -1269,30 +1269,32 @@ def batch_jobs_page(user: dict):
     
     jobs = db.get_user_jobs(user["id"], limit=50)
     
-    tab1, tab2, tab3 = st.tabs(["Active", "Completed", "All Jobs"])
-    
+    tab1, tab2, tab3 = st.tabs(["Active", "Finished", "All Jobs"])
+
     with tab1:
         active_jobs = [j for j in jobs if j.get("status") in ["pending", "processing"]]
-        
+
         if active_jobs:
             for job in active_jobs:
                 render_job_card(job, db, user)
-            
+
             if auto_refresh:
                 time.sleep(3)
                 st.rerun()
         else:
             st.info("No active jobs. Start a batch evaluation to see jobs here.")
-    
+
     with tab2:
-        completed_jobs = [j for j in jobs if j.get("status") == "completed"]
-        
-        if completed_jobs:
-            for job in completed_jobs[:20]:
+        # Completed, failed, AND cancelled — failed jobs must be visible
+        # somewhere with their error message (the card shows it).
+        finished_jobs = [j for j in jobs if j.get("status") in ["completed", "failed", "cancelled"]]
+
+        if finished_jobs:
+            for job in finished_jobs[:20]:
                 render_job_card(job, db, user, show_actions=False)
         else:
-            st.info("No completed jobs yet.")
-    
+            st.info("No finished jobs yet.")
+
     with tab3:
         if jobs:
             job_data = []
@@ -1302,9 +1304,10 @@ def batch_jobs_page(user: dict):
                     "Name": (job.get("job_name") or "-")[:30],
                     "Status": job.get("status", "unknown"),
                     "Progress": f"{job.get('completed_candidates', 0)}/{job.get('total_candidates', 0)}",
-                    "Created": str(job.get("created_at", ""))[:19]
+                    "Created": str(job.get("created_at", ""))[:19],
+                    "Error": (job.get("error") or "")[:80]
                 })
-            
+
             st.dataframe(pd.DataFrame(job_data), hide_index=True, use_container_width=True)
         else:
             st.info("No jobs yet.")
