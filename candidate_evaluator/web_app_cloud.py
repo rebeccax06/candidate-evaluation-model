@@ -40,6 +40,12 @@ from candidate_evaluator.core.models import (
     NotableQuality,
     AdmitPatternAnalysisResult,
     InterviewSelectionResult,
+    ScreeningResult,
+    SCREENING_REVIEW_CONFIDENCE,
+    SCREENING_OUTCOME_MATCH,
+    SCREENING_OUTCOME_REVIEW,
+    SCREENING_OUTCOME_NO_MATCH,
+    SCREENING_OUTCOME_LABELS,
     parse_role_specific_assessment,
 )
 from candidate_evaluator.utils.role_results import (
@@ -54,6 +60,11 @@ from candidate_evaluator.utils.role_results import (
     COMBINED_DIMENSION_KEYS,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
+from candidate_evaluator.screening_ui import (
+    SCREENING_PAGE_INTRO,
+    render_screening_submit_inputs,
+    render_screening_results,
+)
 from candidate_evaluator.exporters import CSVExporter, JSONExporter
 from candidate_evaluator.prompt_manager import PromptManager
 from candidate_evaluator.utils.config import get_default_config, Config, APIConfig, CriteriaWeights
@@ -71,12 +82,12 @@ from candidate_evaluator.auth import (
 from candidate_evaluator.database import Database
 from candidate_evaluator.storage import Storage, cleanup_temp_files
 from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
-from candidate_evaluator.branding import apply_branding, LOGO_PATH
+from candidate_evaluator.branding import apply_branding, ICON_PATH
 
 
 st.set_page_config(
     page_title="Catalyst Candidate Assessment",
-    page_icon=LOGO_PATH,
+    page_icon=ICON_PATH,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -244,7 +255,7 @@ def main():
         
         page = st.radio(
             "Navigation",
-            ["Dashboard", "New Evaluation", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"],
+            ["Dashboard", "New Evaluation", "Screening", "Batch Jobs", "Results", "Analysis", "Guide", "Help", "Settings"],
             label_visibility="collapsed"
         )
         
@@ -265,6 +276,8 @@ def main():
         dashboard_page(user, api_key)
     elif page == "New Evaluation":
         new_evaluation_page(user, api_key)
+    elif page == "Screening":
+        screening_page_cloud(user, api_key)
     elif page == "Batch Jobs":
         batch_jobs_page(user)
     elif page == "Results":
@@ -678,7 +691,7 @@ def single_evaluation_form(user: dict, api_key: str, role: str | None = None, ke
     # Holistic-only: evaluation mode is fixed to holistic across the app.
     is_holistic = True
     if target_job:
-        eff_role = target_job.get("role")
+        eff_role = Database.get_job_config(target_job).get("role")
         st.info(
             f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
             f"**Holistic (program fit)**"
@@ -966,7 +979,7 @@ def batch_evaluation_form(
     # Holistic-only: evaluation mode is fixed to holistic across the app.
     is_holistic = True
     if target_job:
-        eff_role = target_job.get("role")
+        eff_role = Database.get_job_config(target_job).get("role")
         st.info(
             f"Adding to batch **{target_job.get('job_name') or '(unnamed)'}** — "
             f"new candidates are evaluated as **Holistic (program fit)**"
@@ -1084,7 +1097,7 @@ def batch_evaluation_form(
                         total_candidates=len(file_paths),
                         file_paths=file_paths,
                         evaluation_mode="holistic" if is_holistic else "criteria",
-                        role=eff_role
+                        config={"role": eff_role}
                     )
 
                     progress_bar.progress(1.0)
@@ -1121,6 +1134,127 @@ def role_specific_evaluation_form(user: dict, api_key: str):
 
     with sub_tab2:
         batch_evaluation_form(user, role=role, key_prefix="role_batch_", api_key=api_key)
+
+
+def screening_page_cloud(user: dict, api_key: str):
+    """Screening page: filter a large candidate pool against a target profile.
+
+    Jobs run on the background worker (like Batch Upload), so the user can
+    close the page while a large pool is screened. Results are stored in
+    Supabase as evaluations with evaluation_type='screen'. Widgets live in
+    screening_ui (shared with the local app); this page only wires them to
+    Supabase storage, jobs, and evaluations.
+    """
+    st.title("Screening")
+    st.markdown(SCREENING_PAGE_INTRO)
+
+    submit_tab, results_tab = st.tabs(["Run Screening", "Results"])
+
+    with submit_tab:
+        _screening_submit_form_cloud(user)
+
+    with results_tab:
+        _screening_results_view_cloud(user)
+
+
+def _screening_submit_form_cloud(user: dict):
+    """Submit screening as a background (Railway worker) job."""
+    submission = render_screening_submit_inputs()
+    if not submission:
+        return
+
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+
+    try:
+        storage = get_storage()
+        db = get_database()
+
+        uploaded_files = submission["uploaded_files"]
+        file_paths = []
+        total_files = len(uploaded_files)
+
+        for i, uploaded_file in enumerate(uploaded_files):
+            status_text.text(f"Uploading {i+1}/{total_files}: {uploaded_file.name}")
+            progress_bar.progress((i + 1) / total_files)
+
+            file_data = uploaded_file.getbuffer().tobytes()
+            storage_path = storage.upload_file(
+                user_id=user["id"],
+                file_data=file_data,
+                filename=uploaded_file.name,
+                content_type="application/pdf"
+            )
+            file_paths.append(storage_path)
+
+            if i < total_files - 1:
+                time.sleep(0.2)
+
+        status_text.text("Creating screening job...")
+        default_job_name = f"Screening {datetime.now().strftime('%Y%m%d_%H%M')}"
+        job = db.create_job(
+            user_id=user["id"],
+            job_name=(submission["job_name"] or default_job_name) + " (Screen)",
+            job_type="batch",
+            total_candidates=len(file_paths),
+            file_paths=file_paths,
+            evaluation_mode="screen",
+            config={"screen_description": submission["description"]},
+        )
+
+        progress_bar.progress(1.0)
+        status_text.empty()
+        st.success(f"Screening job created! ID: `{job['id']}`")
+        st.info(
+            "The background worker will screen your candidates - you can close "
+            "this page. Track progress under **Batch Jobs**, then return to the "
+            "**Results** tab here."
+        )
+        time.sleep(1)
+        st.rerun()
+
+    except Exception as e:
+        st.error(f"Error creating screening job: {e}")
+
+
+def _screening_results_view_cloud(user: dict):
+    """Load screening rows from Supabase, filter by job, render shared view."""
+    st.markdown("### Screening Results")
+
+    if st.button("Refresh", key="screening_refresh_btn"):
+        st.rerun()
+
+    db = get_database()
+    eval_rows = db.get_user_evaluations(user["id"], evaluation_type="screen", limit=500)
+    parsed = []
+    for e in eval_rows:
+        try:
+            parsed.append((e, ScreeningResult(**e["result"])))
+        except Exception:
+            pass
+
+    if not parsed:
+        st.info("No screening results yet. Run a screening job to see results here.")
+        return
+
+    # Optional filter by screening job (each job can use a different target profile)
+    jobs = {str(j["id"]): j for j in db.get_user_jobs(user["id"], limit=300)}
+    job_ids = []
+    for e, _ in parsed:
+        jid = str(e.get("job_id") or "")
+        if jid and jid not in job_ids:
+            job_ids.append(jid)
+    if len(job_ids) > 1:
+        options = {"All screening jobs": None}
+        for jid in job_ids:
+            job = jobs.get(jid, {})
+            options[f"{label_for_job(job, jid)} · {jid[:8]}"] = jid
+        choice = st.selectbox("Screening job", list(options.keys()), key="screening_job_filter")
+        selected_job = options[choice]
+        if selected_job:
+            parsed = [(e, r) for e, r in parsed if str(e.get("job_id") or "") == selected_job]
+
+    render_screening_results([r for _, r in parsed])
 
 
 def batch_jobs_page(user: dict):
@@ -1224,14 +1358,32 @@ def render_job_card(job: dict, db: Database, user: dict, show_actions: bool = Tr
                 evaluations = db.get_job_evaluations(str(job_id))
                 
                 if evaluations:
+                    is_screen_job = job.get("evaluation_mode") == "screen"
                     result_data = []
                     for e in evaluations:
-                        result_data.append({
-                            "Candidate": e.get("candidate_id", ""),
-                            "Score": f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else "N/A",
-                            "Recommendation": (e.get("recommendation") or "")[:30]
-                        })
+                        if is_screen_job:
+                            res = e.get("result") or {}
+                            confidence = res.get("confidence", 0) or 0
+                            if confidence < SCREENING_REVIEW_CONFIDENCE:
+                                outcome = SCREENING_OUTCOME_REVIEW
+                            elif res.get("matches"):
+                                outcome = SCREENING_OUTCOME_MATCH
+                            else:
+                                outcome = SCREENING_OUTCOME_NO_MATCH
+                            result_data.append({
+                                "Candidate": e.get("candidate_id", ""),
+                                "Outcome": SCREENING_OUTCOME_LABELS[outcome],
+                                "Confidence": f"{confidence:.2f}",
+                            })
+                        else:
+                            result_data.append({
+                                "Candidate": e.get("candidate_id", ""),
+                                "Score": f"{e.get('overall_score', 0):.1f}/10" if e.get('overall_score') else "N/A",
+                                "Recommendation": (e.get("recommendation") or "")[:30]
+                            })
                     st.dataframe(pd.DataFrame(result_data), hide_index=True)
+                    if is_screen_job:
+                        st.caption("Full screening details are on the Screening page → Results tab.")
                 else:
                     st.write("No results available.")
         
@@ -1310,6 +1462,9 @@ def _sections_split_by_batch_jobs(jobs: list, db, all_evaluations: list) -> list
     for job in sorted_jobs:
         jid = str(job.get("id") or "")
         if not jid:
+            continue
+        # Screening jobs have their own results view (Screening page)
+        if job.get("evaluation_mode") == "screen":
             continue
         evs = db.get_job_evaluations(jid)
         if not evs:
@@ -1511,6 +1666,8 @@ def _load_user_evaluations_context(user: dict, limit_evals: int = 500, limit_job
     """
     db = get_database()
     evaluations = db.get_user_evaluations(user["id"], limit=limit_evals)
+    # Screening results are viewed on the Screening page, not Results/Analysis
+    evaluations = [e for e in evaluations if e.get("evaluation_type") != "screen"]
     jobs = db.get_user_jobs(user["id"], limit=limit_jobs)
     if not evaluations:
         return None

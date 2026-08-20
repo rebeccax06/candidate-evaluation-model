@@ -19,8 +19,12 @@ from pathlib import Path
 
 import streamlit as st
 
-# Absolute path to the logo so it resolves regardless of the working directory.
+# Absolute paths so they resolve regardless of the working directory.
+# LOGO_PATH is the wide wordmark (sidebar); ICON_PATH is the square ring mark
+# with a transparent background, used as the browser-tab icon (page_icon) —
+# the wordmark gets distorted when squeezed into the square favicon slot.
 LOGO_PATH = str(Path(__file__).parent / "assets" / "catalyst_logo.png")
+ICON_PATH = str(Path(__file__).parent / "assets" / "catalyst_icon.png")
 
 # Brand palette.
 BRAND_TEAL = "#00B2CA"

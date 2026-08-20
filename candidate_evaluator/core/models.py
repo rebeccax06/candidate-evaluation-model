@@ -337,6 +337,22 @@ class HolisticEvaluationResult(BaseModel):
         }
 
 
+# Below this confidence the yes/no screening decision is not trusted and the
+# candidate is surfaced for human review instead. Model confidence is not
+# calibrated, so this is a review band, not a probability cutoff.
+SCREENING_REVIEW_CONFIDENCE = 0.7
+
+SCREENING_OUTCOME_MATCH = "match"
+SCREENING_OUTCOME_REVIEW = "review"
+SCREENING_OUTCOME_NO_MATCH = "no_match"
+
+SCREENING_OUTCOME_LABELS = {
+    SCREENING_OUTCOME_MATCH: "Match",
+    SCREENING_OUTCOME_REVIEW: "Needs review",
+    SCREENING_OUTCOME_NO_MATCH: "No match",
+}
+
+
 class ScreeningResult(BaseModel):
     """Result of screening a candidate against a natural-language target profile."""
     candidate: CandidateProfile
@@ -360,6 +376,16 @@ class ScreeningResult(BaseModel):
         description="Additional metadata (model used, processing time, etc.)"
     )
 
+    def outcome(self, review_below: float = SCREENING_REVIEW_CONFIDENCE) -> str:
+        """Three-way screening decision: match / no_match / review.
+
+        Any decision below the review-confidence threshold is downgraded to
+        'review' (borderline — a human should look) regardless of direction.
+        """
+        if self.confidence < review_below:
+            return SCREENING_OUTCOME_REVIEW
+        return SCREENING_OUTCOME_MATCH if self.matches else SCREENING_OUTCOME_NO_MATCH
+
     def to_summary_dict(self) -> Dict[str, Any]:
         """Convert to summary dictionary for quick reference"""
         return {
@@ -367,6 +393,7 @@ class ScreeningResult(BaseModel):
             "candidate_name": self.candidate.name,
             "matches": self.matches,
             "confidence": self.confidence,
+            "outcome": self.outcome(),
             "reasoning": self.reasoning,
             "evaluation_date": self.candidate.evaluation_date.isoformat(),
         }

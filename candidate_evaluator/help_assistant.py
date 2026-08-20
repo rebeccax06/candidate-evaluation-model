@@ -306,12 +306,12 @@ through their actions and achievements, not just stated intentions.
 # These sections describe the actual click-by-click flows in the hosted (cloud)
 # web app so both the Guide page and the Help chatbot can walk users through
 # real tasks. Page names match the sidebar exactly: Dashboard, New Evaluation,
-# Batch Jobs, Results, Analysis, Guide, Help, Settings.
+# Screening, Batch Jobs, Results, Analysis, Guide, Help, Settings.
 
 GUIDE_APP_GETTING_STARTED = """
 The app is organized as a set of pages you switch between using the **sidebar
-on the left**. The pages are: **Dashboard**, **New Evaluation**, **Batch Jobs**,
-**Results**, **Analysis**, **Guide**, **Help**, and **Settings**.
+on the left**. The pages are: **Dashboard**, **New Evaluation**, **Screening**,
+**Batch Jobs**, **Results**, **Analysis**, **Guide**, **Help**, and **Settings**.
 
 **Before you can evaluate anyone, two things must be set up:**
 
@@ -400,6 +400,43 @@ you're trying to do. When in doubt, here's how to decide:
   can leave the tab open until it finishes.
 """
 
+GUIDE_APP_SCREENING = """
+**Screening** is a fast filter for large candidate pools — use it to narrow
+hundreds of applicants down to the ones worth a full evaluation. Unlike New
+Evaluation, it does **not** score candidates; each candidate gets one of three
+outcomes against a target profile you describe in plain language: **Match**,
+**No match**, or **Needs review** (the model's confidence was below the review
+threshold, so a human should decide).
+
+**To run a screening (Run Screening tab):**
+
+1. Write a **Target profile description** — what the candidate must have and,
+   optionally, what they must NOT have (exclusions), e.g. *"Primary capability
+   is AI or Computer Science and does not have any healthcare experience."*
+2. **Upload Candidate PDFs** — PDF only, one per candidate; the filename
+   becomes the candidate ID.
+3. *(Optional)* give the run a **Job Name**, then click **Start Screening
+   (Background)**. The job runs on the server — you can close the page and
+   track progress under **Batch Jobs**.
+
+**To review the outcome (Results tab on the Screening page):**
+
+- Summary metrics show how many were **Screened** and how many landed in each
+  outcome: **Matches**, **Needs Review**, and **No Match**.
+- The **Review threshold** slider controls how confident the model must be
+  before its yes/no decision is trusted; anything below it shows as
+  **Needs review**. Use the **Show** filter to view matches only, matches +
+  needs review (the default), or everything; if you ran several screening
+  jobs, pick one with the **Screening job** selector.
+- The table shows each candidate's outcome, confidence, reasoning, and any
+  disqualifiers; **Download CSV** exports it, and **View evidence details**
+  shows the supporting quotes.
+
+Screening results live on this page only — they don't appear under **Results**
+or **Analysis**, which are for full holistic evaluations.
+"""
+
+
 GUIDE_APP_BATCH_JOBS = """
 **Batch Jobs** is where you **monitor** batch runs — it is *not* where you
 upload files (that's **New Evaluation → Batch Upload**).
@@ -460,6 +497,11 @@ Batch Upload: PDF only.
 
 **"Where do I set my API key?"** — On first sign-in, or later under **Settings →
 Update Anthropic API Key**.
+
+**"How do I quickly filter a big pool of applicants?"** — Use the **Screening**
+page: describe the target profile, upload the PDFs, and click **Start Screening
+(Background)**. Each candidate comes back as Match, Needs review, or No match;
+results are on the Screening page's **Results** tab.
 """
 
 
@@ -483,6 +525,8 @@ def render_guide_page() -> None:
         st.markdown(GUIDE_APP_NEW_EVALUATION)
     with st.expander("Which option should I pick?", expanded=False):
         st.markdown(GUIDE_APP_CHOOSING)
+    with st.expander("Filter a large pool (Screening)", expanded=False):
+        st.markdown(GUIDE_APP_SCREENING)
     with st.expander("Track batch runs (Batch Jobs)", expanded=False):
         st.markdown(GUIDE_APP_BATCH_JOBS)
     with st.expander("Browse results (Results)", expanded=False):
@@ -548,12 +592,14 @@ helpful, suggest what the user could check or who they might ask. Never invent \
 features, prompt variables, dimensions, or rating levels that are not in the \
 guide. When users ask "how do I..." questions, give short step-by-step guidance \
 using the app's exact page names and button labels from the reference guide. \
-The sidebar pages are: Dashboard, New Evaluation, Batch Jobs, Results, \
-Analysis, Guide, Help, Settings.
+The sidebar pages are: Dashboard, New Evaluation, Screening, Batch Jobs, \
+Results, Analysis, Guide, Help, Settings.
 
 Every evaluation runs in Holistic mode — there is no criteria-based mode, \
 interview-selection, admit-patterns, or research page in this app, so never \
-refer users to those. Candidate IDs are generated automatically from the \
+refer users to those. Screening (on the Screening page) is separate from \
+evaluation: it filters candidates against a described target profile into \
+Match / Needs review / No match, not a scored evaluation. Candidate IDs are generated automatically from the \
 uploaded file name (users do not type them).
 
 IMPORTANT — help users choose between options. Some flows have more than one \
@@ -583,6 +629,9 @@ HOW TO USE THE APP — RUN A NEW EVALUATION (New Evaluation page)
 
 HOW TO USE THE APP — WHICH OPTION SHOULD I PICK? (help users choose)
 {GUIDE_APP_CHOOSING}
+
+HOW TO USE THE APP — SCREENING (filter a large pool)
+{GUIDE_APP_SCREENING}
 
 HOW TO USE THE APP — BATCH JOBS
 {GUIDE_APP_BATCH_JOBS}

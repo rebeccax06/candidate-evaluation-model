@@ -6,7 +6,7 @@ import json
 import subprocess
 import uuid
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, List, Dict
 
 from candidate_evaluator.background_worker import BackgroundWorker, JobStatus
@@ -168,8 +168,6 @@ class JobManager:
 
     def cleanup_old_jobs(self, days: int = 7):
         """Remove jobs older than specified days."""
-        from datetime import timedelta
-
         cutoff = datetime.now() - timedelta(days=days)
 
         for job in self.worker.list_jobs():

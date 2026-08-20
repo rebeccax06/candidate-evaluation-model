@@ -20,6 +20,13 @@ if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from candidate_evaluator.core.evaluator import CandidateEvaluator
+from candidate_evaluator.core.processing import (
+    EvaluationMode,
+    eval_concurrency,
+    evaluate_chunk_concurrently,
+    result_filename,
+    summary_entry,
+)
 from candidate_evaluator.utils.config import Config, APIConfig
 from candidate_evaluator.exporters.json_exporter import JSONExporter
 
@@ -119,9 +126,7 @@ class BackgroundWorker:
             job_config = job_data.get("config", {})
             api_key = job_config.get("api_key") or os.environ.get("ANTHROPIC_API_KEY")
             max_tokens = job_config.get("max_tokens", 8192)
-            evaluation_mode = job_config.get("evaluation_mode", "criteria")
-            is_holistic = evaluation_mode == "holistic"
-            is_screen = evaluation_mode == "screen"
+            mode = EvaluationMode.coerce(job_config.get("evaluation_mode"))
             role = job_config.get("role")
             description = job_config.get("description", "")
 
@@ -146,106 +151,67 @@ class BackgroundWorker:
             results = []
             errors = []
 
+            pending = []
             for candidate_id, file_path in candidate_files.items():
+                if (output_dir / result_filename(mode, candidate_id)).exists():
+                    completed += 1
+                    results.append({
+                        "candidate_id": candidate_id,
+                        "status": "skipped",
+                        "message": "Already evaluated"
+                    })
+                    continue
+                pending.append((candidate_id, file_path))
+
+            # Candidates are processed in chunks: result files are written on
+            # the main thread; only the Claude calls run concurrently.
+            concurrency = eval_concurrency()
+            for chunk_start in range(0, len(pending), concurrency):
                 if self.should_stop:
                     self.update_job(job_id, {"status": JobStatus.CANCELLED})
                     return
 
-                # Update current candidate
+                chunk = pending[chunk_start:chunk_start + concurrency]
                 self.update_job(job_id, {
                     "progress": {
                         "total": total,
                         "completed": completed,
                         "failed": failed,
-                        "current_candidate": candidate_id
+                        "current_candidate": ", ".join(cid for cid, _ in chunk)
                     }
                 })
 
-                try:
-                    # Check if already evaluated (use appropriate filename pattern)
-                    if is_screen:
-                        result_path = output_dir / f"{candidate_id}_screening.json"
-                    elif is_holistic:
-                        result_path = output_dir / f"{candidate_id}_holistic_evaluation.json"
-                    else:
-                        result_path = output_dir / f"{candidate_id}_evaluation.json"
-
-                    if result_path.exists():
-                        completed += 1
-                        results.append({
+                outcomes = evaluate_chunk_concurrently(
+                    evaluator,
+                    mode,
+                    [(cid, [fp]) for cid, fp in chunk],
+                    role=role,
+                    description=description,
+                    max_workers=concurrency,
+                )
+                for candidate_id, result, result_dict, error in outcomes:
+                    if error is not None:
+                        failed += 1
+                        errors.append({
                             "candidate_id": candidate_id,
-                            "status": "skipped",
-                            "message": "Already evaluated"
+                            "error": error.strip().splitlines()[-1],
+                            "traceback": error
                         })
                         continue
 
-                    # Run evaluation based on mode
-                    if is_screen:
-                        result = evaluator.screen_candidate(
-                            candidate_id=candidate_id,
-                            material_paths=[file_path],
-                            description=description,
-                            candidate_name=None
-                        )
-                        with open(result_path, 'w', encoding='utf-8') as f:
-                            json.dump(result.model_dump(), f, indent=2, default=str)
-
-                        completed += 1
-                        results.append({
-                            "candidate_id": candidate_id,
-                            "status": "success",
-                            "matches": result.matches,
-                            "confidence": result.confidence,
-                            "evaluation_mode": "screen"
-                        })
-                    elif is_holistic:
-                        result = evaluator.evaluate_candidate_holistic(
-                            candidate_id=candidate_id,
-                            material_paths=[file_path],
-                            candidate_name=None,
-                            role=role
-                        )
-                        # Save holistic result
-                        with open(result_path, 'w', encoding='utf-8') as f:
-                            json.dump(result.model_dump(), f, indent=2, default=str)
-
-                        completed += 1
-                        results.append({
-                            "candidate_id": candidate_id,
-                            "status": "success",
-                            "overall_score": result.overall_score,
-                            "recommendation": result.recommendation,
-                            "interview_decision": result.interview_decision,
-                            "evaluation_mode": "holistic"
-                        })
-                    else:
-                        result = evaluator.evaluate_candidate(
-                            candidate_id=candidate_id,
-                            material_paths=[file_path],
-                            candidate_name=None,
-                            role=role
-                        )
-                        # Save criteria-based result
+                    result_path = output_dir / result_filename(mode, candidate_id)
+                    if mode is EvaluationMode.CRITERIA:
+                        # Criteria results keep the exporter's file format so
+                        # existing on-disk results stay loadable.
                         JSONExporter.export_evaluation(result, result_path)
+                    else:
+                        with open(result_path, 'w', encoding='utf-8') as f:
+                            json.dump(result_dict, f, indent=2, default=str)
 
-                        completed += 1
-                        results.append({
-                            "candidate_id": candidate_id,
-                            "status": "success",
-                            "overall_score": result.overall_score,
-                            "recommendation": result.recommendation,
-                            "evaluation_mode": "criteria"
-                        })
+                    completed += 1
+                    results.append(summary_entry(mode, candidate_id, result))
 
-                except Exception as e:
-                    failed += 1
-                    errors.append({
-                        "candidate_id": candidate_id,
-                        "error": str(e),
-                        "traceback": traceback.format_exc()
-                    })
-
-                # Update progress after each candidate
+                # Update progress after each chunk
                 self.update_job(job_id, {
                     "progress": {
                         "total": total,

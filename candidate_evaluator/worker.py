@@ -23,6 +23,11 @@ from uuid import uuid4
 from candidate_evaluator.database import Database, get_supabase_client
 from candidate_evaluator.storage import Storage, cleanup_temp_files
 from candidate_evaluator.core.evaluator import CandidateEvaluator
+from candidate_evaluator.core.processing import (
+    EvaluationMode,
+    eval_concurrency,
+    evaluate_chunk_concurrently,
+)
 from candidate_evaluator.utils.config import Config, APIConfig
 
 logging.basicConfig(
@@ -34,7 +39,6 @@ logger = logging.getLogger(__name__)
 
 WORKER_ID = f"worker-{uuid4().hex[:8]}"
 POLL_INTERVAL = 5  # seconds
-MAX_RETRIES = 3
 SHUTDOWN_REQUESTED = False
 
 
@@ -72,12 +76,18 @@ class Worker:
         job_id = job["id"]
         user_id = job["user_id"]
         file_paths = job.get("file_paths", [])
-        evaluation_mode = job.get("evaluation_mode", "criteria")
-        is_holistic = evaluation_mode == "holistic"
-        role = job.get("role")
-        
+        mode = EvaluationMode.coerce(job.get("evaluation_mode"))
+        config = Database.get_job_config(job)
+        role = config.get("role")
+        screen_description = (config.get("screen_description") or "").strip()
+
         logger.info(f"Processing job {job_id} with {len(file_paths)} candidates")
-        
+
+        if mode is EvaluationMode.SCREEN and not screen_description:
+            logger.error(f"Screening job {job_id} has no target profile description")
+            self.db.complete_job(job_id, error="Screening job is missing a target profile description")
+            return
+
         api_key = self.get_user_api_key(user_id)
         if not api_key:
             logger.error(f"No API key found for user {user_id}")
@@ -101,70 +111,74 @@ class Worker:
         completed = len(already_done)
         failed = 0
         
-        for i, storage_path in enumerate(file_paths):
-            if SHUTDOWN_REQUESTED:
-                logger.info("Shutdown requested, stopping job processing")
-                break
-            
+        pending = []
+        for storage_path in file_paths:
             candidate_id = self._extract_candidate_id(storage_path)
-
             if candidate_id in already_done:
                 logger.info(f"Skipping already-evaluated candidate: {candidate_id}")
                 continue
+            pending.append((candidate_id, storage_path))
 
-            logger.info(f"Processing candidate {i+1}/{len(file_paths)}: {candidate_id}")
-            
-            self.db.update_job_progress(job_id, completed, failed, candidate_id)
-            
-            temp_paths = []
+        # Candidates are processed in chunks: files download and results save
+        # on the main thread (the Supabase client isn't guaranteed
+        # thread-safe); only the Claude calls run concurrently.
+        concurrency = eval_concurrency()
+        for chunk_start in range(0, len(pending), concurrency):
+            if SHUTDOWN_REQUESTED:
+                logger.info("Shutdown requested, stopping job processing")
+                break
+
+            chunk = pending[chunk_start:chunk_start + concurrency]
+            logger.info(
+                f"Processing candidates {chunk_start + 1}-{chunk_start + len(chunk)}"
+                f"/{len(pending)}: {', '.join(cid for cid, _ in chunk)}"
+            )
+            self.db.update_job_progress(
+                job_id, completed, failed, ", ".join(cid for cid, _ in chunk)
+            )
+
+            temp_paths = {}
+            tasks = []
+            for candidate_id, storage_path in chunk:
+                try:
+                    temp_path = self.storage.download_to_temp(storage_path)
+                    temp_paths[candidate_id] = temp_path
+                    tasks.append((candidate_id, [temp_path]))
+                except Exception as e:
+                    logger.error(f"Error downloading {candidate_id}: {e}")
+                    failed += 1
+
             try:
-                temp_path = self.storage.download_to_temp(storage_path)
-                temp_paths.append(temp_path)
-                
-                if is_holistic:
-                    result = evaluator.evaluate_candidate_holistic(
-                        candidate_id=candidate_id,
-                        material_paths=temp_paths,
-                        role=role
-                    )
-                    result_dict = result.model_dump()
-                    result_dict["candidate"]["evaluation_date"] = str(
-                        result_dict["candidate"]["evaluation_date"]
-                    )
-                else:
-                    result = evaluator.evaluate_candidate(
-                        candidate_id=candidate_id,
-                        material_paths=temp_paths,
-                        role=role
-                    )
-                    result_dict = result.model_dump()
-                    result_dict["candidate"]["evaluation_date"] = str(
-                        result_dict["candidate"]["evaluation_date"]
-                    )
-                    for score in result_dict.get("scores", []):
-                        if "criterion" in score:
-                            crit = score["criterion"]
-                            score["criterion"] = crit.value if hasattr(crit, 'value') else str(crit)
-                
-                self.db.save_evaluation(
-                    user_id=user_id,
-                    candidate_id=candidate_id,
-                    evaluation_type=evaluation_mode,
-                    result=result_dict,
-                    job_id=job_id
+                outcomes = evaluate_chunk_concurrently(
+                    evaluator,
+                    mode,
+                    tasks,
+                    role=role,
+                    description=screen_description,
+                    max_workers=concurrency,
                 )
-                
-                completed += 1
-                already_done.add(candidate_id)
-                logger.info(f"Completed evaluation for {candidate_id}")
-                
-            except Exception as e:
-                logger.error(f"Error evaluating {candidate_id}: {e}")
-                failed += 1
-                
+                for candidate_id, _result, result_dict, error in outcomes:
+                    if error is not None:
+                        logger.error(f"Error evaluating {candidate_id}:\n{error}")
+                        failed += 1
+                        continue
+                    try:
+                        self.db.save_evaluation(
+                            user_id=user_id,
+                            candidate_id=candidate_id,
+                            evaluation_type=mode.value,
+                            result=result_dict,
+                            job_id=job_id
+                        )
+                        completed += 1
+                        already_done.add(candidate_id)
+                        logger.info(f"Completed evaluation for {candidate_id}")
+                    except Exception as e:
+                        logger.error(f"Error saving evaluation for {candidate_id}: {e}")
+                        failed += 1
             finally:
-                cleanup_temp_files(temp_paths)
-            
+                cleanup_temp_files(list(temp_paths.values()))
+
             self.db.update_job_progress(job_id, completed, failed)
         
         if SHUTDOWN_REQUESTED:

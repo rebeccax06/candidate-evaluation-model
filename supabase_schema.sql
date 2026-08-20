@@ -23,8 +23,9 @@ CREATE TABLE IF NOT EXISTS jobs (
     job_name TEXT,
     job_type TEXT NOT NULL DEFAULT 'batch',
     status TEXT NOT NULL DEFAULT 'pending',  -- pending, processing, completed, failed, cancelled
-    evaluation_mode TEXT NOT NULL DEFAULT 'criteria',  -- criteria or holistic
-    role TEXT,  -- optional role-specific context: clinician, engineer, phd
+    evaluation_mode TEXT NOT NULL DEFAULT 'criteria',  -- criteria, holistic, or screen
+    role TEXT,  -- LEGACY: read as fallback only; new jobs put role in config
+    config JSONB NOT NULL DEFAULT '{}',  -- mode-specific parameters (role, screen_description, ...)
     total_candidates INTEGER NOT NULL DEFAULT 0,
     completed_candidates INTEGER NOT NULL DEFAULT 0,
     failed_candidates INTEGER NOT NULL DEFAULT 0,
@@ -210,3 +211,12 @@ ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS role TEXT;
 ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS role_specific_score NUMERIC;
 CREATE INDEX IF NOT EXISTS idx_evaluations_role ON evaluations(role);
 CREATE INDEX IF NOT EXISTS idx_evaluations_role_specific_score ON evaluations(role_specific_score);
+
+-- ============================================================================
+-- MIGRATION: Add config payload to jobs (for existing deployments)
+-- Mode-specific job parameters (role, screening's screen_description, and
+-- anything future modes need) live in this JSONB payload, so new modes don't
+-- require schema migrations. evaluation_mode may now also be 'screen'.
+-- The legacy jobs.role column is kept and read as a fallback for old rows.
+-- ============================================================================
+ALTER TABLE jobs ADD COLUMN IF NOT EXISTS config JSONB NOT NULL DEFAULT '{}';

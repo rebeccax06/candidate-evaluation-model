@@ -7,11 +7,15 @@ import os
 import re
 import json
 import time
+import traceback
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
+import numpy as np
 
 from candidate_evaluator.core.evaluator import CandidateEvaluator
+from candidate_evaluator.core.distribution_analyzer import DistributionAnalyzer
+from candidate_evaluator.core.expert_comparison import ExpertComparisonAnalyzer
 from candidate_evaluator.core.models import (
     EvaluationResult,
     CandidateProfile,
@@ -19,12 +23,21 @@ from candidate_evaluator.core.models import (
     EvaluationCriterion,
     Evidence,
     HolisticEvaluationResult,
+    InnovationPotential,
+    ProgramFit,
+    NotableQuality,
     AdmitPatternAnalysisResult,
     InterviewSelectionResult,
     ScreeningResult,
+    SCREENING_OUTCOME_LABELS,
     parse_role_specific_assessment,
 )
 from candidate_evaluator.core.pattern_analyzer import AdmitPatternAnalyzer
+from candidate_evaluator.screening_ui import (
+    SCREENING_PAGE_INTRO,
+    render_screening_submit_inputs,
+    render_screening_results,
+)
 from candidate_evaluator.utils.role_results import (
     ROLE_ORDER,
     ROLE_LABELS,
@@ -47,7 +60,7 @@ from candidate_evaluator.job_manager import JobManager
 from candidate_evaluator.background_worker import JobStatus
 from candidate_evaluator.prompt_manager import PromptManager
 from candidate_evaluator.help_assistant import render_guide_page, render_help_chat
-from candidate_evaluator.branding import apply_branding, LOGO_PATH
+from candidate_evaluator.branding import apply_branding, ICON_PATH
 
 # No custom CSS - using Streamlit defaults for reliability
 CUSTOM_CSS = ""
@@ -103,10 +116,6 @@ def load_result_from_json(json_path: Path) -> EvaluationResult:
 
 def load_holistic_result_from_json(json_path: Path) -> HolisticEvaluationResult:
     """Load a HolisticEvaluationResult from a JSON file."""
-    from candidate_evaluator.core.models import (
-        InnovationPotential, ProgramFit, NotableQuality
-    )
-
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -214,7 +223,7 @@ def load_screening_results_from_disk(results_dir: Path) -> list:
 # Page config
 st.set_page_config(
     page_title="Catalyst Candidate Assessment",
-    page_icon=LOGO_PATH,
+    page_icon=ICON_PATH,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -604,11 +613,6 @@ ROLE_OPTIONS = {
 }
 
 
-DEFAULT_SCREENING_DESCRIPTION = (
-    "Primary capability is AI or Computer Science and does not have any "
-    "experience with healthcare or medical domains."
-)
-
 SCREENING_OUTPUT_DIR = "./results/screening"
 
 
@@ -616,14 +620,12 @@ def screening_page():
     """Screening page: filter a large candidate pool against a target profile.
 
     Runs as a background job (like Batch Upload) so the user can navigate away
-    while ~200 candidates are screened.
+    while ~200 candidates are screened. Widgets live in screening_ui (shared
+    with the cloud app); this page only wires them to the local job manager
+    and on-disk results.
     """
     st.title("Screening")
-    st.markdown(
-        "Upload a batch of candidate PDFs and describe the target profile. Each "
-        "candidate is screened in the background for a yes/no match, so you can "
-        "leave this tab while it runs. Watch progress under **Batch Jobs**."
-    )
+    st.markdown(SCREENING_PAGE_INTRO)
 
     submit_tab, results_tab = st.tabs(["Run Screening", "Results"])
 
@@ -631,62 +633,22 @@ def screening_page():
         _screening_submit_form()
 
     with results_tab:
-        _screening_results_view()
+        st.markdown("### Screening Results")
+        if st.button("Refresh", key="screening_refresh_btn"):
+            st.rerun()
+        results = load_screening_results_from_disk(Path(SCREENING_OUTPUT_DIR))
+        render_screening_results(results)
 
 
 def _screening_submit_form():
-    """Upload + description + background submit for screening."""
-    st.markdown("### Screen Candidates")
-
-    description = st.text_area(
-        "Target profile description",
-        value=DEFAULT_SCREENING_DESCRIPTION,
-        height=120,
-        help=(
-            "Describe the candidate you're looking for. You can include both "
-            "requirements (must have) and exclusions (must not have)."
-        ),
-        key="screening_description",
-    )
-
-    uploaded_files = st.file_uploader(
-        "Upload Candidate PDFs",
-        type=['pdf'],
-        accept_multiple_files=True,
-        help="Upload one PDF per candidate. Filename becomes the candidate ID.",
-        key="screening_uploader",
-    )
-
-    if not uploaded_files:
-        return
-
-    st.markdown(f"**{len(uploaded_files)} files selected**")
-    with st.expander("View files"):
-        for f in uploaded_files:
-            st.text(f"- {f.name}")
-
-    job_name = st.text_input(
-        "Job Name (optional)",
-        placeholder="e.g., AI/CS screen",
-        key="screening_job_name",
-    )
-
-    start_clicked = st.button(
-        "Start Screening (Background)",
-        use_container_width=True,
-        key="screening_start_btn",
-    )
-
-    if not start_clicked:
-        return
-
-    if not description.strip():
-        st.error("Please provide a target profile description.")
+    """Submit screening as a local background job."""
+    submission = render_screening_submit_inputs()
+    if not submission:
         return
 
     temp_dir = tempfile.mkdtemp()
     candidate_files = {}
-    for uploaded_file in uploaded_files:
+    for uploaded_file in submission["uploaded_files"]:
         temp_path = Path(temp_dir) / uploaded_file.name
         with open(temp_path, 'wb') as f:
             f.write(uploaded_file.getbuffer())
@@ -697,9 +659,10 @@ def _screening_submit_form():
         "api_key": config.api.anthropic_api_key,
         "max_tokens": config.api.max_tokens,
         "evaluation_mode": "screen",
-        "description": description.strip(),
+        "description": submission["description"],
     }
 
+    job_name = submission["job_name"]
     job_manager = st.session_state.job_manager
     job_id = job_manager.submit_job(
         candidate_files=candidate_files,
@@ -715,85 +678,6 @@ def _screening_submit_form():
     )
     time.sleep(1)
     st.rerun()
-
-
-def _screening_results_view():
-    """Display screening results with match filter and CSV export."""
-    st.markdown("### Screening Results")
-
-    if st.button("Refresh", key="screening_refresh_btn"):
-        st.rerun()
-
-    results = load_screening_results_from_disk(Path(SCREENING_OUTPUT_DIR))
-
-    if not results:
-        st.info("No screening results yet. Run a screening job to see results here.")
-        return
-
-    matches = [r for r in results if r.matches]
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Screened", len(results))
-    with col2:
-        st.metric("Matches", len(matches))
-    with col3:
-        pct = (len(matches) / len(results) * 100) if results else 0
-        st.metric("Match Rate", f"{pct:.0f}%")
-
-    col_a, col_b = st.columns(2)
-    with col_a:
-        show_only_matches = st.checkbox("Show only matches", value=True, key="screening_only_matches")
-    with col_b:
-        min_confidence = st.slider(
-            "Minimum confidence", 0.0, 1.0, 0.0, 0.05, key="screening_min_conf"
-        )
-
-    filtered = [
-        r for r in results
-        if (not show_only_matches or r.matches) and r.confidence >= min_confidence
-    ]
-    filtered.sort(key=lambda r: (not r.matches, -r.confidence))
-
-    if not filtered:
-        st.warning("No candidates match the current filters.")
-        return
-
-    rows = []
-    for r in filtered:
-        rows.append({
-            "Candidate": r.candidate.candidate_id,
-            "Match": "Yes" if r.matches else "No",
-            "Confidence": f"{r.confidence:.2f}",
-            "Reasoning": r.reasoning,
-            "Disqualifiers": "; ".join(r.disqualifiers),
-        })
-    df = pd.DataFrame(rows)
-    st.dataframe(df, hide_index=True, use_container_width=True)
-
-    csv = df.to_csv(index=False).encode("utf-8")
-    st.download_button(
-        "Download CSV",
-        data=csv,
-        file_name=f"screening_results_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
-        mime="text/csv",
-        key="screening_csv_btn",
-    )
-
-    with st.expander("View evidence details"):
-        for r in filtered:
-            st.markdown(f"**{r.candidate.candidate_id}** - {'Match' if r.matches else 'No match'} ({r.confidence:.2f})")
-            if r.reasoning:
-                st.caption(r.reasoning)
-            if r.supporting_evidence:
-                st.markdown("Supporting evidence:")
-                for ev in r.supporting_evidence:
-                    st.markdown(f"- {ev}")
-            if r.disqualifiers:
-                st.markdown("Disqualifiers:")
-                for d in r.disqualifiers:
-                    st.markdown(f"- {d}")
-            st.markdown("---")
 
 
 def new_evaluation_page():
@@ -1274,9 +1158,10 @@ def render_job_card(job, job_manager, show_actions=True):
                     for r in results:
                         if r.get("status") == "success":
                             if r.get("evaluation_mode") == "screen":
+                                outcome = r.get("outcome") or ("match" if r.get("matches") else "no_match")
                                 result_data.append({
                                     "Candidate": r.get("candidate_id", ""),
-                                    "Match": "Yes" if r.get("matches") else "No",
+                                    "Outcome": SCREENING_OUTCOME_LABELS.get(outcome, outcome),
                                     "Confidence": f"{r.get('confidence', 0):.2f}",
                                 })
                             else:
@@ -1478,8 +1363,6 @@ def _render_role_specific_rankings_local(results: list) -> None:
 
 def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_ids: list):
     """Display statistical analysis of method disparity vs candidate spread."""
-    import numpy as np
-
     if len(both_ids) < 3:
         st.info("Need at least 3 candidates with both evaluations for disparity analysis.")
         return
@@ -1535,6 +1418,8 @@ def display_disparity_analysis(criteria_by_id: dict, holistic_by_id: dict, both_
 
     # Scatter plot with confidence band
     with st.expander("View Scatter Plot", expanded=True):
+        # Lazy import: matplotlib is not in requirements.txt, so the app must
+        # start (and every other page work) without it installed.
         import matplotlib.pyplot as plt
 
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -2002,8 +1887,6 @@ def distribution_analysis(all_results):
     """Score distribution analysis."""
     st.subheader("Score Distribution Analysis")
 
-    from candidate_evaluator.core.distribution_analyzer import DistributionAnalyzer
-
     analyzer = DistributionAnalyzer(all_results)
 
     # Overall stats
@@ -2067,8 +1950,6 @@ def expert_comparison_analysis(all_results, output_dir):
 
     if expert_file:
         try:
-            from candidate_evaluator.core.expert_comparison import ExpertComparisonAnalyzer
-
             temp_dir = tempfile.mkdtemp()
             temp_path = Path(temp_dir) / expert_file.name
             with open(temp_path, 'wb') as f:
@@ -2985,7 +2866,6 @@ def run_admit_pattern_analysis(uploaded_files, use_holistic: bool):
         
     except Exception as e:
         st.error(f"Pattern analysis failed: {e}")
-        import traceback
         st.code(traceback.format_exc())
 
 

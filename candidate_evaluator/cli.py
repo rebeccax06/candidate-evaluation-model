@@ -1,8 +1,10 @@
 """Command-line interface for candidate evaluator"""
 
+import csv
 import sys
 import logging
 from pathlib import Path
+from shutil import copy
 from typing import List, Optional
 import click
 from rich.console import Console
@@ -19,6 +21,7 @@ from candidate_evaluator.exporters import (
     CSVExporter
 )
 from candidate_evaluator.exporters.research_exporter import ResearchPaperExporter
+from candidate_evaluator.exporters.comparison_exporter import ComparisonExporter
 
 console = Console()
 
@@ -234,8 +237,6 @@ def batch(ctx, candidates_file, output_dir, formats, compare):
     """
     config = ctx.obj['config']
     logger = ctx.obj['logger']
-
-    import csv
 
     # Set output directory
     if not output_dir:
@@ -547,7 +548,6 @@ def batch_folder(ctx, folder, output_dir, formats, pattern, compare, research, m
 
             # Export comparison
             comparison_path = output_path / "comparison_report.md"
-            from candidate_evaluator.exporters.comparison_exporter import ComparisonExporter
             ComparisonExporter.export_comparison(comparison, comparison_path)
 
             console.print(f"[green]✓ Comparison report saved to: {comparison_path}[/green]")
@@ -570,9 +570,6 @@ def init(ctx):
     console.print("\n[bold blue]Initializing Candidate Evaluator[/bold blue]\n")
 
     # Copy template files
-    from shutil import copy
-    import pkg_resources
-
     try:
         # Get template paths
         template_dir = Path(__file__).parent.parent / "config_templates"

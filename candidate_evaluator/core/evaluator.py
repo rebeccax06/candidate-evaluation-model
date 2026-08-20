@@ -2,6 +2,8 @@
 
 import json
 import logging
+import os
+import re
 import time
 from typing import List, Dict, Any, Optional
 from datetime import datetime
@@ -756,7 +758,6 @@ Original request:
             ValueError: If response cannot be parsed
         """
         # Save raw response for debugging
-        import os
         debug_dir = os.path.expanduser("~/candidate_eval_debug")
         os.makedirs(debug_dir, exist_ok=True)
         debug_file = os.path.join(debug_dir, f"holistic_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt")
@@ -837,7 +838,6 @@ Original request:
                 logger.error(f"Error at position {e.pos}, around: ...{repaired[max(0,e.pos-50):e.pos+50]}...")
 
                 # Try additional repair: remove trailing commas before } or ]
-                import re
                 repaired2 = re.sub(r',(\s*[}\]])', r'\1', repaired)
                 try:
                     data = json.loads(repaired2)
@@ -913,7 +913,6 @@ Original request:
         Handles patterns like: "key": "text A" bare words "text B" bare,
         by trying to merge them into: "key": "text A bare words text B bare",
         """
-        import re
 
         # Pattern to find malformed string values:
         # "key": "value1" some_text "value2" more_text, (or } or ])
@@ -1010,7 +1009,6 @@ Original request:
             ValueError: If response cannot be parsed
         """
         # Save raw response for debugging
-        import os
         debug_dir = os.path.expanduser("~/candidate_eval_debug")
         os.makedirs(debug_dir, exist_ok=True)
         debug_file = os.path.join(debug_dir, f"response_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt")

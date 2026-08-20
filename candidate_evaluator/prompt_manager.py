@@ -5,6 +5,16 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, Any
 
+from candidate_evaluator.prompts.evaluation_prompts import (
+    SYSTEM_PROMPT,
+    EVALUATION_PROMPT_TEMPLATE,
+    HOLISTIC_EVALUATION_PROMPT,
+    HOLISTIC_RANKING_PROMPT_TEMPLATE,
+    HOLISTIC_SELECTION_PROMPT_TEMPLATE,
+    COMBINED_ROLE_PROMPT,
+)
+from candidate_evaluator.prompts.role_prompts import normalize_role
+
 
 class PromptManager:
     """Manages custom evaluation prompts with persistent storage."""
@@ -26,16 +36,6 @@ class PromptManager:
         self.prompts_dir = Path(prompts_dir)
         self.prompts_dir.mkdir(parents=True, exist_ok=True)
 
-        # Import default prompts
-        from candidate_evaluator.prompts.evaluation_prompts import (
-            SYSTEM_PROMPT,
-            EVALUATION_PROMPT_TEMPLATE,
-            HOLISTIC_EVALUATION_PROMPT,
-            HOLISTIC_RANKING_PROMPT_TEMPLATE,
-            HOLISTIC_SELECTION_PROMPT_TEMPLATE,
-            COMBINED_ROLE_PROMPT,
-        )
-        from candidate_evaluator.prompts.role_prompts import normalize_role
         self._normalize_role = normalize_role
         self._defaults = {
             "system": SYSTEM_PROMPT,

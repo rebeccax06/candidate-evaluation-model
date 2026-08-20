@@ -1,6 +1,8 @@
 """Distribution analyzer for analyzing score patterns across candidate groups."""
 
 import numpy as np
+from datetime import datetime
+from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from collections import Counter
 
@@ -385,9 +387,6 @@ class DistributionAnalyzer:
 
     def export_analysis_report(self, output_path: str) -> str:
         """Export comprehensive distribution analysis to markdown."""
-        from pathlib import Path
-        from datetime import datetime
-
         output_path = Path(output_path)
 
         # Run analyses

@@ -40,6 +40,11 @@ This guide covers deploying the Candidate Evaluator as a multi-user web applicat
 3. **Run Database Schema**: 
    - Go to SQL Editor in Supabase Dashboard
    - Copy contents of `supabase_schema.sql` and run it
+   - For an **existing deployment**, don't re-run the whole file (the
+     `CREATE POLICY` statements will error) — run only the `MIGRATION`
+     statements at the bottom of `supabase_schema.sql`, e.g.
+     `ALTER TABLE jobs ADD COLUMN IF NOT EXISTS config JSONB NOT NULL DEFAULT '{}';`
+     which is required by the Screening feature
 
 4. **Create Storage Bucket**:
    - Go to Storage in Supabase Dashboard
@@ -111,6 +116,7 @@ The Railway worker processes batch jobs in the background.
 |----------|-------------|---------------|
 | `SUPABASE_URL` | Supabase project URL | Supabase → Settings → API |
 | `SUPABASE_KEY` | Supabase **service role** key | Supabase → Settings → API |
+| `EVAL_CONCURRENCY` | Optional: concurrent Claude calls per job (default 4). Raise for faster batches if your Anthropic rate limits allow; set 1 to run serially | — |
 
 **Important**: The worker uses the **service role key** which bypasses Row Level Security. This allows it to read jobs from all users.
 

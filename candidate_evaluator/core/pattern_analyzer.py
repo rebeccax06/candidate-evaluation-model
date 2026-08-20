@@ -18,6 +18,7 @@ from candidate_evaluator.core.models import (
     AdmitPatternCategory,
     AdmitPatternEvidence
 )
+from candidate_evaluator.prompts.evaluation_prompts import get_admit_pattern_analysis_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -555,8 +556,6 @@ class AdmitPatternAnalyzer:
         Returns:
             AdmitPatternAnalysisResult with findings
         """
-        from candidate_evaluator.prompts.evaluation_prompts import get_admit_pattern_analysis_prompt
-        
         logger.info(f"Analyzing patterns for {len(candidate_summaries)} candidates")
         
         # Calculate basic statistics

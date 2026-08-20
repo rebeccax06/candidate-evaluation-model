@@ -5,6 +5,68 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+#### Screening on the cloud web app
+- **New "Screening" page** in the cloud app (`web_app_cloud.py`) sidebar,
+  matching the local app's screening feature: upload candidate PDFs, describe
+  a target profile in plain language, and screen each candidate against it
+- Screening jobs run on the background (Railway) worker: `worker.py` now
+  handles `evaluation_mode == "screen"` via `CandidateEvaluator.screen_candidate`
+- Results are stored in Supabase as evaluations with `evaluation_type='screen'`
+  and shown on the Screening page's **Results** tab (job filter, outcome
+  filter, review-threshold slider, CSV export, evidence details)
+- Batch Jobs result summaries show Outcome/Confidence for screening jobs; the
+  Guide page and Help chatbot now document the Screening page
+
+#### Three-way screening outcomes
+- Screening decisions are now **Match / Needs review / No match** instead of a
+  hard yes/no: any decision whose confidence is below the review threshold
+  (default 0.7, adjustable in the results view) is surfaced for human review,
+  since model confidence is not calibrated
+- `ScreeningResult.outcome()` in `core/models.py` implements the rule and is
+  used by both apps and both workers
+
+#### Concurrent evaluations in both workers
+- Workers now run up to 4 Claude calls at once per job (tunable via the
+  `EVAL_CONCURRENCY` env var), cutting a 200-candidate screen from ~2-3 hours
+  to ~30-45 minutes. Output quality is unchanged — every candidate gets the
+  same prompt, model, and parameters as a serial run; only timing differs.
+  File downloads, result saving, and DB writes stay on the main thread; only
+  the API calls are parallel
+
+### Changed
+
+#### Shared screening/processing code (was duplicated per stack)
+- New `core/processing.py`: `EvaluationMode` enum plus shared per-candidate
+  dispatch/serialization (`evaluate_candidate_for_mode`, `serialize_result`,
+  `result_filename`, `summary_entry`) used by **both** workers
+  (`background_worker.py` local, `worker.py` cloud)
+- New `screening_ui.py`: the screening submit form and results view used by
+  **both** web apps (`web_app.py` local, `web_app_cloud.py` cloud)
+
+#### Job config payload (jobs table)
+- Mode-specific job parameters now live in a `jobs.config` JSONB column
+  (`{"role": ..., "screen_description": ...}`) instead of one column per
+  parameter — new modes need no schema migration. `Database.get_job_config()`
+  reads it with a fallback to the legacy `role` column for old rows. See the
+  MIGRATION section at the bottom of `supabase_schema.sql`
+
+#### Browser tab icon
+- The tab icon (`page_icon`) now uses a square ring mark with a transparent
+  background (`assets/catalyst_icon.png`) instead of the wide wordmark logo,
+  which browsers distorted when squeezing it into the square favicon slot.
+  The sidebar keeps the wordmark
+
+#### Code hygiene
+- Moved function-local imports to module top across `core/evaluator.py`,
+  `core/distribution_analyzer.py`, `core/pattern_analyzer.py`, `web_app.py`,
+  `prompt_manager.py`, `job_manager.py`, and `cli.py` (deliberately lazy
+  imports — optional deps like matplotlib/streamlit — are kept and commented);
+  removed unused `pkg_resources` import and the unused `MAX_RETRIES` constant
+
 ## [1.1.0] - 2026-02-03
 
 ### Added

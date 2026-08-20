@@ -16,6 +16,8 @@ def get_supabase_client() -> Client:
     
     if not url or not key:
         try:
+            # Lazy import on purpose: worker deployments don't install
+            # streamlit; only the web apps have secrets to fall back to.
             import streamlit as st
             # Try direct access (not .get()) as Streamlit secrets may not support .get()
             if hasattr(st, 'secrets'):
@@ -74,9 +76,15 @@ class Database:
         total_candidates: int,
         file_paths: list[str],
         evaluation_mode: str = "criteria",
-        role: Optional[str] = None
+        config: Optional[dict] = None
     ) -> dict:
-        """Create a new batch job."""
+        """Create a new batch job.
+
+        Mode-specific parameters (role, screen_description, ...) go in the
+        `config` JSONB payload — adding a parameter for a new mode needs no
+        schema migration. `evaluation_mode` stays a real column because every
+        job has one and UI lists filter on it.
+        """
         job_data = {
             "user_id": user_id,
             "job_name": job_name,
@@ -87,11 +95,22 @@ class Database:
             "failed_candidates": 0,
             "file_paths": file_paths,
             "evaluation_mode": evaluation_mode,
+            "config": {k: v for k, v in (config or {}).items() if v is not None},
         }
-        if role:
-            job_data["role"] = role
         result = self.client.table("jobs").insert(job_data).execute()
         return result.data[0] if result.data else None
+
+    @staticmethod
+    def get_job_config(job: dict) -> dict:
+        """Mode-specific parameters of a job row.
+
+        Reads the `config` JSONB payload, falling back to the legacy `role`
+        column for jobs created before the config column existed.
+        """
+        config = dict(job.get("config") or {})
+        if not config.get("role") and job.get("role"):
+            config["role"] = job["role"]
+        return config
     
     def get_job(self, job_id: str) -> Optional[dict]:
         """Get job by ID."""
