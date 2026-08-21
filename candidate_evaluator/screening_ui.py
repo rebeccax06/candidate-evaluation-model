@@ -185,18 +185,30 @@ def render_screening_results(results: List[ScreeningResult], key_prefix: str = "
         key=f"{key_prefix}csv_btn",
     )
 
-    with st.expander("View evidence details"):
-        for r in filtered:
-            label = SCREENING_OUTCOME_LABELS[outcomes[id(r)]]
-            st.markdown(f"**{r.candidate.candidate_id}** - {label} ({r.confidence:.2f})")
-            if r.reasoning:
-                st.caption(r.reasoning)
-            if r.supporting_evidence:
-                st.markdown("Supporting evidence:")
-                for ev in r.supporting_evidence:
-                    st.markdown(f"- {ev}")
-            if r.disqualifiers:
-                st.markdown("Disqualifiers:")
-                for d in r.disqualifiers:
-                    st.markdown(f"- {d}")
-            st.markdown("---")
+    st.markdown("### Evidence Details")
+    # Index-based options so duplicate candidate IDs (e.g. the same candidate
+    # across jobs) can't collide, and stale selections reset cleanly when a
+    # new batch changes the option list.
+    labels = [
+        f"{r.candidate.candidate_id} — {SCREENING_OUTCOME_LABELS[outcomes[id(r)]]} ({r.confidence:.2f})"
+        for r in filtered
+    ]
+    selected_idx = st.selectbox(
+        "Select candidate",
+        range(len(filtered)),
+        format_func=lambda i: labels[i],
+        key=f"{key_prefix}evidence_select",
+    )
+    if selected_idx is not None:
+        r = filtered[selected_idx]
+        st.markdown(f"**{r.candidate.candidate_id}** - {SCREENING_OUTCOME_LABELS[outcomes[id(r)]]} ({r.confidence:.2f})")
+        if r.reasoning:
+            st.caption(r.reasoning)
+        if r.supporting_evidence:
+            st.markdown("Supporting evidence:")
+            for ev in r.supporting_evidence:
+                st.markdown(f"- {ev}")
+        if r.disqualifiers:
+            st.markdown("Disqualifiers:")
+            for d in r.disqualifiers:
+                st.markdown(f"- {d}")

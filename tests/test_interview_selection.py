@@ -154,6 +154,7 @@ class TestSelectInterviewsHolistic:
         """Build a fake Anthropic API message response containing JSON."""
         msg = MagicMock()
         msg.content = [MagicMock()]
+        msg.content[0].type = "text"
         msg.content[0].text = json.dumps(payload)
         return msg
 

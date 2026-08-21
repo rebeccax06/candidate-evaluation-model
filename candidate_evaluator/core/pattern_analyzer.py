@@ -619,7 +619,15 @@ class AdmitPatternAnalyzer:
                     }
                 ]
             )
-            return message.content[0].text
+            # Claude Sonnet 5 runs adaptive thinking, so content may start
+            # with thinking blocks — collect only the text blocks.
+            response_text = "".join(
+                block.text for block in message.content
+                if getattr(block, "type", None) == "text"
+            )
+            if not response_text:
+                raise ValueError("Claude response contained no text blocks")
+            return response_text
         except Exception as e:
             logger.error(f"Claude API call failed: {e}")
             raise
