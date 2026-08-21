@@ -637,6 +637,33 @@ def screening_page():
         if st.button("Refresh", key="screening_refresh_btn"):
             st.rerun()
         results = load_screening_results_from_disk(Path(SCREENING_OUTPUT_DIR))
+
+        # Filter by screening batch. Jobs are newest-first, so the first job
+        # option is the latest batch — default to it so a fresh batch isn't
+        # mixed with older runs.
+        screen_jobs = [
+            j for j in st.session_state.job_manager.list_jobs(limit=100)
+            if (j.get("config") or {}).get("evaluation_mode") == "screen"
+        ]
+        if screen_jobs and results:
+            options = {"All screening batches": None}
+            for j in screen_jobs:
+                label = (j.get("job_name") or j["job_id"]).strip()
+                options[f"{label} · {j['job_id'][-8:]}"] = set(
+                    (j.get("candidate_files") or {}).keys()
+                )
+            choice = st.selectbox(
+                "Screening batch",
+                list(options.keys()),
+                index=1,
+                key="screening_job_filter",
+            )
+            selected_ids = options[choice]
+            if selected_ids is not None:
+                results = [
+                    r for r in results
+                    if r.candidate.candidate_id in selected_ids
+                ]
         render_screening_results(results)
 
 

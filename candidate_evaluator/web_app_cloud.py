@@ -1237,22 +1237,41 @@ def _screening_results_view_cloud(user: dict):
         st.info("No screening results yet. Run a screening job to see results here.")
         return
 
-    # Optional filter by screening job (each job can use a different target profile)
+    # Filter by screening job/batch (each job can use a different target
+    # profile). Rows are ordered newest-first, so job_ids[0] is the latest
+    # batch — default to it so a fresh batch isn't mixed with older runs.
     jobs = {str(j["id"]): j for j in db.get_user_jobs(user["id"], limit=300)}
     job_ids = []
+    has_unassigned = False
     for e, _ in parsed:
         jid = str(e.get("job_id") or "")
-        if jid and jid not in job_ids:
+        if not jid:
+            has_unassigned = True
+        elif jid not in job_ids:
             job_ids.append(jid)
-    if len(job_ids) > 1:
+
+    if job_ids:
         options = {"All screening jobs": None}
         for jid in job_ids:
             job = jobs.get(jid, {})
             options[f"{label_for_job(job, jid)} · {jid[:8]}"] = jid
-        choice = st.selectbox("Screening job", list(options.keys()), key="screening_job_filter")
+        if has_unassigned:
+            options["No batch recorded"] = ""
+        option_labels = list(options.keys())
+        # Default to the most recent batch (first job option after "All")
+        choice = st.selectbox(
+            "Screening batch",
+            option_labels,
+            index=1,
+            key="screening_job_filter",
+        )
         selected_job = options[choice]
-        if selected_job:
+        if selected_job is not None:
             parsed = [(e, r) for e, r in parsed if str(e.get("job_id") or "") == selected_job]
+
+    if not parsed:
+        st.info("No screening results in this batch.")
+        return
 
     render_screening_results([r for _, r in parsed])
 
